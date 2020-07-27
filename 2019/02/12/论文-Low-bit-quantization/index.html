@@ -22,20 +22,20 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="前言 Extremely Low Bit Neural Network: Squeeze the Last Bit Out with ADMM - 原文 从结果看比之前的一些量化工作都要好上不少。 遇到ADMM第一步W收敛太慢的问题？外梯度法虽好，写起来麻烦，怎么存储和更新 $W_p$ 是个问题。每一步的 $W_p$ 的初值需要重置回 $W$ 。好在CIFAR-10比较小，测试的时候跑多会儿没关系">
+  <meta name="description" content="前言 Extremely Low Bit Neural Network: Squeeze the Last Bit Out with ADMM - 原文 ；AAAI 18 Oral。 从结果看比之前的一些量化工作都要好上不少。 遇到ADMM第一步W收敛太慢的问题？外梯度法虽好，写起来麻烦，怎么存储和更新 $W_p$ 是个问题。每一步的 $W_p$ 的初值需要重置回 $W$ 。好在CIFAR-10比">
 <meta name="keywords" content="论文,深度学习,NN压缩与加速">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Low-bit quantization">
 <meta property="og:url" content="http://yoursite.com/2019/02/12/论文-Low-bit-quantization/index.html">
 <meta property="og:site_name" content="Thiswinex&#39;s Blog">
-<meta property="og:description" content="前言 Extremely Low Bit Neural Network: Squeeze the Last Bit Out with ADMM - 原文 从结果看比之前的一些量化工作都要好上不少。 遇到ADMM第一步W收敛太慢的问题？外梯度法虽好，写起来麻烦，怎么存储和更新 $W_p$ 是个问题。每一步的 $W_p$ 的初值需要重置回 $W$ 。好在CIFAR-10比较小，测试的时候跑多会儿没关系">
+<meta property="og:description" content="前言 Extremely Low Bit Neural Network: Squeeze the Last Bit Out with ADMM - 原文 ；AAAI 18 Oral。 从结果看比之前的一些量化工作都要好上不少。 遇到ADMM第一步W收敛太慢的问题？外梯度法虽好，写起来麻烦，怎么存储和更新 $W_p$ 是个问题。每一步的 $W_p$ 的初值需要重置回 $W$ 。好在CIFAR-10比">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://camo.githubusercontent.com/16e9d6bdc804b3204c476a6082bbc72f06db9b6d/68747470733a2f2f696d672d626c6f672e6373646e2e6e65742f3230313631303236313834323333333237">
 <meta property="og:image" content="https://camo.githubusercontent.com/8a5b07526e6e12e6b0c7cc8538e72f35711a58df/68747470733a2f2f696d6167652e6a6971697a686978696e2e636f6d2f75706c6f6164732f656469746f722f66643965633961632d353064642d343836372d623762622d6238306261666431366335312f353137393630332e6a7067">
-<meta property="og:updated_time" content="2020-07-27T12:19:35.339Z">
+<meta property="og:updated_time" content="2020-07-27T13:17:07.878Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Low-bit quantization">
-<meta name="twitter:description" content="前言 Extremely Low Bit Neural Network: Squeeze the Last Bit Out with ADMM - 原文 从结果看比之前的一些量化工作都要好上不少。 遇到ADMM第一步W收敛太慢的问题？外梯度法虽好，写起来麻烦，怎么存储和更新 $W_p$ 是个问题。每一步的 $W_p$ 的初值需要重置回 $W$ 。好在CIFAR-10比较小，测试的时候跑多会儿没关系">
+<meta name="twitter:description" content="前言 Extremely Low Bit Neural Network: Squeeze the Last Bit Out with ADMM - 原文 ；AAAI 18 Oral。 从结果看比之前的一些量化工作都要好上不少。 遇到ADMM第一步W收敛太慢的问题？外梯度法虽好，写起来麻烦，怎么存储和更新 $W_p$ 是个问题。每一步的 $W_p$ 的初值需要重置回 $W$ 。好在CIFAR-10比">
 <meta name="twitter:image" content="https://camo.githubusercontent.com/16e9d6bdc804b3204c476a6082bbc72f06db9b6d/68747470733a2f2f696d672d626c6f672e6373646e2e6e65742f3230313631303236313834323333333237">
 
 <link rel="canonical" href="http://yoursite.com/2019/02/12/论文-Low-bit-quantization/">
@@ -207,7 +207,7 @@
 
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
-<li><a href="https://arxiv.org/pdf/1707.09870.pdf" target="_blank" rel="noopener">Extremely Low Bit Neural Network: Squeeze the Last Bit Out with ADMM - 原文</a></li>
+<li><a href="https://arxiv.org/pdf/1707.09870.pdf" target="_blank" rel="noopener">Extremely Low Bit Neural Network: Squeeze the Last Bit Out with ADMM - 原文</a> ；AAAI 18 Oral。</li>
 <li>从结果看比之前的一些量化工作都要好上不少。</li>
 <li>遇到ADMM第一步W收敛太慢的问题？外梯度法虽好，写起来麻烦，怎么存储和更新 $W_p$ 是个问题。每一步的 $W_p$ 的初值需要重置回 $W$ 。好在CIFAR-10比较小，测试的时候跑多会儿没关系。后面上ImageNet就比较惨。</li>
 <li>考虑重写自己的 optimizer。</li>
@@ -379,11 +379,11 @@ W^{(c)}&:=W-\beta_c\partial_WL(W^{(p)})
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
