@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.8.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Duality0. 前言 主要记录了对偶问题和对偶方法。由于强对偶性下对偶问题的解与原问题相等，许多问题在原函数性质不好的情况下可以变换到对偶空间去求解。 Why duality? 降低计算复杂度，数据降维等；更好的性质，更光滑、凸。。">
+<meta name="keywords" content="凸优化,笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[凸优化] 6. 对偶与对偶问题">
+<meta property="og:url" content="http://yoursite.com/2019/06/05/笔记-对偶/index.html">
+<meta property="og:site_name" content="Thiswinex&#39;s Blog">
+<meta property="og:description" content="Duality0. 前言 主要记录了对偶问题和对偶方法。由于强对偶性下对偶问题的解与原问题相等，许多问题在原函数性质不好的情况下可以变换到对偶空间去求解。 Why duality? 降低计算复杂度，数据降维等；更好的性质，更光滑、凸。。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/Users/pingguo/Library/Application%20Support/typora-user-images/image-20190425154237918.png">
+<meta property="og:updated_time" content="2020-07-27T12:18:42.392Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[凸优化] 6. 对偶与对偶问题">
+<meta name="twitter:description" content="Duality0. 前言 主要记录了对偶问题和对偶方法。由于强对偶性下对偶问题的解与原问题相等，许多问题在原函数性质不好的情况下可以变换到对偶空间去求解。 Why duality? 降低计算复杂度，数据降维等；更好的性质，更光滑、凸。。">
+<meta name="twitter:image" content="http://yoursite.com/Users/pingguo/Library/Application%20Support/typora-user-images/image-20190425154237918.png">
+
+<link rel="canonical" href="http://yoursite.com/2019/06/05/笔记-对偶/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>[凸优化] 6. 对偶与对偶问题 | Thiswinex's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Thiswinex's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/05/笔记-对偶/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Thiswinex's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [凸优化] 6. 对偶与对偶问题
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-06-05 10:37:44" itemprop="dateCreated datePublished" datetime="2019-06-05T10:37:44+08:00">2019-06-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/笔记/凸优化/" itemprop="url" rel="index"><span itemprop="name">凸优化</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Duality"><a href="#Duality" class="headerlink" title="Duality"></a>Duality</h2><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>主要记录了对偶问题和对偶方法。由于强对偶性下对偶问题的解与原问题相等，许多问题在原函数性质不好的情况下可以变换到对偶空间去求解。</li>
+<li>Why duality? 降低计算复杂度，数据降维等；更好的性质，更光滑、凸。。</li>
+</ul>
+<a id="more"></a>
+<h2 id="1-Lagrangian"><a href="#1-Lagrangian" class="headerlink" title="1. Lagrangian"></a>1. Lagrangian</h2><ul>
+<li><p>Standard form problem:</p>
+<p>minimize $f_0(x)$</p>
+<p>subject to $f_i(x)\leq 0, i=1,\cdots,m, h_i(x)=0,i=1,\cdots,p$ </p>
+</li>
+<li><p>Lagrangian:</p>
+<script type="math/tex; mode=display">
+L(x,\lambda,\nu)=f_0(x)+\sum^m_{i=1}\lambda_if_i(x)+\sum^p_{i=1}\nu_ih_i(x)</script></li>
+</ul>
+<blockquote>
+<p>$\lambda,\nu$ 分别是不等式约束和等式约束的拉格朗日乘子</p>
+</blockquote>
+<h2 id="2-Lagrangian-Dual"><a href="#2-Lagrangian-Dual" class="headerlink" title="2. Lagrangian Dual"></a>2. Lagrangian Dual</h2><script type="math/tex; mode=display">
+g(\lambda,\nu)=\inf_{x\in D}L(x,\lambda,\nu)</script><blockquote>
+<p>因为 $\inf$ 的存在，且 $L$ 是关于 $\lambda,\nu$ 的仿射函数，对偶函数一定凸且构成了原问题最优值 $p^\star$ 的下界 $g(\lambda,\nu)\leq p^\star$</p>
+</blockquote>
+<h2 id="3-Lagrange-dual-and-conjugate-function"><a href="#3-Lagrange-dual-and-conjugate-function" class="headerlink" title="3. Lagrange dual and conjugate function"></a>3. Lagrange dual and conjugate function</h2><ul>
+<li><p>minimize $f_0(x)$</p>
+<p>subject to $Ax\preceq b, Cx=d$</p>
+<script type="math/tex; mode=display">
+\begin{align}
+g(\lambda,\nu)&=\inf_{x\in\textbf{dom}f_0}(f_0(x)+(A^T\lambda+C^T\nu)^Tx-b^T\lambda-d^T\nu)\\
+&=-f_0^*(-A^T\lambda-C^T\nu)-b^T\lambda-d^T\nu
+\end{align}</script></li>
+</ul>
+<h2 id="4-The-dual-problem"><a href="#4-The-dual-problem" class="headerlink" title="4. The dual problem"></a>4. The dual problem</h2><ul>
+<li><p>maximize $g(\lambda,\nu)$</p>
+<p>subject to $\lambda \succeq 0$ </p>
+<p>finds best lower bound of $p^\star$_</p>
+</li>
+</ul>
+<h2 id="5-Weak-and-strong-duality"><a href="#5-Weak-and-strong-duality" class="headerlink" title="5. Weak and strong duality"></a>5. Weak and strong duality</h2><ul>
+<li><p>weak duality: $d^\star\leq p^\star$</p>
+<p>always holds for convex and nonconvex problems</p>
+</li>
+<li><p>strong duality: $d^\star=p^\star$</p>
+<p>Slater’ constraint qualification:</p>
+<script type="math/tex; mode=display">
+\exists x\in \textbf{int}D: f_i(x)<0, i=1,\cdots,m</script></li>
+</ul>
+<blockquote>
+<p>Slater条件成立即不等式约束可以取严格小于，强对偶性成立。 Slater条件确保拉格朗日函数存在鞍点(参见拉格朗日对偶的鞍点解释，即 $x^\star,\lambda^\star$ 最优且强对偶性成立，则其为 $L$ 的鞍点)</p>
+</blockquote>
+<h2 id="6-A-nonconvex-problem-with-strong-duality"><a href="#6-A-nonconvex-problem-with-strong-duality" class="headerlink" title="6. A nonconvex problem with strong duality"></a>6. A nonconvex problem with strong duality</h2><blockquote>
+<p>对非凸问题也可能存在强对偶条件</p>
+<p>无论 $x$ 的维数($x\in \mathcal{R}^n$ )，其对偶问题总是针对 $\lambda\in \mathcal{R}$ 的一维优化。这是个很好的性质，可以直接使问题降维。</p>
+</blockquote>
+<h2 id="7-Geometric-interpretation"><a href="#7-Geometric-interpretation" class="headerlink" title="7. Geometric interpretation"></a>7. Geometric interpretation</h2><script type="math/tex; mode=display">
+g(\lambda)=\inf_{(u,t)\in G}(t+\lambda u)</script><p>where $G={(f_1(x),f_2(x))\mid x\in D}$</p>
+<p><img src="/Users/pingguo/Library/Application Support/typora-user-images/image-20190425154237918.png" alt="image-20190425154237918"></p>
+<blockquote>
+<p>原问题可行集在左半侧(Slater条件)；超平面 $\lambda u+t=g(\lambda)$ 与 $t$ 的交点永远在 $p^*$ 的下边。此处 $\lambda$ 作为自变量变换超平面的”斜率”，取与G相切之后（inf保证相切）与t轴焦点即为 $g(\lambda)$ 。无论怎么交，最优点（最大的 $g(\lambda)$ ）总在 $p^\star$ 下部。 </p>
+<p>(弱对偶条件 $d^<em>&lt;p^</em>$)</p>
+</blockquote>
+<ul>
+<li>Epigraph variation:</li>
+</ul>
+<blockquote>
+<p>令 $A$ 为G的上境图，强对偶性成立当$p^\star$ 处可以作非垂直（于坐标轴u）的支撑超平面。</p>
+<p>上图G非凸；如果G凸（即对于凸问题），过 $(0,p^\star)$ 可以作支撑超平面。</p>
+<p>此时Slater’s condition: 如果存在 $(\tilde{u},\tilde{t})\in A$ 且 $\tilde{u}&lt;0$ ，$(0,p^\star)$ 点的支撑超平面必然不垂直。</p>
+</blockquote>
+<h2 id="8-Complementary-slackness"><a href="#8-Complementary-slackness" class="headerlink" title="8. Complementary slackness"></a>8. Complementary slackness</h2><ul>
+<li><p>assume strong duality holds, $x^\star$ optimal and $(\lambda^\star,\nu^\star)$ dual optimal</p>
+<p>obviously we have:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+f_0(x^\star)=g(\lambda^\star,\nu^\star)&=\inf_x\{f_0(x)+\sum\lambda_i^\star f_i(x)+\sum\nu_i^\star h_i(x)\}\\
+&\leq f_0(x^\star)+\sum\lambda_i^\star f_i(x^\star)+\sum\nu_i^\star h_i(x^\star)\\
+&\leq f_0(x^\star)
+\end{align}</script><ul>
+<li>First inequality: $x^\star$ minimize $L(x,\lambda^\star,\nu^\star)$ </li>
+<li>$\sum \lambda_i^\star f_i(x^\star)=0$</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>第二个条件即 complementary slackness 互补松弛性，即最优点处除非第i个约束起作用，否则最优拉格朗日乘子的第i项都为零。</p>
+</blockquote>
+<h2 id="9-KKT-Condition"><a href="#9-KKT-Condition" class="headerlink" title="9. KKT Condition"></a>9. KKT Condition</h2><ul>
+<li>For non-convex problem, if strong duality holds, i.e. $x^\star$ minimize $L(x,\lambda^\star,\nu^\star)$ , so its gradient at $x^\star$:<script type="math/tex; mode=display">
+\triangledown f_0(x^\star)+\sum \lambda^\star_i\triangledown f_i(x)+\sum\nu^\star_i\triangledown h_i(x)=0</script>so we have KKT condition:<script type="math/tex; mode=display">
+\begin{align}
+f_i(x^\star)&\leq 0 \text{     primal constraints}\\
+h_i(x^\star)&=0 \\
+\lambda^\star_i&\geq 0 \text{     dual constraints}\\
+\lambda^\star_if_i(x^\star)&=0\text{     complementary slackness}\\
+\triangledown f_0(x^\star)+\sum \lambda^\star_i\triangledown f_i(x)+\sum\nu^\star_i\triangledown h_i(x)&=0 \text{     gradient vanish}
+\end{align}</script></li>
+</ul>
+<blockquote>
+<p>KKT条件由强对偶性下的非凸问题导出，即在非凸问题中，原问题和对偶问题的一堆最优解必须满足KKT条件(必要条件) 。</p>
+<p>（原问题可行性、对偶问题可行性、互补松弛性、最优性）</p>
+<p>若原问题为凸，必要条件变为充要条件，满足KKT条件的点是最优解且对偶间隙为零(强对偶)。对于还未知是否满足强对偶性的凸问题，需要满足 Slater 条件。</p>
+</blockquote>
+<h2 id="10-Example"><a href="#10-Example" class="headerlink" title="10. Example"></a>10. Example</h2><blockquote>
+<p>$\underset{y}{\min} \frac{1}{2}|x-y|^2_2$， $s.t. |x|_1=1$ </p>
+</blockquote>
+<p>待补充</p>
+<h2 id="11-LP-SDP-SOCP-Duality"><a href="#11-LP-SDP-SOCP-Duality" class="headerlink" title="11. LP, SDP, SOCP Duality"></a>11. LP, SDP, SOCP Duality</h2><p>待补充</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/凸优化/" rel="tag"># 凸优化</a>
+              <a href="/tags/笔记/" rel="tag"># 笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/04/24/笔记-凸优化问题-1/" rel="prev" title="[凸优化] 4. 凸优化问题(1)">
+      <i class="fa fa-chevron-left"></i> [凸优化] 4. 凸优化问题(1)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/06/05/笔记-梯度方法/" rel="next" title="[凸优化] 7. 梯度方法">
+      [凸优化] 7. 梯度方法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Duality"><span class="nav-number">1.</span> <span class="nav-text">Duality</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-number">2.</span> <span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Lagrangian"><span class="nav-number">3.</span> <span class="nav-text">1. Lagrangian</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Lagrangian-Dual"><span class="nav-number">4.</span> <span class="nav-text">2. Lagrangian Dual</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Lagrange-dual-and-conjugate-function"><span class="nav-number">5.</span> <span class="nav-text">3. Lagrange dual and conjugate function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-The-dual-problem"><span class="nav-number">6.</span> <span class="nav-text">4. The dual problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Weak-and-strong-duality"><span class="nav-number">7.</span> <span class="nav-text">5. Weak and strong duality</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-A-nonconvex-problem-with-strong-duality"><span class="nav-number">8.</span> <span class="nav-text">6. A nonconvex problem with strong duality</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Geometric-interpretation"><span class="nav-number">9.</span> <span class="nav-text">7. Geometric interpretation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-Complementary-slackness"><span class="nav-number">10.</span> <span class="nav-text">8. Complementary slackness</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-KKT-Condition"><span class="nav-number">11.</span> <span class="nav-text">9. KKT Condition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-Example"><span class="nav-number">12.</span> <span class="nav-text">10. Example</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-LP-SDP-SOCP-Duality"><span class="nav-number">13.</span> <span class="nav-text">11. LP, SDP, SOCP Duality</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">thiswinex</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

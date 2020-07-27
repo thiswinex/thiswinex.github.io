@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.8.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="《凸优化》第五章部分习题">
+<meta name="keywords" content="凸优化,习题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[凸优化] 对偶习题">
+<meta property="og:url" content="http://yoursite.com/2019/06/18/对偶习题/index.html">
+<meta property="og:site_name" content="Thiswinex&#39;s Blog">
+<meta property="og:description" content="《凸优化》第五章部分习题">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-07-27T12:30:45.943Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[凸优化] 对偶习题">
+<meta name="twitter:description" content="《凸优化》第五章部分习题">
+
+<link rel="canonical" href="http://yoursite.com/2019/06/18/对偶习题/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>[凸优化] 对偶习题 | Thiswinex's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Thiswinex's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/18/对偶习题/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Thiswinex's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [凸优化] 对偶习题
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-06-18 23:05:59" itemprop="dateCreated datePublished" datetime="2019-06-18T23:05:59+08:00">2019-06-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/习题/" itemprop="url" rel="index"><span itemprop="name">习题</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/习题/凸优化/" itemprop="url" rel="index"><span itemprop="name">凸优化</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>《凸优化》第五章部分习题</p>
+<a id="more"></a>
+<h3 id="5-6"><a href="#5-6" class="headerlink" title="5.6"></a>5.6</h3><p>(a)</p>
+<script type="math/tex; mode=display">
+\begin{align}
+&\because\forall z\in\textbf{R}^m, \|z\|_\infty\geq\frac{1}{\sqrt{m}}\|z\|_2\\
+&\therefore \|Ax_{ch}-b\|_2\leq\sqrt{m}\|Ax_{ch}-b\|_\infty\\
+&\because \|Ax_{ch}-b\|_2\geq\|Ax_{ls}-b\|_2\text{(optimal)}\geq\|Ax_{ls}-b\|_{\infty}\text{(hint)}\\
+&\therefore \|Ax_{ls}-b\|_\infty\leq \sqrt{m}\|Ax_{ch}-b\|_{\infty}
+\end{align}</script><p>(b)</p>
+<p>容易得到 $|\hat\nu|_1\leq1$ ，$|\tilde{\nu}|_1\leq1$ 。</p>
+<script type="math/tex; mode=display">
+\begin{align}
+A^T\hat{\nu}&=(A^TAx_{ls}-A^Tb)/\|b-Ax_{ls}\|_1\\
+&=(A^TA(A^TA)^{-1}A^Tb-A^Tb)/\|b-Ax_{ls}\|_1\\
+&=0\\
+A^T\tilde{\nu}&=-A^T\hat{\nu}=0
+\end{align}</script><p> 即两个 $\nu$ 都是问题的可行解。考虑 $b^T\nu$：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+b^T\hat\nu&=\frac{-b^Tr_{ls}}{\|r_{ls}\|_1}=\frac{x_{ls}^TA^Tr_{ls}-b^Tr_{ls}}{\|r_{ls}\|_1}=-\frac{\|r_{ls}\|^2_2}{\|r_{ls}\|_1}\\
+b^T\tilde\nu&=-b^T\hat\nu=\frac{\|r_{ls}\|^2_2}{\|r_{ls}\|_1}\\
+\end{align}</script><p>即 $\tilde{\nu}$ 给出了更好（大）的下界。和(a)相比:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\frac{\|r_{ls}\|^2_2}{\|r_{ls}\|_1}=\frac{\|Ax_{ls}-b\|^2_2}{\|b-Ax_{ls}\|_1}\geq\frac{\|Ax_{ls}-b\|^2_2}{\sqrt{m}\|b-Ax_{ls}\|_2}\geq\frac{\|Ax_{ls}-b\|_\infty}{\sqrt{m}}
+\end{align}</script><p>比 (a) 给出了一个更好的下界。</p>
+<blockquote>
+<p>总结：</p>
+<p>解是一些矩阵代换。不过这一题还给出了一个通过最小二乘问题等其他问题的对偶问题来逼近原问题最优解的方法。通常这类问题没有解析解，通过其他问题的对偶问题的分析得到的下界通常比一般不等式要好。</p>
+</blockquote>
+<h3 id="5-7"><a href="#5-7" class="headerlink" title="5.7"></a>5.7</h3><p>(a)</p>
+<script type="math/tex; mode=display">
+L(x,y,\nu)=\max_{i=1,\cdots,m} y_i+\sum_i\nu_i(a^T_ix+b_i-y_i)\\
+g(\nu)=\inf_{x,y}(\max_{i=1,\cdots,m} y_i+\sum_i\nu_i(a^T_ix+b_i-y_i))</script><p>对偶问题：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &g(\nu)\\
+\text{subject to }&\nu\succeq 0
+\end{align}</script><p>由于原函数有线性部分，考虑 $g(\nu)$：</p>
+<p>优化 $x$ 时，$ \sum\nu^T a_i=0, i.e. A^T\nu=0$ 否则拉格朗日函数无下界。</p>
+<p>优化 $y$ 时，$\max y_i-\nu^Ty=0$ 否则拉格朗日函数无下界，即 $v^T\textbf{1}=1$ 。</p>
+<p>等价对偶问题：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &\nu^Tb\\
+\text{subject to }&\nu\succeq 0\\
+&\nu^T\textbf{1}=1\\
+&A^T\nu=0
+\end{align}</script><p>(b)</p>
+<p>原问题的上境图形式为LP：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &t\\
+\text{subject to }&\max(a_i^Tx+b_i)-t\leq 0
+\end{align}</script><p>约束等价变换：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &t\\
+\text{subject to }&A_i^Tx+b_i-t\textbf{1}\preceq 0
+\end{align}</script><p>对偶问题：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &\lambda^Tb\\
+\text{subject to }&A^T\lambda=0\\
+&\lambda^T\textbf{1}=1\\
+&\lambda\succeq0
+\end{align}</script><p>和(a)中对偶问题完全等价。</p>
+<p>(c)</p>
+<p>考虑无约束几何规划对偶问题的最优解 $d^\star$ 以及其最优点 $z^\star$ ：</p>
+<script type="math/tex; mode=display">
+p^\star_{gp}\leq d^\star=b^Tz_i-\sum_iz^\star_i\log z^\star_i</script><p>将其变换成LP ，对某个 $\nu$ 有以下式子成立：</p>
+<script type="math/tex; mode=display">
+b^T\nu= p^\star_{gp} -\sum_iz^\star_i\log z^\star_i</script><p>又因为 $z^\star$ 在GP对偶问题上的可行域也是原分片线性极小化对偶问题的可行域，即 $z^\star$ 为此LP的可行解：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+p^\star_{pw1}&\geq b^T\nu=p^\star_{gp}-\sum_iz^\star_i\log z^\star_i\\
+p^\star_{gp}-p^\star_{pw1}&\leq \sum_iz^\star_i\log z^\star_i\leq \log m
+\end{align}</script><p>(d)</p>
+<p>写出对偶问题，先变换问题为</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &(1/\gamma)\log(\sum_i\exp(\gamma y_i))\\
+\text{subject to }&Ax+b=y
+\end{align}</script><p>拉格朗日函数：</p>
+<script type="math/tex; mode=display">
+L(x,\lambda)=(1/\gamma)\log\sum\exp(\gamma y_i)+\lambda^T(Ax+b-y)</script><p>$x$ 的最优化条件为 $A^T\lambda=0$ ，对 y 第一项为 Log-Sum-Exp 函数，其导数为 Softmax。即 $y$ 的最优化条件为：</p>
+<script type="math/tex; mode=display">
+\frac{e^{\gamma y_i}}{\sum e^{\gamma y_i}}=\lambda_i</script><p>对偶问题为：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &\lambda^Tb-(1/\gamma)\sum_{i=1}^m\lambda_i\log\lambda_i\\
+\text{subject to }&A^T\lambda=0\\
+&\textbf{1}^T\lambda=1
+\end{align}</script><p>按照处理(c)中GP对偶问题的步骤，第二项可以放缩为 $1/\gamma \log m$令其最优解为 $p^\star_{gp}(\gamma)-1/\gamma\log m$ 有：</p>
+<script type="math/tex; mode=display">
+p^\star_{gp}(\gamma)-1/\gamma\log m\leq p^\star_{pw1}\leq p^\star_{gp}(\gamma)</script><p>可看出 $\gamma $ 变大会让此优化问题逼近 $p^\star_{pw1}$ 。</p>
+<blockquote>
+<p>总结：</p>
+<p>问题的拉格朗日对偶问题常常会因为保证满足优化时极小值可达所需要的条件，从而消去一些项使目标函数或约束变得简单 （拉格朗日对偶问题优化拉格朗日变量，对原问题优化变量直接取inf下界，化成等价问题时常常消去inf，即把原优化变量全部去掉），等价问题还可能直接优化成LP形式。(c)的解法比较技巧化，即通过辅助的LP问题分析，能用到之前分片线性极小化问题的性质。</p>
+</blockquote>
+<h3 id="5-16"><a href="#5-16" class="headerlink" title="5.16"></a>5.16</h3><p>(a)</p>
+<p>$f<em>0$ 凸， $f_i$ 凸，所以 $\max{0, f_i}$ 凸，所以 $\max</em>{i=1,\cdots,m}\max{0,f_i}$ 凸，所以 $\phi$ 凸。</p>
+<p>(b)</p>
+<script type="math/tex; mode=display">
+\begin{align}
+L(x,\lambda)&=f_0(x)+\sum_i\lambda_if_i(x)\\
+g(\lambda)&=\inf_x(f_0(x)+\sum_i\lambda_if_ix(x))\\
+L'(x,y,\lambda,\nu)&=f_0(x)+\alpha y+\sum_i\lambda_i(f_i(x)-y)-\nu y\\
+g'(\lambda,\nu)&=\inf_{x,y}(f_0(x)+\alpha y+\sum_i\lambda_i(f_i(x)-y)-\nu y)\\
+&=\inf_x(f_0(x)+\sum\lambda_if_i(x))+\inf_y((\alpha-\nu-\sum_i\lambda_i)y)
+\end{align}</script><p>优化 $g’(\lambda,\nu)$ 的等价问题：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &g(\lambda)\\
+\text{subject to }&\textbf{1}^T\lambda-\alpha\leq0\\
+&\lambda\succeq0\\
+\end{align}</script><p>(c)</p>
+<p>$\lambda^\star$ 为原对偶问题最优解： </p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &g(\lambda)\\
+\text{subject to }
+&\lambda\succeq0\\
+\end{align}</script><p>辅助问题最优解 $x_s^\star\geq \lambda^\star_s$ ，且容易知道辅助问题对偶最优解 $ \lambda^\star_s$ 在原对偶问题上可行。又有 $\alpha&gt;\textbf{1}^T\lambda^\star$ ， 即 $\lambda^\star$ 也是辅助问题对偶最优解，两者可行域以及优化函数等价，辅助问题的最优解是其对偶问题最优解，由于原问题强对偶成立，所以对偶问题最优解也是原问题最优解，即：辅助问题的最优解也是原问题的最优解。</p>
+<blockquote>
+<p>总结：</p>
+<p>比较常规的对偶分析。罚函数项和一些损失函数正则项有相似之处。</p>
+</blockquote>
+<h3 id="5-23"><a href="#5-23" class="headerlink" title="5.23"></a>5.23</h3><p>(a)</p>
+<p>设不存在这样的 $z$ ，即 $-c\notin{\sum z_ia_i\mid z_i\geq0}$ ，右侧为闭凸集，根据严格分离超平面定理，存在超平面 $u^Tx$ 严格分离点和集合。即：</p>
+<script type="math/tex; mode=display">
+-u^Tc>\sum u^Tz_ia_i=u^TA^Tz</script><p>约束为 $z\succeq 0$ ，可以看出 $u^Tc&lt;0, u^TA^T&lt;0$ 。令 $x=x^\star+tu$ ：</p>
+<script type="math/tex; mode=display">
+a^T_ix=a^T_ix^\star+a^T_itu\leq b_i+ta^T_iu<b_i</script><p>即 $x$ 可行；考虑目标函数：</p>
+<script type="math/tex; mode=display">
+c^Tx=c^Tx^\star+tc^Tu<c^Tx^\star</script><p>我们找到了比 $x^\star$ 更优的解，矛盾。所以存在满足题意的 $z$ 。</p>
+<p>(b)</p>
+<p>对偶问题可行即 $-b\notin {Ax+s\mid s\succeq0}$ ，右侧为闭凸集，根据严格分离超平面定理，存在超平面 $v^Tx$ 严格分离点和集合。即：</p>
+<script type="math/tex; mode=display">
+-v^Tb>v^TAx+v^Ts</script><p>在 $x$ 任意取值下成立需要 $v^TA=0$ ， 等价式子为：</p>
+<script type="math/tex; mode=display">
+v^TA=0, v^Tb<0,v\succeq 0</script><p>那么对偶问题可行性条件 $A^Tz+c=0=A^T(z+v)$ ，即对偶问题在 $v$ 方向上是无界的， $d^\star =\infty$。</p>
+<p>(c)</p>
+<p>原问题容易看出不可行 ($0\leq -1$)，$p^\star=\infty$ 。</p>
+<script type="math/tex; mode=display">
+L(x,\lambda_1,\lambda_2)=x+\lambda_1(x-1)+\lambda_2</script><p>可行性条件 $\lambda_1+1=0$  ，对偶线性规划：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &\lambda_2-\lambda_1\\
+\text{subject to }&\lambda_1+1=0\\
+&\lambda_1,\lambda_2\geq0\\
+\end{align}</script><p>容易看出此问题约束  $\lambda_1=-1\geq0$ 不能满足，对偶问题不可行。$d^\star=-\infty$ 。</p>
+<h3 id="5-27"><a href="#5-27" class="headerlink" title="5.27"></a>5.27</h3><p>拉格朗日函数：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+L(x,\nu)&=\|Ax-b\|^2_2+\nu^T(Gx-h)\\
+&=x^TA^TAx-2b^TAx+b^Tb+\nu G^T x-\nu^Th\\
+&=x^TA^TAx+(G^T\nu-2A^Tb)^Tx-\nu^Th+b^Tb
+\end{align}</script><p>KKT条件:</p>
+<script type="math/tex; mode=display">
+2A^TAx^\star-2A^Tb+G^T\nu^\star=0\\
+Gx^\star-h=0</script><p>最优解 $x^\star$ 可以用 $\nu^\star$ 显式表达：</p>
+<script type="math/tex; mode=display">
+x^\star=(\frac{1}{2}(A^TA)^{-1})(-G^T\nu^\star+2A^Tb)</script><p>代入 $Gx^\star-h=0, x^\star=G^{-1}h$ 后 $\nu^\star$ 可独立写出：</p>
+<script type="math/tex; mode=display">
+\nu^\star=(G^T)^{-1}(2A^Tb-2A^TAG^{-1}h)</script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/凸优化/" rel="tag"># 凸优化</a>
+              <a href="/tags/习题/" rel="tag"># 习题</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/06/18/凸问题习题/" rel="prev" title="[凸优化] 凸问题习题">
+      <i class="fa fa-chevron-left"></i> [凸优化] 凸问题习题
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/07/22/笔记-近似点算子/" rel="next" title="[凸优化] 10. 近似点算子">
+      [凸优化] 10. 近似点算子 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-6"><span class="nav-number">1.</span> <span class="nav-text">5.6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-7"><span class="nav-number">2.</span> <span class="nav-text">5.7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-16"><span class="nav-number">3.</span> <span class="nav-text">5.16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-23"><span class="nav-number">4.</span> <span class="nav-text">5.23</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-27"><span class="nav-number">5.</span> <span class="nav-text">5.27</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">thiswinex</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
