@@ -22,20 +22,22 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Convex-Optimization Problems(1)0. 前言 介绍了一些经典的优化问题，不止于凸优化问题 仍然有很多问题（几何规划、向量规划、广义不等式约束等等）以及关于SDP和SOCP的一些拓展未在此处给出，未来用到的时候再继续写点。">
-<meta name="keywords" content="笔记,凸优化">
+  <meta name="description" content="前言 Spatio-temporal backpropagation for training high-performance spiking neural networks - 原文 ；本文刊登在2018年 Frontiers in Neuroscience 期刊上。 BPTT-inspired的方法，文章的主要思想是以迭代式的方式近似LIF模型，使得LIF模型网络的推理过程变为线性迭代（线性">
+<meta name="keywords" content="论文,SNN">
 <meta property="og:type" content="article">
-<meta property="og:title" content="4. 凸优化问题(1)">
-<meta property="og:url" content="http://yoursite.com/2019/04/24/笔记-凸优化问题-1/index.html">
+<meta property="og:title" content="Spatio-Temporal Backpropagation for Training High-Performance Spiking Neural Networks">
+<meta property="og:url" content="http://yoursite.com/2020/10/05/笔记-STBP/index.html">
 <meta property="og:site_name" content="Thiswinex&#39;s Blog">
-<meta property="og:description" content="Convex-Optimization Problems(1)0. 前言 介绍了一些经典的优化问题，不止于凸优化问题 仍然有很多问题（几何规划、向量规划、广义不等式约束等等）以及关于SDP和SOCP的一些拓展未在此处给出，未来用到的时候再继续写点。">
+<meta property="og:description" content="前言 Spatio-temporal backpropagation for training high-performance spiking neural networks - 原文 ；本文刊登在2018年 Frontiers in Neuroscience 期刊上。 BPTT-inspired的方法，文章的主要思想是以迭代式的方式近似LIF模型，使得LIF模型网络的推理过程变为线性迭代（线性">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-07-27T13:06:23.886Z">
+<meta property="og:image" content="https://s1.ax1x.com/2020/10/05/0YgEHs.png">
+<meta property="og:updated_time" content="2020-10-05T10:49:20.142Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="4. 凸优化问题(1)">
-<meta name="twitter:description" content="Convex-Optimization Problems(1)0. 前言 介绍了一些经典的优化问题，不止于凸优化问题 仍然有很多问题（几何规划、向量规划、广义不等式约束等等）以及关于SDP和SOCP的一些拓展未在此处给出，未来用到的时候再继续写点。">
+<meta name="twitter:title" content="Spatio-Temporal Backpropagation for Training High-Performance Spiking Neural Networks">
+<meta name="twitter:description" content="前言 Spatio-temporal backpropagation for training high-performance spiking neural networks - 原文 ；本文刊登在2018年 Frontiers in Neuroscience 期刊上。 BPTT-inspired的方法，文章的主要思想是以迭代式的方式近似LIF模型，使得LIF模型网络的推理过程变为线性迭代（线性">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/10/05/0YgEHs.png">
 
-<link rel="canonical" href="http://yoursite.com/2019/04/24/笔记-凸优化问题-1/">
+<link rel="canonical" href="http://yoursite.com/2020/10/05/笔记-STBP/">
 
 
 <script id="page-configurations">
@@ -48,7 +50,7 @@
   };
 </script>
 
-  <title>4. 凸优化问题(1) | Thiswinex's Blog</title>
+  <title>Spatio-Temporal Backpropagation for Training High-Performance Spiking Neural Networks | Thiswinex's Blog</title>
   
 
 
@@ -153,7 +155,7 @@
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/24/笔记-凸优化问题-1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/05/笔记-STBP/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -166,7 +168,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          4. 凸优化问题(1)
+          Spatio-Temporal Backpropagation for Training High-Performance Spiking Neural Networks
         </h1>
 
         <div class="post-meta">
@@ -176,7 +178,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-04-24 21:47:48" itemprop="dateCreated datePublished" datetime="2019-04-24T21:47:48+08:00">2019-04-24</time>
+              <time title="Created: 2020-10-05 18:49:20" itemprop="dateCreated datePublished" datetime="2020-10-05T18:49:20+08:00">2020-10-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -184,11 +186,11 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/笔记/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+                  <a href="/categories/论文/" itemprop="url" rel="index"><span itemprop="name">论文</span></a>
                 </span>
                   , 
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/笔记/凸优化/" itemprop="url" rel="index"><span itemprop="name">凸优化</span></a>
+                  <a href="/categories/论文/SNN/" itemprop="url" rel="index"><span itemprop="name">SNN</span></a>
                 </span>
             </span>
 
@@ -203,71 +205,60 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Convex-Optimization-Problems-1"><a href="#Convex-Optimization-Problems-1" class="headerlink" title="Convex-Optimization Problems(1)"></a>Convex-Optimization Problems(1)</h2><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
-<li>介绍了一些经典的优化问题，不止于凸优化问题</li>
-<li>仍然有很多问题（几何规划、向量规划、广义不等式约束等等）以及关于SDP和SOCP的一些拓展未在此处给出，未来用到的时候再继续写点。</li>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li><a href="https://www.frontiersin.org/articles/10.3389/fnins.2018.00331/full" target="_blank" rel="noopener">Spatio-temporal backpropagation for training high-performance spiking neural networks - 原文</a> ；本文刊登在2018年 Frontiers in Neuroscience 期刊上。</li>
+<li>BPTT-inspired的方法，文章的主要思想是以迭代式的方式近似LIF模型，使得LIF模型网络的推理过程变为线性迭代（线性地完成时域和空间域的迭代，是谓”spatio-temporal”），从而可以根据迭代式进行反向传播。对于脉冲激活函数的梯度，文章设计了数种不同的梯度近似函数，取得了不错的效果。</li>
 </ul>
 <a id="more"></a>
-<h2 id="1-Convex-optimization-problems"><a href="#1-Convex-optimization-problems" class="headerlink" title="1. Convex optimization problems"></a>1. Convex optimization problems</h2><ul>
-<li><p>Standard form:</p>
-<p>minimize $f_0(x)$</p>
-<p>subject to $f_i(x)\leq 0, i=1,\cdots,m, a^T_ix=b_i,i=1,\cdots,p$</p>
-<p>Note: $f_0$ is convex, $f_1,\cdots,f_n$ are convex, $a^T_ix=b_i$ are affine.</p>
+<h3 id="LIF-Model"><a href="#LIF-Model" class="headerlink" title="LIF Model"></a>LIF Model</h3><ul>
+<li><p>LIF（Leaky Integrate and Fire）模型即带leaky漏电、integrate对脉冲积分、fire发放脉冲等主要特征的神经元模型。其微分方程为：</p>
+<script type="math/tex; mode=display">
+\tau \frac{du(t)}{dt}=-u(t)+I(t)\tag{1}</script><ul>
+<li>其中 $u$ 代表膜电势，$I$ 代表电流，$\tau$ 为一个漏电常量。</li>
+</ul>
+</li>
+<li><p>微分方程在数值上求解需要转为迭代式：</p>
 </li>
 </ul>
-<blockquote>
-<p>可以注意到凸优化问题的可行集为凸</p>
-</blockquote>
+<script type="math/tex; mode=display">
+u(t)=u(t_{i-1})e^{\frac{t_{i-1}-t}{\tau}}+\hat{I}(t)\tag{2}</script><h3 id="STBP-Method"><a href="#STBP-Method" class="headerlink" title="STBP Method"></a>STBP Method</h3><ul>
+<li><p>本文更具体地将LIF模型对应到SNN模型，迭代式可以转化为三步：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+x^{t+1,n}_i&=\sum^{l(n-1)}_{j=1}w^n_{ij}o^{t+1,n-1}_j\tag{3}\\
+u^{t+1,n}_i&=u^{t,n}_if(o^{t,n}_i)+x^{t+1,n}_i+b^n_i\tag{4}\\
+o^{t+1,n}_i&=g(u^{t+1,n}_i)\tag{5}
+\end{align}</script><p>其中</p>
+<script type="math/tex; mode=display">
+\begin{align}
+f(x)&=\tau e^{-\frac{x}{\tau}}\tag{6}\\
+g(x)&=1 \text{  if  }x\geq V_{th} \text{ else }0\tag{7}
+\end{align}</script><p>$x$ 为神经元的输入，$u$ 为神经元电势，$o$ 为神经元的输出。式(3)的含义是：神经元的输入为前层神经元输出的加权和；式(4)的含义是：当前时刻电势=前一时刻电势×漏电/发放函数+神经元输入+偏置；式(5)的含义是，若电势大于阈值，则发放脉冲。</p>
+</li>
+<li><p>本文提出式(6)的近似式：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+f(o^{t,n}_i)\approx\left\{
+    \begin{array} 
+        s\tau, o^{t,n}_i=0 \\
+        0, o^{t,n}_i=1
+    \end{array}
+    \right. \tag{8}
+\end{align}</script></li>
+<li><p>本文提出 $g$ 的一个梯度近似：</p>
+<script type="math/tex; mode=display">
+h(u)=\frac{1}{a_1}sign(|u-V_{th}|<\frac{a_1}{2})\tag{9}</script></li>
+<li><p>至此，在SNN上使用BP的障碍已经全部被扫清。前推中核心的(3)(4)(5)式全部可导。</p>
 <ul>
-<li><p><strong>Any local optimal point is globally optimal</strong></p>
+<li><p>前推顺序为：1）对于每一个时间t，计算完一次完整的前推过程并更新电势；2） 计算下一个时间t。</p>
 </li>
-<li><p>Optimality criterion for differentiable $f_0$ </p>
-<p>$x$ is optimal <strong>iff</strong> it’s feasible $(x\in X)$ and $\triangledown f_0(x)^T(y-x)\geq 0$ </p>
-</li>
-</ul>
-<blockquote>
-<p>$-\triangledown f(x)$ 定义了一个支撑超平面切于 最优点</p>
-</blockquote>
-<ul>
-<li>Equivalent convex problem</li>
-</ul>
-<blockquote>
-<p>包括消除、引入等式约束；加入松弛变量；极小化部分变量；化为上境图问题</p>
-</blockquote>
-<h2 id="2-Quasiconvex-optimization"><a href="#2-Quasiconvex-optimization" class="headerlink" title="2. Quasiconvex optimization"></a>2. Quasiconvex optimization</h2><ul>
-<li><p>Different point: </p>
-<p>$x$ is optimal <strong>if</strong> it’s feasible and $\triangledown f_0(x)^T(y-x)&gt;0$</p>
+<li><p>每层的权重都有t个状态；由于前推过程中每一层的输出结果都依赖于 1）相同t前一层的输出 ；2）前一个t同一层的电势。所以前推的依赖关系在所有的权重状态中可以构成一个有向无环图，可以直接根据前推路径进行反向传播。</p>
+<p><img src="https://s1.ax1x.com/2020/10/05/0YgEHs.png" alt="image 20201005164809424"></p>
 </li>
 </ul>
-<blockquote>
-<p>拟凸问题可以通过构造凸可行性问题来求解</p>
-</blockquote>
-<h2 id="3-Linear-program"><a href="#3-Linear-program" class="headerlink" title="3. Linear program"></a>3. Linear program</h2><ul>
-<li><p>minimize $c^Tx+d$</p>
-<p>subject to $Gx\preceq h, Ax=b$</p>
 </li>
 </ul>
-<blockquote>
-<p>线性目标函数对凸优化是普适的。</p>
-<p>与线性分式问题等价</p>
-<p>$\min |x|_1$ s.t. $Ax=b$ 是线性规划问题：<br>$\min t$ s.t. $|x|_1\leq t, Ax=b$ 1范数可以分解成各分量的线性不等式</p>
-</blockquote>
-<h2 id="4-Quadradic-program"><a href="#4-Quadradic-program" class="headerlink" title="4. Quadradic program"></a>4. Quadradic program</h2><ul>
-<li><p>minimize $(1/2)x^TPx+q^Tx+r$</p>
-<p>subject to $Gx\preceq h, Ax=b, P\in \textbf{S}^n_+$ </p>
-</li>
-<li><p>least-squares: minimize $|Ax-b|^2_2$</p>
-<p>analytical solution $x^\star = A^\dagger b$</p>
-</li>
-</ul>
-<blockquote>
-<p>$A^\dagger$ 是伪逆矩阵的意思， $A=U\Sigma V^T, A^\dagger=V\Sigma^+U^T$</p>
-</blockquote>
-<h2 id="5-Second-order-cone-programming"><a href="#5-Second-order-cone-programming" class="headerlink" title="5. Second-order cone programming"></a>5. Second-order cone programming</h2><ul>
-<li><p>minimize $f^Tx$</p>
-<p>subject to $|A_ix+b_i|_2\leq c^T_ix, i=1,\cdots,m, Fx=g$</p>
-</li>
-</ul>
+<h3 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h3><p>论文中其余篇幅主要是参数选择、g的梯度近似的选择、反向传播公式推导以及实验结果。在此略去不表。</p>
 
     </div>
 
@@ -277,8 +268,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/笔记/" rel="tag"># 笔记</a>
-              <a href="/tags/凸优化/" rel="tag"># 凸优化</a>
+              <a href="/tags/论文/" rel="tag"># 论文</a>
+              <a href="/tags/SNN/" rel="tag"># SNN</a>
           </div>
 
         
@@ -287,13 +278,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/04/24/笔记-凸函数-2/" rel="prev" title="4. 凸函数(2)">
-      <i class="fa fa-chevron-left"></i> 4. 凸函数(2)
+    <a href="/2020/10/05/笔记-SNNyolo/" rel="prev" title="Spiking-YOLO:Spiking Neural Network for Energy-Efﬁcient Object Detection">
+      <i class="fa fa-chevron-left"></i> Spiking-YOLO:Spiking Neural Network for Energy-Efﬁcient Object Detection
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2019/06/05/笔记-对偶/" rel="next" title="6. 对偶与对偶问题">
-      6. 对偶与对偶问题 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -352,7 +340,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Convex-Optimization-Problems-1"><span class="nav-number">1.</span> <span class="nav-text">Convex-Optimization Problems(1)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-number">2.</span> <span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Convex-optimization-problems"><span class="nav-number">3.</span> <span class="nav-text">1. Convex optimization problems</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Quasiconvex-optimization"><span class="nav-number">4.</span> <span class="nav-text">2. Quasiconvex optimization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Linear-program"><span class="nav-number">5.</span> <span class="nav-text">3. Linear program</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Quadradic-program"><span class="nav-number">6.</span> <span class="nav-text">4. Quadradic program</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Second-order-cone-programming"><span class="nav-number">7.</span> <span class="nav-text">5. Second-order cone programming</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LIF-Model"><span class="nav-number">1.1.</span> <span class="nav-text">LIF Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#STBP-Method"><span class="nav-number">1.2.</span> <span class="nav-text">STBP Method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Others"><span class="nav-number">1.3.</span> <span class="nav-text">Others</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
