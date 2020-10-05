@@ -22,21 +22,21 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="偏最小二乘 Partial Least Squares (PLS)">
+  <meta name="description" content="PLS 即 Partial Least Squares  偏最小二乘法。">
 <meta name="keywords" content="笔记,机器学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PLS简介">
 <meta property="og:url" content="http://yoursite.com/2019/11/23/笔记-PLS初探/index.html">
 <meta property="og:site_name" content="Thiswinex&#39;s Blog">
-<meta property="og:description" content="偏最小二乘 Partial Least Squares (PLS)">
+<meta property="og:description" content="PLS 即 Partial Least Squares  偏最小二乘法。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://s2.ax1x.com/2020/03/09/8SgFJJ.png">
 <meta property="og:image" content="https://s2.ax1x.com/2020/03/09/8pQcJH.png">
 <meta property="og:image" content="https://s2.ax1x.com/2020/03/09/8SgKoD.png">
-<meta property="og:updated_time" content="2020-07-27T13:10:35.250Z">
+<meta property="og:updated_time" content="2020-10-05T10:55:27.273Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PLS简介">
-<meta name="twitter:description" content="偏最小二乘 Partial Least Squares (PLS)">
+<meta name="twitter:description" content="PLS 即 Partial Least Squares  偏最小二乘法。">
 <meta name="twitter:image" content="https://s2.ax1x.com/2020/03/09/8SgFJJ.png">
 
 <link rel="canonical" href="http://yoursite.com/2019/11/23/笔记-PLS初探/">
@@ -211,7 +211,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="偏最小二乘-Partial-Least-Squares-PLS"><a href="#偏最小二乘-Partial-Least-Squares-PLS" class="headerlink" title="偏最小二乘 Partial Least Squares (PLS)"></a>偏最小二乘 Partial Least Squares (PLS)</h2><a id="more"></a>
+        <p>PLS 即 Partial Least Squares  偏最小二乘法。</p>
+<a id="more"></a>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
 <li><p>适用特点：数据量小、数据维数高、数据多重共线性</p>
 </li>
@@ -298,9 +299,9 @@ M=X_{a-1}'Y_{a-1}Y_{a-1}'X_{a-1}</script><p>其最大特征值为 $\theta_a^2$�
 </li>
 </ul>
 <h3 id="SIMPLS"><a href="#SIMPLS" class="headerlink" title="SIMPLS"></a>SIMPLS</h3><p>$S=X_0’Y_0$</p>
-<p><code>for i = 1 to k</code></p>
-<p>​    <code>if i=1:</code> $[u,s,v]=SVD(S)$</p>
-<p>​    <code>if i&gt;1:</code> $[u,s,v]=SVD(S-P<em>{i-1}(P</em>{i-1}’P<em>{i-1})^{-1}P’</em>{i-1}S)$</p>
+<p>for i=1 to k</p>
+<p>​    if i=1: $[u,s,v]=SVD(S)$</p>
+<p>​    if i&gt;1: $[u,s,v]=SVD(S-P<em>{i-1}(P</em>{i-1}’P<em>{i-1})^{-1}P’</em>{i-1}S)$</p>
 <p>​    $r_i=u(:,1)$</p>
 <p>​    $t_i=X_0r_i$</p>
 <p>​    $p_i=X’_0t_i/t_i’t_i$</p>
@@ -420,7 +421,7 @@ M=X_{a-1}'Y_{a-1}Y_{a-1}'X_{a-1}</script><p>其最大特征值为 $\theta_a^2$�
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#偏最小二乘-Partial-Least-Squares-PLS"><span class="nav-number">1.</span> <span class="nav-text">偏最小二乘 Partial Least Squares (PLS)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PLS-算法"><span class="nav-number">3.</span> <span class="nav-text">PLS 算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NIPALS"><span class="nav-number">3.1.</span> <span class="nav-text">NIPALS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SIMPLS"><span class="nav-number">3.2.</span> <span class="nav-text">SIMPLS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两者比较"><span class="nav-number">3.3.</span> <span class="nav-text">两者比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kernel-PLS"><span class="nav-number">4.</span> <span class="nav-text">Kernel PLS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PLS分类"><span class="nav-number">5.</span> <span class="nav-text">PLS分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Variable-Selection"><span class="nav-number">6.</span> <span class="nav-text">Variable Selection</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PLS-算法"><span class="nav-number">2.</span> <span class="nav-text">PLS 算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NIPALS"><span class="nav-number">2.1.</span> <span class="nav-text">NIPALS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SIMPLS"><span class="nav-number">2.2.</span> <span class="nav-text">SIMPLS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两者比较"><span class="nav-number">2.3.</span> <span class="nav-text">两者比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kernel-PLS"><span class="nav-number">3.</span> <span class="nav-text">Kernel PLS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PLS分类"><span class="nav-number">4.</span> <span class="nav-text">PLS分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Variable-Selection"><span class="nav-number">5.</span> <span class="nav-text">Variable Selection</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -434,7 +435,7 @@ M=X_{a-1}'Y_{a-1}Y_{a-1}'X_{a-1}</script><p>其最大特征值为 $\theta_a^2$�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
