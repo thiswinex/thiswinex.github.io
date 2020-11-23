@@ -21,7 +21,7 @@
   </script>
 
   <meta name="description" content="《凸优化》第五章部分习题">
-<meta name="keywords" content="习题,凸优化">
+<meta name="keywords" content="凸优化,习题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="对偶习题">
 <meta property="og:url" content="http://yoursite.com/2019/06/18/对偶习题/index.html">
@@ -205,6 +205,20 @@
               <span class="post-meta-item-text">Views: </span>
               <span class="leancloud-visitors-count"></span>
             </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/06/18/对偶习题/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/06/18/对偶习题/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -390,8 +404,8 @@ x^\star=(\frac{1}{2}(A^TA)^{-1})(-G^T\nu^\star+2A^Tb)</script><p>代入 $Gx^\sta
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/习题/" rel="tag"># 习题</a>
               <a href="/tags/凸优化/" rel="tag"># 凸优化</a>
+              <a href="/tags/习题/" rel="tag"># 习题</a>
           </div>
 
         
@@ -419,6 +433,7 @@ x^\star=(\frac{1}{2}(A^TA)^{-1})(-G^T\nu^\star+2A^Tb)</script><p>代入 $Gx^\sta
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -708,6 +723,35 @@ x^\star=(\frac{1}{2}(A^TA)^{-1})(-G^T\nu^\star+2A^Tb)</script><p>代入 $Gx^\sta
     
 
   
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'o28iHkvdJaYlwuG7Tbx9lYWu-gzGzoHsz',
+      appKey     : 'vRnPCs772pxOTas4gSYdOXmx',
+      placeholder: "随便说点什么~s",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
 
 </body>
 </html>

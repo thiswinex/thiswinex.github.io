@@ -21,7 +21,7 @@
   </script>
 
   <meta name="description" content="前言 Extremely Low Bit Neural Network: Squeeze the Last Bit Out with ADMM - 原文 ；AAAI 18 Oral。 从结果看比之前的一些量化工作都要好上不少，干货较多。">
-<meta name="keywords" content="深度学习,论文,NN压缩与加速">
+<meta name="keywords" content="论文,深度学习,NN压缩与加速">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Extremely Low Bit Neural Network: Squeeze the Last Bit Out with ADMM">
 <meta property="og:url" content="http://yoursite.com/2019/02/12/论文-Low-bit-quantization/index.html">
@@ -208,6 +208,20 @@
               <span class="post-meta-item-text">Views: </span>
               <span class="leancloud-visitors-count"></span>
             </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/02/12/论文-Low-bit-quantization/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/02/12/论文-Low-bit-quantization/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -293,8 +307,8 @@ W^{(c)}&:=W-\beta_c\partial_WL(W^{(p)})
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
               <a href="/tags/论文/" rel="tag"># 论文</a>
+              <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
               <a href="/tags/NN压缩与加速/" rel="tag"># NN压缩与加速</a>
           </div>
 
@@ -323,6 +337,7 @@ W^{(c)}&:=W-\beta_c\partial_WL(W^{(p)})
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -612,6 +627,35 @@ W^{(c)}&:=W-\beta_c\partial_WL(W^{(p)})
     
 
   
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'o28iHkvdJaYlwuG7Tbx9lYWu-gzGzoHsz',
+      appKey     : 'vRnPCs772pxOTas4gSYdOXmx',
+      placeholder: "随便说点什么~s",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
 
 </body>
 </html>

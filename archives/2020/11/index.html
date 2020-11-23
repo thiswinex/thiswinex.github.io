@@ -161,47 +161,7 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2020-11-23T10:42:00+08:00"
-              content="2020-11-23">
-          11-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/11/23/笔记-STBP-tdBN/" itemprop="url">
-            <span itemprop="name">Going Deeper With Directly-Trained Larger Spiking Neural Networks</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-11-23T10:36:13+08:00"
-              content="2020-11-23">
-          11-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/11/23/笔记-STBP/" itemprop="url">
-            <span itemprop="name">Spatio-Temporal Backpropagation for Training High-Performance Spiking Neural Networks</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-11-23T10:36:13+08:00"
+              datetime="2020-11-23T13:08:36+08:00"
               content="2020-11-23">
           11-23
         </time>
@@ -221,7 +181,47 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2020-11-23T10:36:13+08:00"
+              datetime="2020-11-23T13:08:36+08:00"
+              content="2020-11-23">
+          11-23
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2020/11/23/笔记-STBP/" itemprop="url">
+            <span itemprop="name">Spatio-Temporal Backpropagation for Training High-Performance Spiking Neural Networks</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2020-11-23T13:08:36+08:00"
+              content="2020-11-23">
+          11-23
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2020/11/23/笔记-STBP-tdBN/" itemprop="url">
+            <span itemprop="name">Going Deeper With Directly-Trained Larger Spiking Neural Networks</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2020-11-23T13:08:36+08:00"
               content="2020-11-23">
           11-23
         </time>
@@ -484,6 +484,35 @@
   
 
   
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'o28iHkvdJaYlwuG7Tbx9lYWu-gzGzoHsz',
+      appKey     : 'vRnPCs772pxOTas4gSYdOXmx',
+      placeholder: "随便说点什么~s",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
 
 </body>
 </html>

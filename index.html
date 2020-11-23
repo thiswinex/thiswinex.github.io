@@ -145,7 +145,7 @@
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/23/笔记-STBP-tdBN/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/23/笔记-SNNyolo/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -159,7 +159,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/23/笔记-STBP-tdBN/" class="post-title-link" itemprop="url">Going Deeper With Directly-Trained Larger Spiking Neural Networks</a>
+            <a href="/2020/11/23/笔记-SNNyolo/" class="post-title-link" itemprop="url">Spiking-YOLO:Spiking Neural Network for Energy-Efficient Object Detection</a>
         </h2>
 
         <div class="post-meta">
@@ -168,10 +168,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-11-23 10:42:00 / Modified: 10:41:56" itemprop="dateCreated datePublished" datetime="2020-11-23T10:42:00+08:00">2020-11-23</time>
+              <time title="Created: 2020-11-23 13:08:36" itemprop="dateCreated datePublished" datetime="2020-11-23T13:08:36+08:00">2020-11-23</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-11-10 22:38:50" itemprop="dateModified" datetime="2020-11-10T22:38:50+08:00">2020-11-10</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -187,13 +193,27 @@
             </span>
 
           
-            <span id="/2020/11/23/笔记-STBP-tdBN/" class="post-meta-item leancloud_visitors" data-flag-title="Going Deeper With Directly-Trained Larger Spiking Neural Networks" title="Views">
+            <span id="/2020/11/23/笔记-SNNyolo/" class="post-meta-item leancloud_visitors" data-flag-title="Spiking-YOLO:Spiking Neural Network for Energy-Efficient Object Detection" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
               <span class="post-meta-item-text">Views: </span>
               <span class="leancloud-visitors-count"></span>
             </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2020/11/23/笔记-SNNyolo/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/23/笔记-SNNyolo/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -205,12 +225,14 @@
 
       
           <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
-<li><a href="x">Going Deeper With Directly-Trained Larger Spiking Neural Networks - 原文</a> 。</li>
-<li>个人理解：听起来和结果上都很厉害的工作。主要解决直接训练SNN算法中的各类Normalization的问题。如STBP这类算法因为是BPTT-inspired的，也会出现梯度消失和爆炸的现象。而且由于脉冲激活不可导，为了BP算法的应用通常都要引入梯度的近似，造成梯度更新有误差，带来了不稳定因素。同时由于信息在LIF模型中传输是“输入-电位-输出”的模型，信息需要在电位上周转一次。如果timestep低且发放率（firing rate）低，“电位-输出”这一环节就会被卡住，造成信息损失；如果脉冲发放率高，神经元的输出对输入就不敏感（实际上从编码的角度来看，firing rate无论是过低还是过高，其信息表达能力都很有限，从这个角度来看理想的发放率是0.5）。论文提出了适用于直接训练SNN算法的BN改进版，并且在残差网络上跑了ImageNet数据集，总的来说算是比较solid的，要是能开放源码就更solid了。</li>
+<li><a href="https://arxiv.org/pdf/1903.06530.pdf" target="_blank" rel="noopener">Spiking-YOLO:Spiking Neural Network for Energy-Efﬁcient Object Detection - 原文</a> ；AAAI 20。</li>
+<li>IF模型</li>
+<li>新的norm方法</li>
+<li>imbalanced threshold</li>
 </ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/23/笔记-STBP-tdBN/#more" rel="contents">
+              <a class="btn" href="/2020/11/23/笔记-SNNyolo/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -258,7 +280,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-11-23 10:36:13" itemprop="dateCreated datePublished" datetime="2020-11-23T10:36:13+08:00">2020-11-23</time>
+              <time title="Created: 2020-11-23 13:08:36" itemprop="dateCreated datePublished" datetime="2020-11-23T13:08:36+08:00">2020-11-23</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -289,6 +311,20 @@
               <span class="post-meta-item-text">Views: </span>
               <span class="leancloud-visitors-count"></span>
             </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2020/11/23/笔记-STBP/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/23/笔记-STBP/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -329,7 +365,7 @@
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/23/笔记-SNNyolo/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/23/笔记-STBP-tdBN/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -343,7 +379,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/23/笔记-SNNyolo/" class="post-title-link" itemprop="url">Spiking-YOLO:Spiking Neural Network for Energy-Efficient Object Detection</a>
+            <a href="/2020/11/23/笔记-STBP-tdBN/" class="post-title-link" itemprop="url">Going Deeper With Directly-Trained Larger Spiking Neural Networks</a>
         </h2>
 
         <div class="post-meta">
@@ -352,16 +388,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-11-23 10:36:13" itemprop="dateCreated datePublished" datetime="2020-11-23T10:36:13+08:00">2020-11-23</time>
+              <time title="Created: 2020-11-23 13:08:36 / Modified: 10:41:56" itemprop="dateCreated datePublished" datetime="2020-11-23T13:08:36+08:00">2020-11-23</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-11-10 22:38:50" itemprop="dateModified" datetime="2020-11-10T22:38:50+08:00">2020-11-10</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -377,13 +407,27 @@
             </span>
 
           
-            <span id="/2020/11/23/笔记-SNNyolo/" class="post-meta-item leancloud_visitors" data-flag-title="Spiking-YOLO:Spiking Neural Network for Energy-Efficient Object Detection" title="Views">
+            <span id="/2020/11/23/笔记-STBP-tdBN/" class="post-meta-item leancloud_visitors" data-flag-title="Going Deeper With Directly-Trained Larger Spiking Neural Networks" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
               <span class="post-meta-item-text">Views: </span>
               <span class="leancloud-visitors-count"></span>
             </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2020/11/23/笔记-STBP-tdBN/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/23/笔记-STBP-tdBN/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -395,14 +439,12 @@
 
       
           <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
-<li><a href="https://arxiv.org/pdf/1903.06530.pdf" target="_blank" rel="noopener">Spiking-YOLO:Spiking Neural Network for Energy-Efﬁcient Object Detection - 原文</a> ；AAAI 20。</li>
-<li>IF模型</li>
-<li>新的norm方法</li>
-<li>imbalanced threshold</li>
+<li><a href="x">Going Deeper With Directly-Trained Larger Spiking Neural Networks - 原文</a> 。</li>
+<li>个人理解：听起来和结果上都很厉害的工作。主要解决直接训练SNN算法中的各类Normalization的问题。如STBP这类算法因为是BPTT-inspired的，也会出现梯度消失和爆炸的现象。而且由于脉冲激活不可导，为了BP算法的应用通常都要引入梯度的近似，造成梯度更新有误差，带来了不稳定因素。同时由于信息在LIF模型中传输是“输入-电位-输出”的模型，信息需要在电位上周转一次。如果timestep低且发放率（firing rate）低，“电位-输出”这一环节就会被卡住，造成信息损失；如果脉冲发放率高，神经元的输出对输入就不敏感（实际上从编码的角度来看，firing rate无论是过低还是过高，其信息表达能力都很有限，从这个角度来看理想的发放率是0.5）。论文提出了适用于直接训练SNN算法的BN改进版，并且在残差网络上跑了ImageNet数据集，总的来说算是比较solid的，要是能开放源码就更solid了。</li>
 </ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/23/笔记-SNNyolo/#more" rel="contents">
+              <a class="btn" href="/2020/11/23/笔记-STBP-tdBN/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -450,7 +492,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-11-23 10:36:13" itemprop="dateCreated datePublished" datetime="2020-11-23T10:36:13+08:00">2020-11-23</time>
+              <time title="Created: 2020-11-23 13:08:36" itemprop="dateCreated datePublished" datetime="2020-11-23T13:08:36+08:00">2020-11-23</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -481,6 +523,20 @@
               <span class="post-meta-item-text">Views: </span>
               <span class="leancloud-visitors-count"></span>
             </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2020/11/23/笔记-SNNcompression/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/23/笔记-SNNcompression/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -572,6 +628,20 @@
               <span class="post-meta-item-text">Views: </span>
               <span class="leancloud-visitors-count"></span>
             </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2020/03/09/非root权限下安装zsh/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/09/非root权限下安装zsh/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -665,6 +735,20 @@
               <span class="post-meta-item-text">Views: </span>
               <span class="leancloud-visitors-count"></span>
             </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/11/23/笔记-Pytorch问题汇总/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/23/笔记-Pytorch问题汇总/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -761,6 +845,20 @@
               <span class="post-meta-item-text">Views: </span>
               <span class="leancloud-visitors-count"></span>
             </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/11/23/笔记-PLS初探/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/23/笔记-PLS初探/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -857,6 +955,20 @@
               <span class="post-meta-item-text">Views: </span>
               <span class="leancloud-visitors-count"></span>
             </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/08/26/OJ-LeetCode题解记录-2/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/08/26/OJ-LeetCode题解记录-2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -954,6 +1066,20 @@
               <span class="post-meta-item-text">Views: </span>
               <span class="leancloud-visitors-count"></span>
             </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/08/14/OJ-LeetCode基础题目/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/08/14/OJ-LeetCode基础题目/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -1050,6 +1176,20 @@
               <span class="post-meta-item-text">Views: </span>
               <span class="leancloud-visitors-count"></span>
             </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/08/05/OJ-LeetCode题解记录/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/08/05/OJ-LeetCode题解记录/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -1382,6 +1522,35 @@
     
 
   
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'o28iHkvdJaYlwuG7Tbx9lYWu-gzGzoHsz',
+      appKey     : 'vRnPCs772pxOTas4gSYdOXmx',
+      placeholder: "随便说点什么~s",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
 
 </body>
 </html>
