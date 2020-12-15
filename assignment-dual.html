@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    6. 对偶与对偶问题 |  Thiswinex&#39;s Blog
+    对偶习题 |  Thiswinex&#39;s Blog
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -44,7 +44,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-笔记-对偶"
+  id="post-assignment-dual"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -55,18 +55,18 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  6. 对偶与对偶问题
+  对偶习题
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/%E7%AC%94%E8%AE%B0-%E5%AF%B9%E5%81%B6.html" class="article-date">
-  <time datetime="2019-06-05T02:37:44.000Z" itemprop="datePublished">2019-06-05</time>
+      <a href="/assignment-dual.html" class="article-date">
+  <time datetime="2019-06-18T15:05:59.000Z" itemprop="datePublished">2019-06-18</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a> / <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/%E5%87%B8%E4%BC%98%E5%8C%96/">凸优化</a>
+    <a class="article-category-link" href="/categories/%E4%B9%A0%E9%A2%98/">习题</a> / <a class="article-category-link" href="/categories/%E4%B9%A0%E9%A2%98/%E5%87%B8%E4%BC%98%E5%8C%96/">凸优化</a>
   </div>
   
 <div class="word_count">
@@ -74,7 +74,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">327</span>
+            <span class="post-count">1.5k</span>
         </span>
     </span>
 
@@ -83,7 +83,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">7 分钟</span>
         </span>
     </span>
 </div>
@@ -98,112 +98,173 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="Duality"><a href="#Duality" class="headerlink" title="Duality"></a>Duality</h2><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
-<li>主要记录了对偶问题和对偶方法。由于强对偶性下对偶问题的解与原问题相等，许多问题在原函数性质不好的情况下可以变换到对偶空间去求解。</li>
-<li>Why duality? 降低计算复杂度，数据降维等；更好的性质，更光滑、凸。。</li>
-</ul>
+  <p>《凸优化》第五章部分习题</p>
 <a id="more"></a>
-<h2 id="1-Lagrangian"><a href="#1-Lagrangian" class="headerlink" title="1. Lagrangian"></a>1. Lagrangian</h2><ul>
-<li><p>Standard form problem:</p>
-<p>minimize $f_0(x)$</p>
-<p>subject to $f_i(x)\leq 0, i=1,\cdots,m, h_i(x)=0,i=1,\cdots,p$ </p>
-</li>
-<li><p>Lagrangian:</p>
-<script type="math/tex; mode=display">
-L(x,\lambda,\nu)=f_0(x)+\sum^m_{i=1}\lambda_if_i(x)+\sum^p_{i=1}\nu_ih_i(x)</script></li>
-</ul>
-<blockquote>
-<p>$\lambda,\nu$ 分别是不等式约束和等式约束的拉格朗日乘子</p>
-</blockquote>
-<h2 id="2-Lagrangian-Dual"><a href="#2-Lagrangian-Dual" class="headerlink" title="2. Lagrangian Dual"></a>2. Lagrangian Dual</h2><script type="math/tex; mode=display">
-g(\lambda,\nu)=\inf_{x\in D}L(x,\lambda,\nu)</script><blockquote>
-<p>因为 $\inf$ 的存在，且 $L$ 是关于 $\lambda,\nu$ 的仿射函数，对偶函数一定凸且构成了原问题最优值 $p^\star$ 的下界 $g(\lambda,\nu)\leq p^\star$</p>
-</blockquote>
-<h2 id="3-Lagrange-dual-and-conjugate-function"><a href="#3-Lagrange-dual-and-conjugate-function" class="headerlink" title="3. Lagrange dual and conjugate function"></a>3. Lagrange dual and conjugate function</h2><ul>
-<li><p>minimize $f_0(x)$</p>
-<p>subject to $Ax\preceq b, Cx=d$</p>
+<h3 id="5-6"><a href="#5-6" class="headerlink" title="5.6"></a>5.6</h3><p>(a)</p>
 <script type="math/tex; mode=display">
 \begin{align}
-g(\lambda,\nu)&=\inf_{x\in\textbf{dom}f_0}(f_0(x)+(A^T\lambda+C^T\nu)^Tx-b^T\lambda-d^T\nu)\\
-&=-f_0^*(-A^T\lambda-C^T\nu)-b^T\lambda-d^T\nu
-\end{align}</script></li>
-</ul>
-<h2 id="4-The-dual-problem"><a href="#4-The-dual-problem" class="headerlink" title="4. The dual problem"></a>4. The dual problem</h2><ul>
-<li><p>maximize $g(\lambda,\nu)$</p>
-<p>subject to $\lambda \succeq 0$ </p>
-<p>finds best lower bound of $p^\star$_</p>
-</li>
-</ul>
-<h2 id="5-Weak-and-strong-duality"><a href="#5-Weak-and-strong-duality" class="headerlink" title="5. Weak and strong duality"></a>5. Weak and strong duality</h2><ul>
-<li><p>weak duality: $d^\star\leq p^\star$</p>
-<p>always holds for convex and nonconvex problems</p>
-</li>
-<li><p>strong duality: $d^\star=p^\star$</p>
-<p>Slater’ constraint qualification:</p>
-<script type="math/tex; mode=display">
-\exists x\in \textbf{int}D: f_i(x)<0, i=1,\cdots,m</script></li>
-</ul>
-<blockquote>
-<p>Slater条件成立即不等式约束可以取严格小于，强对偶性成立。 Slater条件确保拉格朗日函数存在鞍点(参见拉格朗日对偶的鞍点解释，即 $x^\star,\lambda^\star$ 最优且强对偶性成立，则其为 $L$ 的鞍点)</p>
-</blockquote>
-<h2 id="6-A-nonconvex-problem-with-strong-duality"><a href="#6-A-nonconvex-problem-with-strong-duality" class="headerlink" title="6. A nonconvex problem with strong duality"></a>6. A nonconvex problem with strong duality</h2><blockquote>
-<p>对非凸问题也可能存在强对偶条件</p>
-<p>无论 $x$ 的维数($x\in \mathcal{R}^n$ )，其对偶问题总是针对 $\lambda\in \mathcal{R}$ 的一维优化。这是个很好的性质，可以直接使问题降维。</p>
-</blockquote>
-<h2 id="7-Geometric-interpretation"><a href="#7-Geometric-interpretation" class="headerlink" title="7. Geometric interpretation"></a>7. Geometric interpretation</h2><script type="math/tex; mode=display">
-g(\lambda)=\inf_{(u,t)\in G}(t+\lambda u)</script><p>where $G={(f_1(x),f_2(x))\mid x\in D}$</p>
-<p><img src="/Users/pingguo/Library/Application Support/typora-user-images/image-20190425154237918.png" alt="image-20190425154237918"></p>
-<blockquote>
-<p>原问题可行集在左半侧(Slater条件)；超平面 $\lambda u+t=g(\lambda)$ 与 $t$ 的交点永远在 $p^*$ 的下边。此处 $\lambda$ 作为自变量变换超平面的”斜率”，取与G相切之后（inf保证相切）与t轴焦点即为 $g(\lambda)$ 。无论怎么交，最优点（最大的 $g(\lambda)$ ）总在 $p^\star$ 下部。 </p>
-<p>(弱对偶条件 $d^<em>&lt;p^</em>$)</p>
-</blockquote>
-<ul>
-<li>Epigraph variation:</li>
-</ul>
-<blockquote>
-<p>令 $A$ 为G的上境图，强对偶性成立当$p^\star$ 处可以作非垂直（于坐标轴u）的支撑超平面。</p>
-<p>上图G非凸；如果G凸（即对于凸问题），过 $(0,p^\star)$ 可以作支撑超平面。</p>
-<p>此时Slater’s condition: 如果存在 $(\tilde{u},\tilde{t})\in A$ 且 $\tilde{u}&lt;0$ ，$(0,p^\star)$ 点的支撑超平面必然不垂直。</p>
-</blockquote>
-<h2 id="8-Complementary-slackness"><a href="#8-Complementary-slackness" class="headerlink" title="8. Complementary slackness"></a>8. Complementary slackness</h2><ul>
-<li><p>assume strong duality holds, $x^\star$ optimal and $(\lambda^\star,\nu^\star)$ dual optimal</p>
-<p>obviously we have:</p>
+&\because\forall z\in\textbf{R}^m, \|z\|_\infty\geq\frac{1}{\sqrt{m}}\|z\|_2\\
+&\therefore \|Ax_{ch}-b\|_2\leq\sqrt{m}\|Ax_{ch}-b\|_\infty\\
+&\because \|Ax_{ch}-b\|_2\geq\|Ax_{ls}-b\|_2\text{(optimal)}\geq\|Ax_{ls}-b\|_{\infty}\text{(hint)}\\
+&\therefore \|Ax_{ls}-b\|_\infty\leq \sqrt{m}\|Ax_{ch}-b\|_{\infty}
+\end{align}</script><p>(b)</p>
+<p>容易得到 $|\hat\nu|_1\leq1$ ，$|\tilde{\nu}|_1\leq1$ 。</p>
 <script type="math/tex; mode=display">
 \begin{align}
-f_0(x^\star)=g(\lambda^\star,\nu^\star)&=\inf_x\{f_0(x)+\sum\lambda_i^\star f_i(x)+\sum\nu_i^\star h_i(x)\}\\
-&\leq f_0(x^\star)+\sum\lambda_i^\star f_i(x^\star)+\sum\nu_i^\star h_i(x^\star)\\
-&\leq f_0(x^\star)
-\end{align}</script><ul>
-<li>First inequality: $x^\star$ minimize $L(x,\lambda^\star,\nu^\star)$ </li>
-<li>$\sum \lambda_i^\star f_i(x^\star)=0$</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>第二个条件即 complementary slackness 互补松弛性，即最优点处除非第i个约束起作用，否则最优拉格朗日乘子的第i项都为零。</p>
-</blockquote>
-<h2 id="9-KKT-Condition"><a href="#9-KKT-Condition" class="headerlink" title="9. KKT Condition"></a>9. KKT Condition</h2><ul>
-<li>For non-convex problem, if strong duality holds, i.e. $x^\star$ minimize $L(x,\lambda^\star,\nu^\star)$ , so its gradient at $x^\star$:<script type="math/tex; mode=display">
-\triangledown f_0(x^\star)+\sum \lambda^\star_i\triangledown f_i(x)+\sum\nu^\star_i\triangledown h_i(x)=0</script>so we have KKT condition:<script type="math/tex; mode=display">
+A^T\hat{\nu}&=(A^TAx_{ls}-A^Tb)/\|b-Ax_{ls}\|_1\\
+&=(A^TA(A^TA)^{-1}A^Tb-A^Tb)/\|b-Ax_{ls}\|_1\\
+&=0\\
+A^T\tilde{\nu}&=-A^T\hat{\nu}=0
+\end{align}</script><p> 即两个 $\nu$ 都是问题的可行解。考虑 $b^T\nu$：</p>
+<script type="math/tex; mode=display">
 \begin{align}
-f_i(x^\star)&\leq 0 \text{     primal constraints}\\
-h_i(x^\star)&=0 \\
-\lambda^\star_i&\geq 0 \text{     dual constraints}\\
-\lambda^\star_if_i(x^\star)&=0\text{     complementary slackness}\\
-\triangledown f_0(x^\star)+\sum \lambda^\star_i\triangledown f_i(x)+\sum\nu^\star_i\triangledown h_i(x)&=0 \text{     gradient vanish}
-\end{align}</script></li>
-</ul>
+b^T\hat\nu&=\frac{-b^Tr_{ls}}{\|r_{ls}\|_1}=\frac{x_{ls}^TA^Tr_{ls}-b^Tr_{ls}}{\|r_{ls}\|_1}=-\frac{\|r_{ls}\|^2_2}{\|r_{ls}\|_1}\\
+b^T\tilde\nu&=-b^T\hat\nu=\frac{\|r_{ls}\|^2_2}{\|r_{ls}\|_1}\\
+\end{align}</script><p>即 $\tilde{\nu}$ 给出了更好（大）的下界。和(a)相比:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\frac{\|r_{ls}\|^2_2}{\|r_{ls}\|_1}=\frac{\|Ax_{ls}-b\|^2_2}{\|b-Ax_{ls}\|_1}\geq\frac{\|Ax_{ls}-b\|^2_2}{\sqrt{m}\|b-Ax_{ls}\|_2}\geq\frac{\|Ax_{ls}-b\|_\infty}{\sqrt{m}}
+\end{align}</script><p>比 (a) 给出了一个更好的下界。</p>
 <blockquote>
-<p>KKT条件由强对偶性下的非凸问题导出，即在非凸问题中，原问题和对偶问题的一堆最优解必须满足KKT条件(必要条件) 。</p>
-<p>（原问题可行性、对偶问题可行性、互补松弛性、最优性）</p>
-<p>若原问题为凸，必要条件变为充要条件，满足KKT条件的点是最优解且对偶间隙为零(强对偶)。对于还未知是否满足强对偶性的凸问题，需要满足 Slater 条件。</p>
+<p>总结：</p>
+<p>解是一些矩阵代换。不过这一题还给出了一个通过最小二乘问题等其他问题的对偶问题来逼近原问题最优解的方法。通常这类问题没有解析解，通过其他问题的对偶问题的分析得到的下界通常比一般不等式要好。</p>
 </blockquote>
-<h2 id="10-Example"><a href="#10-Example" class="headerlink" title="10. Example"></a>10. Example</h2><blockquote>
-<p>$\underset{y}{\min} \frac{1}{2}|x-y|^2_2$， $s.t. |x|_1=1$ </p>
+<h3 id="5-7"><a href="#5-7" class="headerlink" title="5.7"></a>5.7</h3><p>(a)</p>
+<script type="math/tex; mode=display">
+L(x,y,\nu)=\max_{i=1,\cdots,m} y_i+\sum_i\nu_i(a^T_ix+b_i-y_i)\\
+g(\nu)=\inf_{x,y}(\max_{i=1,\cdots,m} y_i+\sum_i\nu_i(a^T_ix+b_i-y_i))</script><p>对偶问题：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &g(\nu)\\
+\text{subject to }&\nu\succeq 0
+\end{align}</script><p>由于原函数有线性部分，考虑 $g(\nu)$：</p>
+<p>优化 $x$ 时，$ \sum\nu^T a_i=0, i.e. A^T\nu=0$ 否则拉格朗日函数无下界。</p>
+<p>优化 $y$ 时，$\max y_i-\nu^Ty=0$ 否则拉格朗日函数无下界，即 $v^T\textbf{1}=1$ 。</p>
+<p>等价对偶问题：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &\nu^Tb\\
+\text{subject to }&\nu\succeq 0\\
+&\nu^T\textbf{1}=1\\
+&A^T\nu=0
+\end{align}</script><p>(b)</p>
+<p>原问题的上境图形式为LP：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &t\\
+\text{subject to }&\max(a_i^Tx+b_i)-t\leq 0
+\end{align}</script><p>约束等价变换：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &t\\
+\text{subject to }&A_i^Tx+b_i-t\textbf{1}\preceq 0
+\end{align}</script><p>对偶问题：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &\lambda^Tb\\
+\text{subject to }&A^T\lambda=0\\
+&\lambda^T\textbf{1}=1\\
+&\lambda\succeq0
+\end{align}</script><p>和(a)中对偶问题完全等价。</p>
+<p>(c)</p>
+<p>考虑无约束几何规划对偶问题的最优解 $d^\star$ 以及其最优点 $z^\star$ ：</p>
+<script type="math/tex; mode=display">
+p^\star_{gp}\leq d^\star=b^Tz_i-\sum_iz^\star_i\log z^\star_i</script><p>将其变换成LP ，对某个 $\nu$ 有以下式子成立：</p>
+<script type="math/tex; mode=display">
+b^T\nu= p^\star_{gp} -\sum_iz^\star_i\log z^\star_i</script><p>又因为 $z^\star$ 在GP对偶问题上的可行域也是原分片线性极小化对偶问题的可行域，即 $z^\star$ 为此LP的可行解：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+p^\star_{pw1}&\geq b^T\nu=p^\star_{gp}-\sum_iz^\star_i\log z^\star_i\\
+p^\star_{gp}-p^\star_{pw1}&\leq \sum_iz^\star_i\log z^\star_i\leq \log m
+\end{align}</script><p>(d)</p>
+<p>写出对偶问题，先变换问题为</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &(1/\gamma)\log(\sum_i\exp(\gamma y_i))\\
+\text{subject to }&Ax+b=y
+\end{align}</script><p>拉格朗日函数：</p>
+<script type="math/tex; mode=display">
+L(x,\lambda)=(1/\gamma)\log\sum\exp(\gamma y_i)+\lambda^T(Ax+b-y)</script><p>$x$ 的最优化条件为 $A^T\lambda=0$ ，对 y 第一项为 Log-Sum-Exp 函数，其导数为 Softmax。即 $y$ 的最优化条件为：</p>
+<script type="math/tex; mode=display">
+\frac{e^{\gamma y_i}}{\sum e^{\gamma y_i}}=\lambda_i</script><p>对偶问题为：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &\lambda^Tb-(1/\gamma)\sum_{i=1}^m\lambda_i\log\lambda_i\\
+\text{subject to }&A^T\lambda=0\\
+&\textbf{1}^T\lambda=1
+\end{align}</script><p>按照处理(c)中GP对偶问题的步骤，第二项可以放缩为 $1/\gamma \log m$令其最优解为 $p^\star_{gp}(\gamma)-1/\gamma\log m$ 有：</p>
+<script type="math/tex; mode=display">
+p^\star_{gp}(\gamma)-1/\gamma\log m\leq p^\star_{pw1}\leq p^\star_{gp}(\gamma)</script><p>可看出 $\gamma $ 变大会让此优化问题逼近 $p^\star_{pw1}$ 。</p>
+<blockquote>
+<p>总结：</p>
+<p>问题的拉格朗日对偶问题常常会因为保证满足优化时极小值可达所需要的条件，从而消去一些项使目标函数或约束变得简单 （拉格朗日对偶问题优化拉格朗日变量，对原问题优化变量直接取inf下界，化成等价问题时常常消去inf，即把原优化变量全部去掉），等价问题还可能直接优化成LP形式。(c)的解法比较技巧化，即通过辅助的LP问题分析，能用到之前分片线性极小化问题的性质。</p>
 </blockquote>
-<p>待补充</p>
-<h2 id="11-LP-SDP-SOCP-Duality"><a href="#11-LP-SDP-SOCP-Duality" class="headerlink" title="11. LP, SDP, SOCP Duality"></a>11. LP, SDP, SOCP Duality</h2><p>待补充</p>
- 
+<h3 id="5-16"><a href="#5-16" class="headerlink" title="5.16"></a>5.16</h3><p>(a)</p>
+<p>因为 $f<em>0$ 凸， $f_i$ 凸，所以 $\max{0, f_i}$ 凸，所以 $\max</em>{i=1,\cdots,m}\max{0,f_i}$ 凸，所以 $\phi$ 凸。</p>
+<p>(b)</p>
+<script type="math/tex; mode=display">
+\begin{align}
+L(x,\lambda)&=f_0(x)+\sum_i\lambda_if_i(x)\\
+g(\lambda)&=\inf_x(f_0(x)+\sum_i\lambda_if_ix(x))\\
+L'(x,y,\lambda,\nu)&=f_0(x)+\alpha y+\sum_i\lambda_i(f_i(x)-y)-\nu y\\
+g'(\lambda,\nu)&=\inf_{x,y}(f_0(x)+\alpha y+\sum_i\lambda_i(f_i(x)-y)-\nu y)\\
+&=\inf_x(f_0(x)+\sum\lambda_if_i(x))+\inf_y((\alpha-\nu-\sum_i\lambda_i)y)
+\end{align}</script><p>优化 $g’(\lambda,\nu)$ 的等价问题：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &g(\lambda)\\
+\text{subject to }&\textbf{1}^T\lambda-\alpha\leq0\\
+&\lambda\succeq0\\
+\end{align}</script><p>(c)</p>
+<p>$\lambda^\star$ 为原对偶问题最优解： </p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &g(\lambda)\\
+\text{subject to }
+&\lambda\succeq0\\
+\end{align}</script><p>辅助问题最优解 $x_s^\star\geq \lambda^\star_s$ ，且容易知道辅助问题对偶最优解 $ \lambda^\star_s$ 在原对偶问题上可行。又有 $\alpha&gt;\textbf{1}^T\lambda^\star$ ， 即 $\lambda^\star$ 也是辅助问题对偶最优解，两者可行域以及优化函数等价，辅助问题的最优解是其对偶问题最优解，由于原问题强对偶成立，所以对偶问题最优解也是原问题最优解，即：辅助问题的最优解也是原问题的最优解。</p>
+<blockquote>
+<p>总结：</p>
+<p>比较常规的对偶分析。罚函数项和一些损失函数正则项有相似之处。</p>
+</blockquote>
+<h3 id="5-23"><a href="#5-23" class="headerlink" title="5.23"></a>5.23</h3><p>(a)</p>
+<p>设不存在这样的 $z$ ，即 $-c\notin{\sum z_ia_i\mid z_i\geq0}$ ，右侧为闭凸集，根据严格分离超平面定理，存在超平面 $u^Tx$ 严格分离点和集合。即：</p>
+<script type="math/tex; mode=display">
+-u^Tc>\sum u^Tz_ia_i=u^TA^Tz</script><p>约束为 $z\succeq 0$ ，可以看出 $u^Tc&lt;0, u^TA^T&lt;0$ 。令 $x=x^\star+tu$ ：</p>
+<script type="math/tex; mode=display">
+a^T_ix=a^T_ix^\star+a^T_itu\leq b_i+ta^T_iu<b_i</script><p>即 $x$ 可行；考虑目标函数：</p>
+<script type="math/tex; mode=display">
+c^Tx=c^Tx^\star+tc^Tu<c^Tx^\star</script><p>我们找到了比 $x^\star$ 更优的解，矛盾。所以存在满足题意的 $z$ 。</p>
+<p>(b)</p>
+<p>对偶问题可行即 $-b\notin {Ax+s\mid s\succeq0}$ ，右侧为闭凸集，根据严格分离超平面定理，存在超平面 $v^Tx$ 严格分离点和集合。即：</p>
+<script type="math/tex; mode=display">
+-v^Tb>v^TAx+v^Ts</script><p>在 $x$ 任意取值下成立需要 $v^TA=0$ ， 等价式子为：</p>
+<script type="math/tex; mode=display">
+v^TA=0, v^Tb<0,v\succeq 0</script><p>那么对偶问题可行性条件 $A^Tz+c=0=A^T(z+v)$ ，即对偶问题在 $v$ 方向上是无界的， $d^\star =\infty$。</p>
+<p>(c)</p>
+<p>原问题容易看出不可行 ($0\leq -1$)，$p^\star=\infty$ 。</p>
+<script type="math/tex; mode=display">
+L(x,\lambda_1,\lambda_2)=x+\lambda_1(x-1)+\lambda_2</script><p>可行性条件 $\lambda_1+1=0$  ，对偶线性规划：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &\lambda_2-\lambda_1\\
+\text{subject to }&\lambda_1+1=0\\
+&\lambda_1,\lambda_2\geq0\\
+\end{align}</script><p>容易看出此问题约束  $\lambda_1=-1\geq0$ 不能满足，对偶问题不可行。$d^\star=-\infty$ 。</p>
+<h3 id="5-27"><a href="#5-27" class="headerlink" title="5.27"></a>5.27</h3><p>拉格朗日函数：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+L(x,\nu)&=\|Ax-b\|^2_2+\nu^T(Gx-h)\\
+&=x^TA^TAx-2b^TAx+b^Tb+\nu G^T x-\nu^Th\\
+&=x^TA^TAx+(G^T\nu-2A^Tb)^Tx-\nu^Th+b^Tb
+\end{align}</script><p>KKT条件:</p>
+<script type="math/tex; mode=display">
+2A^TAx^\star-2A^Tb+G^T\nu^\star=0\\
+Gx^\star-h=0</script><p>最优解 $x^\star$ 可以用 $\nu^\star$ 显式表达：</p>
+<script type="math/tex; mode=display">
+x^\star=(\frac{1}{2}(A^TA)^{-1})(-G^T\nu^\star+2A^Tb)</script><p>代入 $Gx^\star-h=0, x^\star=G^{-1}h$ 后 $\nu^\star$ 可独立写出：</p>
+<script type="math/tex; mode=display">
+\nu^\star=(G^T)^{-1}(2A^Tb-2A^TAG^{-1}h)</script> 
       <!-- reward -->
       
     </div>
@@ -267,12 +328,12 @@ h_i(x^\star)&=0 \\
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/%E7%AC%94%E8%AE%B0-%E5%AF%B9%E5%81%B6.html" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/assignment-dual.html" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%87%B8%E4%BC%98%E5%8C%96/" rel="tag">凸优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B9%A0%E9%A2%98/" rel="tag">习题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%87%B8%E4%BC%98%E5%8C%96/" rel="tag">凸优化</a></li></ul>
 
     </footer>
   </div>
@@ -280,19 +341,19 @@ h_i(x^\star)&=0 \\
    
   <nav class="article-nav">
     
-      <a href="/%E7%AC%94%E8%AE%B0-%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95.html" class="article-nav-link">
+      <a href="/note-proximal-mapping.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            7. 梯度方法
+            10. 近似点算子
           
         </div>
       </a>
     
     
-      <a href="/%E7%AC%94%E8%AE%B0-%E5%87%B8%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98-1.html" class="article-nav-link">
+      <a href="/assignment-convex-problem.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">4. 凸优化问题(1)</div>
+        <div class="article-nav-title">凸问题习题</div>
       </a>
     
   </nav>

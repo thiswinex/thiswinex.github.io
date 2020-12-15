@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    凸问题习题 |  Thiswinex&#39;s Blog
+    凸集/凸函数习题 |  Thiswinex&#39;s Blog
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -44,7 +44,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-凸问题习题"
+  id="post-assignment-convex-set"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -55,15 +55,15 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  凸问题习题
+  凸集/凸函数习题
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/%E5%87%B8%E9%97%AE%E9%A2%98%E4%B9%A0%E9%A2%98.html" class="article-date">
-  <time datetime="2019-06-18T14:20:43.000Z" itemprop="datePublished">2019-06-18</time>
+      <a href="/assignment-convex-set.html" class="article-date">
+  <time datetime="2019-06-18T12:46:08.000Z" itemprop="datePublished">2019-06-18</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/%E4%B9%A0%E9%A2%98/">习题</a> / <a class="article-category-link" href="/categories/%E4%B9%A0%E9%A2%98/%E5%87%B8%E4%BC%98%E5%8C%96/">凸优化</a>
@@ -74,7 +74,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">817</span>
+            <span class="post-count">1.3k</span>
         </span>
     </span>
 
@@ -83,7 +83,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">3 分钟</span>
+            <span class="post-count">5 分钟</span>
         </span>
     </span>
 </div>
@@ -98,315 +98,131 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>《凸优化》第四章部分习题。</p>
-<a id="more"></a>
-<h3 id="4-2"><a href="#4-2" class="headerlink" title="4.2"></a>4.2</h3><p>(a) </p>
-<p>先证充分性： $Av\preceq 0$ ，则对于任意一点$x_0\in \textbf{dom}f$， 有 </p>
+  <p>《凸优化》第二/三章部分习题。</p>
+<a id="more"></a> 
+<h3 id="2-9"><a href="#2-9" class="headerlink" title="2.9"></a>2.9</h3><p>(a) 证明：</p>
+<p>​    考虑 </p>
 <script type="math/tex; mode=display">
-\forall k\in R^+, A(x_0+kv)=Ax_0+k\cdot Av\preceq Ax_0 \prec b</script><p>即 $x_0+kv$ 也在定义域中。所以 $\textbf{dom} f$ 无界。</p>
-<p>再证必要性：若 $\textbf{dom} f$ 无界，则存在序列 $x^k\in\textbf{dom} f$ 在 $k\rightarrow \infty$ 时 $|x^k|_2\rightarrow \infty$ 。若不存在 $v\neq 0$ 满足 $Av\preceq 0$ ，则对于 $v\neq 0$ ，$Av$ 必定存在某一分量大于0。 令 $A(kv)=k\cdot Av$  为对 $Ax^k$ 的一个逼近，即可使 $v=x^k/|x^k|_2$ ，那么 $k\rightarrow \infty$ 时， $kv$ 逼近 $x^k$ ，应有 $A(kv)\prec b$ ，但由于 $Av$ 必定存在某一分量大于0，所以 $k\cdot Av\prec b$ 不成立，此处 $b$ 亦可为任意实数。 结论自相矛盾，假设不成立。所以存在 $v\neq 0$ 满足 $Av\preceq 0$ 。</p>
-<p>(b) </p>
-<p>由择一定理可以得到，存在 $v$ 满足 $Av\preceq 0, Av\neq 0$ 的充要条件是，不存在 $z\succ 0$ 使得 $A^Tz=0$ 。</p>
-<p>对于原命题，先证充分性：存在 $Av\preceq 0$ ， $Av\neq 0$ ，即对 $Av$ 的每个分量都有 $a^T_iv_i\leq 0$ ，且 $Av\neq 0$ 。由于(1)可知此时定义域无界，对于 $x_0\in \textbf{dom} f$ ，有 $\forall k\in R^+, x_0+kv\in\textbf{dom} f$ :</p>
+V_i=\{x=\textbf{R}^n\mid \|x-x_0\|_2\leq\|x-x_i\|_2\}</script><p>作超平面 $(x_i-x_0)^Tx=(x_i-x_0)^T(x_i+x_0)/2$</p>
+<p>​    对超平面上每个点 $x<em>k$ 的分量 $j$ 都有 $2(x</em>{ij}-x<em>{0j})x</em>{kj}=(x<em>i^2-x_0^2)$ ，且 $|x_k-x_0|_2=\sqrt{\sum_j{(x</em>{kj}-x<em>{0j})^2}}$  ，$|x_k-x_i|_2=\sqrt{\sum_j{(x</em>{kj}-x_{0j})^2}}$ 。</p>
+<p>​    将第一式带入范数表达式可得对超平面上每个点 $x$ 均有 $|x-x_0|_2=|x-x_i|_2$ ，且对于超平面下方的半空间 $(x_i-x_0)^Tx\leq(x_i-x_0)^T(x_i+x_0)/2$ ，均有 $|x-x_0|_2\leq |x-x_i|_2$ ，对所有的 $i$ 均成立。即 $V$ 的边界为一系列超平面的交，$V$ 为多面体。设 $x_i-x_0=a_i$ ，$(x_i-x_0)^T(x_i+x_0)/2=b_i$ ， $V$ 可以被写作 </p>
 <script type="math/tex; mode=display">
-f_0(x_0+kv)=-\sum^m_{i=1}\log(b_i-a^T_ix_0-k\cdot a^T_iv)</script><p>因为对每个分量都有 $a^T_iv\leq 0$ 且 $Av\neq 0$ ，在 $k\rightarrow \infty$ 时很容易看出 $f_0(x_0+kv)\rightarrow -\infty$ ，即 $f_0$ 无下界。</p>
-<p>再证必要性：若 $f_0$ 无下界，设序列 $x_1,x_2,\cdots,x_k$ 为无界序列，即 $k\rightarrow \infty\Rightarrow b-Ax\rightarrow -\infty\Rightarrow f_0(x_k)\rightarrow -\infty$ 。且存在 $z\succ 0$ ，使得 $A^Tz=0$ ，展开 $f_0(x_k)$ 在 $x_0$ 处的一阶条件：</p>
-<script type="math/tex; mode=display">
-f_0(x_k)\geq f_0(x_0)+\sum^m_{i=1}\frac{1}{b_i-a^T_ix}a_i^T(x_k-x_0)</script><p>(c)</p>
-<p>设其定义域 $\textbf{dom} f_0$ 有界，则 $f_0$ 下水平集为闭，极小值可达。<br>若其定义域无界，则由 (a) 有其等同于存在 $v\neq 0, Av\preceq 0$ ； $f_0$ 有下界，则不存在  $v$ 使 $Av\preceq 0, Av\neq 0$ 。因为 $v\neq 0$ ，所以只有 $A=0$才能满足条件，此时函数值恒为定值，极小值可达。</p>
-<p>(d)</p>
-<p>由最优性条件：</p>
-<script type="math/tex; mode=display">
-\triangledown f_0(x)=\sum^m_{i=1}\frac{1}{b_i-a^T_ix}a_i=0</script><p>若 $Av=0$ ，则有 $a^T_iv=0$ ，即 $b_i-a^T_ix^\star=b_i-a^T_ix^\star+a^T_iv=b_i-a^T_i(x^\star+v)$ ，即对于任意最优解 $x^\star$ ，$x^\star+v$ 也是最优解( $Av=0$ ) 。</p>
+V=\{x\mid Ax\preceq b\}, A=\{a_1^T,a_2^T,\cdots,a_K^T\}, b=\{b_1,b_2,\cdots,b_K\}</script><p>(b)</p>
+<p>​    P总可以表达为$P={x\mid Ax\preceq b}$ 的形式，设 $A={a_1^T,a_2^T,\cdots,a_K^T}$ ，对于任意一点 $x_0\in P$ 和多面体的面 $a_i^Tx=b$，总可以找到直线 $x=x_0+ka_i, k\in\textbf{R}$ 上的一点 $x_i$ 满足对面上任意一点 $x_k$ ，有 $ |x_i-x_k|_2=|x_0-x_k|_2$ (作点 $x_0$ 关于面的对称点即可) ，这是由于 $x_0$ 在多面体内部，满足 $a^T_ix&lt;b$ ，在直线上增大 $k$ 会使 $|x_i-x_k|_2$ 减小至0后增大，使 $|x_0-x_k|_2$ 增大。根据定义，这样的一组点就$x_0, x_1,\cdots,x_K$ 满足 $P$ 是 $x_0$ 关于 $x_1,\cdots, x_K$ 的 Voronoi 区域。</p>
+<p>(c)</p>
+<p>​    并不总可以用 Voronoi 区域表示。最明显的例子是由数个无限边界多面体组成的集合，考虑 $\textbf{R}^2$ 中由三个多面体组成的集合，他们的边界超平面的法向量共面，且边界两两之间夹角小于90°，这样就有至少一个多面体真包含了一个半空间，记为A。依照之前 Voronoi 区域点的找法， $x_1,x_2,x_A$ 分属三个多面体且需要互相关于边界超平面对称，将其他两个多面体沿边界对称投影到A上，它们的交集就是 $x_A$ 的取值范围(因为 $x_A$ 需要同时与 $x_1,x_2$ 关于两条边界对称)。由于 A 真包含了一个半空间，所以两部分投影不可能有交集，即不可能找到这样的 $x_A$ 。</p>
 <blockquote>
 <p>总结：</p>
-<p>这题我认为主要的点是在：</p>
+<p>主要是超平面的定义。</p>
+</blockquote>
+<h3 id="2-26"><a href="#2-26" class="headerlink" title="2.26"></a>2.26</h3><p>证明： </p>
+<p>​    先证必要性。因为 $C=D$ ，即 $C\subseteq D, D\subseteq C$ ， ，显然它可以推得于 $S_C\leq S_D, S_D\leq S_C$， 即 $S_C=S_D$ 。</p>
+<p>  再证充分性。因为 $S_C=S_D$，设 $C\neq D$ ，不失一般性，设存在 $x_i\in C, x_i\notin D$ ，<br>根据凸集定义，取 $D$ 的支撑超平面集，一定存在某个方向 $a^T$ 上的 $D$ 的支撑超平面，满足 $a^Tx_i&gt;b$ 且 $\forall x \in D, a^Tx&lt;b$ 。<br>  将 $a$ 取为支撑函数自变量，则 </p>
+<script type="math/tex; mode=display">
+S_C(a)=\sup\{a^Tx\mid x\in C\}=a^Tx_i >b> \sup\{a^Tx\mid\ x\in D\}</script><p>  即 $S_C\neq S_D$ ，矛盾。所以 $C=D$ 。</p>
+<blockquote>
+<p>总结：</p>
+<p>这道题说明了一个性质，即凸集能被他们的支撑函数完全表征，它们是双射关系。考虑”支撑集”定义和支撑一词的含义，能够表征凸集还是比较容易理解的。</p>
+</blockquote>
+<h3 id="2-33"><a href="#2-33" class="headerlink" title="2.33"></a>2.33</h3><p>(a) 证明:</p>
+<p>​    $K<em>{m+}$ 在 $\textbf{R}^n$ 中由 n 个带等号不等式约束，所以其是闭凸集，且容易知道它满足 $\theta_1 x_1+\theta_2 x_2\in K</em>{m+}, \forall x<em>1,x_2\in K</em>{m+}$ 所以 $K<em>{m+}$ 是个闭凸锥。其内部非空性质通过列举满足条件的向量同样易得。<br>​    因为 $x\in K</em>{m+}, -x\in K<em>{m+}$ ，即 $x_1\geq x_2\geq\cdots\geq x_n\geq 0, x_1\leq x_2\leq\cdots\leq x_n\leq 0$ ，即 $x_1=x_2=\cdots=x_n=0$ ， $x=0$ 。所以 $K</em>{m+}$ 是尖的，所以它是正常锥。</p>
+<p>(b) </p>
+<script type="math/tex; mode=display">
+K^*_{m+}=\{y\mid\sum x_iy_i\geq0, \forall x\in K\}\\</script><p>注意到提示中恒等式，有</p>
+<script type="math/tex; mode=display">
+\begin{align}
+K^*_{m+}&=\{y\mid (x_1-x_2)y_1+(x_2-x_3)(y_1+y_2)+
+(x_3-x_4)(y_1+y_2+y_3)\\&+\cdots+(x_{n-1}-x_n)(y_1+\cdots+y_{n-1})+x_n(y_1+\cdots+y_n)\geq0, \forall x\in K\}\\
+K^*_{m+}&=\{y\mid\sum_{i=1}^n y_i\geq 0\}
+\end{align}</script><blockquote>
+<p>总结：</p>
 <ul>
-<li>怎么判断无界(用序列 $x+kv$ 逼近无穷)</li>
-<li>怎么表达可达($X_{opt}$非空，大部分情况下问题应有界)</li>
-<li>拆矩阵分析</li>
+<li>等号不等式约束集为闭凸集。</li>
 </ul>
 </blockquote>
-<h3 id="4-8"><a href="#4-8" class="headerlink" title="4.8"></a>4.8</h3><p>(a)</p>
-<p>若问题不可行，则 $p^\star=+\infty$ 。</p>
-<p>若问题可行，将 $c$ 分解为 $c=A^T\lambda+\hat{c}$ ，$A\hat{c}=0$ ：<br>若 $c$ 与 $A$ 的零空间正交，因为正交性，有 $\hat{c}=0$， $c^Tx=\lambda^TAx=\lambda b$ 即最优值为 $\lambda b$ ；<br>若 $c$ 与 $A$ 的零空间不正交，则问题无下界，因为 $c^Tx=\lambda b+\hat{c}^Tx$ ，$x$ 在可行集内可以无限小，只需要无限减小 $\hat{c}$ 分量的值。</p>
-<p>所以此问题的最优值为</p>
-<script type="math/tex; mode=display">
-p^\star=\begin{cases}
- & +\infty, \text{ if } \forall x, Ax\neq b\\
- & \lambda b,\text{ if for some } \lambda<0, c=A^T\lambda=0 \\ 
- & -\infty, \text{ if } otherwise
-\end{cases}</script><p>(b)</p>
-<p>问题可行集为半空间，此问题一定可行。</p>
-<p>将 $c$ 分解为 $c=\lambda a +\hat{a}$ ，$a^T\hat{a}=0$ ，即分解成与 $a$ 平行和正交的两个分量。目标函数可以表示为： $c^Tx=\hat{a}^Tx+\lambda a^Tx$ ，可以容易知道 $c$ 与 $a$ 平行时，问题才有界。否则解可以无限在 $\hat{a}$ 的方向上滑动。且 $c,a$ 必须反向，即 $\lambda &lt;0$ ，此时最优解为 $\lambda a^Tx=\lambda b$ 。</p>
-<p>所以此问题的最优值为</p>
-<script type="math/tex; mode=display">
-p^\star=\begin{cases}
- & \lambda b,\text{ if for some } \lambda<0, \hat{a}=0 \\ 
- & -\infty, \text{ if } \lambda\geq0 
-\end{cases}</script><p>(c)</p>
-<p>问题可行集为矩形，问题一定可行。由于  $l\preceq x\preceq u$ ，容易知道最优值为</p>
-<script type="math/tex; mode=display">
-p^\star=\begin{cases}
- & c^Tl,\text{ if } c<0,  \\ 
- & c^Tu, \text{ if } c>0, \\
- & \forall x \text{ in rectangle, if } c=0 
-\end{cases}</script><p>(d)</p>
-<p>将 $c$ 中元素排序，设最小元素为 $c_1$ ，显然最优值为 $p^\star=c_1$ ，即投资组合优化问题中全部投资收益率最高的项目。</p>
-<p>等式约束被替换为不等式约束时，由于 $1^Tx$ 可以为0，则在 $c_1&gt;0$ 时，最优值为 $p^\star=0$ (即投资组合优化问题中，收益率为负时，可以选择不投资)。总最优值为 $p^\star=\min{0,c_1}$ 。</p>
-<p>(e)</p>
-<p>仍然将 $c$ 中元素排序，设为 $c_1\leq c_2\leq \cdots \leq c_n$ ，显然最优值为</p>
-<script type="math/tex; mode=display">
-p^\star=\sum_{i=1}^\alpha c_i</script><p>即全预算投资收益率前 $\alpha$ 的项目。</p>
-<p>若 $\alpha$ 不为整数，最优值仍然可以按照原思想得出:</p>
-<script type="math/tex; mode=display">
-p^\star=\sum_{i=1}^{\lfloor\alpha\rfloor}c_i+(\alpha-\lfloor\alpha\rfloor)c_{\lfloor\alpha\rfloor}</script><p>若等式变为 $1^Tx\leq\alpha$ ，则对于收益率为负的部分，可以选择不投资。令 $c_m$ 为其中最大的负值，则最优值为：</p>
-<script type="math/tex; mode=display">
-p^\star=\sum_{i=m}^{\min\{\alpha+m,n\}}c_i</script><p>(f)</p>
-<p>可以定义收益性价比为 $v<em>i=c_i/d_i$ ，容易知道到全资投资收益性价比高的总会拥有比别的方案更高的收益。按性价比对 $c$ 中元素排序，设为 $v_1\leq v_2\leq \cdots\leq v_n$，且 $\sum</em>{i=1}^m d<em>ix_i\leq \alpha\leq \sum</em>{i=1}^{m+1}d_ix_i$ 显然最优值为</p>
-<script type="math/tex; mode=display">
-p^\star=\sum_{i=1}^{m}c_i+c_{m+1}\frac{\alpha-\sum_{i=1}^md_ix_i}{d_i}</script><blockquote>
-<p>总结:</p>
-<p>如何显示求LP的解？一个比较常用的方法是把系数 $c$ 拆成两个互相正交方向，通常一个是下降方向，即另一个和约束平面平行。这种方法在其他题目上也有体现，比如将矩阵拆成正定矩阵和非正定矩阵的和。 </p>
+<h3 id="3-9"><a href="#3-9" class="headerlink" title="3.9"></a>3.9</h3><p>(a) 证明:</p>
+<p>$\overset{-}{f}$ 为凸的二阶条件是 $\triangledown^2\overset{-}{f}$ 半正定。<br>即 $\bigtriangledown^2\overset{-}{f}(z)=F^T\bigtriangledown^2f(Fz+\hat{x})F\succeq 0$ </p>
+<p>(b) 证明：</p>
+<p>即证明 $F^T\bigtriangledown^2(Fz+\hat{x})F\succeq 0 \Leftrightarrow \bigtriangledown^2 f(Fz+\hat{x})+\lambda A^TA\succeq 0$<br>使用引理：</p>
+<blockquote>
+<p>总结：</p>
+<p>这里没有写，但最后交上去的时候这里还是写了的，实际上这里是应用 (a) 中的结论， 将 $F$ 分解后仍然成立，即$\forall v,v^T\triangledown^2f(Fz+\hat{x})v\succeq0$ 。 $v$ 也在 $A$ 的零空间中。然后直接用引理就行。 用 $B=\triangledown^2f(Fz+\hat{x})$ 代换引理的话，很容易就能得出结论。</p>
+<p>还需要注意一点是 $g(x)=f(Ax+b)$ 的二阶条件是 $\triangledown^2g$ 和 $A^T\triangledown^2fA$ 。</p>
 </blockquote>
-<h3 id="4-24"><a href="#4-24" class="headerlink" title="4.24"></a>4.24</h3><p>(a)</p>
-<p>L1范数:</p>
+<h3 id="3-35"><a href="#3-35" class="headerlink" title="3.35"></a>3.35</h3><p>(a)证明：</p>
+<p>$S<em>B(y)=\sup{y^Tx\mid x\in B}$， $S</em>{\textbf{conv}B}(y)=\sup{y^Tx’\mid x’\in\textbf{conv}B}$ </p>
+<p>因为 $B\subseteq\textbf{conv}B$ ，所以在 $y$ 确定时 ， 有 $y^Tx\leq y^Tx’$ 。在 $y$ 确定的情况下，若此不等式不能取严格等号，则必定存在某个 $x’$ 对任意 $x$ 都取 </p>
+<script type="math/tex; mode=display">
+y^Tx<y^Tx'</script><p>根据凸包定义，$x’=\sum_i\theta_i x_i, \sum\theta_i=1, x_i\in B$ ，则有 </p>
+<script type="math/tex; mode=display">
+y^Tx'=y^T\sum\theta_i x'>y^T\sum\theta_i x_i=y^Tx_i</script><p>矛盾。所以不等式可以严格取等号，即 $S<em>B(y)=S</em>{\textbf{conv}B}(y)$</p>
+<p>(b)证明：</p>
 <script type="math/tex; mode=display">
 \begin{align}
-\text{minimize } &\sum_{i=1}^m|a_i^Tx-b|\\
-\end{align}</script><p>直接引入新优化实变量 $t_i=|a^T_ix-b|$ ，则引入了新约束 $|a^T_ix-b|\leq t_i$ ， 可以将约束用范数展开：</p>
+S_{A+B}(y)&=\sup\{y^Tx\mid x\in A+B\}=\sup\{y^T(a+b)\mid a\in A, b\in B\}\\
+&=\sup\{y^Ta\mid a\in A\}+\sup\{y^Tb\mid b\in B\}\\
+&=S_A(y)+S_B(y)
+\end{align}</script><p>(c)证明：</p>
 <script type="math/tex; mode=display">
 \begin{align}
-&\sum|a^T_ix-b|\\
-&=\sum\sqrt{[Re(a^T_ix-b)]^2+[Im(a^T_ix-b)]^2}\\
-&=\sum\sqrt{[Re(a^T_i)Re(x)-Im(a^T_i)Im(x)-Re(b)]^2}\\
-&\overline{+[Re(a^T_i)Im(x)+Im(a^T_i)Re(x)-Im(b)]^2}\\
-&=\|\begin{bmatrix}
- Re(a_i^T)&-Im(a^T_i) \\ 
- Im(a^T_i)&Re(a_I^T) 
-\end{bmatrix}\begin{bmatrix}
- Re(x)\\ Im(x)
-\end{bmatrix}-\begin{bmatrix}
- Re(b)\\ Im(b)
-\end{bmatrix}\|_2
-\end{align}</script><p>SOCP形式：</p>
+S_{A\cup B}(y)&=\sup\{y^Tx\mid x\in A\cup B\}\\
+&=\max\{\sup\{y^Tx\mid x\in A\}, \sup\{y^Tx\mid x\in B\}\}\\
+&=\max\{S_A(y)+S_B(y)\}
+\end{align}</script><p>(d)证明:</p>
+<p>必要性易得，此处仅证充分性：</p>
 <script type="math/tex; mode=display">
-\begin{align}
-\text{minimize } &\sum_{i=1}^m t_i\\
-\text{subject to } &
- \|\begin{bmatrix}
- Re(a_i^T)&-Im(a^T_i) \\ 
- Im(a^T_i)&Re(a_I^T) 
-\end{bmatrix}\begin{bmatrix}
- Re(x)\\ Im(x)
-\end{bmatrix}-\begin{bmatrix}
- Re(b)\\ Im(b)
-\end{bmatrix}\|_2\leq t_i
-\end{align}</script><p>(b)</p>
-<p>L2范数：</p>
-<p>同L1范数，可以容易写出</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\|Ax-b\|_2&={\|Re(Ax-b)\|_2+\|Im(Ax-b)\|_2}^{1/2}\\
-&=\|\begin{bmatrix}
- Re(A)&-Im(A) \\ 
- Im(A)&Re(A) 
-\end{bmatrix}\begin{bmatrix}
- Re(x)\\ Im(x)
-\end{bmatrix}-\begin{bmatrix}
- Re(b)\\ Im(b)
-\end{bmatrix}\|_2^{1/2}
-\end{align}</script><p>SOCP形式:</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{minimize } &\sum_{i=1}^m t_i\\
-\text{subject to } &
- \|\begin{bmatrix}
- Re(A)&-Im(A) \\ 
- Im(A)&Re(A) 
-\end{bmatrix}\begin{bmatrix}
- Re(x)\\ Im(x)
-\end{bmatrix}-\begin{bmatrix}
- Re(b)\\ Im(b)
-\end{bmatrix}\|_2^{1/2}\leq t_i
-\end{align}</script><p>(c)</p>
-<p>L∞范数：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{minimize } \max_{i=1,\cdots,m} |a_i^Tx-b|
-\end{align}</script><p>同样引入新约束变量：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{minimize } &t\\
-\text{subject to } &|a^T_ix-b|\leq t
-\end{align}</script><p>SOCP形式:</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{minimize } &t\\
-\text{subject to } &
- \|\begin{bmatrix}
- Re(a_i^T)&-Im(a^T_i) \\ 
- Im(a^T_i)&Re(a_I^T) 
-\end{bmatrix}\begin{bmatrix}
- Re(x)\\ Im(x)
-\end{bmatrix}-\begin{bmatrix}
- Re(b)\\ Im(b)
-\end{bmatrix}\|_2\leq t
-\end{align}</script><blockquote>
-<p>总结：凑SOCP形式，经常会凑出来目标函数为单一个 $t$ (正常情况是 $c^Tx$ 或 $f^Tx$)。将其他条件凑成二范数的约束(二次锥约束)。</p>
+S_{\textbf{conv}A}(y)=S_A(y)\leq S_B(y)</script><p>若 $\textbf{conv}A\nsubseteq B$，即 $\exists x\in \textbf{conv}A, x\notin B$ ，则 $S<em>{\textbf{conv}A\cup B}(y)&gt;S_B(y)$ 。又有 $S</em>{\textbf{conv}A\cup B}(y)=\max{S_{\textbf{conv}A}(y), S_B(y)}=S_B(y)$ 矛盾。所以 $A\subseteq \textbf{conv}A \subseteq B$。</p>
+<blockquote>
+<p>总结：</p>
+<p>和2.26一样，结合之前的支撑函数的例子和此题（尤其是(a)），能更好地理解支撑函数能够表征凸集的性质。这种一一对应关系由sup运算保证。</p>
 </blockquote>
-<h3 id="4-40"><a href="#4-40" class="headerlink" title="4.40"></a>4.40</h3><p>(a) LP：</p>
+<h3 id="3-38"><a href="#3-38" class="headerlink" title="3.38"></a>3.38</h3><p>证明:</p>
+<p>即证明 $F(x)=\underset{y\in\textbf{dom}G}{\sup}(xy-G(y))$ 。</p>
+<p>Young 不等式的简单图示:</p>
+<p>可以看到 $xy$ 表征一个矩形面积，可以看到阴影面积和（即 $F(x)+G(y)$）永远不小于这个矩形面积，等号在 $f(x)=y$ 时取得。因为 $xy\leq F(x)+G(y)$ ，所以 $F(x)\geq xy-G(y)$ 。因为 $y=f(x)$ 时不等式可以取等号，所以$F(x)=\underset{y\in\textbf{dom}G}{\sup}(xy-G(y))$</p>
+<blockquote>
+<p>总结</p>
+<p>此处无图，自行想象哈。大概就是函数过零点的函数 $f(x)$ 对 $x$ 轴和 $y$ 轴分别做 $[0,x],[0,y]$ 上的积分，这样可以把两个函数的定积分画到一个图上。</p>
+</blockquote>
+<h3 id="3-49"><a href="#3-49" class="headerlink" title="3.49"></a>3.49</h3><p>(a) 证明：</p>
 <script type="math/tex; mode=display">
 \begin{align}
-\text{minimize } &c^Tx+d\\
-\text{subject to } &Gx\preceq h\\
-&Ax=b
-\end{align}</script><p>直接把不等式约束写成对应矩阵形式即可，对应SDP：</p>
+\ln f(x)=\ln\frac{e^x}{1+e^x}=x-\ln (1+e^x)
+\end{align}</script><p>其中 $x$ 是凹函数而 $-\ln(1+e^x)$ 可以看做指数和的对数取负，它是凹函数函数。所以原式是对数凹的。</p>
+<p>(b) 证明：</p>
 <script type="math/tex; mode=display">
 \begin{align}
-\text{minimize } &c^Tx+d\\
-\text{subject to } &\textbf{diag}(Gx-h)\preceq 0\\
-&Ax=b
-\end{align}</script><p>(b) QP:</p>
+\ln f(x)=-\ln\sum\frac{1}{x_i}
+\end{align}</script><p>因为 $1/x<em>i$ 在 $x\in\textbf{dom}f=\textbf{R}^n</em>{++}$ 上为凸函数，所以 $\sum 1/x_i$ 为其非负加权求和，也是凸函数。 $-\ln(x)$ 在定义域内为凸函数且非增。需要对复合函数求二阶导：</p>
 <script type="math/tex; mode=display">
 \begin{align}
-\text{minimize } &(1/2)x^TPx+q^Tx+r,\ P\in S^n_+\\
-\text{subject to } &Gx\preceq h\\
-&Ax=b
-\end{align}</script><p>设 $A\in S^r_{++}, C\in S^s, B\in R^{r\times s}$ ，有</p>
-<script type="math/tex; mode=display">
-\begin{bmatrix}
- A&B \\ 
- B^T&C 
-\end{bmatrix}\succeq 0\Leftrightarrow C-B^TA^{-1}B\succeq 0</script><p>令 $P=QQ^T, Q\in R^{n\times r}$ ，则目标函数变为 $(1/2)(Q^Tx)^T(Q^Tx)+q^Tx+r$ ，引入新优化变量 $t\geq x^TPx=(Q^Tx)^T(Q^Tx)$  ，目标函数变为 $(1/2)t+q^Tx+r$ ，且有新的约束 $t\geq (Q^Tx)^T(Q^Tx),\ i.e.\ tI-(Q^Tx)^TI^{-1}(Q^Tx)\succeq 0$ 。按照上式变换新约束，则原问题对应SDP为：</p>
+h(x)&=-\ln\sum\frac{1}{x_i}\\
+h'(x)&=
+\end{align}</script><p>(c) 证明：</p>
 <script type="math/tex; mode=display">
 \begin{align}
-\text{minimize } &(1/2)t+q^Tx+r\\
-\text{subject to } &\textbf{diag}(Gx-h)\preceq 0\\
-&\begin{bmatrix}
-I& Q^Tx\\ 
-x^TQ &tI 
-\end{bmatrix}\succeq0\\
-&Ax=b
-\end{align}</script><p>优化变量为 $x,t$ 。</p>
-<p>QCOP:</p>
+\ln f(x)=\ln x_i-\ln\sum x_i
+
+\\
+f[\theta x+(1-\theta)y]=\frac{\prod[\theta x_i+(1-\theta) y_i]}{\sum[\theta x_i+(1-\theta) y_i]}\\
+\frac{\prod[x_i^\theta y_i^{1-\theta}]}{(\sum x_i)^\theta(\sum y_i)^{1-\theta}}
+\end{align}</script><p>(d) 证明：</p>
 <script type="math/tex; mode=display">
 \begin{align}
-\text{minimize } &(1/2)x^TP_0x+q_0^Tx+r_0)\\
-\text{subject to } &(1/2)x^TP_ix+q_i^Tx+r_i\leq 0,\ i=1,\cdots,i\\
-&Ax=b
-\end{align}</script><p>仿照上述过程，处理约束 $(1/2)x^TP_ix+q_i^Tx+r_i =(1/2)(Q_i^Tx)^T(Q_i^Tx)+q^T_ix+r_i\leq 0$ ，引入新的优化变量 $t_i$ ，则约束变为 $(1/2)t_i+q_i^Tx+r_i\leq 0$ ，同时引入新约束 $t_iI-(Q_i^Tx)^TI^{-1}(Q_i^Tx)\succeq 0$ 。原问题对应SDP为：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{minimize } &(1/2)t_0+q_0^Tx+r_0\\
-\text{subject to } &(1/2)t_i+q^T_ix+r_i\leq 0\\
-&\begin{bmatrix} 
-I& Q_i^Tx\\ 
-x^TQ &t_iI 
-\end{bmatrix}\succeq0,\ i=0,1,\cdots,m\\
-&Ax=b
-\end{align}</script><p>SOCP:</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{minimize } &c^Tx\\
-\text{subject to } &\|A_ix+b_i\|_2\leq c^T_ix+d_i,i=1,\cdots,m\\
-&Fx=g
-\end{align}</script><p>仿照上述过程，约束可以化为</p>
-<script type="math/tex; mode=display">
-\begin{align}
-(A_ix+b_i)^T(A_ix+b_i)&\leq (c_i^Tx+d_i)^2\\
-(c^T_ix+d_i)(c_i^Tx+d_i)-(A_ix+b_i)^T(A_ix+b_i)&\geq0\\
-(c^T_ix+d_i)-(c^T_ix+d_i)^{-1}(A_ix+b_i)^T(A_ix+b_i)&\geq0\\
-(c^T_ix+d_i)I-(A_ix+b_i)^T(c^T_ix+d_i)^{-1}I^{-1}(A_ix+b_i)&\succeq 0\\
-\begin{bmatrix} 
-(c^T_ix+d_i)I& A_ix+b_i\\ 
-(A_ix+b_i)^T & (c^T_ix+d_i)I
-\end{bmatrix}&\succeq 0
-\end{align}</script><p> 原问题SDP为：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{minimize } &c^Tx\\
-\text{subject to } &\begin{bmatrix} 
-(c^T_ix+d_i)I& A_ix+b_i\\ 
-(A_ix+b_i)^T & (c^T_ix+d_i)I
-\end{bmatrix}\succeq 0\\
-&Fx=g
-\end{align}</script><p>(c) </p>
-<p>引入新优化变量 $t=(Ax+b)^TF(x)^{-1}(Ax+b)$ ，则引入了新约束 $(Ax+b)^TF(x)^{-1}(Ax+b)-t\leq 0$ ，仿照上述形式，约束变为：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\begin{bmatrix} 
-F(x)& Ax+b\\ 
-(Ax+b)^T & tI
-\end{bmatrix}&\succeq 0
-\end{align}</script><p>问题可以化成等价的上境图形式，同时也是SDP形式：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{minimize } &t\\
-\text{subject to } &\begin{bmatrix} 
-F(x)& Ax+b\\ 
-(Ax+b)^T & tI
-\end{bmatrix}\succeq 0\\
+f(\theta X+(1-\theta)Y)=\frac{\det [\theta X+(1-\theta)Y]}{\textbf{tr}[\theta X+(1-\theta)Y]}\\
+\frac{(\det X)^\theta(\det Y)^{1-\theta}}{\textbf{tr}X^\theta\textbf{tr}Y^{1-\theta}}
 \end{align}</script><blockquote>
 <p>总结：</p>
-<p>SDP更广所以LP、QP、QCQP、SOCP都可以转换成SDP形式。这里的Hint非常有用，提供了通过变量代换将约束/目标函数转换成对角阵形式约束的方法。</p>
-</blockquote>
-<h3 id="4-43"><a href="#4-43" class="headerlink" title="4.43"></a>4.43</h3><p>(a)</p>
+<p>实在做不下去了。。可以说一下答案大概的思路。</p>
+<p>(b)考虑取 $\log$ 后的二阶条件，直接通过暴力（也没多暴力）算对 $x_i$ 的二次偏导和 $x_i,x_j$ 的联合偏导 ，这样可以直接写出整个 Hessian 阵的项，可以通过柯西施瓦茨不等式得出二阶条件为为负。</p>
+<p>(c)有点麻烦按下不表。主体方法还是通过代入 $x+tv$ 的方式。</p>
+<p>(d)同样考虑 $X=Z+tV$ ， $Z\succ 0$ 且对  $Z^{-1/2}VZ^{-1/2}$ 做特征值分解。主要行了一个比较难的代换：</p>
 <script type="math/tex; mode=display">
 \begin{align}
-\text{minimize } &\lambda_1(x)\\
-\end{align}</script><p>引入新优化变量 $t=\lambda_1(x)$ ，则容易知道引入了新约束 $A(x)\preceq tI$ 即 $A(x)-tI$ 负定。SDP形式为:</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{minimize } &t\\
-\text{subject to } &A(x)\preceq tI
-\end{align}</script><p>(b)</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{minimize } \lambda_1(x)-\lambda_m(x)
-\end{align}</script><p>引入新优化变量 $t_1=\lambda_1(x), t_2=\lambda_m(x)$ ，仿照上题可直接写出SDP形式</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{minimize } &t_1-t_2\\
-\text{subject to } &t_2I\preceq A(x)\preceq t_1I
-\end{align}</script><p>(c)</p>
-<script type="math/tex; mode=display">
-\begin{align}
-&\text{minimize } \lambda_1(x)/\lambda_m(x)\\
-&\text{subject to } A(x)\succ 0
-\end{align}</script><p>引入新变量 $\lambda=\lambda_1(x), \gamma=\lambda_m(x)$ ，同时引入了新约束 $\gamma I\preceq A(x)\preceq \lambda I$ 。作变量替换 $y=x/\gamma, t=\lambda/\gamma, s=1/\gamma$ ，则目标函数就变成了 $t$ ，约束可以两边同除 $\gamma$ 消元：$I\preceq A(x)/\gamma \preceq tI$ ，将 $A(x)$ 展开可以得到更清晰的形式：$I\preceq 1/\gamma A_0+y_1A_1+\cdots+y_nA_n\preceq tI$ 。因为至少有一个 $x$ 满足 $A(x)\succ 0$ ，所以需要 $\gamma &gt; 0$ ，即 $1/\gamma &gt;0$ 。</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{minimize } &t\\
-\text{subject to } &s> 0\\
-&I\preceq sA_0+y_1A_1+\cdots+y_nA_n\preceq tI
-\end{align}</script><p>(d)</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{minimize } |\lambda_1(x)|+\cdots+|\lambda_m(x)|
-\end{align}</script><p> $A(x)$ 变形为正负部 $A(x)=A<em>+-A</em>-$，这样 $A<em>+,A</em>-$ 都绝对半正定。设 $t<em>+=\textbf{tr}A</em>+, t<em>-=\textbf{tr}A</em>-$ ，可以看出正负部各自拥有原矩阵的正特征值和负特征值，即两者和即为目标函数。原问题SDP：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{minimize } &\textbf{tr}A_++\textbf{tr}A_-\\
-\text{subject to } &A(x)=A_+-A_-\\
-&A_+\succeq 0， A_-\succeq 0
-\end{align}</script><blockquote>
-<p>总结:</p>
-<p>优化特征值的等价问题。常用的等价问题代换除了特征值&lt;=&gt;单位阵，还有小于&lt;=&gt;极大值小于；。。</p>
-</blockquote>
-<h3 id="4-53"><a href="#4-53" class="headerlink" title="4.53"></a>4.53</h3><p>设两个点 $t_1, t_2\in \textbf{R}^q$ 在集合里，即满足 $f_0(x_1)\preceq_K t_1, f_0(x_2)\preceq_K t_2$ ，有原向量优化为凸问题，即 $f_0$ 是 K-凸的，即 </p>
-<script type="math/tex; mode=display">
-f_0[\theta x_1+(1-\theta)x_2]\preceq_K \theta f_0(x_1)+(1-\theta)f_0(x_2)</script><p>所以对 $0\leq\theta\leq1$ ，有：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-&\theta t_1+(1-\theta)t_2-\theta f_0(x_1)-(1-\theta)f_0(x_2)\\
-=&\theta (t_1-f_0(x_1))+(1-\theta)(t_2-f_0(x_2))\in K\\
-i.e.\ &f_0[\theta x_1+(1-\theta)x_2]\preceq_K\theta f_0(x_1)+(1-\theta)f_0(x_2)\preceq_K t_1+(1-\theta)t_2
-\end{align}</script><p>因为原向量优化为凸问题， $\theta x_1+(1-\theta)x_2$ 在可行集中，即 $\theta t_1+(1-\theta)t_2\in A$ ，$A$ 为凸集。</p>
-<p>若 $a$ 为 $A$ 的极小元，$o$ 为 $O$ 的极小元，将 $a$ 分解成 $O$ 上的元素的形式，即  $a=a’+b, a’\in O, b\succeq_K 0$ 。由于 $A$ 是凸集，则 $a=a’+kb$ 也属于 $A$ ，可以得到 $b=0$ 否则 $k&lt;1$ 时 $a$ 将不是极小元。此时由于 $a$ 的极小元性质，对于任意 $v\in A, v\preceq_K a \Rightarrow v=a$ 。那么对于任意 $v’\in O, v\preceq_K a’ \Rightarrow v’\in A, v\preceq_K a’=a \Rightarrow v=a=a’$  ，即 $v’$ 满足 $O$ 中的极小元性质，且 $v=a$ ，即两者极小元相同。</p>
-<blockquote>
-<p>总结:</p>
-<p>重点是可行、极小元的概念，还有元素的分解。</p>
+h(Z+tV)=\log f(Z+tV)&=\log\det(Z+tV)-\log\textbf{tr}(Z+tV)\\
+&=\log\det Z-\log\det(I+tZ^{-1/2}VZ^{-1/2})-\\
+&\ \ \ \ \log\textbf{tr}(Z(I+tZ^{-1/2}VZ^{-1/2}))
+\end{align}</script><p>并用到了(c)中的条件。</p>
 </blockquote>
  
       <!-- reward -->
@@ -472,7 +288,7 @@ i.e.\ &f_0[\theta x_1+(1-\theta)x_2]\preceq_K\theta f_0(x_1)+(1-\theta)f_0(x_2)\
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/%E5%87%B8%E9%97%AE%E9%A2%98%E4%B9%A0%E9%A2%98.html" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/assignment-convex-set.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -485,19 +301,19 @@ i.e.\ &f_0[\theta x_1+(1-\theta)x_2]\preceq_K\theta f_0(x_1)+(1-\theta)f_0(x_2)\
    
   <nav class="article-nav">
     
-      <a href="/%E5%AF%B9%E5%81%B6%E4%B9%A0%E9%A2%98.html" class="article-nav-link">
+      <a href="/assignment-convex-problem.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            对偶习题
+            凸问题习题
           
         </div>
       </a>
     
     
-      <a href="/%E5%87%B8%E9%9B%86%E4%B9%A0%E9%A2%98.html" class="article-nav-link">
+      <a href="/note-sub-gradient.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">凸集/凸函数习题</div>
+        <div class="article-nav-title">8. 次梯度</div>
       </a>
     
   </nav>

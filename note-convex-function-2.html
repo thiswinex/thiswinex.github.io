@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    ADMM 交替方向乘子法 |  Thiswinex&#39;s Blog
+    4. 凸函数(2) |  Thiswinex&#39;s Blog
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -44,7 +44,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-笔记-ADMM-交替方向乘子法"
+  id="post-note-convex-function-2"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -55,15 +55,15 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  ADMM 交替方向乘子法
+  4. 凸函数(2)
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/%E7%AC%94%E8%AE%B0-ADMM-%E4%BA%A4%E6%9B%BF%E6%96%B9%E5%90%91%E4%B9%98%E5%AD%90%E6%B3%95.html" class="article-date">
-  <time datetime="2019-01-28T07:11:25.000Z" itemprop="datePublished">2019-01-28</time>
+      <a href="/note-convex-function-2.html" class="article-date">
+  <time datetime="2019-04-24T12:11:54.000Z" itemprop="datePublished">2019-04-24</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a> / <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/%E5%87%B8%E4%BC%98%E5%8C%96/">凸优化</a>
@@ -74,7 +74,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.2k</span>
+            <span class="post-count">548</span>
         </span>
     </span>
 
@@ -83,7 +83,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">9 分钟</span>
+            <span class="post-count">2 分钟</span>
         </span>
     </span>
 </div>
@@ -98,121 +98,99 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
-<li><a target="_blank" rel="noopener" href="http://web.stanford.edu/~boyd/papers/pdf/admm_distr_stats.pdf">ADMM by Boyd, 2010</a></li>
-<li>收敛速率和算法复杂度分析可见南大何教授的分析 <a target="_blank" rel="noopener" href="http://maths.nju.edu.cn/~hebma/">主页</a></li>
-<li>对于基础知识，建议简要阅读一下 Boyd 的凸优化。(Convex Optimization, Stephen Boyd)</li>
-</ul>
+  <h2 id="Convex-Function-2"><a href="#Convex-Function-2" class="headerlink" title="Convex Function(2)"></a>Convex Function(2)</h2><h2 id="1-Operation-that-preserve-convexity"><a href="#1-Operation-that-preserve-convexity" class="headerlink" title="1. Operation that preserve convexity"></a>1. Operation that preserve convexity</h2><ol>
+<li><p>Positive weighted sum</p>
+<p>if $f_1,f_2,\cdots,f_n$ are convex, $\omega_1,\omega_2,\cdots,\omega_n\geq0$, then $f=\sum\omega_if_i$ is convex</p>
+</li>
+</ol>
 <a id="more"></a>
-<h2 id="等式约束优化问题"><a href="#等式约束优化问题" class="headerlink" title="等式约束优化问题"></a>等式约束优化问题</h2><h3 id="拉格朗日乘子法"><a href="#拉格朗日乘子法" class="headerlink" title="拉格朗日乘子法"></a>拉格朗日乘子法</h3><ul>
-<li>即求 <script type="math/tex">\min f(x) \ \ s.t.g_i(x)=0</script><br>使用拉格朗日乘子 <script type="math/tex">\ L(x,\lambda)=f(x)+\sum\lambda_i g_i(x)</script> ，使 <script type="math/tex; mode=display">\frac{\partial L}{\partial x}=\frac{\partial L}{\partial \lambda_i}=0</script>可以得到最优解。</li>
-<li>即多元微积分中求多元函数的条件极值。</li>
-</ul>
-<h3 id="罚函数"><a href="#罚函数" class="headerlink" title="罚函数"></a>罚函数</h3><ul>
-<li>即求 <script type="math/tex">\min f(x) \ \ s.t.g_i(x)=0</script> 。<br>引入惩罚因子 $\sigma$ 与增广函数 $P$ ，有 <script type="math/tex">\min F(x,\sigma)=f(x)+\sigma P(x)</script><br>其中 $\sigma$ 取很大的正数， $P=g^T g$ 。增广函数指示偏离约束的程度，并由一个很大的惩罚因子给予惩罚。由此求解的极值几乎不会脱离约束。 </li>
-</ul>
-<h3 id="增广拉格朗日乘子法-Augmented-Lagrange-Method"><a href="#增广拉格朗日乘子法-Augmented-Lagrange-Method" class="headerlink" title="增广拉格朗日乘子法 Augmented Lagrange Method"></a>增广拉格朗日乘子法 Augmented Lagrange Method</h3><ul>
-<li>在拉格朗日函数中引入罚函数，具体形式见后。</li>
-</ul>
-<h2 id="共轭问题和对偶问题"><a href="#共轭问题和对偶问题" class="headerlink" title="共轭问题和对偶问题"></a>共轭问题和对偶问题</h2><h3 id="共轭问题"><a href="#共轭问题" class="headerlink" title="共轭问题"></a>共轭问题</h3><ul>
-<li>$f(x): R^n\rightarrow R$</li>
-<li>$f^*(y): R^n\rightarrow R$</li>
-<li>$f^*(y)=\sup_{x\in D}(y^Tx-f(x))$</li>
-<li>(重要) <script type="math/tex">f^*(y)</script> 一定是凸的。这是因为逐点最大和逐点上确界操作是保凸的。在 <script type="math/tex">y\in R</script> 的情况下， <script type="math/tex">f^*</script> 相当于遍历仿射函数 <script type="math/tex">yx(kx)</script> 的斜率，并取 $kx+b$ 与 $f(x)$ 相交的时候最小的 $b$ ($b=-f(x)$)。</li>
-<li>(重要) 若 $f$ 是凸的且可微，则使 $y^Tx-f(x)$ 取最大的 <script type="math/tex">x^*</script> 满足 <script type="math/tex">y=\triangledown f(x^*)</script>（遍历的仿射函数和 $f(x)$ 相切）。即，给定任意 $y$ ，可以求解梯度方程 $y=\triangledown f(z)$ 得到 $y$ 处共轭函数 $f^*(y)$</li>
-<li>此处 $x$ 带有 $\sup$ 即要对 $x$ 做遍历，所以并不是常数。</li>
-</ul>
-<h4 id="拉格朗日对偶函数"><a href="#拉格朗日对偶函数" class="headerlink" title="拉格朗日对偶函数"></a>拉格朗日对偶函数</h4><ul>
-<li>$g(\lambda,t)=\inf_{x\in D}L(x,\lambda,\nu)$</li>
-<li>由于$\inf$的影响，$g$ 只能在一系列 $x$ 的取值中取最小的 $g(\lambda,\nu)$ 中取，是一族关于 $(\lambda,\nu)$ 的仿射函数的逐点下确界，是一定凸的。<br>所以对 $g(\lambda,\nu)=\min L(x,\lambda,\nu)\leq \min<em>x \max</em>{\lambda,\nu} L(x,\lambda,\nu)=\min f(x)$ 恒成立</li>
-<li>拉格朗日对偶函数给出了优化问题的最优值的一个下界 <script type="math/tex">(d^*\leq p^*)</script></li>
-</ul>
-<h3 id="线性约束下两者关系"><a href="#线性约束下两者关系" class="headerlink" title="线性约束下两者关系"></a>线性约束下两者关系</h3><p>$\min f(x),s.t. Ax=a, Bx\leq b.$<br>$L(x,\lambda,t)=f(x)+\lambda(Ax-a)+\nu(Bx-b)$<br>对偶函数 $g(\lambda,\nu)=\inf<em>{x\in D} L(x,\lambda,\nu)=-\lambda a-\nu b-\sup</em>{x\in D}[(-\lambda A-\nu B)x-f(x)]$<br>$=-\lambda a-\nu b-f^*(-\lambda A-\nu B)$</p>
-<h3 id="对偶问题"><a href="#对偶问题" class="headerlink" title="对偶问题"></a>对偶问题</h3><ul>
-<li>$\max g(\lambda,\nu ),\ \ s.t.\ \ \lambda,\nu \geq 0.$</li>
-<li>对偶问题的引出是因为 $g(\lambda,\nu)$ 描述一个最优值的下界，那么 $\max g(\lambda,\nu)$ 则是最优值的最好下界。</li>
-<li>$\lambda,\nu$ 可代回 $L(x,\lambda,\nu)$ 对 $x$ 求 $\min L.$</li>
-<li>此问题是无约束问题，拉格朗日方程不带约束项。这一过程消除了约束的限制(并入 $g$ 中)。且对偶问题一定是一个<strong>凸优化</strong>问题。</li>
-<li>注意强对偶条件下对偶问题的解才和原问题解相同。凸优化问题满足Slater条件，即凸优化问题存在严格可行解（约束中的仿射函数不等式约束满足严格小于），问题具有强对偶性质。Slater条件确保原函数存在鞍点（？）。</li>
-<li>凸问题下满足KKT条件的点 $\tilde{x},\tilde{\lambda},\tilde{\nu}$ ， $\tilde{x}$ 和 $(\tilde{\lambda},\tilde{\nu})$ 分别是原问题和对偶问题的最优解，且对偶间隙为0。</li>
-</ul>
-<h2 id="ADMM与相关优化算法"><a href="#ADMM与相关优化算法" class="headerlink" title="ADMM与相关优化算法"></a>ADMM与相关优化算法</h2><h3 id="对偶上升法-Dual-Ascent-Method"><a href="#对偶上升法-Dual-Ascent-Method" class="headerlink" title="对偶上升法 Dual Ascent Method"></a>对偶上升法 Dual Ascent Method</h3><ul>
-<li>使用梯度上升法更新 $\lambda$ 和 $\nu$ 。不断迭代求对偶问题的最优解（最大值，故用上升法）。每次更新 $\lambda$ 和 $\nu$ 都可以从此带入 $L$ 求出一个新的 $x$ ，此时得到一条新曲线（也可能是原曲线，但永远不会在原曲线上方），可以得到新的对偶问题继续更新 $\lambda$ 和 $\nu$ 。</li>
-<li><p>$\lambda, \nu$ 的上标表示迭代次数，在迭代中不断将解更新为满足不同约束条件的解。(剩余约束条件是多余的)(等式约束对所有可行解都是起作用的)</p>
+<blockquote>
+<p>非负加权求和，仿射变换的扩展</p>
+</blockquote>
+<ol>
+<li><p>Composition with affine function</p>
+<p>if $f$ is convex, then $g(x)=f(ax+b)$ is convex</p>
 </li>
-<li><p>原问题：$\min f(x) \s.t. Ax=b$<br>其拉格朗日函数为：</p>
-<script type="math/tex; mode=display">L(x,\lambda)=f(x)+\lambda^T(Ax-b)</script><p>对偶函数为：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-g(\lambda)&=\inf_x L(x,\lambda)=\inf_x (f(x)+\lambda^T(Ax-b))\\&=-\sup_x (-f(x)-\lambda^TAx)-\lambda^Tb\\&=-f^※(-A^T\lambda)-b^T\lambda
-\end{align}</script><p>对偶问题：$\max g(\lambda)$<br>在强对偶条件成立的情况下，原问题最优解(minimizer) <script type="math/tex">x^*</script> 可以通过 <script type="math/tex">y^*</script> (即上述 <script type="math/tex">\lambda^*</script>) 使用下式计算：<br><script type="math/tex">x^*=\arg\min_x L(x,\lambda^*)</script> 。</p>
+</ol>
+<blockquote>
+<p>凸函数复合仿射函数是凸函数</p>
+</blockquote>
+<ol>
+<li><p>Pointwise maximum</p>
+<p>if $f_1,f_2$ are convex, then $f(x)=\max{f_1,f_2}$ is convex</p>
 </li>
-<li><p>若 $g$ 可微，对任意点 $(x,\lambda)$ ，令（有?） $x^+=\arg\min_xL(x,y)$ ,则其梯度 $\triangledown g(y)=Ax^+-b$ ，则点的迭代（即梯度上升迭代）式如下：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-x^{k+1}&:=\arg\min_x L(x,y^k)\\
-y^{k+1}&:=y^k+\alpha^k(Ax^{k+1}-b)
-\end{align}</script><p>利用梯度上升迭代更新对偶问题的答案 $y$ ，并用 $y$ 反过来更新 $x$ 。 $\alpha^k&gt;0$ 是步长，所有上标都为迭代计数器。</p>
+</ol>
+<blockquote>
+<p>逐点最大操作保凸；<br>可以推广到无穷多个凸集（因为是(定义域)取交？）</p>
+</blockquote>
+<ol>
+<li><p>Pointwise supremum</p>
+<p>if $f(x,y)$ is convex, then $g(x)=\sup f(x,y)$ is convex</p>
 </li>
-<li><p>若 $f$ 为 $x$ 的任何分量的非零仿射函数，则 $x$ 无法更新，因为大多数情况下 $L$ 对 $x$ 无界（例 $y=kx+b$ 在 $k\neq0$ 时 $y$ 无下界）。</p>
+</ol>
+<blockquote>
+<p> 逐点上确界操作保凸</p>
+</blockquote>
+<ol>
+<li><p>Estabilishing by affine function</p>
+<p>$f(x)=\sup{g(x)}$ , $g$ is affine</p>
+</li>
+</ol>
+<blockquote>
+<p>由凸函数-&gt;仿射函数族的证明：做 $\textbf{epi}\ f$ 上的支撑超平面<br>仿射函数族-&gt;凸函数的证明：多个函数的逐点上确界保凸</p>
+<p>保证了共轭函数是凸函数</p>
+</blockquote>
+<ol>
+<li><p>Composition with scalar functions</p>
+<p><img src="https://imgchr.com/i/EVbLqS" alt="image-20190329103202902"></p>
+</li>
+</ol>
+<blockquote>
+<p>标量函数复合：需满足的条件</p>
+</blockquote>
+<ol>
+<li>Vector composition</li>
+</ol>
+<p><img src="https://imgchr.com/i/EVbjaQ" alt="image-20190329103401790"></p>
+<blockquote>
+<p>矢量复合需满足的条件</p>
+</blockquote>
+<ol>
+<li><p>Minimization</p>
+<p>if $f(x,y)$ is convex function and $\mathcal{C}$ is a convex set, then $g(x)=\underset{y\in\mathcal{C}}\inf f(x,y)$ is convex</p>
+</li>
+</ol>
+<blockquote>
+<p>$g$ 相当于 $f$ 在某个分量上的投影取 $\min$ (想像从y轴的平行方向看$t=f(x,y)$的投影，再把投影生成的面积取下界得到的仍然是凸函数)</p>
+</blockquote>
+<ol>
+<li>Perspective</li>
+</ol>
+<blockquote>
+<p>透视运算保凸</p>
+</blockquote>
+<h2 id="The-conjugate-function"><a href="#The-conjugate-function" class="headerlink" title="The conjugate function"></a>The conjugate function</h2><ul>
+<li><p>Define: $f^*(y)=\underset{x\in\mathbf{dom} f}{\sup}(y^Tx-f(x))$</p>
+<blockquote>
+<p>相当于这个仿射函数族遍历所有的斜率(斜率为x)，b取$-f(x)$</p>
+<p>对仿射函数族取逐点上确界的操作保证了$f^*(y)$ 的凸性，无论$f(x)$是否凸</p>
+</blockquote>
 </li>
 </ul>
-<h4 id="对偶分解法-Dual-Decomposition"><a href="#对偶分解法-Dual-Decomposition" class="headerlink" title="对偶分解法 Dual Decomposition"></a>对偶分解法 Dual Decomposition</h4><ul>
-<li>对 $x$ 的更新可以并行执行。</li>
+<h2 id="2-Quasiconvex-functions"><a href="#2-Quasiconvex-functions" class="headerlink" title="2. Quasiconvex functions"></a>2. Quasiconvex functions</h2><ul>
+<li>Define: $f$ is quasiconvex if $S_\alpha ={x\in\mathbf{dom}f\mid f(x)\leq\alpha }$ are convex for all $\alpha$</li>
 </ul>
-<h3 id="增广拉格朗日乘子法-Augmented-Lagrange-Method-1"><a href="#增广拉格朗日乘子法-Augmented-Lagrange-Method-1" class="headerlink" title="增广拉格朗日乘子法 Augmented Lagrange Method"></a>增广拉格朗日乘子法 Augmented Lagrange Method</h3><ul>
-<li>在拉格朗日函数中引入二次罚函数因子（即二次正则项，设约束为线性约束） <script type="math/tex; mode=display">L_\rho(x,y)=f(x)+y^T(Ax-b)+(\rho/2)||Ax-b||^2_2</script></li>
-<li>迭代过程：<script type="math/tex; mode=display">
-\begin{align}
-x^{k+1}&:=\arg\min_x L_\rho(x,y^k)\\
-y^{k+1}&:=y^k+\rho(Ax^{k+1}-b)
-\end{align}</script></li>
-<li>由于二次惩罚项的存在无法并行更新 $x$</li>
-</ul>
-<h3 id="交替方向乘子法-Alternating-Direction-Method-of-Multipliers"><a href="#交替方向乘子法-Alternating-Direction-Method-of-Multipliers" class="headerlink" title="交替方向乘子法 Alternating Direction Method of Multipliers"></a>交替方向乘子法 Alternating Direction Method of Multipliers</h3><h4 id="ADMM-基本形式-Unscale-form"><a href="#ADMM-基本形式-Unscale-form" class="headerlink" title="ADMM 基本形式(Unscale form)"></a>ADMM 基本形式(Unscale form)</h4><ul>
-<li>ADMM将原来的变量 $x$ 分成 $x$ 和 $z$ 两部分。优化问题如下（一次等式约束）：<script type="math/tex; mode=display">\min f(x)+g(z)\\ s.t. Ax+Bz=c</script></li>
-<li>最优值可表示为(?)：<script type="math/tex; mode=display">p^*=\inf\{f(x)+g(z)\ |\ Ax+Bz=c\}</script></li>
-<li>其拉格朗日函数可表示为：<script type="math/tex; mode=display">L_\rho(x,z,y)=f(x)+g(z)+y^T(Ax+Bz-c)+(\rho/2)||Ax+Bz-c||^2_2</script></li>
-<li>迭代过程：<script type="math/tex; mode=display">
-\begin{align}
-x^{k+1}&:=\arg\min_x L_\rho(x,z^k,y^k)\\
-z^{k+1}&:=\arg\min_z L_\rho(x^{k+1},z,y^k)\\
-y^{k+1}&:=y^k+\rho(Ax^{k+1}+Bz^{k+1}-c)
-\end{align}</script></li>
-<li>ADMM的可以并行迭代更新x,z</li>
-</ul>
-<h4 id="Scale-form"><a href="#Scale-form" class="headerlink" title="Scale form"></a>Scale form</h4><ul>
-<li>定义残差(residual) $r=Ax+Bz-c$ 和 Scale dual variable $u=(1/\rho)y$ ，我们有<script type="math/tex; mode=display">y^Tr+(\rho/2)||r||^2_2=(\rho/2)||r+(1/\rho)y||^2_2-(1/2\rho)||y||^2_2</script>ADMM迭代式可以重写为：<script type="math/tex; mode=display">
-\begin{align}
-x^{k+1}&:=\arg\min_x (f(x)+(\rho/2)||Ax+Bz^k-c+u^k||^2_2)\\
-z^{k+1}&:=\arg\min_z (g(x)+(\rho/2)||Ax^{k+1}+Bz-c+u^k||^2_2)\\
-u^{k+1}&:=u^k+Ax^{k+1}+Bz^{k+1}-c
-\end{align}</script>即为ADMM的Scale form</li>
-</ul>
-<h4 id="停止条件"><a href="#停止条件" class="headerlink" title="停止条件"></a>停止条件</h4><ul>
-<li>原变量满足收敛条件时残差必定满足收敛于0的条件，所以可以取<script type="math/tex; mode=display">||r^k||_2\leq\epsilon^{pri}\ \ \ \ and\ \ \ \ ||s^k||_2\leq\epsilon^{dual}</script></li>
-<li>其中的 $\epsilon$ 取法需满足一定条件，可见Boyd 2011论文式(3.12)部分。</li>
-</ul>
-<h4 id="对一般约束问题"><a href="#对一般约束问题" class="headerlink" title="对一般约束问题"></a>对一般约束问题</h4><ul>
-<li>优化问题如下：<script type="math/tex; mode=display">\min f(x)\\ s.t. x\in \mathcal{C}</script>其中 $x\in R^n$ ，$f$ 和 $\mathcal{C}$ 都是凸的，转化为ADMM形式：<script type="math/tex; mode=display">\min f(x)+g(z)\\ s.t. x-z=0</script>其中 $g$ 是 $\mathcal{C}$ 的指示函数（即 $x\in \mathcal{C}$ 则 $g(x)=0$ ，否则 $g(x)=+\infty$<br>迭代式为：<script type="math/tex; mode=display">
-\begin{align}
-x^{k+1}&:=\arg\min_x (f(x)+(\rho/2)||x-z^k+u^k||^2_2)\\
-z^{k+1}&:=\Pi_C(x^{k+1}+u^k)\\
-u^{k+1}&:=u^k+x^{k+1}-z^{k+1}
-\end{align}</script>其中 $\Pi_{\mathcal{C}(x)}$ 即 $x$ 在集合 $\mathcal{C}$ 上的欧几里得投影。</li>
-</ul>
-<h4 id="对非凸问题"><a href="#对非凸问题" class="headerlink" title="对非凸问题"></a>对非凸问题</h4><ul>
-<li>优化问题如下：<script type="math/tex; mode=display">\min f(x)\\ s.t. x\in S</script>其中 $f$ 凸而 $S$ 非凸，ADMM迭代式为：<script type="math/tex; mode=display">
-\begin{align}
-x^{k+1}&:=\arg\min_x (f(x)+(\rho/2)||x-z^k+u^k||^2_2)\\
-z^{k+1}&:=\Pi_S(x^{k+1}+u^k)\\
-u^{k+1}&:=u^k+x^{k+1}-z^{k+1}
-\end{align}</script>对 $z$ 的更新由于 $S$ 的非凸性变得难以计算，但仍然有容易计算的特例存在：<ul>
-<li>基数运算：<br>如果 <script type="math/tex">S=\{x| card(x)\leq c\}</script> ，其中 $card$ 给出集合中非零元的数量，那么 $\Pi_S(v)$ 是将 $v$ 的最大 $c$ 个元素保留并将其余元素置零。</li>
-<li>秩运算：<br>如果 $S$ 是秩为 $c$ 的矩阵的集合，那么 $\Pi<em>S(v)$ 通过SVD计算并保留前 $c$ 对，即 $\Pi_S(v)=\sum^c</em>{i=1}\sigma_i u_i v_i^T$</li>
-<li>布尔约束：<br>如果 $S={x|x<em>i\in{0,1}}$ ，那么 $\Pi<em>S(v)$ 直接取 0、1 中更近的那个。__整数约束</em></em>可以被同样的方式处理。</li>
-</ul>
-</li>
+<blockquote>
+<p>即定义域为凸，所有下水平集为凸<br><img src="https://imgchr.com/i/EVbqr8" alt="image-20190329111417466"></p>
+</blockquote>
+<h3 id="2-1-Properties"><a href="#2-1-Properties" class="headerlink" title="2.1 Properties"></a>2.1 Properties</h3><h4 id="Modified-Jensen-inequality"><a href="#Modified-Jensen-inequality" class="headerlink" title="- Modified Jensen inequality"></a>- Modified Jensen inequality</h4><p>$f$ is quasiconvex $\Leftrightarrow$ $f(\theta x+(1-\theta)y)\leq\max{f(x),f(y}$</p>
+<h4 id="In-R"><a href="#In-R" class="headerlink" title="- In R"></a>- In R</h4><p>$f$ is quasiconvex $\Leftrightarrow$ $f$ 在 $c\in\mathbf{dom}f$ 左侧非增右侧非减，且 $f$ 非增非减</p>
+<h4 id="First-order-condition"><a href="#First-order-condition" class="headerlink" title="- First-order condition"></a>- First-order condition</h4><p>$f$ is quasiconvex $\Leftrightarrow$[ $f(y)\leq f(x)\rightarrow\triangledown f(x)^T(y-x)\leq 0$]</p>
+<blockquote>
+<p>梯度与 y-x 连线反向</p>
+</blockquote>
+<h2 id="3-Log-concave-and-log-convex-functions"><a href="#3-Log-concave-and-log-convex-functions" class="headerlink" title="3. Log-concave and log-convex functions"></a>3. Log-concave and log-convex functions</h2><ul>
+<li>Define: $f$ is log-convex if for all $x\in\mathbf{dom}f$ , $f(x)&gt;0$ and $\log f$ is convex</li>
 </ul>
  
       <!-- reward -->
@@ -278,7 +256,7 @@ u^{k+1}&:=u^k+x^{k+1}-z^{k+1}
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/%E7%AC%94%E8%AE%B0-ADMM-%E4%BA%A4%E6%9B%BF%E6%96%B9%E5%90%91%E4%B9%98%E5%AD%90%E6%B3%95.html" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/note-convex-function-2.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -291,15 +269,20 @@ u^{k+1}&:=u^k+x^{k+1}-z^{k+1}
    
   <nav class="article-nav">
     
-      <a href="/%E8%AE%BA%E6%96%87-Low-bit-quantization.html" class="article-nav-link">
+      <a href="/note-convex-problem.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            Extremely Low Bit Neural Network: Squeeze the Last Bit Out with ADMM
+            4. 凸优化问题(1)
           
         </div>
       </a>
     
+    
+      <a href="/note-convex-function-1.html" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">3. 凸函数(1)</div>
+      </a>
     
   </nav>
 

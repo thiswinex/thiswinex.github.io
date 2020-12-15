@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    8. 次梯度 |  Thiswinex&#39;s Blog
+    7. 梯度方法 |  Thiswinex&#39;s Blog
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -44,7 +44,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-笔记-次梯度"
+  id="post-note-gradient-method"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -55,18 +55,18 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  8. 次梯度
+  7. 梯度方法
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/%E7%AC%94%E8%AE%B0-%E6%AC%A1%E6%A2%AF%E5%BA%A6.html" class="article-date">
-  <time datetime="2019-06-05T02:44:56.000Z" itemprop="datePublished">2019-06-05</time>
+      <a href="/note-gradient-method.html" class="article-date">
+  <time datetime="2019-06-05T02:44:09.000Z" itemprop="datePublished">2019-06-05</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a> / <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/%E5%87%B8%E4%BC%98%E5%8C%96/">凸优化</a>
+    <a class="article-category-link" href="/categories/%E5%87%B8%E4%BC%98%E5%8C%96/">凸优化</a> / <a class="article-category-link" href="/categories/%E5%87%B8%E4%BC%98%E5%8C%96/%E7%AC%94%E8%AE%B0/">笔记</a>
   </div>
   
 <div class="word_count">
@@ -74,7 +74,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">578</span>
+            <span class="post-count">910</span>
         </span>
     </span>
 
@@ -83,7 +83,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">3 分钟</span>
+            <span class="post-count">4 分钟</span>
         </span>
     </span>
 </div>
@@ -98,109 +98,89 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="Sub-Gradient"><a href="#Sub-Gradient" class="headerlink" title="Sub-Gradient"></a>Sub-Gradient</h2><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
-<li>介绍了次梯度的一些性质，为之后的次梯度方法作铺垫。</li>
+  <h2 id="Gradient-Method"><a href="#Gradient-Method" class="headerlink" title="Gradient Method"></a>Gradient Method</h2><h3 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h3><ul>
+<li>介绍了经典的一阶方法，梯度下降。</li>
 </ul>
 <a id="more"></a>
-<h2 id="1-Sub-Gradient"><a href="#1-Sub-Gradient" class="headerlink" title="1. Sub-Gradient"></a>1. Sub-Gradient</h2><p>$g$ is a sub-gradient of convex function $f$ if</p>
-<script type="math/tex; mode=display">
-f(y)\geq f(x)+g^T(y-x), \forall y\in \textbf{dom} f</script><h3 id="1-1-Properties"><a href="#1-1-Properties" class="headerlink" title="1.1 Properties"></a>1.1 Properties</h3><ul>
-<li>unconstrained optimality: $x$ minimize $f(x)$ if $0\in\partial f(x)$</li>
-</ul>
-<h3 id="1-2-Subdifferential"><a href="#1-2-Subdifferential" class="headerlink" title="1.2 Subdifferential"></a>1.2 Subdifferential</h3><p>a set of all sub-gradient:</p>
-<script type="math/tex; mode=display">
-\partial f(x)=\{g\mid g^T(y-x)\leq f(y)-f(x),\forall y\in\textbf{dom}f\}</script><blockquote>
-<p>$\partial f(x)$ 是半空间的交，所以是凸闭集</p>
+<h3 id="1-Gradient-Method"><a href="#1-Gradient-Method" class="headerlink" title="1. Gradient Method"></a>1. Gradient Method</h3><h4 id="1-1-Definition"><a href="#1-1-Definition" class="headerlink" title="1.1 Definition"></a>1.1 Definition</h4><p>选定初始点 $x<em>0$ 并按 $x</em>{k+1}=x_k-t_k\triangledown f(x_k)$ 的方法迭代。其中 $t_k$ 是通过线搜索方法确定的步长。梯度下降法不需要使用二阶条件，不需要计算 Hessian 阵，所以每次迭代的计算代价不高。但是容易出现收敛过慢，在不可微区域失效等缺点。</p>
+<blockquote>
+<p>为避免歧义，之后用$ x^{(k)}$ 指代一个序列中的第 k 个元素。</p>
 </blockquote>
-<h3 id="1-3-Monotonicity"><a href="#1-3-Monotonicity" class="headerlink" title="1.3 Monotonicity"></a>1.3 Monotonicity</h3><blockquote>
-<p>次梯度在凸函数上单调(类比梯度)</p>
-</blockquote>
-<h3 id="1-4-Sub-level-set"><a href="#1-4-Sub-level-set" class="headerlink" title="1.4 Sub-level set"></a>1.4 Sub-level set</h3><blockquote>
-<p>$x$ 上的非零次梯度定义了此处下水平集的一个支撑超平面</p>
-</blockquote>
-<h2 id="2-Sub-Gradient-calculus"><a href="#2-Sub-Gradient-calculus" class="headerlink" title="2. Sub-Gradient calculus"></a>2. Sub-Gradient calculus</h2><ul>
-<li>weak result: find <strong>1</strong> sub-gradient </li>
-<li>strong result: find <strong>all</strong> sub-gradient</li>
-</ul>
-<h3 id="2-1-Basic-rules"><a href="#2-1-Basic-rules" class="headerlink" title="2.1 Basic rules"></a>2.1 Basic rules</h3><ul>
-<li><p>Differentiable functions:</p>
-<p>$\partial f(x)={\triangledown f(x)}$ if $f$ is differentiable at $x$</p>
+<h3 id="2-First-order-methods"><a href="#2-First-order-methods" class="headerlink" title="2. First-order methods"></a>2. First-order methods</h3><h4 id="2-1-Lipschitz-continuity-gradient"><a href="#2-1-Lipschitz-continuity-gradient" class="headerlink" title="2.1 Lipschitz continuity gradient"></a>2.1 Lipschitz continuity gradient</h4><ul>
+<li><p>Lipschitz continuous<br>$|f(x)-f(y)|\leq L|x-y|, \forall x,y\in\textbf{dom} f$ </p>
 </li>
-<li><p>Non-negative linear combination (Thm. Morean-Rockafellor):</p>
-<p>if $f(x)=\alpha_1f_1(x)+\alpha_2f_2(x)\text{ with } \alpha_1、\alpha_2\geq0$</p>
-<p>than $\partial f(x)=\alpha_1\partial f_1(x)+\alpha_2\partial f_2(x)$</p>
+<li><p>Lipschitz continuous gradient (L-smooth)<br>  $|\triangledown f(x)-\triangledown f(y)|\leq L|x-y|, \forall x,y\in\textbf{dom} f$</p>
 </li>
-<li><p>Affine transformation of variables:</p>
-<p>if $f(x)=h(Ax+b)$</p>
-<p>then $\partial f(x)=A^T\partial h(Ax+b)$</p>
-</li>
-</ul>
-<h3 id="2-2-Pointwise-maximum"><a href="#2-2-Pointwise-maximum" class="headerlink" title="2.2 Pointwise maximum"></a>2.2 Pointwise maximum</h3><ul>
-<li><p>$f(x)=\max{f_1(x),\cdots,f_m(x)}$。 Define $I(x)={i\mid f(x)=f_i(x)}$</p>
-</li>
-<li><p>weak result: choose $k\in I(x)$ ， any sub-gradient in $f_k(x)$  </p>
-</li>
-<li><p>strong result: (Dubovitskii-Milyutin)</p>
-<script type="math/tex; mode=display">
-\partial f(x)=\text{conv} \bigcup_{i=I(x)}\partial f_i(x)</script></li>
 </ul>
 <blockquote>
-<p>在同一点可能有多个函数f被激活</p>
+<p>$|\cdot|, |\cdot|_*$ ? Norm Choice</p>
 </blockquote>
 <ul>
-<li>Exp. 1-norm</li>
-</ul>
-<h3 id="2-3-Maximum-eigenvalue"><a href="#2-3-Maximum-eigenvalue" class="headerlink" title="2.3 Maximum eigenvalue"></a>2.3 Maximum eigenvalue</h3><ul>
-<li><p>$f(x)=\lambda<em>{max}(A(x))=\sup</em>{|y|_2=1}y^TA(x)y$</p>
-<p>where $A(x)=A_0+x_1A_1+\cdots+x_nA_n$</p>
-<p><strong>Find</strong> a sub-gradient in $\hat{x}$</p>
+<li><p>Quadratic upper bound<br>  Lipschitz continuous gradient $\rightarrow (\triangledown f(x)-\triangledown f(y))^T(x-y)\leq L|x-y|^2 ,\forall x,y\in \textbf{dom}f$<br>  which is equivalent to $f(y)\leq f(x)+\triangledown f(x)^T(y-x)+L/2|y-x|^2, \forall x,y\in\textbf{dom}f$ 给出了一个(对y的函数的)二次函数上界(固定x)</p>
 </li>
-<li><p>choose any unit eigenvalue $y$ with eigenvalue $\lambda_{max}(A(x))$ </p>
-</li>
-<li><p>gradient of $y^TA(x)y$ is an answer:</p>
-<p>$(y_1^TAy_1,\cdots,y^T_nAy_n)\in \partial f(x)$ </p>
-</li>
-</ul>
-<h3 id="2-4-Some-other-examples"><a href="#2-4-Some-other-examples" class="headerlink" title="2.4 Some other examples"></a>2.4 Some other examples</h3><ul>
-<li><p>minimize $f(x)=\inf_yh(x,y)$ </p>
-</li>
-<li><p>minimize $f(x)=\inf_{y\in C} |x-y|_2$ , which $C$ is convex.</p>
-</li>
-<li><p>Composition: $f(x)=h(f_1(x),\cdots,f_k(x))$ , which $f_i, h$ is convex, $h$ non-decreasing.</p>
-</li>
-<li><p>Optimal value function:</p>
-<p>considering minimize $f_0(x)$</p>
-<p>s.t. $f_i(x)&lt;u_i, Ax=b+v$</p>
-<p>With strong duality, finite dual problem: $f(\hat{u},\hat{v})$ is optimal, we can conclude that $(-\hat{\lambda},-\hat{\nu})\in \partial f(\hat{u},\hat{v})$ </p>
-<blockquote>
-<ul>
-<li><p>$\lambda,\nu$ 是拉格朗日对偶对应项的系数梯度</p>
-</li>
-<li><p>$u\in \partial f(v) \Leftrightarrow v\in \partial f^*(u)\tag{8-1}$</p>
-</li>
-<li>极小值问题转为次梯度问题(?)</li>
-</ul>
-</blockquote>
-</li>
-<li><p>Expectation </p>
-</li>
-</ul>
-<h2 id="3-Optimal-condition"><a href="#3-Optimal-condition" class="headerlink" title="3. Optimal condition"></a>3. Optimal condition</h2><ul>
-<li>$x^\star$ minimize $f(x)$ iff $0\in \partial f(x^\star)$</li>
-</ul>
-<h3 id="Constrained"><a href="#Constrained" class="headerlink" title="Constrained"></a>Constrained</h3><p>KKT Condition: dual optimal iff</p>
-<ul>
-<li>Strong duality holds</li>
-<li>$x^\star$ is primal feasible</li>
-<li>$\lambda^\star\geq 0$   </li>
-<li>$\lambda_i^\star f_i(x^\star)=0$ for $i=1,\cdots,m$</li>
-<li>$x^\star$ minimize the $L(x,\lambda^\star)$</li>
-</ul>
-<h2 id="4-Directional-derivative"><a href="#4-Directional-derivative" class="headerlink" title="4. Directional derivative"></a><strong>4. Directional derivative</strong></h2><ul>
-<li>Definition: ($f$ at $x$ with $y$ direction)</li>
-</ul>
+<li><p>Consequensce of quadratic upper bound</p>
 <script type="math/tex; mode=display">
-f'(x;y)=\lim_{\alpha\rightarrow0}\frac{f(x+\alpha y)-f(x)}{\alpha}</script> 
+\frac{1}{2L}\|\triangledown f(z)\|^2\leq f(z)-f(x^\star)\leq \frac{L}{2}\|z-x^\star\|^2, \forall z</script><p>​        $x^\star$ 是最优值。右侧不等号由 $x=x^\star$ 的二次函数上界给出，左侧不等号由固定 $x=z$ 对 $y$ 优化最小上界得到。</p>
+</li>
+<li><p>Co-coercivity of gradient</p>
+<script type="math/tex; mode=display">
+(\triangledown f(x)-\triangledown f(y))^T(x-y)\geq \frac{1}{L} \|\triangledown f(x)-\triangledown f(y)\|^2, \forall x,y</script></li>
+</ul>
+<p>​        if $f$ is convex and L-Lipschitz continuous gradient<br>​        Lipschitz continuous gradient = upper bound property = co-coercivity of gradient</p>
+<h4 id="2-2-Strong-convexity"><a href="#2-2-Strong-convexity" class="headerlink" title="2.2 Strong convexity"></a>2.2 Strong convexity</h4><ul>
+<li>$f$ is strongly convex with $m&gt;0$ if dom $f$ is convex and:<script type="math/tex; mode=display">
+f(\theta x+(1-\theta)y)\leq \theta f(x)+(1-\theta)f(y)-\frac{m}{2}\theta(1-\theta)\|x-y\|^2</script></li>
+<li>m-strongly convex means:<script type="math/tex; mode=display">
+f(y)\geq f(x)+\triangledown f(x)^T(y-x)+\frac{m}{2}\|y-x\|^2, \forall x,y\in \textbf{dom} f</script>​        给出了一个二次函数的下界(同样是固定x，对y的函数)</li>
+</ul>
+<h3 id="2-3-Analysis-of-gradient-method"><a href="#2-3-Analysis-of-gradient-method" class="headerlink" title="2.3 Analysis of gradient method"></a>2.3 Analysis of gradient method</h3><ul>
+<li><p>$x_{k+1}=x_k-t_k\triangledown f(x_k)$<br>假设 $f$ 是凸且可微，且梯度为 $L-smooth$ ，存在最优值 $f(x^\star)$。</p>
+</li>
+<li><p>For one step:</p>
+<script type="math/tex; mode=display">
+f(x-t\triangledown f(x)) \leq f(x)-t(1-\frac{Lt}{2})\|\triangledown f(x)\|^2_2</script></li>
+</ul>
+<p>​        (quadratic upper bound)</p>
+<p>​        let $x^+=x-t\triangledown f(x)$ , $0&lt;t&lt;1/L$ ,</p>
+<script type="math/tex; mode=display">
+\begin{align}
+f(x^+)&\leq f(x)-\frac{t}{2}\|\triangledown f(x)\|^2_2,(1)\\
+f(x^+)-f^\star&\leq(f(x)-f^\star)-\frac{t}{2}\|\triangledown f(x)\|^2_2\\
+f(x^+)-f^\star&\leq\triangledown f(x)^T(x-x^\star)-\frac{t}{2}\|\triangledown f(x)\|^2_2\\
+&=\frac{1}{2t}(\|x-x^\star\|^2_2)-\|x-x^\star-t\triangledown f(x)\|^2_2)\\
+&=\frac{1}{2t}(\|x-x^\star\|^2_2)-\|x^+-x^\star\|^2_2),(2)
+\end{align}</script><p>​        (1) shows that $f(x^+)&lt;f(x)$ </p>
+<p>​        (2) shows that $|x^+-x^\star|_2&lt;|x-x^\star|_2$ </p>
+<p>​        函数值收敛，x值也收敛</p>
+<blockquote>
+<p>为什么这两者不是等价的?</p>
+<p>这是所谓强收敛(Strong Convergence)和弱收敛(Weak Convergence)的区别，(1)即函数值收敛为弱收敛，(2)即点列收敛为强收敛。考虑极限情况——一个”平底锅”函数，弱收敛算法的函数值能够收敛到锅底，但其点列可能在锅的两头反复横跳。</p>
+</blockquote>
+<ul>
+<li>Constant step size:</li>
+</ul>
+<p>Number of iterations to reach $f(x_k)-f^\star\leq \epsilon$ is $O(1/\epsilon)$ </p>
+<blockquote>
+<p>如果函数强凸，此条可加强为  $O(\log(1/\epsilon))$  </p>
+</blockquote>
+<ul>
+<li>Backtracking line search</li>
+</ul>
+<h4 id="2-4-Limits-on-convergence-rate-of-first-order-methods"><a href="#2-4-Limits-on-convergence-rate-of-first-order-methods" class="headerlink" title="2.4 Limits on convergence rate of first-order methods"></a>2.4 Limits on convergence rate of first-order methods</h4><p>(Nestrov) for $k&lt;(n-1)/2$ , we have this theroem of first-order methods above:</p>
+<script type="math/tex; mode=display">
+f(x_k)-f^\star\geq \frac{3L\|x-x^\star\|^2_2}{32(k+1)^2}</script><blockquote>
+<p>即大体可以分为 $1/k$ 级和 $1/k^2$ 级。梯度方法作为一阶方法在后面的一些改进算法中获得了 $1/k^2$ 的收敛速度。</p>
+<p>如何评判收敛速度？以下为一些速度标准以及它们的含义</p>
+</blockquote>
+<p>Q-linear</p>
+<script type="math/tex; mode=display">
+\frac{\|x^k-x^*\|}{\|x^{k-1}-x^*\|}<\gamma, \gamma\in(0,1)</script><p>super-linear</p>
+<script type="math/tex; mode=display">
+\frac{\|x^k-x^*\|}{\|x^{k-1}-x^*\|}\rightarrow 0</script><p>quadratic</p>
+<script type="math/tex; mode=display">
+\frac{\|x^k-x^*\|}{\|x^{k-1}-x^*\|^2}\leq M</script><p>$\epsilon_k$ is Q-linear</p>
+<script type="math/tex; mode=display">
+\|x^k-x^*\|<\epsilon_k</script> 
       <!-- reward -->
       
     </div>
@@ -264,32 +244,30 @@ f'(x;y)=\lim_{\alpha\rightarrow0}\frac{f(x+\alpha y)-f(x)}{\alpha}</script>
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/%E7%AC%94%E8%AE%B0-%E6%AC%A1%E6%A2%AF%E5%BA%A6.html" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/note-gradient-method.html" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%87%B8%E4%BC%98%E5%8C%96/" rel="tag">凸优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
-
     </footer>
   </div>
 
    
   <nav class="article-nav">
     
-      <a href="/%E5%87%B8%E9%9B%86%E4%B9%A0%E9%A2%98.html" class="article-nav-link">
+      <a href="/note-sub-gradient.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            凸集/凸函数习题
+            8. 次梯度
           
         </div>
       </a>
     
     
-      <a href="/%E7%AC%94%E8%AE%B0-%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95.html" class="article-nav-link">
+      <a href="/note-dual-in-optimization.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">7. 梯度方法</div>
+        <div class="article-nav-title">6. 对偶与对偶问题</div>
       </a>
     
   </nav>

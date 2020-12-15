@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    4. 凸优化问题(1) |  Thiswinex&#39;s Blog
+    6. 对偶与对偶问题 |  Thiswinex&#39;s Blog
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -44,7 +44,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-笔记-凸优化问题-1"
+  id="post-note-dual-in-optimization"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -55,15 +55,15 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  4. 凸优化问题(1)
+  6. 对偶与对偶问题
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/%E7%AC%94%E8%AE%B0-%E5%87%B8%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98-1.html" class="article-date">
-  <time datetime="2019-04-24T13:47:48.000Z" itemprop="datePublished">2019-04-24</time>
+      <a href="/note-dual-in-optimization.html" class="article-date">
+  <time datetime="2019-06-05T02:37:44.000Z" itemprop="datePublished">2019-06-05</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a> / <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/%E5%87%B8%E4%BC%98%E5%8C%96/">凸优化</a>
@@ -74,7 +74,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">415</span>
+            <span class="post-count">327</span>
         </span>
     </span>
 
@@ -98,71 +98,111 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="Convex-Optimization-Problems-1"><a href="#Convex-Optimization-Problems-1" class="headerlink" title="Convex-Optimization Problems(1)"></a>Convex-Optimization Problems(1)</h2><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
-<li>介绍了一些经典的优化问题，不止于凸优化问题</li>
-<li>仍然有很多问题（几何规划、向量规划、广义不等式约束等等）以及关于SDP和SOCP的一些拓展未在此处给出，未来用到的时候再继续写点。</li>
+  <h2 id="Duality"><a href="#Duality" class="headerlink" title="Duality"></a>Duality</h2><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>主要记录了对偶问题和对偶方法。由于强对偶性下对偶问题的解与原问题相等，许多问题在原函数性质不好的情况下可以变换到对偶空间去求解。</li>
+<li>Why duality? 降低计算复杂度，数据降维等；更好的性质，更光滑、凸。。</li>
 </ul>
 <a id="more"></a>
-<h2 id="1-Convex-optimization-problems"><a href="#1-Convex-optimization-problems" class="headerlink" title="1. Convex optimization problems"></a>1. Convex optimization problems</h2><ul>
-<li><p>Standard form:</p>
+<h2 id="1-Lagrangian"><a href="#1-Lagrangian" class="headerlink" title="1. Lagrangian"></a>1. Lagrangian</h2><ul>
+<li><p>Standard form problem:</p>
 <p>minimize $f_0(x)$</p>
-<p>subject to $f_i(x)\leq 0, i=1,\cdots,m, a^T_ix=b_i,i=1,\cdots,p$</p>
-<p>Note: $f_0$ is convex, $f_1,\cdots,f_n$ are convex, $a^T_ix=b_i$ are affine.</p>
+<p>subject to $f_i(x)\leq 0, i=1,\cdots,m, h_i(x)=0,i=1,\cdots,p$ </p>
 </li>
+<li><p>Lagrangian:</p>
+<script type="math/tex; mode=display">
+L(x,\lambda,\nu)=f_0(x)+\sum^m_{i=1}\lambda_if_i(x)+\sum^p_{i=1}\nu_ih_i(x)</script></li>
 </ul>
 <blockquote>
-<p>可以注意到凸优化问题的可行集为凸</p>
+<p>$\lambda,\nu$ 分别是不等式约束和等式约束的拉格朗日乘子</p>
+</blockquote>
+<h2 id="2-Lagrangian-Dual"><a href="#2-Lagrangian-Dual" class="headerlink" title="2. Lagrangian Dual"></a>2. Lagrangian Dual</h2><script type="math/tex; mode=display">
+g(\lambda,\nu)=\inf_{x\in D}L(x,\lambda,\nu)</script><blockquote>
+<p>因为 $\inf$ 的存在，且 $L$ 是关于 $\lambda,\nu$ 的仿射函数，对偶函数一定凸且构成了原问题最优值 $p^\star$ 的下界 $g(\lambda,\nu)\leq p^\star$</p>
+</blockquote>
+<h2 id="3-Lagrange-dual-and-conjugate-function"><a href="#3-Lagrange-dual-and-conjugate-function" class="headerlink" title="3. Lagrange dual and conjugate function"></a>3. Lagrange dual and conjugate function</h2><ul>
+<li><p>minimize $f_0(x)$</p>
+<p>subject to $Ax\preceq b, Cx=d$</p>
+<script type="math/tex; mode=display">
+\begin{align}
+g(\lambda,\nu)&=\inf_{x\in\textbf{dom}f_0}(f_0(x)+(A^T\lambda+C^T\nu)^Tx-b^T\lambda-d^T\nu)\\
+&=-f_0^*(-A^T\lambda-C^T\nu)-b^T\lambda-d^T\nu
+\end{align}</script></li>
+</ul>
+<h2 id="4-The-dual-problem"><a href="#4-The-dual-problem" class="headerlink" title="4. The dual problem"></a>4. The dual problem</h2><ul>
+<li><p>maximize $g(\lambda,\nu)$</p>
+<p>subject to $\lambda \succeq 0$ </p>
+<p>finds best lower bound of $p^\star$_</p>
+</li>
+</ul>
+<h2 id="5-Weak-and-strong-duality"><a href="#5-Weak-and-strong-duality" class="headerlink" title="5. Weak and strong duality"></a>5. Weak and strong duality</h2><ul>
+<li><p>weak duality: $d^\star\leq p^\star$</p>
+<p>always holds for convex and nonconvex problems</p>
+</li>
+<li><p>strong duality: $d^\star=p^\star$</p>
+<p>Slater’ constraint qualification:</p>
+<script type="math/tex; mode=display">
+\exists x\in \textbf{int}D: f_i(x)<0, i=1,\cdots,m</script></li>
+</ul>
+<blockquote>
+<p>Slater条件成立即不等式约束可以取严格小于，强对偶性成立。 Slater条件确保拉格朗日函数存在鞍点(参见拉格朗日对偶的鞍点解释，即 $x^\star,\lambda^\star$ 最优且强对偶性成立，则其为 $L$ 的鞍点)</p>
+</blockquote>
+<h2 id="6-A-nonconvex-problem-with-strong-duality"><a href="#6-A-nonconvex-problem-with-strong-duality" class="headerlink" title="6. A nonconvex problem with strong duality"></a>6. A nonconvex problem with strong duality</h2><blockquote>
+<p>对非凸问题也可能存在强对偶条件</p>
+<p>无论 $x$ 的维数($x\in \mathcal{R}^n$ )，其对偶问题总是针对 $\lambda\in \mathcal{R}$ 的一维优化。这是个很好的性质，可以直接使问题降维。</p>
+</blockquote>
+<h2 id="7-Geometric-interpretation"><a href="#7-Geometric-interpretation" class="headerlink" title="7. Geometric interpretation"></a>7. Geometric interpretation</h2><script type="math/tex; mode=display">
+g(\lambda)=\inf_{(u,t)\in G}(t+\lambda u)</script><p>where $G={(f_1(x),f_2(x))\mid x\in D}$</p>
+<p><img src="/Users/pingguo/Library/Application Support/typora-user-images/image-20190425154237918.png" alt="image-20190425154237918"></p>
+<blockquote>
+<p>原问题可行集在左半侧(Slater条件)；超平面 $\lambda u+t=g(\lambda)$ 与 $t$ 的交点永远在 $p^*$ 的下边。此处 $\lambda$ 作为自变量变换超平面的”斜率”，取与G相切之后（inf保证相切）与t轴焦点即为 $g(\lambda)$ 。无论怎么交，最优点（最大的 $g(\lambda)$ ）总在 $p^\star$ 下部。 </p>
+<p>(弱对偶条件 $d^<em>&lt;p^</em>$)</p>
 </blockquote>
 <ul>
-<li><p><strong>Any local optimal point is globally optimal</strong></p>
-</li>
-<li><p>Optimality criterion for differentiable $f_0$ </p>
-<p>$x$ is optimal <strong>iff</strong> it’s feasible $(x\in X)$ and $\triangledown f_0(x)^T(y-x)\geq 0$ </p>
+<li>Epigraph variation:</li>
+</ul>
+<blockquote>
+<p>令 $A$ 为G的上境图，强对偶性成立当$p^\star$ 处可以作非垂直（于坐标轴u）的支撑超平面。</p>
+<p>上图G非凸；如果G凸（即对于凸问题），过 $(0,p^\star)$ 可以作支撑超平面。</p>
+<p>此时Slater’s condition: 如果存在 $(\tilde{u},\tilde{t})\in A$ 且 $\tilde{u}&lt;0$ ，$(0,p^\star)$ 点的支撑超平面必然不垂直。</p>
+</blockquote>
+<h2 id="8-Complementary-slackness"><a href="#8-Complementary-slackness" class="headerlink" title="8. Complementary slackness"></a>8. Complementary slackness</h2><ul>
+<li><p>assume strong duality holds, $x^\star$ optimal and $(\lambda^\star,\nu^\star)$ dual optimal</p>
+<p>obviously we have:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+f_0(x^\star)=g(\lambda^\star,\nu^\star)&=\inf_x\{f_0(x)+\sum\lambda_i^\star f_i(x)+\sum\nu_i^\star h_i(x)\}\\
+&\leq f_0(x^\star)+\sum\lambda_i^\star f_i(x^\star)+\sum\nu_i^\star h_i(x^\star)\\
+&\leq f_0(x^\star)
+\end{align}</script><ul>
+<li>First inequality: $x^\star$ minimize $L(x,\lambda^\star,\nu^\star)$ </li>
+<li>$\sum \lambda_i^\star f_i(x^\star)=0$</li>
+</ul>
 </li>
 </ul>
 <blockquote>
-<p>$-\triangledown f(x)$ 定义了一个支撑超平面切于 最优点</p>
+<p>第二个条件即 complementary slackness 互补松弛性，即最优点处除非第i个约束起作用，否则最优拉格朗日乘子的第i项都为零。</p>
 </blockquote>
-<ul>
-<li>Equivalent convex problem</li>
+<h2 id="9-KKT-Condition"><a href="#9-KKT-Condition" class="headerlink" title="9. KKT Condition"></a>9. KKT Condition</h2><ul>
+<li>For non-convex problem, if strong duality holds, i.e. $x^\star$ minimize $L(x,\lambda^\star,\nu^\star)$ , so its gradient at $x^\star$:<script type="math/tex; mode=display">
+\triangledown f_0(x^\star)+\sum \lambda^\star_i\triangledown f_i(x)+\sum\nu^\star_i\triangledown h_i(x)=0</script>so we have KKT condition:<script type="math/tex; mode=display">
+\begin{align}
+f_i(x^\star)&\leq 0 \text{     primal constraints}\\
+h_i(x^\star)&=0 \\
+\lambda^\star_i&\geq 0 \text{     dual constraints}\\
+\lambda^\star_if_i(x^\star)&=0\text{     complementary slackness}\\
+\triangledown f_0(x^\star)+\sum \lambda^\star_i\triangledown f_i(x)+\sum\nu^\star_i\triangledown h_i(x)&=0 \text{     gradient vanish}
+\end{align}</script></li>
 </ul>
 <blockquote>
-<p>包括消除、引入等式约束；加入松弛变量；极小化部分变量；化为上境图问题</p>
+<p>KKT条件由强对偶性下的非凸问题导出，即在非凸问题中，原问题和对偶问题的一堆最优解必须满足KKT条件(必要条件) 。</p>
+<p>（原问题可行性、对偶问题可行性、互补松弛性、最优性）</p>
+<p>若原问题为凸，必要条件变为充要条件，满足KKT条件的点是最优解且对偶间隙为零(强对偶)。对于还未知是否满足强对偶性的凸问题，需要满足 Slater 条件。</p>
 </blockquote>
-<h2 id="2-Quasiconvex-optimization"><a href="#2-Quasiconvex-optimization" class="headerlink" title="2. Quasiconvex optimization"></a>2. Quasiconvex optimization</h2><ul>
-<li><p>Different point: </p>
-<p>$x$ is optimal <strong>if</strong> it’s feasible and $\triangledown f_0(x)^T(y-x)&gt;0$</p>
-</li>
-</ul>
-<blockquote>
-<p>拟凸问题可以通过构造凸可行性问题来求解</p>
+<h2 id="10-Example"><a href="#10-Example" class="headerlink" title="10. Example"></a>10. Example</h2><blockquote>
+<p>$\underset{y}{\min} \frac{1}{2}|x-y|^2_2$， $s.t. |x|_1=1$ </p>
 </blockquote>
-<h2 id="3-Linear-program"><a href="#3-Linear-program" class="headerlink" title="3. Linear program"></a>3. Linear program</h2><ul>
-<li><p>minimize $c^Tx+d$</p>
-<p>subject to $Gx\preceq h, Ax=b$</p>
-</li>
-</ul>
-<blockquote>
-<p>线性目标函数对凸优化是普适的。</p>
-<p>与线性分式问题等价</p>
-<p>$\min |x|_1$ s.t. $Ax=b$ 是线性规划问题：<br>$\min t$ s.t. $|x|_1\leq t, Ax=b$ 1范数可以分解成各分量的线性不等式</p>
-</blockquote>
-<h2 id="4-Quadradic-program"><a href="#4-Quadradic-program" class="headerlink" title="4. Quadradic program"></a>4. Quadradic program</h2><ul>
-<li><p>minimize $(1/2)x^TPx+q^Tx+r$</p>
-<p>subject to $Gx\preceq h, Ax=b, P\in \textbf{S}^n_+$ </p>
-</li>
-<li><p>least-squares: minimize $|Ax-b|^2_2$</p>
-<p>analytical solution $x^\star = A^\dagger b$</p>
-</li>
-</ul>
-<blockquote>
-<p>$A^\dagger$ 是伪逆矩阵的意思， $A=U\Sigma V^T, A^\dagger=V\Sigma^+U^T$</p>
-</blockquote>
-<h2 id="5-Second-order-cone-programming"><a href="#5-Second-order-cone-programming" class="headerlink" title="5. Second-order cone programming"></a>5. Second-order cone programming</h2><ul>
-<li><p>minimize $f^Tx$</p>
-<p>subject to $|A_ix+b_i|_2\leq c^T_ix, i=1,\cdots,m, Fx=g$</p>
-</li>
-</ul>
+<p>待补充</p>
+<h2 id="11-LP-SDP-SOCP-Duality"><a href="#11-LP-SDP-SOCP-Duality" class="headerlink" title="11. LP, SDP, SOCP Duality"></a>11. LP, SDP, SOCP Duality</h2><p>待补充</p>
  
       <!-- reward -->
       
@@ -227,7 +267,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/%E7%AC%94%E8%AE%B0-%E5%87%B8%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98-1.html" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/note-dual-in-optimization.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -240,19 +280,19 @@
    
   <nav class="article-nav">
     
-      <a href="/%E7%AC%94%E8%AE%B0-%E5%AF%B9%E5%81%B6.html" class="article-nav-link">
+      <a href="/note-gradient-method.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            6. 对偶与对偶问题
+            7. 梯度方法
           
         </div>
       </a>
     
     
-      <a href="/%E7%AC%94%E8%AE%B0-%E5%87%B8%E5%87%BD%E6%95%B0-2.html" class="article-nav-link">
+      <a href="/note-convex-problem.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">4. 凸函数(2)</div>
+        <div class="article-nav-title">4. 凸优化问题(1)</div>
       </a>
     
   </nav>

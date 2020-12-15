@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    非root权限下安装zsh |  Thiswinex&#39;s Blog
+    PyTorch 问题汇总 |  Thiswinex&#39;s Blog
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -44,7 +44,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-非root权限下安装zsh"
+  id="post-note-pytorch-problems"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -55,18 +55,18 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  非root权限下安装zsh
+  PyTorch 问题汇总
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/%E9%9D%9Eroot%E6%9D%83%E9%99%90%E4%B8%8B%E5%AE%89%E8%A3%85zsh.html" class="article-date">
-  <time datetime="2020-03-09T03:13:01.000Z" itemprop="datePublished">2020-03-09</time>
+      <a href="/note-pytorch-problems.html" class="article-date">
+  <time datetime="2019-11-23T12:42:00.000Z" itemprop="datePublished">2019-11-23</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%9D%82%E7%89%A9/">杂物</a>
+    <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a> / <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">问题记录</a> / <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/PyTorch/">PyTorch</a>
   </div>
   
 <div class="word_count">
@@ -74,7 +74,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">177</span>
+            <span class="post-count">580</span>
         </span>
     </span>
 
@@ -83,24 +83,63 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">2 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-  <a id="more"></a>
-<p>选修课分到的服务器虽然环境配好，但是默认shell是bash，<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av911093/">我不能忍</a>。locate了一下，发现两年前服务器上也有个人不能忍，第一次上线啥都没干，就装了个zsh。偷瞄了一下bash_history，他应该看的这篇教程：</p>
-<p><a target="_blank" rel="noopener" href="https://www.drewsilcock.co.uk/compiling-zsh">Compiling zsh without root</a></p>
-<p>因为第一次wget zsh后解压+configure，会发现ncurses的报错，所以先要把对应的ncurses装好（具体版本根据服务器系统而定），然后调环境变量让编译器认得路就行了。一般来说用不到icmake和yodl（参考github上一个更简单的<a target="_blank" rel="noopener" href="https://gist.github.com/mgbckr/b8dc6d7d228e25325b6dfaa1c4018e78">脚本</a>）。</p>
-<p>当然，如果还不行，就老实安装icmake，按照教程做吧。</p>
+  <p>记录一些自己遇到的有关 PyTroch 的问题。</p>
+<a id="more"></a>
+<h3 id="关于Mask梯度的方法"><a href="#关于Mask梯度的方法" class="headerlink" title="关于Mask梯度的方法"></a>关于Mask梯度的方法</h3><ul>
+<li>自己尝试过两种实现方式：<ul>
+<li>模型 layer 使用自定义的 <code>MaskedConv</code> 等 layer 实现，layer中自带一个mask的tensor，在 <code>init()</code> 中定义 <code>backward_hook(grad)</code> ，并在其中执行 <code>register_hook()</code> 。之后只要改动 mask就好；</li>
+<li>不改动模型，在训练结束后手动添加 <code>layer.mask</code>，手动<code>register_hook()</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="关于数组-Index"><a href="#关于数组-Index" class="headerlink" title="关于数组 Index"></a>关于数组 Index</h3><ul>
+<li>Pytorch 1.3之后如果要使用 <code>Tensor_1[Tensor_2]</code> 的写法，Tensor_2的dtype必须是<code>torch.bool</code>(以前可以是uint8)，不然会疯狂报错。正确写法 <code>Tensor_1[Tensor_2.bool()]</code></li>
+<li>此类错误不会给出traceback。手动开启traceback方法：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> traceback</span><br><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">warn_with_traceback</span>(<span class="params">message, category, filename, lineno, file=<span class="literal">None</span>, line=<span class="literal">None</span></span>):</span></span><br><span class="line"></span><br><span class="line">    log = file <span class="keyword">if</span> <span class="built_in">hasattr</span>(file,<span class="string">&#x27;write&#x27;</span>) <span class="keyword">else</span> sys.stderr</span><br><span class="line">    traceback.print_stack(file=log)</span><br><span class="line">    log.write(warnings.formatwarning(message, category, filename, lineno, line))</span><br><span class="line"></span><br><span class="line">warnings.showwarning = warn_with_traceback</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="关于-backward"><a href="#关于-backward" class="headerlink" title="关于 backward"></a>关于 backward</h3><ul>
+<li>需要一步内多次<code>backward()</code>的情况：<code>loss.backward(retain_graph=True)</code> 否则无法在之后再次 <code>loss.backward()</code>。注意此类型报错通常能以更高效的方式解决(?)</li>
+</ul>
+<hr>
+<h3 id="关于-apply-fn"><a href="#关于-apply-fn" class="headerlink" title="关于 apply(fn)"></a>关于 apply(fn)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> module <span class="keyword">in</span> self.children():</span><br><span class="line">  module.apply(fn)</span><br><span class="line">fn(self)</span><br><span class="line"><span class="keyword">return</span> self</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="关于-tensor与numpy的转换"><a href="#关于-tensor与numpy的转换" class="headerlink" title="关于 tensor与numpy的转换"></a>关于 tensor与numpy的转换</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.ones[<span class="number">5</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">tensor([<span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a.numpy()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b[<span class="number">0</span>] = <span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">tensor([<span class="number">3.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>])</span><br></pre></td></tr></table></figure>
+<p>两者指向同一地址。</p>
+<p>对b进行改动时应使用inplace操作，否则b地址会被替换。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = numpy.zeros_like([<span class="number">5</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = c</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">tensor([<span class="number">3.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a.numpy()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b += (c - b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">tensor([<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>需要注意的是，显卡上的tensor（device=GPU）需要取到cpu上才能转换为numpy <code>A.cpu().numpy()</code> 否则报错。</li>
+<li>还有一点是，注意维持其为同一个ndarray数组对象，否则仍然会替换地址(如 <code>b = 1</code> 则b不再和a共享地址)</li>
+</ul>
+<hr>
+<h3 id="关于-copy-clone-detach-的区别"><a href="#关于-copy-clone-detach-的区别" class="headerlink" title="关于 copy_(), clone(), detach(), = 的区别"></a>关于 copy_(), clone(), detach(), = 的区别</h3><ul>
+<li><p>后两者复制地址，detach不复制梯度</p>
+</li>
+<li><p>注意转换 <code>A.cpu().detach().numpy()</code> 所detach的是cpu上的临时tensor，不会对A (此时A的device是显卡) 造成任何影响，也不会对其他Tensor有影响。<code>A.cpu()</code> 是函数返回值，本身创造的临时tensor在创造完numpy数组后会被释放(大概吧)</p>
+<p><del>所以需要重新 register_buffer</del> </p>
+<p>不需要，用 <code>A.data.copy_(torch.as_tensor(A_np))</code> 。</p>
+</li>
+<li><p>在 <code>W.required_grad==True</code> 的情况下不能使用 <code>W.cpu().numpy()</code> ，必须detach()</p>
+</li>
+</ul>
+<hr>
  
       <!-- reward -->
       
@@ -165,12 +204,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/%E9%9D%9Eroot%E6%9D%83%E9%99%90%E4%B8%8B%E5%AE%89%E8%A3%85zsh.html" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/note-pytorch-problems.html" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E7%89%A9/" rel="tag">杂物</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PyTorch/" rel="tag">PyTorch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
 
     </footer>
   </div>
@@ -178,19 +217,19 @@
    
   <nav class="article-nav">
     
-      <a href="/%E7%AC%94%E8%AE%B0-STBP-tdBN.html" class="article-nav-link">
+      <a href="/note-PLS.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            Going Deeper With Directly-Trained Larger Spiking Neural Networks
+            PLS简介
           
         </div>
       </a>
     
     
-      <a href="/%E7%AC%94%E8%AE%B0-PLS%E5%88%9D%E6%8E%A2.html" class="article-nav-link">
+      <a href="/OJ-LeetCode-Solution-02.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">PLS简介</div>
+        <div class="article-nav-title">LeetCode 题解记录(2)</div>
       </a>
     
   </nav>

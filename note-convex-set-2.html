@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Spatio-Temporal Backpropagation for Training High-Performance Spiking Neural Networks |  Thiswinex&#39;s Blog
+    2. 凸集(2) |  Thiswinex&#39;s Blog
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -44,7 +44,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-笔记-STBP"
+  id="post-note-convex-set-2"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -55,18 +55,18 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Spatio-Temporal Backpropagation for Training High-Performance Spiking Neural Networks
+  2. 凸集(2)
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/%E7%AC%94%E8%AE%B0-STBP.html" class="article-date">
-  <time datetime="2020-12-15T13:00:40.644Z" itemprop="datePublished">2020-12-15</time>
+      <a href="/note-convex-set-2.html" class="article-date">
+  <time datetime="2019-03-01T01:58:38.000Z" itemprop="datePublished">2019-03-01</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87/">论文</a> / <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87/SNN/">SNN</a>
+    <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a> / <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/%E5%87%B8%E4%BC%98%E5%8C%96/">凸优化</a>
   </div>
   
 <div class="word_count">
@@ -74,7 +74,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">523</span>
+            <span class="post-count">1k</span>
         </span>
     </span>
 
@@ -83,7 +83,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">2 分钟</span>
+            <span class="post-count">5 分钟</span>
         </span>
     </span>
 </div>
@@ -98,60 +98,111 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://www.frontiersin.org/articles/10.3389/fnins.2018.00331/full">Spatio-temporal backpropagation for training high-performance spiking neural networks - 原文</a> ；本文刊登在2018年 Frontiers in Neuroscience 期刊上。</li>
-<li>BPTT-inspired的方法，文章的主要思想是以迭代式的方式近似LIF模型，使得LIF模型网络的推理过程变为线性迭代（线性地完成时域和空间域的迭代，是谓”spatio-temporal”），从而可以根据迭代式进行反向传播。对于脉冲激活函数的梯度，文章设计了数种不同的梯度近似函数，取得了不错的效果。</li>
+  <h2 id="Convex-Sets-2"><a href="#Convex-Sets-2" class="headerlink" title="Convex Sets(2)"></a>Convex Sets(2)</h2><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>这一篇笔记涉及的东西比较抽象，且涉及比较多实变中的定义。对度量空间上的各类集合性质不甚熟悉的话，学起来会比较吃力（特别是一些证明）。我认为需要首先掌握好重要的概念，并且对定理有直观的认识体会（先不要求严格证明）。</li>
 </ul>
 <a id="more"></a>
-<h3 id="LIF-Model"><a href="#LIF-Model" class="headerlink" title="LIF Model"></a>LIF Model</h3><ul>
-<li><p>LIF（Leaky Integrate and Fire）模型即带leaky漏电、integrate对脉冲积分、fire发放脉冲等主要特征的神经元模型。其微分方程为：</p>
-<script type="math/tex; mode=display">
-\tau \frac{du(t)}{dt}=-u(t)+I(t)\tag{1}</script><ul>
-<li>其中 $u$ 代表膜电势，$I$ 代表电流，$\tau$ 为一个漏电常量。</li>
-</ul>
-</li>
-<li><p>微分方程在数值上求解需要转为迭代式：</p>
-</li>
-</ul>
-<script type="math/tex; mode=display">
-u(t)=u(t_{i-1})e^{\frac{t_{i-1}-t}{\tau}}+\hat{I}(t)\tag{2}</script><h3 id="STBP-Method"><a href="#STBP-Method" class="headerlink" title="STBP Method"></a>STBP Method</h3><ul>
-<li><p>本文更具体地将LIF模型对应到SNN模型，迭代式可以转化为三步：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-x^{t+1,n}_i&=\sum^{l(n-1)}_{j=1}w^n_{ij}o^{t+1,n-1}_j\tag{3}\\
-u^{t+1,n}_i&=u^{t,n}_if(o^{t,n}_i)+x^{t+1,n}_i+b^n_i\tag{4}\\
-o^{t+1,n}_i&=g(u^{t+1,n}_i)\tag{5}
-\end{align}</script><p>其中</p>
-<script type="math/tex; mode=display">
-\begin{align}
-f(x)&=\tau e^{-\frac{x}{\tau}}\tag{6}\\
-g(x)&=1 \text{  if  }x\geq V_{th} \text{ else }0\tag{7}
-\end{align}</script><p>$x$ 为神经元的输入，$u$ 为神经元电势，$o$ 为神经元的输出。式(3)的含义是：神经元的输入为前层神经元输出的加权和；式(4)的含义是：当前时刻电势=前一时刻电势×漏电/发放函数+神经元输入+偏置；式(5)的含义是，若电势大于阈值，则发放脉冲。</p>
-</li>
-<li><p>本文提出式(6)的近似式：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-f(o^{t,n}_i)\approx\left\{
-    \begin{array} 
-        s\tau, o^{t,n}_i=0 \\
-        0, o^{t,n}_i=1
-    \end{array}
-    \right. \tag{8}
-\end{align}</script></li>
-<li><p>本文提出 $g$ 的一个梯度近似：</p>
-<script type="math/tex; mode=display">
-h(u)=\frac{1}{a_1}sign(|u-V_{th}|<\frac{a_1}{2})\tag{9}</script></li>
-<li><p>至此，在SNN上使用BP的障碍已经全部被扫清。前推中核心的(3)(4)(5)式全部可导。</p>
 <ul>
-<li><p>前推顺序为：1）对于每一个时间t，计算完一次完整的前推过程并更新电势；2） 计算下一个时间t。</p>
-</li>
-<li><p>每层的权重都有t个状态；由于前推过程中每一层的输出结果都依赖于 1）相同t前一层的输出 ；2）前一个t同一层的电势。所以前推的依赖关系在所有的权重状态中可以构成一个有向无环图，可以直接根据前推路径进行反向传播。</p>
-<p><img src="https://s1.ax1x.com/2020/10/05/0YgEHs.png" alt="image 20201005164809424"></p>
-</li>
+<li>定义复习：<ul>
+<li>闭集S：S的所有聚点都在S中</li>
+<li>开集S：闭集的补集</li>
+<li>可列集：S的基数和自然数集相当</li>
+<li>紧集：任一开覆盖都包含有限子覆盖；$R^n$ 中的紧集是有界闭集</li>
 </ul>
 </li>
 </ul>
-<h3 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h3><p>论文中其余篇幅主要是参数选择、g的梯度近似的选择、反向传播公式推导以及实验结果。在此略去不表。</p>
+<h2 id="1-Operations-that-preserve-convexity"><a href="#1-Operations-that-preserve-convexity" class="headerlink" title="1. Operations that preserve convexity"></a>1. Operations that preserve convexity</h2><p>$f: \mathcal{R}^m\rightarrow\mathcal{R}^n$ preserves convexity if $f(S)$ is convex for any $S\subseteq R$</p>
+<h3 id="1-1-Intersection"><a href="#1-1-Intersection" class="headerlink" title="1.1 Intersection"></a>1.1 Intersection</h3><ul>
+<li>$S_1\cap S_2$ convex, if $S_1, S_2$ convex</li>
+</ul>
+<h3 id="1-2-Affine-transform"><a href="#1-2-Affine-transform" class="headerlink" title="1.2 Affine transform"></a>1.2 Affine transform</h3><ul>
+<li>$f(x)=Ax+b: \mathcal{R}^n\rightarrow\mathcal{R}^m ,(A\in R^{m\times n})$</li>
+<li>$f(S)$ convex if $S$ is convex<br>$f^{-1}(S)={x\mid Ax+b\in S}$ is convex</li>
+<li>Eg. $S_1\times S_2 ={(u,v)\mid u\in S_1, v\in S_2}$<br>$S_1+S_2={u+v\mid u\in S_1, v\in S_2}$<br>$f(u,v)=u+v$</li>
+</ul>
+<h3 id="1-3-Perspective-function"><a href="#1-3-Perspective-function" class="headerlink" title="1.3 Perspective function"></a>1.3 Perspective function</h3><ul>
+<li>perspective transform:<br>$P:R^{n+1}\rightarrow R^n$<br>and $(x,t)\rightarrow \frac{x}{t}$<br>with $dom(P)={(x,t)\mid x\in R^n, t&gt;0}$<br>If $S\subseteq dom(P)$ and convex $\rightarrow P(S)$ is convex<blockquote>
+<p>Proof:<br>$\forall P(x),P*y( x,y\in S,$ we need to prove $[P(x), P(y)]\subseteq P(S)$ …<br>Just calculate..(</p>
+</blockquote>
+</li>
+<li>$P^{-1}:R^n \rightarrow R^{n+1}$<br>$P^{-1}(C)={(x,t)\mid \frac{x}{t}\in C, t&gt;0 }$<br>If $C$ is convex, then $P^{-1}(C) convex$</li>
+</ul>
+<h3 id="1-4-Linear-fractional"><a href="#1-4-Linear-fractional" class="headerlink" title="1.4 Linear fractional"></a>1.4 Linear fractional</h3><script type="math/tex; mode=display">f(x)=\frac{Ax+b}{c^Tx+d}$$ for $c^Tx+d>0$
+- $f(x)=p_0g$
+$$g(x)=\begin{pmatrix}A\\c^T\end{pmatrix}x+\begin{pmatrix}b\\d\end{pmatrix}, p(x,t)=\frac{x}{t}, t>0</script><p>If $S$ is convex $\rightarrow f(s)=p_0g(S)$ convex</p>
+<blockquote>
+<p>(Operation 不一定是严格的映射)</p>
+</blockquote>
+<h2 id="2-Separation-theorem"><a href="#2-Separation-theorem" class="headerlink" title="2. Separation theorem"></a>2. Separation theorem</h2><p>If  $C,D$ are two non-empty, disjoint, convex sets, then </p>
+<script type="math/tex; mode=display">\exists a\neq 0, a\in R^n, b\in R, s.t.\\
+1.a^Tx\leq b,\forall x\in C\\
+2.a^Tx\geq b,\forall x\in D</script><blockquote>
+<p>算是一个符合直觉的结论，两个非空凸集不相交的话一定会有一个超平面将两个凸集隔开<br>但是证明并不好证<br>逆命题需要加条件，需要其中一个集合为开 </p>
+<p>Proof<br>通过构造两个凸集之间的”平分线（超平面）“来找到相应的a和b，然后计算a和b满足条件<br>其中需要考虑多种情况(开集/闭包包含0)</p>
+</blockquote>
+<h2 id="3-Strict-Separation"><a href="#3-Strict-Separation" class="headerlink" title="3. Strict Separation"></a>3. Strict Separation</h2><p>If  $C,D$ are two non-empty, disjoint, convex sets, then strict separation is</p>
+<script type="math/tex; mode=display">\exists a\neq 0, a\in R^n, b\in R, s.t.\\
+1.a^Tx< b,\forall x\in C\\
+2.a^Tx> b,\forall x\in D</script><p>$C$ is convex closed set, $x_0\neq C \Leftrightarrow$ strict separation<br>$\overline{C-D}\cap{0}=\varnothing \Leftrightarrow$ strict separation</p>
+<h2 id="4-Convex-cone"><a href="#4-Convex-cone" class="headerlink" title="4. Convex cone"></a>4. Convex cone</h2><ul>
+<li>k is a proper cone if </li>
+</ul>
+<ol>
+<li>convex</li>
+<li>closed</li>
+<li>solid</li>
+<li>pointed</li>
+</ol>
+<ul>
+<li><p>generalized inequalities:</p>
+</li>
+<li><p>Define partial order:<br>$x\preceq_K y \Leftrightarrow y-x\in K$<br>$x\prec_K y \Leftrightarrow y-x\in int(K)$ 是K的内点</p>
+</li>
+</ul>
+<blockquote>
+<p>x和y的偏序关系不一定非得成立其中一个</p>
+</blockquote>
+<h3 id="4-1-Dual-cone"><a href="#4-1-Dual-cone" class="headerlink" title="4.1 Dual cone"></a>4.1 Dual cone</h3><ul>
+<li>Let k be a cone<br>$k^*={y\mid x^Ty\geq 0, \forall x\in k}$</li>
+</ul>
+<blockquote>
+<p>k 可以定义成任意集合，无所谓</p>
+</blockquote>
+<ul>
+<li>Properties:</li>
+</ul>
+<ol>
+<li>$k^*$ is closed, convex cone</li>
+<li>$k_1\subseteq k_2\rightarrow k^*_2\subseteq k_1^※$</li>
+<li>$k^*=\overline{conv(K)}$</li>
+<li>if K is proper cone, K<em> is proper cone and  K*</em>=K</li>
+</ol>
+<ul>
+<li>Some eg</li>
+</ul>
+<ol>
+<li>$K=R^n<em>+\rightarrow  K^*=R^n</em>+$</li>
+<li>$K=S^n<em>+\rightarrow K^*=S^n</em>+$</li>
+<li>$K={(x,t)\mid |x|\leq t}\rightarrow K^*{(u,v)\mid |u|\leq v}$</li>
+</ol>
+<h3 id="Minimum-and-minimal-element-of-S"><a href="#Minimum-and-minimal-element-of-S" class="headerlink" title="Minimum and minimal element of S"></a>Minimum and minimal element of S</h3><ul>
+<li>x is a minimum element of S $\Leftrightarrow S\subset x+K$ 最小元</li>
+<li>x is a minimal element of S $\Leftrightarrow (x-K)\cap S={x}$ 极小元</li>
+</ul>
+<blockquote>
+<p>最小元条件更强，且要么不存在要么为1(?)</p>
+</blockquote>
+<ul>
+<li><ul>
+<li>x is a minimum element of S $\Leftrightarrow \forall \lambda \succ_{K^*}0, x$ is the unique minimizer of $\lambda^T z $ over S</li>
+<li>x is a minimal element of S $\Leftarrow$ for some $\lambda\succ_{K^*}0$ , x is the minimizer of $\lambda^Tz$ over S</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>极小元条件的右方向不成立。直接用极小元定义可以看出来（一个口向左下的C字集合）。如果S凸，那么右方向成立<br>每个集合S可以从原点引一锥包K，可求对偶锥K<em>。若一超平面法向（即 $\lambda$）在K</em>内，则超平面可以作一个极小元(?)</p>
+</blockquote>
+<p><img src="https://s2.ax1x.com/2019/03/08/kzxMjO.png" alt=""></p>
  
       <!-- reward -->
       
@@ -216,12 +267,12 @@ h(u)=\frac{1}{a_1}sign(|u-V_{th}|<\frac{a_1}{2})\tag{9}</script></li>
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/%E7%AC%94%E8%AE%B0-STBP.html" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/note-convex-set-2.html" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SNN/" rel="tag">SNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BA%E6%96%87/" rel="tag">论文</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%87%B8%E4%BC%98%E5%8C%96/" rel="tag">凸优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
 
     </footer>
   </div>
@@ -229,10 +280,19 @@ h(u)=\frac{1}{a_1}sign(|u-V_{th}|<\frac{a_1}{2})\tag{9}</script></li>
    
   <nav class="article-nav">
     
+      <a href="/note-convex-function-1.html" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            3. 凸函数(1)
+          
+        </div>
+      </a>
     
-      <a href="/%E7%AC%94%E8%AE%B0-SNNcompression.html" class="article-nav-link">
+    
+      <a href="/note-convex-set-1.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Comprehensive SNN Compression using ADMM Optimization and Activity Regularization</div>
+        <div class="article-nav-title">1. 凸集(1)</div>
       </a>
     
   </nav>

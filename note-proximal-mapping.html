@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Spiking-YOLO:Spiking Neural Network for Energy-Efficient Object Detection |  Thiswinex&#39;s Blog
+    10. 近似点算子 |  Thiswinex&#39;s Blog
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -44,7 +44,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-笔记-SNNyolo"
+  id="post-note-proximal-mapping"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -55,18 +55,18 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Spiking-YOLO:Spiking Neural Network for Energy-Efficient Object Detection
+  10. 近似点算子
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/%E7%AC%94%E8%AE%B0-SNNyolo.html" class="article-date">
-  <time datetime="2020-12-15T13:00:40.643Z" itemprop="datePublished">2020-12-15</time>
+      <a href="/note-proximal-mapping.html" class="article-date">
+  <time datetime="2019-07-22T02:50:01.000Z" itemprop="datePublished">2019-07-22</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87/">论文</a> / <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87/SNN/">SNN</a>
+    <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a> / <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/%E5%87%B8%E4%BC%98%E5%8C%96/">凸优化</a>
   </div>
   
 <div class="word_count">
@@ -74,7 +74,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">353</span>
+            <span class="post-count">392</span>
         </span>
     </span>
 
@@ -83,7 +83,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">2 分钟</span>
         </span>
     </span>
 </div>
@@ -98,32 +98,76 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1903.06530.pdf">Spiking-YOLO:Spiking Neural Network for Energy-Efﬁcient Object Detection - 原文</a> ；AAAI 20。</li>
-<li>IF模型，SNN在检测领域的一次尝试</li>
-<li>新的norm方法</li>
-<li>imbalanced threshold</li>
+  <h2 id="The-proximal-mapping"><a href="#The-proximal-mapping" class="headerlink" title="The proximal mapping"></a>The proximal mapping</h2><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>介绍了近似点映射以及一些常见的函数的近似点映射的例子。</li>
 </ul>
 <a id="more"></a>
-<h3 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h3><ul>
-<li><p>ANN-to-SNN方法</p>
-</li>
-<li><p>IF模型（似乎没有明说，但在relate work里提到）</p>
-</li>
+<h2 id="1-Closed-function"><a href="#1-Closed-function" class="headerlink" title="1. Closed function"></a>1. Closed function</h2><h3 id="1-1-Closed-set"><a href="#1-1-Closed-set" class="headerlink" title="1.1 Closed set"></a>1.1 Closed set</h3><ul>
+<li>A set $C$ is closed if it contains its boundary:<script type="math/tex; mode=display">
+x^k\in C, x^k\rightarrow \overline{x}\Rightarrow\overline{x}\in C</script></li>
 </ul>
-<h3 id="Key-Point"><a href="#Key-Point" class="headerlink" title="Key Point"></a>Key Point</h3><ul>
-<li>新的channel wise的norm方法（就是把常用的layer-wise的方法改了一下）。看实验数据的话，对平衡firing rate效果不错。</li>
-</ul>
-<p><img src="https://s3.ax1x.com/2020/11/23/DJwMT0.png" alt="image-20201123142221085"></p>
 <ul>
-<li>imbalanced threshold 模拟 leaky relu<ul>
-<li>新的负阈值（与正阈值不对称，<script type="math/tex">V_{th-}=-V_{th+}/\alpha</script>，模拟leaky的α）</li>
-<li>超过负阈值发放负脉冲（模拟leaky relu的负值激活）</li>
+<li>Notice:<script type="math/tex; mode=display">
+C \text{  closed}\Rightarrow A^{-1}C\text{  closed}\\
+C \text{  closed}, AC=\{Ax\mid x\in C\}\text{  might be open}</script></li>
 </ul>
+<h3 id="1-2-Closed-function"><a href="#1-2-Closed-function" class="headerlink" title="1.2 Closed function"></a>1.2 Closed function</h3><ul>
+<li>See slides</li>
+</ul>
+<h2 id="2-Conjugate-function"><a href="#2-Conjugate-function" class="headerlink" title="2. Conjugate function"></a>2. Conjugate function</h2><h3 id="2-1-Recall-and-some-example"><a href="#2-1-Recall-and-some-example" class="headerlink" title="2.1 Recall and some example."></a>2.1 Recall and some example.</h3><ul>
+<li>See slides</li>
+</ul>
+<h2 id="3-Proximal-mapping"><a href="#3-Proximal-mapping" class="headerlink" title="3. Proximal mapping"></a>3. Proximal mapping</h2><ul>
+<li><p>Definition: proximal mapping of a closed convex function $f$ is</p>
+<script type="math/tex; mode=display">
+\text{prox}_f(x)=\arg\min_u(f(u)+\frac{1}{2}\|u-x\|^2_2)</script><blockquote>
+<p>加入二次项保证强凸性，使 $\arg\min$ 的值唯一</p>
+<p>闭性质保证一定有 $\arg\min$ </p>
+<p>将 $x$ 映射到近似点 $u$ (意义？)</p>
+</blockquote>
 </li>
+<li><p>Subgradient characterization</p>
+</li>
+<li><script type="math/tex; mode=display">
+u=\text{prox}_f(x)\Leftrightarrow x-u\in\partial f(u)\tag{10-1}</script><p>Proof:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+&\because0\in\partial f(u)+(u-x)\\
+&\therefore x-u\in\partial f(u)
+
+\end{align}</script></li>
+<li></li>
 </ul>
-<h3 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h3><p>然后论文跑了一下实验，其他部分就没啥了，图我也不放了。文章更大的亮点可能还是做了个性能还行的SNN版本yolo，而且还没有上板测试，是纯理论的模型。<del>把以上几点搅拌到一起，一篇AAAI就诞生了</del>。</p>
-<p>另一个需要注意的点是<strong>SNN要如何处理回归问题</strong>。YOLO里需要对bounding box进行回归，这对离散的SNN来说是一个非常难处理的问题。因为回归问题要求高精确度的浮点值（而非相对的分类结果），天然与SNN的离散性相悖。所以，基于bounding box回归的方法肯定不是SNN做检测的最优解，Spiking YOLO花费上千的timesteps来做一帧的检测也实属无奈之举。</p>
+<script type="math/tex; mode=display">
+f(x)=g(x)+a^Tx,\ \ \ \ \text{prox}_f(x)=\text{prox}_g(x-a)</script><script type="math/tex; mode=display">
+f(x)=g(x)+\frac{\mu}{2}\|x-a\|^2_2\ \ \ \ \text{prox}_{\theta g}(\theta x+(1-\theta)a)</script><ul>
+<li><strong>Moreau decomposition</strong></li>
+</ul>
+<script type="math/tex; mode=display">
+x=\text{prox}_f(x)+\text{prox}_{f^*}(x), \forall x</script><p>​            Follows form:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+u=\text{prox}_f(x)&\Leftrightarrow x-u\in\partial f(u)\text{    (10-1)}\\
+&\Leftrightarrow u\in\partial f^*(x-u)\text{    (8-1)}\\
+&\Leftrightarrow x-u=\text{prox}_{f^*}(x)\text{   (10-1)}
+\end{align}</script><p>​            Decomposition:</p>
+<script type="math/tex; mode=display">
+x=P_L(x)+P_{L^\perp}(x)</script><p>​                    with $f=\delta<em>{L}, f^*=\delta</em>{L^\perp}$ .</p>
+<p>​            Extended version</p>
+<ul>
+<li>Composition with affine mapping</li>
+</ul>
+<script type="math/tex; mode=display">
+f(x)=g(Ax+b)</script><blockquote>
+<p>由 g 的近似点映射求  f 的并不容易</p>
+<p>但是如果 $AA^T=(1/\alpha)I$ ，则 f 有解析的近似点映射(slides)</p>
+</blockquote>
+<h2 id="4-Projections"><a href="#4-Projections" class="headerlink" title="4. Projections"></a>4. Projections</h2><blockquote>
+<p>近似点映射对各种集合的投影有比较好的性质。例子见slides。</p>
+</blockquote>
+<h2 id="5-Support-functions-norms-distances"><a href="#5-Support-functions-norms-distances" class="headerlink" title="5. Support functions, norms, distances"></a>5. Support functions, norms, distances</h2><blockquote>
+<p>同上，例子见slides。</p>
+</blockquote>
  
       <!-- reward -->
       
@@ -188,12 +232,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/%E7%AC%94%E8%AE%B0-SNNyolo.html" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/note-proximal-mapping.html" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SNN/" rel="tag">SNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/" rel="tag">目标检测</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BA%E6%96%87/" rel="tag">论文</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%87%B8%E4%BC%98%E5%8C%96/" rel="tag">凸优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
 
     </footer>
   </div>
@@ -201,19 +245,19 @@
    
   <nav class="article-nav">
     
-      <a href="/%E7%AC%94%E8%AE%B0-SNNcompression.html" class="article-nav-link">
+      <a href="/OJ-LeetCode-Solution-01.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            Comprehensive SNN Compression using ADMM Optimization and Activity Regularization
+            LeetCode 题解记录(1)
           
         </div>
       </a>
     
     
-      <a href="/%E7%AC%94%E8%AE%B0-STBP-tdBN.html" class="article-nav-link">
+      <a href="/assignment-dual.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Going Deeper With Directly-Trained Larger Spiking Neural Networks</div>
+        <div class="article-nav-title">对偶习题</div>
       </a>
     
   </nav>

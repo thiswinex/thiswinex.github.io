@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Going Deeper With Directly-Trained Larger Spiking Neural Networks |  Thiswinex&#39;s Blog
+    8. 次梯度 |  Thiswinex&#39;s Blog
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -44,7 +44,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-笔记-STBP-tdBN"
+  id="post-note-sub-gradient"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -55,18 +55,18 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Going Deeper With Directly-Trained Larger Spiking Neural Networks
+  8. 次梯度
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/%E7%AC%94%E8%AE%B0-STBP-tdBN.html" class="article-date">
-  <time datetime="2020-12-15T13:00:40.643Z" itemprop="datePublished">2020-12-15</time>
+      <a href="/note-sub-gradient.html" class="article-date">
+  <time datetime="2019-06-05T02:44:56.000Z" itemprop="datePublished">2019-06-05</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87/">论文</a> / <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87/SNN/">SNN</a>
+    <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a> / <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/%E5%87%B8%E4%BC%98%E5%8C%96/">凸优化</a>
   </div>
   
 <div class="word_count">
@@ -74,7 +74,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">953</span>
+            <span class="post-count">578</span>
         </span>
     </span>
 
@@ -98,52 +98,109 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2011.05280">Going Deeper With Directly-Trained Larger Spiking Neural Networks - 原文</a> 。</li>
-<li>个人理解：听起来和结果上都很厉害的工作。主要解决直接训练SNN算法中的各类Normalization的问题。如STBP这类算法因为是BPTT-inspired的，也会出现梯度消失和爆炸的现象。而且由于脉冲激活不可导，为了BP算法的应用通常都要引入梯度的近似，造成梯度更新有误差，带来了不稳定因素。同时由于信息在LIF模型中传输是“输入-电位-输出”的模型，信息需要在电位上周转一次。如果timestep低且发放率（firing rate）低，“电位-输出”这一环节就会被卡住，造成信息损失；如果脉冲发放率高，神经元的输出对输入就不敏感（实际上从编码的角度来看，firing rate无论是过低还是过高，其信息表达能力都很有限，从这个角度来看理想的发放率是0.5）。论文提出了适用于直接训练SNN算法的BN改进版，并且在残差网络上跑了ImageNet数据集，总的来说算是比较solid的，要是能开放源码就更solid了。</li>
+  <h2 id="Sub-Gradient"><a href="#Sub-Gradient" class="headerlink" title="Sub-Gradient"></a>Sub-Gradient</h2><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>介绍了次梯度的一些性质，为之后的次梯度方法作铺垫。</li>
 </ul>
 <a id="more"></a>
-<h3 id="Iterative-LIF"><a href="#Iterative-LIF" class="headerlink" title="Iterative LIF"></a>Iterative LIF</h3><ul>
-<li>迭代LIF模型，引自<a target="_blank" rel="noopener" href="https://www.aaai.org/ojs/index.php/AAAI/article/view/3929">此文</a>。</li>
-<li>STBP的基础。分析可见<a href="https://thiswinex.github.io/2020/11/23/%E7%AC%94%E8%AE%B0-STBP/">此处</a>。</li>
-</ul>
-<h3 id="Threshold-dependent-batch-normalization"><a href="#Threshold-dependent-batch-normalization" class="headerlink" title="Threshold-dependent batch normalization"></a>Threshold-dependent batch normalization</h3><ul>
-<li><p>ANN-to-SNN的方法能使用ANN中所有的训练trick，包括知名的batch normalization，但是模型在ANN-to-SNN映射时会有映射损失。基于梯度近似的BP算法（此文中为STBP）能够直接在SNN上训练，避免先训练后转换的损失，但是由于SNN结构不同，无法直接应用ANN的BN。所以这篇文章提出了适用于直接训练SNN的BN方法tdBN。</p>
-</li>
-<li><p>公式：</p>
+<h2 id="1-Sub-Gradient"><a href="#1-Sub-Gradient" class="headerlink" title="1. Sub-Gradient"></a>1. Sub-Gradient</h2><p>$g$ is a sub-gradient of convex function $f$ if</p>
 <script type="math/tex; mode=display">
-\begin{align}
-\hat{x}_k &=\frac{\alpha V_{th}(x_k-E[x_k])}{\sqrt{Var[x_k]+\epsilon}}\\
-y_k&=\lambda_k\hat{x}_k+\beta_k
-\end{align}</script><p>其中 $\alpha$ 是超参，$V_{th}$ 是阈值电压，其他的参数和ANN的BN意义相同，即做channel-wise的统计并取得统计量用于inference的计算，训练时则使用minibatch 的统计量， 不同的是求均值/方差的时候还要在SNN新增的时间维度上求，即对(N,H,W,T)的张量求均值等。</p>
+f(y)\geq f(x)+g^T(y-x), \forall y\in \textbf{dom} f</script><h3 id="1-1-Properties"><a href="#1-1-Properties" class="headerlink" title="1.1 Properties"></a>1.1 Properties</h3><ul>
+<li>unconstrained optimality: $x$ minimize $f(x)$ if $0\in\partial f(x)$</li>
+</ul>
+<h3 id="1-2-Subdifferential"><a href="#1-2-Subdifferential" class="headerlink" title="1.2 Subdifferential"></a>1.2 Subdifferential</h3><p>a set of all sub-gradient:</p>
+<script type="math/tex; mode=display">
+\partial f(x)=\{g\mid g^T(y-x)\leq f(y)-f(x),\forall y\in\textbf{dom}f\}</script><blockquote>
+<p>$\partial f(x)$ 是半空间的交，所以是凸闭集</p>
+</blockquote>
+<h3 id="1-3-Monotonicity"><a href="#1-3-Monotonicity" class="headerlink" title="1.3 Monotonicity"></a>1.3 Monotonicity</h3><blockquote>
+<p>次梯度在凸函数上单调(类比梯度)</p>
+</blockquote>
+<h3 id="1-4-Sub-level-set"><a href="#1-4-Sub-level-set" class="headerlink" title="1.4 Sub-level set"></a>1.4 Sub-level set</h3><blockquote>
+<p>$x$ 上的非零次梯度定义了此处下水平集的一个支撑超平面</p>
+</blockquote>
+<h2 id="2-Sub-Gradient-calculus"><a href="#2-Sub-Gradient-calculus" class="headerlink" title="2. Sub-Gradient calculus"></a>2. Sub-Gradient calculus</h2><ul>
+<li>weak result: find <strong>1</strong> sub-gradient </li>
+<li>strong result: find <strong>all</strong> sub-gradient</li>
+</ul>
+<h3 id="2-1-Basic-rules"><a href="#2-1-Basic-rules" class="headerlink" title="2.1 Basic rules"></a>2.1 Basic rules</h3><ul>
+<li><p>Differentiable functions:</p>
+<p>$\partial f(x)={\triangledown f(x)}$ if $f$ is differentiable at $x$</p>
+</li>
+<li><p>Non-negative linear combination (Thm. Morean-Rockafellor):</p>
+<p>if $f(x)=\alpha_1f_1(x)+\alpha_2f_2(x)\text{ with } \alpha_1、\alpha_2\geq0$</p>
+<p>than $\partial f(x)=\alpha_1\partial f_1(x)+\alpha_2\partial f_2(x)$</p>
+</li>
+<li><p>Affine transformation of variables:</p>
+<p>if $f(x)=h(Ax+b)$</p>
+<p>then $\partial f(x)=A^T\partial h(Ax+b)$</p>
 </li>
 </ul>
-<p><img src="https://s3.ax1x.com/2020/11/22/D85wx1.png" alt="image-20201122170903068"></p>
+<h3 id="2-2-Pointwise-maximum"><a href="#2-2-Pointwise-maximum" class="headerlink" title="2.2 Pointwise maximum"></a>2.2 Pointwise maximum</h3><ul>
+<li><p>$f(x)=\max{f_1(x),\cdots,f_m(x)}$。 Define $I(x)={i\mid f(x)=f_i(x)}$</p>
+</li>
+<li><p>weak result: choose $k\in I(x)$ ， any sub-gradient in $f_k(x)$  </p>
+</li>
+<li><p>strong result: (Dubovitskii-Milyutin)</p>
+<script type="math/tex; mode=display">
+\partial f(x)=\text{conv} \bigcup_{i=I(x)}\partial f_i(x)</script></li>
+</ul>
+<blockquote>
+<p>在同一点可能有多个函数f被激活</p>
+</blockquote>
 <ul>
-<li><p>理论解释：</p>
+<li>Exp. 1-norm</li>
+</ul>
+<h3 id="2-3-Maximum-eigenvalue"><a href="#2-3-Maximum-eigenvalue" class="headerlink" title="2.3 Maximum eigenvalue"></a>2.3 Maximum eigenvalue</h3><ul>
+<li><p>$f(x)=\lambda<em>{max}(A(x))=\sup</em>{|y|_2=1}y^TA(x)y$</p>
+<p>where $A(x)=A_0+x_1A_1+\cdots+x_nA_n$</p>
+<p><strong>Find</strong> a sub-gradient in $\hat{x}$</p>
+</li>
+<li><p>choose any unit eigenvalue $y$ with eigenvalue $\lambda_{max}(A(x))$ </p>
+</li>
+<li><p>gradient of $y^TA(x)y$ is an answer:</p>
+<p>$(y_1^TAy_1,\cdots,y^T_nAy_n)\in \partial f(x)$ </p>
+</li>
+</ul>
+<h3 id="2-4-Some-other-examples"><a href="#2-4-Some-other-examples" class="headerlink" title="2.4 Some other examples"></a>2.4 Some other examples</h3><ul>
+<li><p>minimize $f(x)=\inf_yh(x,y)$ </p>
+</li>
+<li><p>minimize $f(x)=\inf_{y\in C} |x-y|_2$ , which $C$ is convex.</p>
+</li>
+<li><p>Composition: $f(x)=h(f_1(x),\cdots,f_k(x))$ , which $f_i, h$ is convex, $h$ non-decreasing.</p>
+</li>
+<li><p>Optimal value function:</p>
+<p>considering minimize $f_0(x)$</p>
+<p>s.t. $f_i(x)&lt;u_i, Ax=b+v$</p>
+<p>With strong duality, finite dual problem: $f(\hat{u},\hat{v})$ is optimal, we can conclude that $(-\hat{\lambda},-\hat{\nu})\in \partial f(\hat{u},\hat{v})$ </p>
+<blockquote>
 <ul>
-<li>关于防止梯度消失/爆炸的作用：有点长，先码着。涉及到另一篇分析grad norm的文章，理论性比较强。</li>
-<li>关于公式里多出来的scaling factor：总体是为了平衡firing rate设计的，理论细节先鸽了。</li>
+<li><p>$\lambda,\nu$ 是拉格朗日对偶对应项的系数梯度</p>
+</li>
+<li><p>$u\in \partial f(v) \Leftrightarrow v\in \partial f^*(u)\tag{8-1}$</p>
+</li>
+<li>极小值问题转为次梯度问题(?)</li>
 </ul>
+</blockquote>
+</li>
+<li><p>Expectation </p>
 </li>
 </ul>
-<h3 id="Deep-Spiking-Residual-Network"><a href="#Deep-Spiking-Residual-Network" class="headerlink" title="Deep Spiking Residual Network"></a>Deep Spiking Residual Network</h3><ul>
-<li>结构总体和ANN相同：ReLU替换为LIF（激活），BN替换为tdBN。区别主要是<ul>
-<li>在shortcut的连接上也加了tdBN。</li>
-<li>与最后的add操作相连的tdBN中，$\alpha=1/\sqrt{2}$ 。</li>
+<h2 id="3-Optimal-condition"><a href="#3-Optimal-condition" class="headerlink" title="3. Optimal condition"></a>3. Optimal condition</h2><ul>
+<li>$x^\star$ minimize $f(x)$ iff $0\in \partial f(x^\star)$</li>
 </ul>
-</li>
-<li>因为tdBN的目的是平衡firing rate，所以要将fire单元前的所有输入都norm一遍。α的取值能保证相加后特征图方差符合要求。</li>
+<h3 id="Constrained"><a href="#Constrained" class="headerlink" title="Constrained"></a>Constrained</h3><p>KKT Condition: dual optimal iff</p>
+<ul>
+<li>Strong duality holds</li>
+<li>$x^\star$ is primal feasible</li>
+<li>$\lambda^\star\geq 0$   </li>
+<li>$\lambda_i^\star f_i(x^\star)=0$ for $i=1,\cdots,m$</li>
+<li>$x^\star$ minimize the $L(x,\lambda^\star)$</li>
 </ul>
-<p><img src="https://s3.ax1x.com/2020/11/22/D8IneK.png" alt="image-20201122170903063"></p>
-<h3 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h3><ul>
-<li>CIFAR10上的结果很漂亮。由于加入了BN，（从表上看）训练出来的ResNet19对其他结果都是降维打击。在timesteps=6的情况下就能达到SOTA（一般timesteps调高能很暴力地涨点）。不过表中用作baseline的ANN结构ResNet19只有90.6%的ACC，我记着这网络起码也能有93%左右的，不知道这个数据是什么意思。</li>
-<li>跑了ImageNet，文章声称它是第一个直接训练SNN算法跑ImageNet的。结果也不错，而且timesteps也只有6，相比其他动辄几百上千的timesteps确实低很多（有一个用VGG跑了2500steps的，还好是ANN2SNN的方法）。</li>
-<li>脉冲数据集上测了DVS-Gesture和他们自录的DVS-CIFAR10。对于DVS-Gesture，超参设置是dt=30ms，T=40 steps。结果平均比之前的SOTA高了1到2个点，有点夸张。</li>
-<li>DVS-CIFAR10的结果也是SOTA。</li>
+<h2 id="4-Directional-derivative"><a href="#4-Directional-derivative" class="headerlink" title="4. Directional derivative"></a><strong>4. Directional derivative</strong></h2><ul>
+<li>Definition: ($f$ at $x$ with $y$ direction)</li>
 </ul>
-<p><img src="https://s3.ax1x.com/2020/11/22/D8IudO.png" alt="result"></p>
- 
+<script type="math/tex; mode=display">
+f'(x;y)=\lim_{\alpha\rightarrow0}\frac{f(x+\alpha y)-f(x)}{\alpha}</script> 
       <!-- reward -->
       
     </div>
@@ -207,12 +264,12 @@ y_k&=\lambda_k\hat{x}_k+\beta_k
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/%E7%AC%94%E8%AE%B0-STBP-tdBN.html" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/note-sub-gradient.html" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SNN/" rel="tag">SNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BA%E6%96%87/" rel="tag">论文</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%87%B8%E4%BC%98%E5%8C%96/" rel="tag">凸优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
 
     </footer>
   </div>
@@ -220,19 +277,19 @@ y_k&=\lambda_k\hat{x}_k+\beta_k
    
   <nav class="article-nav">
     
-      <a href="/%E7%AC%94%E8%AE%B0-SNNyolo.html" class="article-nav-link">
+      <a href="/assignment-convex-set.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            Spiking-YOLO:Spiking Neural Network for Energy-Efficient Object Detection
+            凸集/凸函数习题
           
         </div>
       </a>
     
     
-      <a href="/%E9%9D%9Eroot%E6%9D%83%E9%99%90%E4%B8%8B%E5%AE%89%E8%A3%85zsh.html" class="article-nav-link">
+      <a href="/note-gradient-method.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">非root权限下安装zsh</div>
+        <div class="article-nav-title">7. 梯度方法</div>
       </a>
     
   </nav>

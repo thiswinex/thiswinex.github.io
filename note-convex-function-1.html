@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    4. 凸函数(2) |  Thiswinex&#39;s Blog
+    3. 凸函数(1) |  Thiswinex&#39;s Blog
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -44,7 +44,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-笔记-凸函数-2"
+  id="post-note-convex-function-1"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -55,15 +55,15 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  4. 凸函数(2)
+  3. 凸函数(1)
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/%E7%AC%94%E8%AE%B0-%E5%87%B8%E5%87%BD%E6%95%B0-2.html" class="article-date">
-  <time datetime="2019-04-24T12:11:54.000Z" itemprop="datePublished">2019-04-24</time>
+      <a href="/note-convex-function-1.html" class="article-date">
+  <time datetime="2019-03-08T02:45:37.000Z" itemprop="datePublished">2019-03-08</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a> / <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/%E5%87%B8%E4%BC%98%E5%8C%96/">凸优化</a>
@@ -74,7 +74,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">548</span>
+            <span class="post-count">239</span>
         </span>
     </span>
 
@@ -83,7 +83,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">2 分钟</span>
+            <span class="post-count">1 分钟</span>
         </span>
     </span>
 </div>
@@ -98,100 +98,46 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="Convex-Function-2"><a href="#Convex-Function-2" class="headerlink" title="Convex Function(2)"></a>Convex Function(2)</h2><h2 id="1-Operation-that-preserve-convexity"><a href="#1-Operation-that-preserve-convexity" class="headerlink" title="1. Operation that preserve convexity"></a>1. Operation that preserve convexity</h2><ol>
-<li><p>Positive weighted sum</p>
-<p>if $f_1,f_2,\cdots,f_n$ are convex, $\omega_1,\omega_2,\cdots,\omega_n\geq0$, then $f=\sum\omega_if_i$ is convex</p>
-</li>
-</ol>
+  <h2 id="Convex-functions-1"><a href="#Convex-functions-1" class="headerlink" title="Convex functions(1)"></a>Convex functions(1)</h2><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>主要介绍了凸函数及其性质</li>
+</ul>
 <a id="more"></a>
-<blockquote>
-<p>非负加权求和，仿射变换的扩展</p>
-</blockquote>
-<ol>
-<li><p>Composition with affine function</p>
-<p>if $f$ is convex, then $g(x)=f(ax+b)$ is convex</p>
+<h2 id="1-Definition"><a href="#1-Definition" class="headerlink" title="1. Definition"></a>1. Definition</h2><ul>
+<li>$f:\mathcal{R^n}\rightarrow \mathcal{R}$ is convex if $\textbf{dom}\ f$ is convex set and<script type="math/tex; mode=display">f[\theta x+(1-\theta)y]\leq \theta f(x)+(1-\theta)f(y)</script>for all $x, y\in\textbf{dom}\ f, 0\leq\theta\leq 1$</li>
+</ul>
+<h2 id="2-Convex-Examples"><a href="#2-Convex-Examples" class="headerlink" title="2.  Convex Examples"></a>2.  Convex Examples</h2><ul>
+<li>on $\mathcal{R}$<ul>
+<li>affine</li>
+<li>exponential</li>
+<li>powers</li>
+<li>powers of absolute value</li>
+<li>negative entropy</li>
+</ul>
 </li>
-</ol>
-<blockquote>
-<p>凸函数复合仿射函数是凸函数</p>
-</blockquote>
-<ol>
-<li><p>Pointwise maximum</p>
-<p>if $f_1,f_2$ are convex, then $f(x)=\max{f_1,f_2}$ is convex</p>
+<li>on $\mathcal{R}^n$<ul>
+<li>affine</li>
+<li>norms</li>
+</ul>
 </li>
-</ol>
-<blockquote>
-<p>逐点最大操作保凸；<br>可以推广到无穷多个凸集（因为是(定义域)取交？）</p>
-</blockquote>
-<ol>
-<li><p>Pointwise supremum</p>
-<p>if $f(x,y)$ is convex, then $g(x)=\sup f(x,y)$ is convex</p>
-</li>
-</ol>
-<blockquote>
-<p> 逐点上确界操作保凸</p>
-</blockquote>
-<ol>
-<li><p>Estabilishing by affine function</p>
-<p>$f(x)=\sup{g(x)}$ , $g$ is affine</p>
-</li>
-</ol>
-<blockquote>
-<p>由凸函数-&gt;仿射函数族的证明：做 $\textbf{epi}\ f$ 上的支撑超平面<br>仿射函数族-&gt;凸函数的证明：多个函数的逐点上确界保凸</p>
-<p>保证了共轭函数是凸函数</p>
-</blockquote>
-<ol>
-<li><p>Composition with scalar functions</p>
-<p><img src="https://imgchr.com/i/EVbLqS" alt="image-20190329103202902"></p>
-</li>
-</ol>
-<blockquote>
-<p>标量函数复合：需满足的条件</p>
-</blockquote>
-<ol>
-<li>Vector composition</li>
-</ol>
-<p><img src="https://imgchr.com/i/EVbjaQ" alt="image-20190329103401790"></p>
-<blockquote>
-<p>矢量复合需满足的条件</p>
-</blockquote>
-<ol>
-<li><p>Minimization</p>
-<p>if $f(x,y)$ is convex function and $\mathcal{C}$ is a convex set, then $g(x)=\underset{y\in\mathcal{C}}\inf f(x,y)$ is convex</p>
-</li>
-</ol>
-<blockquote>
-<p>$g$ 相当于 $f$ 在某个分量上的投影取 $\min$ (想像从y轴的平行方向看$t=f(x,y)$的投影，再把投影生成的面积取下界得到的仍然是凸函数)</p>
-</blockquote>
-<ol>
-<li>Perspective</li>
-</ol>
-<blockquote>
-<p>透视运算保凸</p>
-</blockquote>
-<h2 id="The-conjugate-function"><a href="#The-conjugate-function" class="headerlink" title="The conjugate function"></a>The conjugate function</h2><ul>
-<li><p>Define: $f^*(y)=\underset{x\in\mathbf{dom} f}{\sup}(y^Tx-f(x))$</p>
-<blockquote>
-<p>相当于这个仿射函数族遍历所有的斜率(斜率为x)，b取$-f(x)$</p>
-<p>对仿射函数族取逐点上确界的操作保证了$f^*(y)$ 的凸性，无论$f(x)$是否凸</p>
-</blockquote>
+<li>on $\mathcal{R}^{m\times n}$<ul>
+<li>affine</li>
+<li>spectral norm</li>
+</ul>
 </li>
 </ul>
-<h2 id="2-Quasiconvex-functions"><a href="#2-Quasiconvex-functions" class="headerlink" title="2. Quasiconvex functions"></a>2. Quasiconvex functions</h2><ul>
-<li>Define: $f$ is quasiconvex if $S_\alpha ={x\in\mathbf{dom}f\mid f(x)\leq\alpha }$ are convex for all $\alpha$</li>
-</ul>
+<h2 id="3-Restriction-of-a-convex-function-to-a-line"><a href="#3-Restriction-of-a-convex-function-to-a-line" class="headerlink" title="3. Restriction of a convex function to a line"></a>3. Restriction of a convex function to a line</h2><p>$f:R^n\rightarrow R$ is convex if and only if the function $g:R\rightarrow R$</p>
+<script type="math/tex; mode=display">g(t)=f(x+tv), \textbf{dom}\ g=\{t\mid x+tv\in \textbf{dom}\ f\}</script><p>is convex for any $x\in\textbf{dom}\ f, v\in \mathcal{R}^n$</p>
 <blockquote>
-<p>即定义域为凸，所有下水平集为凸<br><img src="https://imgchr.com/i/EVbqr8" alt="image-20190329111417466"></p>
+<p>把 $f$ 定义域限定在任意空间直线上是凸的，那么 $f$ 是凸的。注意 $x+tv$ 中 $x,v\in\mathcal{R^n}$ 只有 $t\in\mathcal{R}$ ，$x,v$ 可变并控制是哪条直线</p>
 </blockquote>
-<h3 id="2-1-Properties"><a href="#2-1-Properties" class="headerlink" title="2.1 Properties"></a>2.1 Properties</h3><h4 id="Modified-Jensen-inequality"><a href="#Modified-Jensen-inequality" class="headerlink" title="- Modified Jensen inequality"></a>- Modified Jensen inequality</h4><p>$f$ is quasiconvex $\Leftrightarrow$ $f(\theta x+(1-\theta)y)\leq\max{f(x),f(y}$</p>
-<h4 id="In-R"><a href="#In-R" class="headerlink" title="- In R"></a>- In R</h4><p>$f$ is quasiconvex $\Leftrightarrow$ $f$ 在 $c\in\mathbf{dom}f$ 左侧非增右侧非减，且 $f$ 非增非减</p>
-<h4 id="First-order-condition"><a href="#First-order-condition" class="headerlink" title="- First-order condition"></a>- First-order condition</h4><p>$f$ is quasiconvex $\Leftrightarrow$[ $f(y)\leq f(x)\rightarrow\triangledown f(x)^T(y-x)\leq 0$]</p>
+<h2 id="4-Extended-value-extension"><a href="#4-Extended-value-extension" class="headerlink" title="4. Extended-value extension"></a>4. Extended-value extension</h2><p><img src="https://s2.ax1x.com/2019/03/08/kzvT9P.png" alt=""></p>
+<h2 id="5-First-order-condition"><a href="#5-First-order-condition" class="headerlink" title="5. First-order condition"></a>5. First-order condition</h2><p><img src="https://s2.ax1x.com/2019/03/08/kzvbjS.png" alt=""></p>
+<h2 id="6-Second-order-condition"><a href="#6-Second-order-condition" class="headerlink" title="6. Second-order condition"></a>6. Second-order condition</h2><p><img src="https://s2.ax1x.com/2019/03/08/kzvLng.png" alt=""></p>
 <blockquote>
-<p>梯度与 y-x 连线反向</p>
+<p>一阶条件和二阶条件，总的来说和一元函数差不多</p>
 </blockquote>
-<h2 id="3-Log-concave-and-log-convex-functions"><a href="#3-Log-concave-and-log-convex-functions" class="headerlink" title="3. Log-concave and log-convex functions"></a>3. Log-concave and log-convex functions</h2><ul>
-<li>Define: $f$ is log-convex if for all $x\in\mathbf{dom}f$ , $f(x)&gt;0$ and $\log f$ is convex</li>
-</ul>
+<h3 id="Epigraph"><a href="#Epigraph" class="headerlink" title="Epigraph"></a>Epigraph</h3><p><img src="/Users/pingguo/Desktop/凸优化/image/11.png" alt="11"></p>
+<h3 id="Jensen’s-inequality"><a href="#Jensen’s-inequality" class="headerlink" title="Jensen’s inequality"></a>Jensen’s inequality</h3><p><img src="/Users/pingguo/Desktop/凸优化/image/12.png" alt="12"></p>
  
       <!-- reward -->
       
@@ -256,7 +202,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/%E7%AC%94%E8%AE%B0-%E5%87%B8%E5%87%BD%E6%95%B0-2.html" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/note-convex-function-1.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -269,19 +215,19 @@
    
   <nav class="article-nav">
     
-      <a href="/%E7%AC%94%E8%AE%B0-%E5%87%B8%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98-1.html" class="article-nav-link">
+      <a href="/note-convex-function-2.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            4. 凸优化问题(1)
+            4. 凸函数(2)
           
         </div>
       </a>
     
     
-      <a href="/%E7%AC%94%E8%AE%B0-%E5%87%B8%E4%BC%98%E5%8C%963.html" class="article-nav-link">
+      <a href="/note-convex-set-2.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">3. 凸函数(1)</div>
+        <div class="article-nav-title">2. 凸集(2)</div>
       </a>
     
   </nav>

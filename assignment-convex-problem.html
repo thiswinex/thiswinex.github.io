@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    凸问题习题 |  Thiswinex&#39;s Blog
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/github.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-assignment-convex-problem"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  凸问题习题
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/assignment-convex-problem.html" class="article-date">
+  <time datetime="2019-06-18T14:20:43.000Z" itemprop="datePublished">2019-06-18</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E4%B9%A0%E9%A2%98/">习题</a> / <a class="article-category-link" href="/categories/%E4%B9%A0%E9%A2%98/%E5%87%B8%E4%BC%98%E5%8C%96/">凸优化</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">817</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">3 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>《凸优化》第四章部分习题。</p>
+<a id="more"></a>
+<h3 id="4-2"><a href="#4-2" class="headerlink" title="4.2"></a>4.2</h3><p>(a) </p>
+<p>先证充分性： $Av\preceq 0$ ，则对于任意一点$x_0\in \textbf{dom}f$， 有 </p>
+<script type="math/tex; mode=display">
+\forall k\in R^+, A(x_0+kv)=Ax_0+k\cdot Av\preceq Ax_0 \prec b</script><p>即 $x_0+kv$ 也在定义域中。所以 $\textbf{dom} f$ 无界。</p>
+<p>再证必要性：若 $\textbf{dom} f$ 无界，则存在序列 $x^k\in\textbf{dom} f$ 在 $k\rightarrow \infty$ 时 $|x^k|_2\rightarrow \infty$ 。若不存在 $v\neq 0$ 满足 $Av\preceq 0$ ，则对于 $v\neq 0$ ，$Av$ 必定存在某一分量大于0。 令 $A(kv)=k\cdot Av$  为对 $Ax^k$ 的一个逼近，即可使 $v=x^k/|x^k|_2$ ，那么 $k\rightarrow \infty$ 时， $kv$ 逼近 $x^k$ ，应有 $A(kv)\prec b$ ，但由于 $Av$ 必定存在某一分量大于0，所以 $k\cdot Av\prec b$ 不成立，此处 $b$ 亦可为任意实数。 结论自相矛盾，假设不成立。所以存在 $v\neq 0$ 满足 $Av\preceq 0$ 。</p>
+<p>(b) </p>
+<p>由择一定理可以得到，存在 $v$ 满足 $Av\preceq 0, Av\neq 0$ 的充要条件是，不存在 $z\succ 0$ 使得 $A^Tz=0$ 。</p>
+<p>对于原命题，先证充分性：存在 $Av\preceq 0$ ， $Av\neq 0$ ，即对 $Av$ 的每个分量都有 $a^T_iv_i\leq 0$ ，且 $Av\neq 0$ 。由于(1)可知此时定义域无界，对于 $x_0\in \textbf{dom} f$ ，有 $\forall k\in R^+, x_0+kv\in\textbf{dom} f$ :</p>
+<script type="math/tex; mode=display">
+f_0(x_0+kv)=-\sum^m_{i=1}\log(b_i-a^T_ix_0-k\cdot a^T_iv)</script><p>因为对每个分量都有 $a^T_iv\leq 0$ 且 $Av\neq 0$ ，在 $k\rightarrow \infty$ 时很容易看出 $f_0(x_0+kv)\rightarrow -\infty$ ，即 $f_0$ 无下界。</p>
+<p>再证必要性：若 $f_0$ 无下界，设序列 $x_1,x_2,\cdots,x_k$ 为无界序列，即 $k\rightarrow \infty\Rightarrow b-Ax\rightarrow -\infty\Rightarrow f_0(x_k)\rightarrow -\infty$ 。且存在 $z\succ 0$ ，使得 $A^Tz=0$ ，展开 $f_0(x_k)$ 在 $x_0$ 处的一阶条件：</p>
+<script type="math/tex; mode=display">
+f_0(x_k)\geq f_0(x_0)+\sum^m_{i=1}\frac{1}{b_i-a^T_ix}a_i^T(x_k-x_0)</script><p>(c)</p>
+<p>设其定义域 $\textbf{dom} f_0$ 有界，则 $f_0$ 下水平集为闭，极小值可达。<br>若其定义域无界，则由 (a) 有其等同于存在 $v\neq 0, Av\preceq 0$ ； $f_0$ 有下界，则不存在  $v$ 使 $Av\preceq 0, Av\neq 0$ 。因为 $v\neq 0$ ，所以只有 $A=0$才能满足条件，此时函数值恒为定值，极小值可达。</p>
+<p>(d)</p>
+<p>由最优性条件：</p>
+<script type="math/tex; mode=display">
+\triangledown f_0(x)=\sum^m_{i=1}\frac{1}{b_i-a^T_ix}a_i=0</script><p>若 $Av=0$ ，则有 $a^T_iv=0$ ，即 $b_i-a^T_ix^\star=b_i-a^T_ix^\star+a^T_iv=b_i-a^T_i(x^\star+v)$ ，即对于任意最优解 $x^\star$ ，$x^\star+v$ 也是最优解( $Av=0$ ) 。</p>
+<blockquote>
+<p>总结：</p>
+<p>这题我认为主要的点是在：</p>
+<ul>
+<li>怎么判断无界(用序列 $x+kv$ 逼近无穷)</li>
+<li>怎么表达可达($X_{opt}$非空，大部分情况下问题应有界)</li>
+<li>拆矩阵分析</li>
+</ul>
+</blockquote>
+<h3 id="4-8"><a href="#4-8" class="headerlink" title="4.8"></a>4.8</h3><p>(a)</p>
+<p>若问题不可行，则 $p^\star=+\infty$ 。</p>
+<p>若问题可行，将 $c$ 分解为 $c=A^T\lambda+\hat{c}$ ，$A\hat{c}=0$ ：<br>若 $c$ 与 $A$ 的零空间正交，因为正交性，有 $\hat{c}=0$， $c^Tx=\lambda^TAx=\lambda b$ 即最优值为 $\lambda b$ ；<br>若 $c$ 与 $A$ 的零空间不正交，则问题无下界，因为 $c^Tx=\lambda b+\hat{c}^Tx$ ，$x$ 在可行集内可以无限小，只需要无限减小 $\hat{c}$ 分量的值。</p>
+<p>所以此问题的最优值为</p>
+<script type="math/tex; mode=display">
+p^\star=\begin{cases}
+ & +\infty, \text{ if } \forall x, Ax\neq b\\
+ & \lambda b,\text{ if for some } \lambda<0, c=A^T\lambda=0 \\ 
+ & -\infty, \text{ if } otherwise
+\end{cases}</script><p>(b)</p>
+<p>问题可行集为半空间，此问题一定可行。</p>
+<p>将 $c$ 分解为 $c=\lambda a +\hat{a}$ ，$a^T\hat{a}=0$ ，即分解成与 $a$ 平行和正交的两个分量。目标函数可以表示为： $c^Tx=\hat{a}^Tx+\lambda a^Tx$ ，可以容易知道 $c$ 与 $a$ 平行时，问题才有界。否则解可以无限在 $\hat{a}$ 的方向上滑动。且 $c,a$ 必须反向，即 $\lambda &lt;0$ ，此时最优解为 $\lambda a^Tx=\lambda b$ 。</p>
+<p>所以此问题的最优值为</p>
+<script type="math/tex; mode=display">
+p^\star=\begin{cases}
+ & \lambda b,\text{ if for some } \lambda<0, \hat{a}=0 \\ 
+ & -\infty, \text{ if } \lambda\geq0 
+\end{cases}</script><p>(c)</p>
+<p>问题可行集为矩形，问题一定可行。由于  $l\preceq x\preceq u$ ，容易知道最优值为</p>
+<script type="math/tex; mode=display">
+p^\star=\begin{cases}
+ & c^Tl,\text{ if } c<0,  \\ 
+ & c^Tu, \text{ if } c>0, \\
+ & \forall x \text{ in rectangle, if } c=0 
+\end{cases}</script><p>(d)</p>
+<p>将 $c$ 中元素排序，设最小元素为 $c_1$ ，显然最优值为 $p^\star=c_1$ ，即投资组合优化问题中全部投资收益率最高的项目。</p>
+<p>等式约束被替换为不等式约束时，由于 $1^Tx$ 可以为0，则在 $c_1&gt;0$ 时，最优值为 $p^\star=0$ (即投资组合优化问题中，收益率为负时，可以选择不投资)。总最优值为 $p^\star=\min{0,c_1}$ 。</p>
+<p>(e)</p>
+<p>仍然将 $c$ 中元素排序，设为 $c_1\leq c_2\leq \cdots \leq c_n$ ，显然最优值为</p>
+<script type="math/tex; mode=display">
+p^\star=\sum_{i=1}^\alpha c_i</script><p>即全预算投资收益率前 $\alpha$ 的项目。</p>
+<p>若 $\alpha$ 不为整数，最优值仍然可以按照原思想得出:</p>
+<script type="math/tex; mode=display">
+p^\star=\sum_{i=1}^{\lfloor\alpha\rfloor}c_i+(\alpha-\lfloor\alpha\rfloor)c_{\lfloor\alpha\rfloor}</script><p>若等式变为 $1^Tx\leq\alpha$ ，则对于收益率为负的部分，可以选择不投资。令 $c_m$ 为其中最大的负值，则最优值为：</p>
+<script type="math/tex; mode=display">
+p^\star=\sum_{i=m}^{\min\{\alpha+m,n\}}c_i</script><p>(f)</p>
+<p>可以定义收益性价比为 $v<em>i=c_i/d_i$ ，容易知道到全资投资收益性价比高的总会拥有比别的方案更高的收益。按性价比对 $c$ 中元素排序，设为 $v_1\leq v_2\leq \cdots\leq v_n$，且 $\sum</em>{i=1}^m d<em>ix_i\leq \alpha\leq \sum</em>{i=1}^{m+1}d_ix_i$ 显然最优值为</p>
+<script type="math/tex; mode=display">
+p^\star=\sum_{i=1}^{m}c_i+c_{m+1}\frac{\alpha-\sum_{i=1}^md_ix_i}{d_i}</script><blockquote>
+<p>总结:</p>
+<p>如何显示求LP的解？一个比较常用的方法是把系数 $c$ 拆成两个互相正交方向，通常一个是下降方向，即另一个和约束平面平行。这种方法在其他题目上也有体现，比如将矩阵拆成正定矩阵和非正定矩阵的和。 </p>
+</blockquote>
+<h3 id="4-24"><a href="#4-24" class="headerlink" title="4.24"></a>4.24</h3><p>(a)</p>
+<p>L1范数:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{minimize } &\sum_{i=1}^m|a_i^Tx-b|\\
+\end{align}</script><p>直接引入新优化实变量 $t_i=|a^T_ix-b|$ ，则引入了新约束 $|a^T_ix-b|\leq t_i$ ， 可以将约束用范数展开：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+&\sum|a^T_ix-b|\\
+&=\sum\sqrt{[Re(a^T_ix-b)]^2+[Im(a^T_ix-b)]^2}\\
+&=\sum\sqrt{[Re(a^T_i)Re(x)-Im(a^T_i)Im(x)-Re(b)]^2}\\
+&\overline{+[Re(a^T_i)Im(x)+Im(a^T_i)Re(x)-Im(b)]^2}\\
+&=\|\begin{bmatrix}
+ Re(a_i^T)&-Im(a^T_i) \\ 
+ Im(a^T_i)&Re(a_I^T) 
+\end{bmatrix}\begin{bmatrix}
+ Re(x)\\ Im(x)
+\end{bmatrix}-\begin{bmatrix}
+ Re(b)\\ Im(b)
+\end{bmatrix}\|_2
+\end{align}</script><p>SOCP形式：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{minimize } &\sum_{i=1}^m t_i\\
+\text{subject to } &
+ \|\begin{bmatrix}
+ Re(a_i^T)&-Im(a^T_i) \\ 
+ Im(a^T_i)&Re(a_I^T) 
+\end{bmatrix}\begin{bmatrix}
+ Re(x)\\ Im(x)
+\end{bmatrix}-\begin{bmatrix}
+ Re(b)\\ Im(b)
+\end{bmatrix}\|_2\leq t_i
+\end{align}</script><p>(b)</p>
+<p>L2范数：</p>
+<p>同L1范数，可以容易写出</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\|Ax-b\|_2&={\|Re(Ax-b)\|_2+\|Im(Ax-b)\|_2}^{1/2}\\
+&=\|\begin{bmatrix}
+ Re(A)&-Im(A) \\ 
+ Im(A)&Re(A) 
+\end{bmatrix}\begin{bmatrix}
+ Re(x)\\ Im(x)
+\end{bmatrix}-\begin{bmatrix}
+ Re(b)\\ Im(b)
+\end{bmatrix}\|_2^{1/2}
+\end{align}</script><p>SOCP形式:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{minimize } &\sum_{i=1}^m t_i\\
+\text{subject to } &
+ \|\begin{bmatrix}
+ Re(A)&-Im(A) \\ 
+ Im(A)&Re(A) 
+\end{bmatrix}\begin{bmatrix}
+ Re(x)\\ Im(x)
+\end{bmatrix}-\begin{bmatrix}
+ Re(b)\\ Im(b)
+\end{bmatrix}\|_2^{1/2}\leq t_i
+\end{align}</script><p>(c)</p>
+<p>L∞范数：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{minimize } \max_{i=1,\cdots,m} |a_i^Tx-b|
+\end{align}</script><p>同样引入新约束变量：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{minimize } &t\\
+\text{subject to } &|a^T_ix-b|\leq t
+\end{align}</script><p>SOCP形式:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{minimize } &t\\
+\text{subject to } &
+ \|\begin{bmatrix}
+ Re(a_i^T)&-Im(a^T_i) \\ 
+ Im(a^T_i)&Re(a_I^T) 
+\end{bmatrix}\begin{bmatrix}
+ Re(x)\\ Im(x)
+\end{bmatrix}-\begin{bmatrix}
+ Re(b)\\ Im(b)
+\end{bmatrix}\|_2\leq t
+\end{align}</script><blockquote>
+<p>总结：凑SOCP形式，经常会凑出来目标函数为单一个 $t$ (正常情况是 $c^Tx$ 或 $f^Tx$)。将其他条件凑成二范数的约束(二次锥约束)。</p>
+</blockquote>
+<h3 id="4-40"><a href="#4-40" class="headerlink" title="4.40"></a>4.40</h3><p>(a) LP：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{minimize } &c^Tx+d\\
+\text{subject to } &Gx\preceq h\\
+&Ax=b
+\end{align}</script><p>直接把不等式约束写成对应矩阵形式即可，对应SDP：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{minimize } &c^Tx+d\\
+\text{subject to } &\textbf{diag}(Gx-h)\preceq 0\\
+&Ax=b
+\end{align}</script><p>(b) QP:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{minimize } &(1/2)x^TPx+q^Tx+r,\ P\in S^n_+\\
+\text{subject to } &Gx\preceq h\\
+&Ax=b
+\end{align}</script><p>设 $A\in S^r_{++}, C\in S^s, B\in R^{r\times s}$ ，有</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+ A&B \\ 
+ B^T&C 
+\end{bmatrix}\succeq 0\Leftrightarrow C-B^TA^{-1}B\succeq 0</script><p>令 $P=QQ^T, Q\in R^{n\times r}$ ，则目标函数变为 $(1/2)(Q^Tx)^T(Q^Tx)+q^Tx+r$ ，引入新优化变量 $t\geq x^TPx=(Q^Tx)^T(Q^Tx)$  ，目标函数变为 $(1/2)t+q^Tx+r$ ，且有新的约束 $t\geq (Q^Tx)^T(Q^Tx),\ i.e.\ tI-(Q^Tx)^TI^{-1}(Q^Tx)\succeq 0$ 。按照上式变换新约束，则原问题对应SDP为：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{minimize } &(1/2)t+q^Tx+r\\
+\text{subject to } &\textbf{diag}(Gx-h)\preceq 0\\
+&\begin{bmatrix}
+I& Q^Tx\\ 
+x^TQ &tI 
+\end{bmatrix}\succeq0\\
+&Ax=b
+\end{align}</script><p>优化变量为 $x,t$ 。</p>
+<p>QCOP:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{minimize } &(1/2)x^TP_0x+q_0^Tx+r_0)\\
+\text{subject to } &(1/2)x^TP_ix+q_i^Tx+r_i\leq 0,\ i=1,\cdots,i\\
+&Ax=b
+\end{align}</script><p>仿照上述过程，处理约束 $(1/2)x^TP_ix+q_i^Tx+r_i =(1/2)(Q_i^Tx)^T(Q_i^Tx)+q^T_ix+r_i\leq 0$ ，引入新的优化变量 $t_i$ ，则约束变为 $(1/2)t_i+q_i^Tx+r_i\leq 0$ ，同时引入新约束 $t_iI-(Q_i^Tx)^TI^{-1}(Q_i^Tx)\succeq 0$ 。原问题对应SDP为：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{minimize } &(1/2)t_0+q_0^Tx+r_0\\
+\text{subject to } &(1/2)t_i+q^T_ix+r_i\leq 0\\
+&\begin{bmatrix} 
+I& Q_i^Tx\\ 
+x^TQ &t_iI 
+\end{bmatrix}\succeq0,\ i=0,1,\cdots,m\\
+&Ax=b
+\end{align}</script><p>SOCP:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{minimize } &c^Tx\\
+\text{subject to } &\|A_ix+b_i\|_2\leq c^T_ix+d_i,i=1,\cdots,m\\
+&Fx=g
+\end{align}</script><p>仿照上述过程，约束可以化为</p>
+<script type="math/tex; mode=display">
+\begin{align}
+(A_ix+b_i)^T(A_ix+b_i)&\leq (c_i^Tx+d_i)^2\\
+(c^T_ix+d_i)(c_i^Tx+d_i)-(A_ix+b_i)^T(A_ix+b_i)&\geq0\\
+(c^T_ix+d_i)-(c^T_ix+d_i)^{-1}(A_ix+b_i)^T(A_ix+b_i)&\geq0\\
+(c^T_ix+d_i)I-(A_ix+b_i)^T(c^T_ix+d_i)^{-1}I^{-1}(A_ix+b_i)&\succeq 0\\
+\begin{bmatrix} 
+(c^T_ix+d_i)I& A_ix+b_i\\ 
+(A_ix+b_i)^T & (c^T_ix+d_i)I
+\end{bmatrix}&\succeq 0
+\end{align}</script><p> 原问题SDP为：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{minimize } &c^Tx\\
+\text{subject to } &\begin{bmatrix} 
+(c^T_ix+d_i)I& A_ix+b_i\\ 
+(A_ix+b_i)^T & (c^T_ix+d_i)I
+\end{bmatrix}\succeq 0\\
+&Fx=g
+\end{align}</script><p>(c) </p>
+<p>引入新优化变量 $t=(Ax+b)^TF(x)^{-1}(Ax+b)$ ，则引入了新约束 $(Ax+b)^TF(x)^{-1}(Ax+b)-t\leq 0$ ，仿照上述形式，约束变为：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\begin{bmatrix} 
+F(x)& Ax+b\\ 
+(Ax+b)^T & tI
+\end{bmatrix}&\succeq 0
+\end{align}</script><p>问题可以化成等价的上境图形式，同时也是SDP形式：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{minimize } &t\\
+\text{subject to } &\begin{bmatrix} 
+F(x)& Ax+b\\ 
+(Ax+b)^T & tI
+\end{bmatrix}\succeq 0\\
+\end{align}</script><blockquote>
+<p>总结：</p>
+<p>SDP更广所以LP、QP、QCQP、SOCP都可以转换成SDP形式。这里的Hint非常有用，提供了通过变量代换将约束/目标函数转换成对角阵形式约束的方法。</p>
+</blockquote>
+<h3 id="4-43"><a href="#4-43" class="headerlink" title="4.43"></a>4.43</h3><p>(a)</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{minimize } &\lambda_1(x)\\
+\end{align}</script><p>引入新优化变量 $t=\lambda_1(x)$ ，则容易知道引入了新约束 $A(x)\preceq tI$ 即 $A(x)-tI$ 负定。SDP形式为:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{minimize } &t\\
+\text{subject to } &A(x)\preceq tI
+\end{align}</script><p>(b)</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{minimize } \lambda_1(x)-\lambda_m(x)
+\end{align}</script><p>引入新优化变量 $t_1=\lambda_1(x), t_2=\lambda_m(x)$ ，仿照上题可直接写出SDP形式</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{minimize } &t_1-t_2\\
+\text{subject to } &t_2I\preceq A(x)\preceq t_1I
+\end{align}</script><p>(c)</p>
+<script type="math/tex; mode=display">
+\begin{align}
+&\text{minimize } \lambda_1(x)/\lambda_m(x)\\
+&\text{subject to } A(x)\succ 0
+\end{align}</script><p>引入新变量 $\lambda=\lambda_1(x), \gamma=\lambda_m(x)$ ，同时引入了新约束 $\gamma I\preceq A(x)\preceq \lambda I$ 。作变量替换 $y=x/\gamma, t=\lambda/\gamma, s=1/\gamma$ ，则目标函数就变成了 $t$ ，约束可以两边同除 $\gamma$ 消元：$I\preceq A(x)/\gamma \preceq tI$ ，将 $A(x)$ 展开可以得到更清晰的形式：$I\preceq 1/\gamma A_0+y_1A_1+\cdots+y_nA_n\preceq tI$ 。因为至少有一个 $x$ 满足 $A(x)\succ 0$ ，所以需要 $\gamma &gt; 0$ ，即 $1/\gamma &gt;0$ 。</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{minimize } &t\\
+\text{subject to } &s> 0\\
+&I\preceq sA_0+y_1A_1+\cdots+y_nA_n\preceq tI
+\end{align}</script><p>(d)</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{minimize } |\lambda_1(x)|+\cdots+|\lambda_m(x)|
+\end{align}</script><p> $A(x)$ 变形为正负部 $A(x)=A<em>+-A</em>-$，这样 $A<em>+,A</em>-$ 都绝对半正定。设 $t<em>+=\textbf{tr}A</em>+, t<em>-=\textbf{tr}A</em>-$ ，可以看出正负部各自拥有原矩阵的正特征值和负特征值，即两者和即为目标函数。原问题SDP：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{minimize } &\textbf{tr}A_++\textbf{tr}A_-\\
+\text{subject to } &A(x)=A_+-A_-\\
+&A_+\succeq 0， A_-\succeq 0
+\end{align}</script><blockquote>
+<p>总结:</p>
+<p>优化特征值的等价问题。常用的等价问题代换除了特征值&lt;=&gt;单位阵，还有小于&lt;=&gt;极大值小于；。。</p>
+</blockquote>
+<h3 id="4-53"><a href="#4-53" class="headerlink" title="4.53"></a>4.53</h3><p>设两个点 $t_1, t_2\in \textbf{R}^q$ 在集合里，即满足 $f_0(x_1)\preceq_K t_1, f_0(x_2)\preceq_K t_2$ ，有原向量优化为凸问题，即 $f_0$ 是 K-凸的，即 </p>
+<script type="math/tex; mode=display">
+f_0[\theta x_1+(1-\theta)x_2]\preceq_K \theta f_0(x_1)+(1-\theta)f_0(x_2)</script><p>所以对 $0\leq\theta\leq1$ ，有：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+&\theta t_1+(1-\theta)t_2-\theta f_0(x_1)-(1-\theta)f_0(x_2)\\
+=&\theta (t_1-f_0(x_1))+(1-\theta)(t_2-f_0(x_2))\in K\\
+i.e.\ &f_0[\theta x_1+(1-\theta)x_2]\preceq_K\theta f_0(x_1)+(1-\theta)f_0(x_2)\preceq_K t_1+(1-\theta)t_2
+\end{align}</script><p>因为原向量优化为凸问题， $\theta x_1+(1-\theta)x_2$ 在可行集中，即 $\theta t_1+(1-\theta)t_2\in A$ ，$A$ 为凸集。</p>
+<p>若 $a$ 为 $A$ 的极小元，$o$ 为 $O$ 的极小元，将 $a$ 分解成 $O$ 上的元素的形式，即  $a=a’+b, a’\in O, b\succeq_K 0$ 。由于 $A$ 是凸集，则 $a=a’+kb$ 也属于 $A$ ，可以得到 $b=0$ 否则 $k&lt;1$ 时 $a$ 将不是极小元。此时由于 $a$ 的极小元性质，对于任意 $v\in A, v\preceq_K a \Rightarrow v=a$ 。那么对于任意 $v’\in O, v\preceq_K a’ \Rightarrow v’\in A, v\preceq_K a’=a \Rightarrow v=a=a’$  ，即 $v’$ 满足 $O$ 中的极小元性质，且 $v=a$ ，即两者极小元相同。</p>
+<blockquote>
+<p>总结:</p>
+<p>重点是可行、极小元的概念，还有元素的分解。</p>
+</blockquote>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/assignment-convex-problem.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B9%A0%E9%A2%98/" rel="tag">习题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%87%B8%E4%BC%98%E5%8C%96/" rel="tag">凸优化</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/assignment-dual.html" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            对偶习题
+          
+        </div>
+      </a>
+    
+    
+      <a href="/assignment-convex-set.html" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">凸集/凸函数习题</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "o28iHkvdJaYlwuG7Tbx9lYWu-gzGzoHsz",
+    app_key: "vRnPCs772pxOTas4gSYdOXmx",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2019-2020
+        <i class="ri-heart-fill heart_icon"></i> thiswinex
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/github.svg" alt="Thiswinex&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝奶茶~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>

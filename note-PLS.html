@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    变分不等式 |  Thiswinex&#39;s Blog
+    PLS简介 |  Thiswinex&#39;s Blog
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -44,7 +44,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-笔记-变分不等式"
+  id="post-note-PLS"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -55,18 +55,18 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  变分不等式
+  PLS简介
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/%E7%AC%94%E8%AE%B0-%E5%8F%98%E5%88%86%E4%B8%8D%E7%AD%89%E5%BC%8F.html" class="article-date">
-  <time datetime="2019-02-16T03:32:51.000Z" itemprop="datePublished">2019-02-16</time>
+      <a href="/note-PLS.html" class="article-date">
+  <time datetime="2019-11-23T12:42:00.000Z" itemprop="datePublished">2019-11-23</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a> / <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/%E5%87%B8%E4%BC%98%E5%8C%96/">凸优化</a>
+    <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a> / <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a> / <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%A4%9A%E5%85%83%E5%9B%9E%E5%BD%92/">多元回归</a>
   </div>
   
 <div class="word_count">
@@ -74,7 +74,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">310</span>
+            <span class="post-count">945</span>
         </span>
     </span>
 
@@ -83,7 +83,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">3 分钟</span>
         </span>
     </span>
 </div>
@@ -98,28 +98,132 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
-<li>大部分学习资料来自于何炳生教授的 <a target="_blank" rel="noopener" href="http://maths.nju.edu.cn/~hebma/">主页</a></li>
-<li>已弃坑，待填。</li>
-</ul>
+  <p>PLS 即 Partial Least Squares  偏最小二乘法。</p>
 <a id="more"></a>
-<h2 id="1-变分不等式"><a href="#1-变分不等式" class="headerlink" title="1. 变分不等式"></a>1. 变分不等式</h2><ul>
-<li>设 $\Omega$ 为 $R^n$ 中的一个非空闭凸集，$F$ 是 $R^n$ 到 $R^n$ 的一个连续映射（向量函数），单调变分不等式问题就是寻找 $x^*$：<script type="math/tex; mode=display">x^*\in\Omega, F(x^*)^T(x-x^*)\geq 0, \forall x \in\Omega</script>单调是指 $F$ 满足 $(u-v)^T(F(u)-F(v))\geq 0$ 。</li>
-</ul>
-<h2 id="2-与可微凸优化的关系"><a href="#2-与可微凸优化的关系" class="headerlink" title="2. 与可微凸优化的关系"></a>2. 与可微凸优化的关系</h2><p>设 $f: R^n \rightarrow R$ 为可微凸函数，凸优化问题：</p>
-<script type="math/tex; mode=display">\min f(x), x\in \Omega</script><p>则最优点必须有：</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li><p>适用特点：数据量小、数据维数高、数据多重共线性</p>
+</li>
+<li><p>为什么？考虑回归问题 $y=\alpha +\beta X+\epsilon$ ，那么最小二乘回归（最大化X、y协方差）</p>
+<script type="math/tex; mode=display">
+  \beta=(X'X)^{-1}X'y</script><p>即需要 $X’X$ 可逆满秩，$X$ 的样本（行数）需要多于特征（列数），且特征之间没有线性相关性（共线性）。</p>
+</li>
+<li><p>对比：</p>
 <ul>
-<li>它属于 $\Omega$</li>
-<li>它的邻域内无可行下降方向</li>
+<li><p>PCA：</p>
+</li>
+<li><script type="math/tex; mode=display">
+X=TP'=T_kP_k'+E\\</script><p>使用SVD求：</p>
+</li>
+<li><script type="math/tex; mode=display">
+X=USV',T=US,P=V,X=TP'</script><p>但是PCA没有利用预测信息即 $y$ ，有些PC和预测没有关系。</p>
+</li>
 </ul>
-<p>可求 $f$ 梯度 $\triangledown f(x)$ ，记</p>
+</li>
+<li><p>PLS模型：</p>
+</li>
+<li><script type="math/tex; mode=display">
+X=TP'+E\\
+Y=UQ'+F</script><p>其中 $X$ 为 $n×m$ 观测矩阵，$Y$ 为 $n×p$ 响应矩阵。$T/U$ 为 $n×l$ 的得分矩阵（或成分矩阵），$P/Q$ 为 $m/n ×l$ 的正交载荷矩阵，$E/F$ 为残差。</p>
+</li>
+<li><p>要求：$\max \text{Cov}(T,U)$ 。类似PCR，观测矩阵被分解为得分矩阵和载荷矩阵的外积，但是PCR中 $X=TP’, T=XW, P=W$ 即权值和载荷相同，这一点不同于PLS（ PLS1中 $w=X’y$ ，正比于X和y的协方差）。</p>
+</li>
+</ul>
+<hr>
 <ul>
-<li>$Sd(x)={s\in R^n| s^T\triangledown f(x)&lt;0}$ 为点 $x$ 处的可行方向集（ $s$ 为下降向量满足逆梯度）</li>
-<li>$Sf(x)={s\in R^n| s=x’-x, x’\in\Omega}$ 为点 $x$ 处的下降方向集（ $s$ 为下降向量满足下降后向量仍在集合内）</li>
+<li>PLS-CV：<img src="https://s2.ax1x.com/2020/03/09/8SgFJJ.png" alt="image-20191211162109235"></li>
 </ul>
-<p>那么凸优化条件可表述为：</p>
-<script type="math/tex; mode=display">x\in\Omega,\ \ and\  \ Sf(x)\cap Sd(x)\neq\varnothing</script><p>其等价数学形式为：</p>
-<script type="math/tex; mode=display">x\in\Omega, (x'-x)^T\triangledown f(x)\geq 0, \forall x'\in\Omega</script><p>（暂时弃坑，等系统学习完凸优化后再来补充）</p>
+<hr>
+<h2 id="PLS-算法"><a href="#PLS-算法" class="headerlink" title="PLS 算法"></a>PLS 算法</h2><h3 id="NIPALS"><a href="#NIPALS" class="headerlink" title="NIPALS"></a>NIPALS</h3><ol>
+<li><p>令 $X_a, Y_a$ 为观测矩阵和响应矩阵</p>
+</li>
+<li><p>数据标准化：</p>
+</li>
+</ol>
+<ul>
+<li>观测/响应矩阵需要减去对应维度的均值</li>
+<li>一般没有除以标准差这一操作</li>
+</ul>
+<ol>
+<li><p>取其中一列 $y$ 作为 $u_1$ （因子）</p>
+</li>
+<li><p>计算 $X$ 权重：（利用 $u_1$ 信息，用权重实现 $X$ 到因子 $t$ 的变换）</p>
+</li>
+</ol>
+<script type="math/tex; mode=display">
+w_1=\frac{X'_{0}u_{1}}{u_1'u_1}\\
+w_1\leftarrow \frac{w_1}{\|w_1\|}</script><ol>
+<li>计算得分向量（因子）：</li>
+</ol>
+<script type="math/tex; mode=display">
+t_1=X_{0}w_1</script><ol>
+<li><p>对 $Y$ 进行相同操作，求得权重 $c_1$ ，因子 $u_1^*$ ，计算 $u$ 的残差是否收敛</p>
+</li>
+<li><p>计算载荷向量（$p$ 反映 $X$ 和 $t$ 的关系，估计意义上 $X=tp’$：</p>
+</li>
+</ol>
+<script type="math/tex; mode=display">
+p_1=X_0'\frac{t_1}{t_1't_1}\\
+    q_1=Y_{0}'\frac{u_1}{u_1'u_1}\\</script><ol>
+<li>计算新观测矩阵（残差矩阵）：</li>
+</ol>
+<script type="math/tex; mode=display">
+X_1=X_{0}-t_1p_1'\\
+b_1=u_1't_1/t_1't_1\\
+Y_1=Y_{0}-u_1q_1'=Y_0-b_1t_1q_1'</script><ol>
+<li><p>循环</p>
+</li>
+<li><p>若为回归任务，则任务目标是回归线性模型 $Y=\alpha+X\beta +\epsilon$ ，则 </p>
+</li>
+</ol>
+<script type="math/tex; mode=display">
+\hat{\beta}=W(P'W)^{-1}q\\
+\hat{\alpha}=\overline{y}-\overline{x}\hat{\beta}</script><p>​                否则需解：</p>
+<ul>
+<li><script type="math/tex; mode=display">
+M=X_{a-1}'Y_{a-1}Y_{a-1}'X_{a-1}</script><p>其最大特征值为 $\theta_a^2$，单位特征向量为 $w_a$ ， $v_a$ 可由其计算得出。</p>
+</li>
+<li><p>第一轮之后的权重把残差变换到因子，不对原始数据变换</p>
+</li>
+</ul>
+<h3 id="SIMPLS"><a href="#SIMPLS" class="headerlink" title="SIMPLS"></a>SIMPLS</h3><p>$S=X_0’Y_0$</p>
+<p>for i=1 to k</p>
+<p>​    if i=1: $[u,s,v]=SVD(S)$</p>
+<p>​    if i&gt;1: $[u,s,v]=SVD(S-P<em>{i-1}(P</em>{i-1}’P<em>{i-1})^{-1}P’</em>{i-1}S)$</p>
+<p>​    $r_i=u(:,1)$</p>
+<p>​    $t_i=X_0r_i$</p>
+<p>​    $p_i=X’_0t_i/t_i’t_i$</p>
+<p><code>end</code></p>
+<p>$B_{PLS}=R_k(T_k’T_k)^{-1}T_kY_0$</p>
+<h3 id="两者比较"><a href="#两者比较" class="headerlink" title="两者比较"></a>两者比较</h3><ul>
+<li>NIPALS的权重是相对于各个残差矩阵而言的，解释不便</li>
+<li>SIMPLS更快，且是Matlab 标准算法</li>
+<li>大部分情况下结果相似，但是高 latent variable 时 SIMPLS 不稳定</li>
+</ul>
+<p><img src="https://s2.ax1x.com/2020/03/09/8pQcJH.png" alt="image-20191213141042111"></p>
+<hr>
+<h2 id="Kernel-PLS"><a href="#Kernel-PLS" class="headerlink" title="Kernel PLS"></a>Kernel PLS</h2><ul>
+<li>解决非线性问题，和SVM一样可以采用 Kernel 方法：将非线性的低维数据投影到高维后数据变得线性。核函数则用来计算数据在高维空间中的内积。</li>
+<li>实验中由于映射未知，核函数无法显式推导，一般只能通过枚举实验。</li>
+</ul>
+<hr>
+<h2 id="PLS分类"><a href="#PLS分类" class="headerlink" title="PLS分类"></a>PLS分类</h2><ul>
+<li>PLS-DA</li>
+<li>通过 dummy matrix 对响应矩阵编码（类似 one-hot）来分类</li>
+<li>处理非线性问题，类别不平衡问题性能会下降</li>
+<li>Local weighted PLS：对每个待预测的query，只选出一部分最近的训练样本进行回归建模（多个线性模型来处理非线性）</li>
+</ul>
+<hr>
+<h2 id="Variable-Selection"><a href="#Variable-Selection" class="headerlink" title="Variable Selection"></a>Variable Selection</h2><p><img src="https://s2.ax1x.com/2020/03/09/8SgKoD.png" alt="image-20191212213245596"></p>
+<ul>
+<li>filter方法，直接从输出中过滤</li>
+<li>wrapper：基于filter，选出的变量送回模型重新拟合</li>
+<li>embedded的方法，顾名思义即变量选择是PLSR过程的一部分</li>
+</ul>
+<ul>
+<li>loading weight：可以直接用此向量衡量变量重要性</li>
+<li>regression coefficients</li>
+<li>variable importance in projection</li>
+</ul>
  
       <!-- reward -->
       
@@ -184,12 +288,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/%E7%AC%94%E8%AE%B0-%E5%8F%98%E5%88%86%E4%B8%8D%E7%AD%89%E5%BC%8F.html" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/note-PLS.html" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%87%B8%E4%BC%98%E5%8C%96/" rel="tag">凸优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
 
     </footer>
   </div>
@@ -197,19 +301,19 @@
    
   <nav class="article-nav">
     
-      <a href="/%E7%AC%94%E8%AE%B0-%E5%87%B8%E4%BC%98%E5%8C%961.html" class="article-nav-link">
+      <a href="/note-zsh-without-root.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            1. 凸集(1)
+            非root权限下安装zsh
           
         </div>
       </a>
     
     
-      <a href="/%E8%AE%BA%E6%96%87-Low-bit-quantization.html" class="article-nav-link">
+      <a href="/note-pytorch-problems.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Extremely Low Bit Neural Network: Squeeze the Last Bit Out with ADMM</div>
+        <div class="article-nav-title">PyTorch 问题汇总</div>
       </a>
     
   </nav>

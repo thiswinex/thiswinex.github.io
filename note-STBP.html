@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    3. 凸函数(1) |  Thiswinex&#39;s Blog
+    Spatio-Temporal Backpropagation for Training High-Performance Spiking Neural Networks |  Thiswinex&#39;s Blog
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -44,7 +44,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-笔记-凸优化3"
+  id="post-note-STBP"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -55,18 +55,18 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  3. 凸函数(1)
+  Spatio-Temporal Backpropagation for Training High-Performance Spiking Neural Networks
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/%E7%AC%94%E8%AE%B0-%E5%87%B8%E4%BC%98%E5%8C%963.html" class="article-date">
-  <time datetime="2019-03-08T02:45:37.000Z" itemprop="datePublished">2019-03-08</time>
+      <a href="/note-STBP.html" class="article-date">
+  <time datetime="2020-12-15T14:00:43.874Z" itemprop="datePublished">2020-12-15</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a> / <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/%E5%87%B8%E4%BC%98%E5%8C%96/">凸优化</a>
+    <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87/">论文</a> / <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87/SNN/">SNN</a>
   </div>
   
 <div class="word_count">
@@ -74,7 +74,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">239</span>
+            <span class="post-count">523</span>
         </span>
     </span>
 
@@ -83,7 +83,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">2 分钟</span>
         </span>
     </span>
 </div>
@@ -98,46 +98,60 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="Convex-functions-1"><a href="#Convex-functions-1" class="headerlink" title="Convex functions(1)"></a>Convex functions(1)</h2><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
-<li>主要介绍了凸函数及其性质</li>
+  <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.frontiersin.org/articles/10.3389/fnins.2018.00331/full">Spatio-temporal backpropagation for training high-performance spiking neural networks - 原文</a> ；本文刊登在2018年 Frontiers in Neuroscience 期刊上。</li>
+<li>BPTT-inspired的方法，文章的主要思想是以迭代式的方式近似LIF模型，使得LIF模型网络的推理过程变为线性迭代（线性地完成时域和空间域的迭代，是谓”spatio-temporal”），从而可以根据迭代式进行反向传播。对于脉冲激活函数的梯度，文章设计了数种不同的梯度近似函数，取得了不错的效果。</li>
 </ul>
 <a id="more"></a>
-<h2 id="1-Definition"><a href="#1-Definition" class="headerlink" title="1. Definition"></a>1. Definition</h2><ul>
-<li>$f:\mathcal{R^n}\rightarrow \mathcal{R}$ is convex if $\textbf{dom}\ f$ is convex set and<script type="math/tex; mode=display">f[\theta x+(1-\theta)y]\leq \theta f(x)+(1-\theta)f(y)</script>for all $x, y\in\textbf{dom}\ f, 0\leq\theta\leq 1$</li>
-</ul>
-<h2 id="2-Convex-Examples"><a href="#2-Convex-Examples" class="headerlink" title="2.  Convex Examples"></a>2.  Convex Examples</h2><ul>
-<li>on $\mathcal{R}$<ul>
-<li>affine</li>
-<li>exponential</li>
-<li>powers</li>
-<li>powers of absolute value</li>
-<li>negative entropy</li>
+<h3 id="LIF-Model"><a href="#LIF-Model" class="headerlink" title="LIF Model"></a>LIF Model</h3><ul>
+<li><p>LIF（Leaky Integrate and Fire）模型即带leaky漏电、integrate对脉冲积分、fire发放脉冲等主要特征的神经元模型。其微分方程为：</p>
+<script type="math/tex; mode=display">
+\tau \frac{du(t)}{dt}=-u(t)+I(t)\tag{1}</script><ul>
+<li>其中 $u$ 代表膜电势，$I$ 代表电流，$\tau$ 为一个漏电常量。</li>
 </ul>
 </li>
-<li>on $\mathcal{R}^n$<ul>
-<li>affine</li>
-<li>norms</li>
-</ul>
-</li>
-<li>on $\mathcal{R}^{m\times n}$<ul>
-<li>affine</li>
-<li>spectral norm</li>
-</ul>
+<li><p>微分方程在数值上求解需要转为迭代式：</p>
 </li>
 </ul>
-<h2 id="3-Restriction-of-a-convex-function-to-a-line"><a href="#3-Restriction-of-a-convex-function-to-a-line" class="headerlink" title="3. Restriction of a convex function to a line"></a>3. Restriction of a convex function to a line</h2><p>$f:R^n\rightarrow R$ is convex if and only if the function $g:R\rightarrow R$</p>
-<script type="math/tex; mode=display">g(t)=f(x+tv), \textbf{dom}\ g=\{t\mid x+tv\in \textbf{dom}\ f\}</script><p>is convex for any $x\in\textbf{dom}\ f, v\in \mathcal{R}^n$</p>
-<blockquote>
-<p>把 $f$ 定义域限定在任意空间直线上是凸的，那么 $f$ 是凸的。注意 $x+tv$ 中 $x,v\in\mathcal{R^n}$ 只有 $t\in\mathcal{R}$ ，$x,v$ 可变并控制是哪条直线</p>
-</blockquote>
-<h2 id="4-Extended-value-extension"><a href="#4-Extended-value-extension" class="headerlink" title="4. Extended-value extension"></a>4. Extended-value extension</h2><p><img src="https://s2.ax1x.com/2019/03/08/kzvT9P.png" alt=""></p>
-<h2 id="5-First-order-condition"><a href="#5-First-order-condition" class="headerlink" title="5. First-order condition"></a>5. First-order condition</h2><p><img src="https://s2.ax1x.com/2019/03/08/kzvbjS.png" alt=""></p>
-<h2 id="6-Second-order-condition"><a href="#6-Second-order-condition" class="headerlink" title="6. Second-order condition"></a>6. Second-order condition</h2><p><img src="https://s2.ax1x.com/2019/03/08/kzvLng.png" alt=""></p>
-<blockquote>
-<p>一阶条件和二阶条件，总的来说和一元函数差不多</p>
-</blockquote>
-<h3 id="Epigraph"><a href="#Epigraph" class="headerlink" title="Epigraph"></a>Epigraph</h3><p><img src="/Users/pingguo/Desktop/凸优化/image/11.png" alt="11"></p>
-<h3 id="Jensen’s-inequality"><a href="#Jensen’s-inequality" class="headerlink" title="Jensen’s inequality"></a>Jensen’s inequality</h3><p><img src="/Users/pingguo/Desktop/凸优化/image/12.png" alt="12"></p>
+<script type="math/tex; mode=display">
+u(t)=u(t_{i-1})e^{\frac{t_{i-1}-t}{\tau}}+\hat{I}(t)\tag{2}</script><h3 id="STBP-Method"><a href="#STBP-Method" class="headerlink" title="STBP Method"></a>STBP Method</h3><ul>
+<li><p>本文更具体地将LIF模型对应到SNN模型，迭代式可以转化为三步：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+x^{t+1,n}_i&=\sum^{l(n-1)}_{j=1}w^n_{ij}o^{t+1,n-1}_j\tag{3}\\
+u^{t+1,n}_i&=u^{t,n}_if(o^{t,n}_i)+x^{t+1,n}_i+b^n_i\tag{4}\\
+o^{t+1,n}_i&=g(u^{t+1,n}_i)\tag{5}
+\end{align}</script><p>其中</p>
+<script type="math/tex; mode=display">
+\begin{align}
+f(x)&=\tau e^{-\frac{x}{\tau}}\tag{6}\\
+g(x)&=1 \text{  if  }x\geq V_{th} \text{ else }0\tag{7}
+\end{align}</script><p>$x$ 为神经元的输入，$u$ 为神经元电势，$o$ 为神经元的输出。式(3)的含义是：神经元的输入为前层神经元输出的加权和；式(4)的含义是：当前时刻电势=前一时刻电势×漏电/发放函数+神经元输入+偏置；式(5)的含义是，若电势大于阈值，则发放脉冲。</p>
+</li>
+<li><p>本文提出式(6)的近似式：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+f(o^{t,n}_i)\approx\left\{
+    \begin{array} 
+        s\tau, o^{t,n}_i=0 \\
+        0, o^{t,n}_i=1
+    \end{array}
+    \right. \tag{8}
+\end{align}</script></li>
+<li><p>本文提出 $g$ 的一个梯度近似：</p>
+<script type="math/tex; mode=display">
+h(u)=\frac{1}{a_1}sign(|u-V_{th}|<\frac{a_1}{2})\tag{9}</script></li>
+<li><p>至此，在SNN上使用BP的障碍已经全部被扫清。前推中核心的(3)(4)(5)式全部可导。</p>
+<ul>
+<li><p>前推顺序为：1）对于每一个时间t，计算完一次完整的前推过程并更新电势；2） 计算下一个时间t。</p>
+</li>
+<li><p>每层的权重都有t个状态；由于前推过程中每一层的输出结果都依赖于 1）相同t前一层的输出 ；2）前一个t同一层的电势。所以前推的依赖关系在所有的权重状态中可以构成一个有向无环图，可以直接根据前推路径进行反向传播。</p>
+<p><img src="https://s1.ax1x.com/2020/10/05/0YgEHs.png" alt="image 20201005164809424"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h3><p>论文中其余篇幅主要是参数选择、g的梯度近似的选择、反向传播公式推导以及实验结果。在此略去不表。</p>
  
       <!-- reward -->
       
@@ -202,12 +216,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/%E7%AC%94%E8%AE%B0-%E5%87%B8%E4%BC%98%E5%8C%963.html" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/note-STBP.html" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%87%B8%E4%BC%98%E5%8C%96/" rel="tag">凸优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SNN/" rel="tag">SNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BA%E6%96%87/" rel="tag">论文</a></li></ul>
 
     </footer>
   </div>
@@ -215,19 +229,19 @@
    
   <nav class="article-nav">
     
-      <a href="/%E7%AC%94%E8%AE%B0-%E5%87%B8%E5%87%BD%E6%95%B0-2.html" class="article-nav-link">
+      <a href="/note-snn-yolo.html" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            4. 凸函数(2)
+            Spiking-YOLO:Spiking Neural Network for Energy-Efficient Object Detection
           
         </div>
       </a>
     
     
-      <a href="/%E7%AC%94%E8%AE%B0-%E5%87%B8%E4%BC%98%E5%8C%962.html" class="article-nav-link">
+      <a href="/note-deepSTBP-tdBN.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">2. 凸集(2)</div>
+        <div class="article-nav-title">Going Deeper With Directly-Trained Larger Spiking Neural Networks</div>
       </a>
     
   </nav>
