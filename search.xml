@@ -1,53 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>LeetCode 基础题目</title>
-    <url>/OJ-LeetCode-Basic-01.html</url>
-    <content><![CDATA[<p>分享一些基础题目题解和标答。</p>
-<a id="more"></a>
-<h3 id="206-Easy-反转链表-Reverse-Linked-List"><a href="#206-Easy-反转链表-Reverse-Linked-List" class="headerlink" title="#206 [Easy] 反转链表 Reverse Linked List"></a>#206 [Easy] 反转链表 <a href="https://leetcode-cn.com/problems/reverse-linked-list/">Reverse Linked List</a></h3><blockquote>
-<p>反转一个单链表。</p>
-</blockquote>
-<p>经典题目，有迭代和递归解法：</p>
-<p>迭代解：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">reverseList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        ListNode *pre, *now, *next, *new_head;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="literal">NULL</span> || head-&gt;next == <span class="literal">NULL</span>) <span class="keyword">return</span> head;</span><br><span class="line">        now = head-&gt;next;</span><br><span class="line">        pre = head;</span><br><span class="line">        pre-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">            next = now-&gt;next;</span><br><span class="line">            now-&gt;next = pre;</span><br><span class="line">            <span class="keyword">if</span>(next != <span class="literal">NULL</span>)&#123;</span><br><span class="line">                pre = now;</span><br><span class="line">                now = next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> now;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>迭代解即是用新指针来保存前后元素，遍历一遍链表即可反转。</p>
-<blockquote>
-<p> 执行用时 :16 ms, 在所有 C++ 提交中击败了52.36%的用户</p>
-<p>内存消耗 :9.1 MB, 在所有 C++ 提交中击败了67.37%的用户</p>
-</blockquote>
-<p>递归解：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">reverseList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="literal">NULL</span> || head-&gt;next == <span class="literal">NULL</span>) <span class="keyword">return</span> head;</span><br><span class="line">        ListNode *newHead = recur(head, head-&gt;next);</span><br><span class="line">        head-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">return</span> newHead;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function">ListNode* <span class="title">recur</span><span class="params">(ListNode* node, ListNode* next)</span></span>&#123;</span><br><span class="line">        ListNode *nnext = next-&gt;next;</span><br><span class="line">        next-&gt;next = node;</span><br><span class="line">        <span class="keyword">if</span>(nnext == <span class="literal">NULL</span>) <span class="keyword">return</span> next;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> recur(next, nnext);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>一个更标准的递归做法基于反向处理链表，可以不需要新的函数。(Java)</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">reverseList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>) <span class="keyword">return</span> head;</span><br><span class="line">    ListNode p = reverseList(head.next);</span><br><span class="line">    head.next.next = head;</span><br><span class="line">    head.next = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>执行用时 :28 ms, 在所有 C++ 提交中击败了5.93%的用户</p>
-<p>内存消耗 :9.3 MB, 在所有 C++ 提交中击败了11.86%的用户</p>
-</blockquote>
-<hr>
-<h3 id="21-Easy-合并两个有序链表-Merge-Two-Sorted-Lists"><a href="#21-Easy-合并两个有序链表-Merge-Two-Sorted-Lists" class="headerlink" title="#21 [Easy] 合并两个有序链表 Merge Two Sorted Lists"></a>#21 [Easy] 合并两个有序链表 <a href="https://leetcode-cn.com/problems/merge-two-sorted-lists/">Merge Two Sorted Lists</a></h3><blockquote>
-<p>将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 </p>
-</blockquote>
-<p>标准迭代，递归也可以但是感觉会慢。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeTwoLists</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        ListNode *root = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        ListNode *iter = root;</span><br><span class="line">        <span class="keyword">while</span>(l1 != <span class="literal">NULL</span> || l2 != <span class="literal">NULL</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(l1 != <span class="literal">NULL</span> &amp;&amp; (l2 == <span class="literal">NULL</span> || l1-&gt;val &lt;= l2-&gt;val))&#123;</span><br><span class="line">                iter-&gt;next = l1;</span><br><span class="line">                iter = iter-&gt;next;</span><br><span class="line">                l1 = l1-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(l2 != <span class="literal">NULL</span> &amp;&amp; (l1 == <span class="literal">NULL</span> || l2-&gt;val &lt;= l1-&gt;val))&#123;</span><br><span class="line">                iter-&gt;next = l2;</span><br><span class="line">                iter = iter-&gt;next;</span><br><span class="line">                l2 = l2-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>执行用时 :12 ms, 在所有 C++ 提交中击败了83.66%的用户</p>
-<p>内存消耗 :8.9 MB, 在所有 C++ 提交中击败了82.84%的用户</p>
-</blockquote>
-<hr>
-]]></content>
-      <categories>
-        <category>习题</category>
-        <category>OJ</category>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>OJ</tag>
-        <tag>LeetCode</tag>
-        <tag>习题</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>凸问题习题</title>
     <url>/assignment-convex-problem.html</url>
     <content><![CDATA[<p>《凸优化》第四章部分习题。</p>
@@ -368,6 +321,53 @@ i.e.\ &f_0[\theta x_1+(1-\theta)x_2]\preceq_K\theta f_0(x_1)+(1-\theta)f_0(x_2)\
       <tags>
         <tag>凸优化</tag>
         <tag>习题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode 基础题目</title>
+    <url>/OJ-LeetCode-Basic-01.html</url>
+    <content><![CDATA[<p>分享一些基础题目题解和标答。</p>
+<a id="more"></a>
+<h3 id="206-Easy-反转链表-Reverse-Linked-List"><a href="#206-Easy-反转链表-Reverse-Linked-List" class="headerlink" title="#206 [Easy] 反转链表 Reverse Linked List"></a>#206 [Easy] 反转链表 <a href="https://leetcode-cn.com/problems/reverse-linked-list/">Reverse Linked List</a></h3><blockquote>
+<p>反转一个单链表。</p>
+</blockquote>
+<p>经典题目，有迭代和递归解法：</p>
+<p>迭代解：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">reverseList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        ListNode *pre, *now, *next, *new_head;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="literal">NULL</span> || head-&gt;next == <span class="literal">NULL</span>) <span class="keyword">return</span> head;</span><br><span class="line">        now = head-&gt;next;</span><br><span class="line">        pre = head;</span><br><span class="line">        pre-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">            next = now-&gt;next;</span><br><span class="line">            now-&gt;next = pre;</span><br><span class="line">            <span class="keyword">if</span>(next != <span class="literal">NULL</span>)&#123;</span><br><span class="line">                pre = now;</span><br><span class="line">                now = next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> now;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>迭代解即是用新指针来保存前后元素，遍历一遍链表即可反转。</p>
+<blockquote>
+<p> 执行用时 :16 ms, 在所有 C++ 提交中击败了52.36%的用户</p>
+<p>内存消耗 :9.1 MB, 在所有 C++ 提交中击败了67.37%的用户</p>
+</blockquote>
+<p>递归解：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">reverseList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="literal">NULL</span> || head-&gt;next == <span class="literal">NULL</span>) <span class="keyword">return</span> head;</span><br><span class="line">        ListNode *newHead = recur(head, head-&gt;next);</span><br><span class="line">        head-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">return</span> newHead;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function">ListNode* <span class="title">recur</span><span class="params">(ListNode* node, ListNode* next)</span></span>&#123;</span><br><span class="line">        ListNode *nnext = next-&gt;next;</span><br><span class="line">        next-&gt;next = node;</span><br><span class="line">        <span class="keyword">if</span>(nnext == <span class="literal">NULL</span>) <span class="keyword">return</span> next;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> recur(next, nnext);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>一个更标准的递归做法基于反向处理链表，可以不需要新的函数。(Java)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">reverseList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>) <span class="keyword">return</span> head;</span><br><span class="line">    ListNode p = reverseList(head.next);</span><br><span class="line">    head.next.next = head;</span><br><span class="line">    head.next = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>执行用时 :28 ms, 在所有 C++ 提交中击败了5.93%的用户</p>
+<p>内存消耗 :9.3 MB, 在所有 C++ 提交中击败了11.86%的用户</p>
+</blockquote>
+<hr>
+<h3 id="21-Easy-合并两个有序链表-Merge-Two-Sorted-Lists"><a href="#21-Easy-合并两个有序链表-Merge-Two-Sorted-Lists" class="headerlink" title="#21 [Easy] 合并两个有序链表 Merge Two Sorted Lists"></a>#21 [Easy] 合并两个有序链表 <a href="https://leetcode-cn.com/problems/merge-two-sorted-lists/">Merge Two Sorted Lists</a></h3><blockquote>
+<p>将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 </p>
+</blockquote>
+<p>标准迭代，递归也可以但是感觉会慢。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeTwoLists</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        ListNode *root = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        ListNode *iter = root;</span><br><span class="line">        <span class="keyword">while</span>(l1 != <span class="literal">NULL</span> || l2 != <span class="literal">NULL</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(l1 != <span class="literal">NULL</span> &amp;&amp; (l2 == <span class="literal">NULL</span> || l1-&gt;val &lt;= l2-&gt;val))&#123;</span><br><span class="line">                iter-&gt;next = l1;</span><br><span class="line">                iter = iter-&gt;next;</span><br><span class="line">                l1 = l1-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(l2 != <span class="literal">NULL</span> &amp;&amp; (l1 == <span class="literal">NULL</span> || l2-&gt;val &lt;= l1-&gt;val))&#123;</span><br><span class="line">                iter-&gt;next = l2;</span><br><span class="line">                iter = iter-&gt;next;</span><br><span class="line">                l2 = l2-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>执行用时 :12 ms, 在所有 C++ 提交中击败了83.66%的用户</p>
+<p>内存消耗 :8.9 MB, 在所有 C++ 提交中击败了82.84%的用户</p>
+</blockquote>
+<hr>
+]]></content>
+      <categories>
+        <category>习题</category>
+        <category>OJ</category>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>习题</tag>
+        <tag>OJ</tag>
+        <tag>LeetCode</tag>
       </tags>
   </entry>
   <entry>
@@ -818,6 +818,146 @@ u^{k+1}&:=u^k+x^{k+1}-z^{k+1}
       </tags>
   </entry>
   <entry>
+    <title>PLS简介</title>
+    <url>/note-PLS.html</url>
+    <content><![CDATA[<p>PLS 即 Partial Least Squares  偏最小二乘法。</p>
+<a id="more"></a>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li><p>适用特点：数据量小、数据维数高、数据多重共线性</p>
+</li>
+<li><p>为什么？考虑回归问题 $y=\alpha +\beta X+\epsilon$ ，那么最小二乘回归（最大化X、y协方差）</p>
+<script type="math/tex; mode=display">
+  \beta=(X'X)^{-1}X'y</script><p>即需要 $X’X$ 可逆满秩，$X$ 的样本（行数）需要多于特征（列数），且特征之间没有线性相关性（共线性）。</p>
+</li>
+<li><p>对比：</p>
+<ul>
+<li><p>PCA：</p>
+</li>
+<li><script type="math/tex; mode=display">
+X=TP'=T_kP_k'+E\\</script><p>使用SVD求：</p>
+</li>
+<li><script type="math/tex; mode=display">
+X=USV',T=US,P=V,X=TP'</script><p>但是PCA没有利用预测信息即 $y$ ，有些PC和预测没有关系。</p>
+</li>
+</ul>
+</li>
+<li><p>PLS模型：</p>
+</li>
+<li><script type="math/tex; mode=display">
+X=TP'+E\\
+Y=UQ'+F</script><p>其中 $X$ 为 $n×m$ 观测矩阵，$Y$ 为 $n×p$ 响应矩阵。$T/U$ 为 $n×l$ 的得分矩阵（或成分矩阵），$P/Q$ 为 $m/n ×l$ 的正交载荷矩阵，$E/F$ 为残差。</p>
+</li>
+<li><p>要求：$\max \text{Cov}(T,U)$ 。类似PCR，观测矩阵被分解为得分矩阵和载荷矩阵的外积，但是PCR中 $X=TP’, T=XW, P=W$ 即权值和载荷相同，这一点不同于PLS（ PLS1中 $w=X’y$ ，正比于X和y的协方差）。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li>PLS-CV：<img src="https://s2.ax1x.com/2020/03/09/8SgFJJ.png" alt="image-20191211162109235"></li>
+</ul>
+<hr>
+<h2 id="PLS-算法"><a href="#PLS-算法" class="headerlink" title="PLS 算法"></a>PLS 算法</h2><h3 id="NIPALS"><a href="#NIPALS" class="headerlink" title="NIPALS"></a>NIPALS</h3><ol>
+<li><p>令 $X_a, Y_a$ 为观测矩阵和响应矩阵</p>
+</li>
+<li><p>数据标准化：</p>
+</li>
+</ol>
+<ul>
+<li>观测/响应矩阵需要减去对应维度的均值</li>
+<li>一般没有除以标准差这一操作</li>
+</ul>
+<ol>
+<li><p>取其中一列 $y$ 作为 $u_1$ （因子）</p>
+</li>
+<li><p>计算 $X$ 权重：（利用 $u_1$ 信息，用权重实现 $X$ 到因子 $t$ 的变换）</p>
+</li>
+</ol>
+<script type="math/tex; mode=display">
+w_1=\frac{X'_{0}u_{1}}{u_1'u_1}\\
+w_1\leftarrow \frac{w_1}{\|w_1\|}</script><ol>
+<li>计算得分向量（因子）：</li>
+</ol>
+<script type="math/tex; mode=display">
+t_1=X_{0}w_1</script><ol>
+<li><p>对 $Y$ 进行相同操作，求得权重 $c_1$ ，因子 $u_1^*$ ，计算 $u$ 的残差是否收敛</p>
+</li>
+<li><p>计算载荷向量（$p$ 反映 $X$ 和 $t$ 的关系，估计意义上 $X=tp’$：</p>
+</li>
+</ol>
+<script type="math/tex; mode=display">
+p_1=X_0'\frac{t_1}{t_1't_1}\\
+    q_1=Y_{0}'\frac{u_1}{u_1'u_1}\\</script><ol>
+<li>计算新观测矩阵（残差矩阵）：</li>
+</ol>
+<script type="math/tex; mode=display">
+X_1=X_{0}-t_1p_1'\\
+b_1=u_1't_1/t_1't_1\\
+Y_1=Y_{0}-u_1q_1'=Y_0-b_1t_1q_1'</script><ol>
+<li><p>循环</p>
+</li>
+<li><p>若为回归任务，则任务目标是回归线性模型 $Y=\alpha+X\beta +\epsilon$ ，则 </p>
+</li>
+</ol>
+<script type="math/tex; mode=display">
+\hat{\beta}=W(P'W)^{-1}q\\
+\hat{\alpha}=\overline{y}-\overline{x}\hat{\beta}</script><p>​                否则需解：</p>
+<ul>
+<li><script type="math/tex; mode=display">
+M=X_{a-1}'Y_{a-1}Y_{a-1}'X_{a-1}</script><p>其最大特征值为 $\theta_a^2$，单位特征向量为 $w_a$ ， $v_a$ 可由其计算得出。</p>
+</li>
+<li><p>第一轮之后的权重把残差变换到因子，不对原始数据变换</p>
+</li>
+</ul>
+<h3 id="SIMPLS"><a href="#SIMPLS" class="headerlink" title="SIMPLS"></a>SIMPLS</h3><p>$S=X_0’Y_0$</p>
+<p>for i=1 to k</p>
+<p>​    if i=1: $[u,s,v]=SVD(S)$</p>
+<p>​    if i&gt;1: $[u,s,v]=SVD(S-P<em>{i-1}(P</em>{i-1}’P<em>{i-1})^{-1}P’</em>{i-1}S)$</p>
+<p>​    $r_i=u(:,1)$</p>
+<p>​    $t_i=X_0r_i$</p>
+<p>​    $p_i=X’_0t_i/t_i’t_i$</p>
+<p><code>end</code></p>
+<p>$B_{PLS}=R_k(T_k’T_k)^{-1}T_kY_0$</p>
+<h3 id="两者比较"><a href="#两者比较" class="headerlink" title="两者比较"></a>两者比较</h3><ul>
+<li>NIPALS的权重是相对于各个残差矩阵而言的，解释不便</li>
+<li>SIMPLS更快，且是Matlab 标准算法</li>
+<li>大部分情况下结果相似，但是高 latent variable 时 SIMPLS 不稳定</li>
+</ul>
+<p><img src="https://s2.ax1x.com/2020/03/09/8pQcJH.png" alt="image-20191213141042111"></p>
+<hr>
+<h2 id="Kernel-PLS"><a href="#Kernel-PLS" class="headerlink" title="Kernel PLS"></a>Kernel PLS</h2><ul>
+<li>解决非线性问题，和SVM一样可以采用 Kernel 方法：将非线性的低维数据投影到高维后数据变得线性。核函数则用来计算数据在高维空间中的内积。</li>
+<li>实验中由于映射未知，核函数无法显式推导，一般只能通过枚举实验。</li>
+</ul>
+<hr>
+<h2 id="PLS分类"><a href="#PLS分类" class="headerlink" title="PLS分类"></a>PLS分类</h2><ul>
+<li>PLS-DA</li>
+<li>通过 dummy matrix 对响应矩阵编码（类似 one-hot）来分类</li>
+<li>处理非线性问题，类别不平衡问题性能会下降</li>
+<li>Local weighted PLS：对每个待预测的query，只选出一部分最近的训练样本进行回归建模（多个线性模型来处理非线性）</li>
+</ul>
+<hr>
+<h2 id="Variable-Selection"><a href="#Variable-Selection" class="headerlink" title="Variable Selection"></a>Variable Selection</h2><p><img src="https://s2.ax1x.com/2020/03/09/8SgKoD.png" alt="image-20191212213245596"></p>
+<ul>
+<li>filter方法，直接从输出中过滤</li>
+<li>wrapper：基于filter，选出的变量送回模型重新拟合</li>
+<li>embedded的方法，顾名思义即变量选择是PLSR过程的一部分</li>
+</ul>
+<ul>
+<li>loading weight：可以直接用此向量衡量变量重要性</li>
+<li>regression coefficients</li>
+<li>variable importance in projection</li>
+</ul>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>机器学习</category>
+        <category>多元回归</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>机器学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Spatio-Temporal Backpropagation for Training High-Performance Spiking Neural Networks</title>
     <url>/note-STBP.html</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
@@ -938,72 +1078,101 @@ h(u)=\frac{1}{a_1}sign(|u-V_{th}|<\frac{a_1}{2})\tag{9}</script></li>
       </tags>
   </entry>
   <entry>
-    <title>4. 凸优化问题(1)</title>
-    <url>/note-convex-problem.html</url>
-    <content><![CDATA[<h2 id="Convex-Optimization-Problems-1"><a href="#Convex-Optimization-Problems-1" class="headerlink" title="Convex-Optimization Problems(1)"></a>Convex-Optimization Problems(1)</h2><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
-<li>介绍了一些经典的优化问题，不止于凸优化问题</li>
-<li>仍然有很多问题（几何规划、向量规划、广义不等式约束等等）以及关于SDP和SOCP的一些拓展未在此处给出，未来用到的时候再继续写点。</li>
-</ul>
+    <title>4. 凸函数(2)</title>
+    <url>/note-convex-function-2.html</url>
+    <content><![CDATA[<h2 id="Convex-Function-2"><a href="#Convex-Function-2" class="headerlink" title="Convex Function(2)"></a>Convex Function(2)</h2><h2 id="1-Operation-that-preserve-convexity"><a href="#1-Operation-that-preserve-convexity" class="headerlink" title="1. Operation that preserve convexity"></a>1. Operation that preserve convexity</h2><ol>
+<li><p>Positive weighted sum</p>
+<p>if $f_1,f_2,\cdots,f_n$ are convex, $\omega_1,\omega_2,\cdots,\omega_n\geq0$, then $f=\sum\omega_if_i$ is convex</p>
+</li>
+</ol>
 <a id="more"></a>
-<h2 id="1-Convex-optimization-problems"><a href="#1-Convex-optimization-problems" class="headerlink" title="1. Convex optimization problems"></a>1. Convex optimization problems</h2><ul>
-<li><p>Standard form:</p>
-<p>minimize $f_0(x)$</p>
-<p>subject to $f_i(x)\leq 0, i=1,\cdots,m, a^T_ix=b_i,i=1,\cdots,p$</p>
-<p>Note: $f_0$ is convex, $f_1,\cdots,f_n$ are convex, $a^T_ix=b_i$ are affine.</p>
+<blockquote>
+<p>非负加权求和，仿射变换的扩展</p>
+</blockquote>
+<ol>
+<li><p>Composition with affine function</p>
+<p>if $f$ is convex, then $g(x)=f(ax+b)$ is convex</p>
+</li>
+</ol>
+<blockquote>
+<p>凸函数复合仿射函数是凸函数</p>
+</blockquote>
+<ol>
+<li><p>Pointwise maximum</p>
+<p>if $f_1,f_2$ are convex, then $f(x)=\max{f_1,f_2}$ is convex</p>
+</li>
+</ol>
+<blockquote>
+<p>逐点最大操作保凸；<br>可以推广到无穷多个凸集（因为是(定义域)取交？）</p>
+</blockquote>
+<ol>
+<li><p>Pointwise supremum</p>
+<p>if $f(x,y)$ is convex, then $g(x)=\sup f(x,y)$ is convex</p>
+</li>
+</ol>
+<blockquote>
+<p> 逐点上确界操作保凸</p>
+</blockquote>
+<ol>
+<li><p>Estabilishing by affine function</p>
+<p>$f(x)=\sup{g(x)}$ , $g$ is affine</p>
+</li>
+</ol>
+<blockquote>
+<p>由凸函数-&gt;仿射函数族的证明：做 $\textbf{epi}\ f$ 上的支撑超平面<br>仿射函数族-&gt;凸函数的证明：多个函数的逐点上确界保凸</p>
+<p>保证了共轭函数是凸函数</p>
+</blockquote>
+<ol>
+<li><p>Composition with scalar functions</p>
+<p><img src="https://imgchr.com/i/EVbLqS" alt="image-20190329103202902"></p>
+</li>
+</ol>
+<blockquote>
+<p>标量函数复合：需满足的条件</p>
+</blockquote>
+<ol>
+<li>Vector composition</li>
+</ol>
+<p><img src="https://imgchr.com/i/EVbjaQ" alt="image-20190329103401790"></p>
+<blockquote>
+<p>矢量复合需满足的条件</p>
+</blockquote>
+<ol>
+<li><p>Minimization</p>
+<p>if $f(x,y)$ is convex function and $\mathcal{C}$ is a convex set, then $g(x)=\underset{y\in\mathcal{C}}\inf f(x,y)$ is convex</p>
+</li>
+</ol>
+<blockquote>
+<p>$g$ 相当于 $f$ 在某个分量上的投影取 $\min$ (想像从y轴的平行方向看$t=f(x,y)$的投影，再把投影生成的面积取下界得到的仍然是凸函数)</p>
+</blockquote>
+<ol>
+<li>Perspective</li>
+</ol>
+<blockquote>
+<p>透视运算保凸</p>
+</blockquote>
+<h2 id="The-conjugate-function"><a href="#The-conjugate-function" class="headerlink" title="The conjugate function"></a>The conjugate function</h2><ul>
+<li><p>Define: $f^*(y)=\underset{x\in\mathbf{dom} f}{\sup}(y^Tx-f(x))$</p>
+<blockquote>
+<p>相当于这个仿射函数族遍历所有的斜率(斜率为x)，b取$-f(x)$</p>
+<p>对仿射函数族取逐点上确界的操作保证了$f^*(y)$ 的凸性，无论$f(x)$是否凸</p>
+</blockquote>
 </li>
 </ul>
-<blockquote>
-<p>可以注意到凸优化问题的可行集为凸</p>
-</blockquote>
-<ul>
-<li><p><strong>Any local optimal point is globally optimal</strong></p>
-</li>
-<li><p>Optimality criterion for differentiable $f_0$ </p>
-<p>$x$ is optimal <strong>iff</strong> it’s feasible $(x\in X)$ and $\triangledown f_0(x)^T(y-x)\geq 0$ </p>
-</li>
+<h2 id="2-Quasiconvex-functions"><a href="#2-Quasiconvex-functions" class="headerlink" title="2. Quasiconvex functions"></a>2. Quasiconvex functions</h2><ul>
+<li>Define: $f$ is quasiconvex if $S_\alpha ={x\in\mathbf{dom}f\mid f(x)\leq\alpha }$ are convex for all $\alpha$</li>
 </ul>
 <blockquote>
-<p>$-\triangledown f(x)$ 定义了一个支撑超平面切于 最优点</p>
+<p>即定义域为凸，所有下水平集为凸<br><img src="https://imgchr.com/i/EVbqr8" alt="image-20190329111417466"></p>
 </blockquote>
-<ul>
-<li>Equivalent convex problem</li>
-</ul>
+<h3 id="2-1-Properties"><a href="#2-1-Properties" class="headerlink" title="2.1 Properties"></a>2.1 Properties</h3><h4 id="Modified-Jensen-inequality"><a href="#Modified-Jensen-inequality" class="headerlink" title="- Modified Jensen inequality"></a>- Modified Jensen inequality</h4><p>$f$ is quasiconvex $\Leftrightarrow$ $f(\theta x+(1-\theta)y)\leq\max{f(x),f(y}$</p>
+<h4 id="In-R"><a href="#In-R" class="headerlink" title="- In R"></a>- In R</h4><p>$f$ is quasiconvex $\Leftrightarrow$ $f$ 在 $c\in\mathbf{dom}f$ 左侧非增右侧非减，且 $f$ 非增非减</p>
+<h4 id="First-order-condition"><a href="#First-order-condition" class="headerlink" title="- First-order condition"></a>- First-order condition</h4><p>$f$ is quasiconvex $\Leftrightarrow$[ $f(y)\leq f(x)\rightarrow\triangledown f(x)^T(y-x)\leq 0$]</p>
 <blockquote>
-<p>包括消除、引入等式约束；加入松弛变量；极小化部分变量；化为上境图问题</p>
+<p>梯度与 y-x 连线反向</p>
 </blockquote>
-<h2 id="2-Quasiconvex-optimization"><a href="#2-Quasiconvex-optimization" class="headerlink" title="2. Quasiconvex optimization"></a>2. Quasiconvex optimization</h2><ul>
-<li><p>Different point: </p>
-<p>$x$ is optimal <strong>if</strong> it’s feasible and $\triangledown f_0(x)^T(y-x)&gt;0$</p>
-</li>
-</ul>
-<blockquote>
-<p>拟凸问题可以通过构造凸可行性问题来求解</p>
-</blockquote>
-<h2 id="3-Linear-program"><a href="#3-Linear-program" class="headerlink" title="3. Linear program"></a>3. Linear program</h2><ul>
-<li><p>minimize $c^Tx+d$</p>
-<p>subject to $Gx\preceq h, Ax=b$</p>
-</li>
-</ul>
-<blockquote>
-<p>线性目标函数对凸优化是普适的。</p>
-<p>与线性分式问题等价</p>
-<p>$\min |x|_1$ s.t. $Ax=b$ 是线性规划问题：<br>$\min t$ s.t. $|x|_1\leq t, Ax=b$ 1范数可以分解成各分量的线性不等式</p>
-</blockquote>
-<h2 id="4-Quadradic-program"><a href="#4-Quadradic-program" class="headerlink" title="4. Quadradic program"></a>4. Quadradic program</h2><ul>
-<li><p>minimize $(1/2)x^TPx+q^Tx+r$</p>
-<p>subject to $Gx\preceq h, Ax=b, P\in \textbf{S}^n_+$ </p>
-</li>
-<li><p>least-squares: minimize $|Ax-b|^2_2$</p>
-<p>analytical solution $x^\star = A^\dagger b$</p>
-</li>
-</ul>
-<blockquote>
-<p>$A^\dagger$ 是伪逆矩阵的意思， $A=U\Sigma V^T, A^\dagger=V\Sigma^+U^T$</p>
-</blockquote>
-<h2 id="5-Second-order-cone-programming"><a href="#5-Second-order-cone-programming" class="headerlink" title="5. Second-order cone programming"></a>5. Second-order cone programming</h2><ul>
-<li><p>minimize $f^Tx$</p>
-<p>subject to $|A_ix+b_i|_2\leq c^T_ix, i=1,\cdots,m, Fx=g$</p>
-</li>
+<h2 id="3-Log-concave-and-log-convex-functions"><a href="#3-Log-concave-and-log-convex-functions" class="headerlink" title="3. Log-concave and log-convex functions"></a>3. Log-concave and log-convex functions</h2><ul>
+<li>Define: $f$ is log-convex if for all $x\in\mathbf{dom}f$ , $f(x)&gt;0$ and $\log f$ is convex</li>
 </ul>
 ]]></content>
       <categories>
@@ -1232,258 +1401,12 @@ $$g(x)=\begin{pmatrix}A\\c^T\end{pmatrix}x+\begin{pmatrix}b\\d\end{pmatrix}, p(x
       </tags>
   </entry>
   <entry>
-    <title>4. 凸函数(2)</title>
-    <url>/note-convex-function-2.html</url>
-    <content><![CDATA[<h2 id="Convex-Function-2"><a href="#Convex-Function-2" class="headerlink" title="Convex Function(2)"></a>Convex Function(2)</h2><h2 id="1-Operation-that-preserve-convexity"><a href="#1-Operation-that-preserve-convexity" class="headerlink" title="1. Operation that preserve convexity"></a>1. Operation that preserve convexity</h2><ol>
-<li><p>Positive weighted sum</p>
-<p>if $f_1,f_2,\cdots,f_n$ are convex, $\omega_1,\omega_2,\cdots,\omega_n\geq0$, then $f=\sum\omega_if_i$ is convex</p>
-</li>
-</ol>
-<a id="more"></a>
-<blockquote>
-<p>非负加权求和，仿射变换的扩展</p>
-</blockquote>
-<ol>
-<li><p>Composition with affine function</p>
-<p>if $f$ is convex, then $g(x)=f(ax+b)$ is convex</p>
-</li>
-</ol>
-<blockquote>
-<p>凸函数复合仿射函数是凸函数</p>
-</blockquote>
-<ol>
-<li><p>Pointwise maximum</p>
-<p>if $f_1,f_2$ are convex, then $f(x)=\max{f_1,f_2}$ is convex</p>
-</li>
-</ol>
-<blockquote>
-<p>逐点最大操作保凸；<br>可以推广到无穷多个凸集（因为是(定义域)取交？）</p>
-</blockquote>
-<ol>
-<li><p>Pointwise supremum</p>
-<p>if $f(x,y)$ is convex, then $g(x)=\sup f(x,y)$ is convex</p>
-</li>
-</ol>
-<blockquote>
-<p> 逐点上确界操作保凸</p>
-</blockquote>
-<ol>
-<li><p>Estabilishing by affine function</p>
-<p>$f(x)=\sup{g(x)}$ , $g$ is affine</p>
-</li>
-</ol>
-<blockquote>
-<p>由凸函数-&gt;仿射函数族的证明：做 $\textbf{epi}\ f$ 上的支撑超平面<br>仿射函数族-&gt;凸函数的证明：多个函数的逐点上确界保凸</p>
-<p>保证了共轭函数是凸函数</p>
-</blockquote>
-<ol>
-<li><p>Composition with scalar functions</p>
-<p><img src="https://imgchr.com/i/EVbLqS" alt="image-20190329103202902"></p>
-</li>
-</ol>
-<blockquote>
-<p>标量函数复合：需满足的条件</p>
-</blockquote>
-<ol>
-<li>Vector composition</li>
-</ol>
-<p><img src="https://imgchr.com/i/EVbjaQ" alt="image-20190329103401790"></p>
-<blockquote>
-<p>矢量复合需满足的条件</p>
-</blockquote>
-<ol>
-<li><p>Minimization</p>
-<p>if $f(x,y)$ is convex function and $\mathcal{C}$ is a convex set, then $g(x)=\underset{y\in\mathcal{C}}\inf f(x,y)$ is convex</p>
-</li>
-</ol>
-<blockquote>
-<p>$g$ 相当于 $f$ 在某个分量上的投影取 $\min$ (想像从y轴的平行方向看$t=f(x,y)$的投影，再把投影生成的面积取下界得到的仍然是凸函数)</p>
-</blockquote>
-<ol>
-<li>Perspective</li>
-</ol>
-<blockquote>
-<p>透视运算保凸</p>
-</blockquote>
-<h2 id="The-conjugate-function"><a href="#The-conjugate-function" class="headerlink" title="The conjugate function"></a>The conjugate function</h2><ul>
-<li><p>Define: $f^*(y)=\underset{x\in\mathbf{dom} f}{\sup}(y^Tx-f(x))$</p>
-<blockquote>
-<p>相当于这个仿射函数族遍历所有的斜率(斜率为x)，b取$-f(x)$</p>
-<p>对仿射函数族取逐点上确界的操作保证了$f^*(y)$ 的凸性，无论$f(x)$是否凸</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="2-Quasiconvex-functions"><a href="#2-Quasiconvex-functions" class="headerlink" title="2. Quasiconvex functions"></a>2. Quasiconvex functions</h2><ul>
-<li>Define: $f$ is quasiconvex if $S_\alpha ={x\in\mathbf{dom}f\mid f(x)\leq\alpha }$ are convex for all $\alpha$</li>
-</ul>
-<blockquote>
-<p>即定义域为凸，所有下水平集为凸<br><img src="https://imgchr.com/i/EVbqr8" alt="image-20190329111417466"></p>
-</blockquote>
-<h3 id="2-1-Properties"><a href="#2-1-Properties" class="headerlink" title="2.1 Properties"></a>2.1 Properties</h3><h4 id="Modified-Jensen-inequality"><a href="#Modified-Jensen-inequality" class="headerlink" title="- Modified Jensen inequality"></a>- Modified Jensen inequality</h4><p>$f$ is quasiconvex $\Leftrightarrow$ $f(\theta x+(1-\theta)y)\leq\max{f(x),f(y}$</p>
-<h4 id="In-R"><a href="#In-R" class="headerlink" title="- In R"></a>- In R</h4><p>$f$ is quasiconvex $\Leftrightarrow$ $f$ 在 $c\in\mathbf{dom}f$ 左侧非增右侧非减，且 $f$ 非增非减</p>
-<h4 id="First-order-condition"><a href="#First-order-condition" class="headerlink" title="- First-order condition"></a>- First-order condition</h4><p>$f$ is quasiconvex $\Leftrightarrow$[ $f(y)\leq f(x)\rightarrow\triangledown f(x)^T(y-x)\leq 0$]</p>
-<blockquote>
-<p>梯度与 y-x 连线反向</p>
-</blockquote>
-<h2 id="3-Log-concave-and-log-convex-functions"><a href="#3-Log-concave-and-log-convex-functions" class="headerlink" title="3. Log-concave and log-convex functions"></a>3. Log-concave and log-convex functions</h2><ul>
-<li>Define: $f$ is log-convex if for all $x\in\mathbf{dom}f$ , $f(x)&gt;0$ and $\log f$ is convex</li>
-</ul>
-]]></content>
-      <categories>
-        <category>笔记</category>
-        <category>凸优化</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-        <tag>凸优化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>PLS简介</title>
-    <url>/note-PLS.html</url>
-    <content><![CDATA[<p>PLS 即 Partial Least Squares  偏最小二乘法。</p>
-<a id="more"></a>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
-<li><p>适用特点：数据量小、数据维数高、数据多重共线性</p>
-</li>
-<li><p>为什么？考虑回归问题 $y=\alpha +\beta X+\epsilon$ ，那么最小二乘回归（最大化X、y协方差）</p>
-<script type="math/tex; mode=display">
-  \beta=(X'X)^{-1}X'y</script><p>即需要 $X’X$ 可逆满秩，$X$ 的样本（行数）需要多于特征（列数），且特征之间没有线性相关性（共线性）。</p>
-</li>
-<li><p>对比：</p>
-<ul>
-<li><p>PCA：</p>
-</li>
-<li><script type="math/tex; mode=display">
-X=TP'=T_kP_k'+E\\</script><p>使用SVD求：</p>
-</li>
-<li><script type="math/tex; mode=display">
-X=USV',T=US,P=V,X=TP'</script><p>但是PCA没有利用预测信息即 $y$ ，有些PC和预测没有关系。</p>
-</li>
-</ul>
-</li>
-<li><p>PLS模型：</p>
-</li>
-<li><script type="math/tex; mode=display">
-X=TP'+E\\
-Y=UQ'+F</script><p>其中 $X$ 为 $n×m$ 观测矩阵，$Y$ 为 $n×p$ 响应矩阵。$T/U$ 为 $n×l$ 的得分矩阵（或成分矩阵），$P/Q$ 为 $m/n ×l$ 的正交载荷矩阵，$E/F$ 为残差。</p>
-</li>
-<li><p>要求：$\max \text{Cov}(T,U)$ 。类似PCR，观测矩阵被分解为得分矩阵和载荷矩阵的外积，但是PCR中 $X=TP’, T=XW, P=W$ 即权值和载荷相同，这一点不同于PLS（ PLS1中 $w=X’y$ ，正比于X和y的协方差）。</p>
-</li>
-</ul>
-<hr>
-<ul>
-<li>PLS-CV：<img src="https://s2.ax1x.com/2020/03/09/8SgFJJ.png" alt="image-20191211162109235"></li>
-</ul>
-<hr>
-<h2 id="PLS-算法"><a href="#PLS-算法" class="headerlink" title="PLS 算法"></a>PLS 算法</h2><h3 id="NIPALS"><a href="#NIPALS" class="headerlink" title="NIPALS"></a>NIPALS</h3><ol>
-<li><p>令 $X_a, Y_a$ 为观测矩阵和响应矩阵</p>
-</li>
-<li><p>数据标准化：</p>
-</li>
-</ol>
-<ul>
-<li>观测/响应矩阵需要减去对应维度的均值</li>
-<li>一般没有除以标准差这一操作</li>
-</ul>
-<ol>
-<li><p>取其中一列 $y$ 作为 $u_1$ （因子）</p>
-</li>
-<li><p>计算 $X$ 权重：（利用 $u_1$ 信息，用权重实现 $X$ 到因子 $t$ 的变换）</p>
-</li>
-</ol>
-<script type="math/tex; mode=display">
-w_1=\frac{X'_{0}u_{1}}{u_1'u_1}\\
-w_1\leftarrow \frac{w_1}{\|w_1\|}</script><ol>
-<li>计算得分向量（因子）：</li>
-</ol>
-<script type="math/tex; mode=display">
-t_1=X_{0}w_1</script><ol>
-<li><p>对 $Y$ 进行相同操作，求得权重 $c_1$ ，因子 $u_1^*$ ，计算 $u$ 的残差是否收敛</p>
-</li>
-<li><p>计算载荷向量（$p$ 反映 $X$ 和 $t$ 的关系，估计意义上 $X=tp’$：</p>
-</li>
-</ol>
-<script type="math/tex; mode=display">
-p_1=X_0'\frac{t_1}{t_1't_1}\\
-    q_1=Y_{0}'\frac{u_1}{u_1'u_1}\\</script><ol>
-<li>计算新观测矩阵（残差矩阵）：</li>
-</ol>
-<script type="math/tex; mode=display">
-X_1=X_{0}-t_1p_1'\\
-b_1=u_1't_1/t_1't_1\\
-Y_1=Y_{0}-u_1q_1'=Y_0-b_1t_1q_1'</script><ol>
-<li><p>循环</p>
-</li>
-<li><p>若为回归任务，则任务目标是回归线性模型 $Y=\alpha+X\beta +\epsilon$ ，则 </p>
-</li>
-</ol>
-<script type="math/tex; mode=display">
-\hat{\beta}=W(P'W)^{-1}q\\
-\hat{\alpha}=\overline{y}-\overline{x}\hat{\beta}</script><p>​                否则需解：</p>
-<ul>
-<li><script type="math/tex; mode=display">
-M=X_{a-1}'Y_{a-1}Y_{a-1}'X_{a-1}</script><p>其最大特征值为 $\theta_a^2$，单位特征向量为 $w_a$ ， $v_a$ 可由其计算得出。</p>
-</li>
-<li><p>第一轮之后的权重把残差变换到因子，不对原始数据变换</p>
-</li>
-</ul>
-<h3 id="SIMPLS"><a href="#SIMPLS" class="headerlink" title="SIMPLS"></a>SIMPLS</h3><p>$S=X_0’Y_0$</p>
-<p>for i=1 to k</p>
-<p>​    if i=1: $[u,s,v]=SVD(S)$</p>
-<p>​    if i&gt;1: $[u,s,v]=SVD(S-P<em>{i-1}(P</em>{i-1}’P<em>{i-1})^{-1}P’</em>{i-1}S)$</p>
-<p>​    $r_i=u(:,1)$</p>
-<p>​    $t_i=X_0r_i$</p>
-<p>​    $p_i=X’_0t_i/t_i’t_i$</p>
-<p><code>end</code></p>
-<p>$B_{PLS}=R_k(T_k’T_k)^{-1}T_kY_0$</p>
-<h3 id="两者比较"><a href="#两者比较" class="headerlink" title="两者比较"></a>两者比较</h3><ul>
-<li>NIPALS的权重是相对于各个残差矩阵而言的，解释不便</li>
-<li>SIMPLS更快，且是Matlab 标准算法</li>
-<li>大部分情况下结果相似，但是高 latent variable 时 SIMPLS 不稳定</li>
-</ul>
-<p><img src="https://s2.ax1x.com/2020/03/09/8pQcJH.png" alt="image-20191213141042111"></p>
-<hr>
-<h2 id="Kernel-PLS"><a href="#Kernel-PLS" class="headerlink" title="Kernel PLS"></a>Kernel PLS</h2><ul>
-<li>解决非线性问题，和SVM一样可以采用 Kernel 方法：将非线性的低维数据投影到高维后数据变得线性。核函数则用来计算数据在高维空间中的内积。</li>
-<li>实验中由于映射未知，核函数无法显式推导，一般只能通过枚举实验。</li>
-</ul>
-<hr>
-<h2 id="PLS分类"><a href="#PLS分类" class="headerlink" title="PLS分类"></a>PLS分类</h2><ul>
-<li>PLS-DA</li>
-<li>通过 dummy matrix 对响应矩阵编码（类似 one-hot）来分类</li>
-<li>处理非线性问题，类别不平衡问题性能会下降</li>
-<li>Local weighted PLS：对每个待预测的query，只选出一部分最近的训练样本进行回归建模（多个线性模型来处理非线性）</li>
-</ul>
-<hr>
-<h2 id="Variable-Selection"><a href="#Variable-Selection" class="headerlink" title="Variable Selection"></a>Variable Selection</h2><p><img src="https://s2.ax1x.com/2020/03/09/8SgKoD.png" alt="image-20191212213245596"></p>
-<ul>
-<li>filter方法，直接从输出中过滤</li>
-<li>wrapper：基于filter，选出的变量送回模型重新拟合</li>
-<li>embedded的方法，顾名思义即变量选择是PLSR过程的一部分</li>
-</ul>
-<ul>
-<li>loading weight：可以直接用此向量衡量变量重要性</li>
-<li>regression coefficients</li>
-<li>variable importance in projection</li>
-</ul>
-]]></content>
-      <categories>
-        <category>笔记</category>
-        <category>机器学习</category>
-        <category>多元回归</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-        <tag>机器学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Going Deeper With Directly-Trained Larger Spiking Neural Networks</title>
     <url>/note-deepSTBP-tdBN.html</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
 <li><a href="https://arxiv.org/abs/2011.05280">Going Deeper With Directly-Trained Larger Spiking Neural Networks - 原文</a> 。</li>
 <li>个人理解：听起来和结果上都很厉害的工作。主要解决直接训练SNN算法中的各类Normalization的问题。如STBP这类算法因为是BPTT-inspired的，也会出现梯度消失和爆炸的现象。而且由于脉冲激活不可导，为了BP算法的应用通常都要引入梯度的近似，造成梯度更新有误差，带来了不稳定因素。同时由于信息在LIF模型中传输是“输入-电位-输出”的模型，信息需要在电位上周转一次。如果timestep低且发放率（firing rate）低，“电位-输出”这一环节就会被卡住，造成信息损失；如果脉冲发放率高，神经元的输出对输入就不敏感（实际上从编码的角度来看，firing rate无论是过低还是过高，其信息表达能力都很有限，从这个角度来看理想的发放率是0.5）。论文提出了适用于直接训练SNN算法的BN改进版，并且在残差网络上跑了ImageNet数据集，总的来说算是比较solid的，要是能开放源码就更solid了。</li>
+<li>后续补：给个Vth和tau也行啊，还以为能解决硬调Vth的问题呢。</li>
 </ul>
 <a id="more"></a>
 <h3 id="Iterative-LIF"><a href="#Iterative-LIF" class="headerlink" title="Iterative LIF"></a>Iterative LIF</h3><ul>
@@ -1908,6 +1831,63 @@ f(x)=g(Ax+b)</script><blockquote>
       </tags>
   </entry>
   <entry>
+    <title>PyTorch 问题汇总</title>
+    <url>/note-pytorch-problems.html</url>
+    <content><![CDATA[<p>记录一些自己遇到的有关 PyTroch 的问题。</p>
+<a id="more"></a>
+<h3 id="关于Mask梯度的方法"><a href="#关于Mask梯度的方法" class="headerlink" title="关于Mask梯度的方法"></a>关于Mask梯度的方法</h3><ul>
+<li>自己尝试过两种实现方式：<ul>
+<li>模型 layer 使用自定义的 <code>MaskedConv</code> 等 layer 实现，layer中自带一个mask的tensor，在 <code>init()</code> 中定义 <code>backward_hook(grad)</code> ，并在其中执行 <code>register_hook()</code> 。之后只要改动 mask就好；</li>
+<li>不改动模型，在训练结束后手动添加 <code>layer.mask</code>，手动<code>register_hook()</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="关于数组-Index"><a href="#关于数组-Index" class="headerlink" title="关于数组 Index"></a>关于数组 Index</h3><ul>
+<li>Pytorch 1.3之后如果要使用 <code>Tensor_1[Tensor_2]</code> 的写法，Tensor_2的dtype必须是<code>torch.bool</code>(以前可以是uint8)，不然会疯狂报错。正确写法 <code>Tensor_1[Tensor_2.bool()]</code></li>
+<li>此类错误不会给出traceback。手动开启traceback方法：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> traceback</span><br><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">warn_with_traceback</span>(<span class="params">message, category, filename, lineno, file=<span class="literal">None</span>, line=<span class="literal">None</span></span>):</span></span><br><span class="line"></span><br><span class="line">    log = file <span class="keyword">if</span> <span class="built_in">hasattr</span>(file,<span class="string">&#x27;write&#x27;</span>) <span class="keyword">else</span> sys.stderr</span><br><span class="line">    traceback.print_stack(file=log)</span><br><span class="line">    log.write(warnings.formatwarning(message, category, filename, lineno, line))</span><br><span class="line"></span><br><span class="line">warnings.showwarning = warn_with_traceback</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="关于-backward"><a href="#关于-backward" class="headerlink" title="关于 backward"></a>关于 backward</h3><ul>
+<li>需要一步内多次<code>backward()</code>的情况：<code>loss.backward(retain_graph=True)</code> 否则无法在之后再次 <code>loss.backward()</code>。注意此类型报错通常能以更高效的方式解决(?)</li>
+</ul>
+<hr>
+<h3 id="关于-apply-fn"><a href="#关于-apply-fn" class="headerlink" title="关于 apply(fn)"></a>关于 apply(fn)</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> module <span class="keyword">in</span> self.children():</span><br><span class="line">  module.apply(fn)</span><br><span class="line">fn(self)</span><br><span class="line"><span class="keyword">return</span> self</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="关于-tensor与numpy的转换"><a href="#关于-tensor与numpy的转换" class="headerlink" title="关于 tensor与numpy的转换"></a>关于 tensor与numpy的转换</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.ones[<span class="number">5</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">tensor([<span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a.numpy()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b[<span class="number">0</span>] = <span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">tensor([<span class="number">3.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>])</span><br></pre></td></tr></table></figure>
+<p>两者指向同一地址。</p>
+<p>对b进行改动时应使用inplace操作，否则b地址会被替换。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = numpy.zeros_like([<span class="number">5</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = c</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">tensor([<span class="number">3.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a.numpy()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b += (c - b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">tensor([<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>需要注意的是，显卡上的tensor（device=GPU）需要取到cpu上才能转换为numpy <code>A.cpu().numpy()</code> 否则报错。</li>
+<li>还有一点是，注意维持其为同一个ndarray数组对象，否则仍然会替换地址(如 <code>b = 1</code> 则b不再和a共享地址)</li>
+</ul>
+<hr>
+<h3 id="关于-copy-clone-detach-的区别"><a href="#关于-copy-clone-detach-的区别" class="headerlink" title="关于 copy_(), clone(), detach(), = 的区别"></a>关于 copy_(), clone(), detach(), = 的区别</h3><ul>
+<li><p>后两者复制地址，detach不复制梯度</p>
+</li>
+<li><p>注意转换 <code>A.cpu().detach().numpy()</code> 所detach的是cpu上的临时tensor，不会对A (此时A的device是显卡) 造成任何影响，也不会对其他Tensor有影响。<code>A.cpu()</code> 是函数返回值，本身创造的临时tensor在创造完numpy数组后会被释放(大概吧)</p>
+<p><del>所以需要重新 register_buffer</del> </p>
+<p>不需要，用 <code>A.data.copy_(torch.as_tensor(A_np))</code> 。</p>
+</li>
+<li><p>在 <code>W.required_grad==True</code> 的情况下不能使用 <code>W.cpu().numpy()</code> ，必须detach()</p>
+</li>
+</ul>
+<hr>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>问题记录</category>
+        <category>PyTorch</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>笔记</tag>
+        <tag>PyTorch</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>8. 次梯度</title>
     <url>/note-sub-gradient.html</url>
     <content><![CDATA[<h2 id="Sub-Gradient"><a href="#Sub-Gradient" class="headerlink" title="Sub-Gradient"></a>Sub-Gradient</h2><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
@@ -2023,76 +2003,116 @@ f'(x;y)=\lim_{\alpha\rightarrow0}\frac{f(x+\alpha y)-f(x)}{\alpha}</script>]]></
       </tags>
   </entry>
   <entry>
-    <title>PyTorch 问题汇总</title>
-    <url>/note-pytorch-problems.html</url>
-    <content><![CDATA[<p>记录一些自己遇到的有关 PyTroch 的问题。</p>
+    <title>4. 凸优化问题(1)</title>
+    <url>/note-convex-problem.html</url>
+    <content><![CDATA[<h2 id="Convex-Optimization-Problems-1"><a href="#Convex-Optimization-Problems-1" class="headerlink" title="Convex-Optimization Problems(1)"></a>Convex-Optimization Problems(1)</h2><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>介绍了一些经典的优化问题，不止于凸优化问题</li>
+<li>仍然有很多问题（几何规划、向量规划、广义不等式约束等等）以及关于SDP和SOCP的一些拓展未在此处给出，未来用到的时候再继续写点。</li>
+</ul>
 <a id="more"></a>
-<h3 id="关于Mask梯度的方法"><a href="#关于Mask梯度的方法" class="headerlink" title="关于Mask梯度的方法"></a>关于Mask梯度的方法</h3><ul>
-<li>自己尝试过两种实现方式：<ul>
-<li>模型 layer 使用自定义的 <code>MaskedConv</code> 等 layer 实现，layer中自带一个mask的tensor，在 <code>init()</code> 中定义 <code>backward_hook(grad)</code> ，并在其中执行 <code>register_hook()</code> 。之后只要改动 mask就好；</li>
-<li>不改动模型，在训练结束后手动添加 <code>layer.mask</code>，手动<code>register_hook()</code></li>
-</ul>
+<h2 id="1-Convex-optimization-problems"><a href="#1-Convex-optimization-problems" class="headerlink" title="1. Convex optimization problems"></a>1. Convex optimization problems</h2><ul>
+<li><p>Standard form:</p>
+<p>minimize $f_0(x)$</p>
+<p>subject to $f_i(x)\leq 0, i=1,\cdots,m, a^T_ix=b_i,i=1,\cdots,p$</p>
+<p>Note: $f_0$ is convex, $f_1,\cdots,f_n$ are convex, $a^T_ix=b_i$ are affine.</p>
 </li>
 </ul>
-<hr>
-<h3 id="关于数组-Index"><a href="#关于数组-Index" class="headerlink" title="关于数组 Index"></a>关于数组 Index</h3><ul>
-<li>Pytorch 1.3之后如果要使用 <code>Tensor_1[Tensor_2]</code> 的写法，Tensor_2的dtype必须是<code>torch.bool</code>(以前可以是uint8)，不然会疯狂报错。正确写法 <code>Tensor_1[Tensor_2.bool()]</code></li>
-<li>此类错误不会给出traceback。手动开启traceback方法：</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> traceback</span><br><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">warn_with_traceback</span>(<span class="params">message, category, filename, lineno, file=<span class="literal">None</span>, line=<span class="literal">None</span></span>):</span></span><br><span class="line"></span><br><span class="line">    log = file <span class="keyword">if</span> <span class="built_in">hasattr</span>(file,<span class="string">&#x27;write&#x27;</span>) <span class="keyword">else</span> sys.stderr</span><br><span class="line">    traceback.print_stack(file=log)</span><br><span class="line">    log.write(warnings.formatwarning(message, category, filename, lineno, line))</span><br><span class="line"></span><br><span class="line">warnings.showwarning = warn_with_traceback</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="关于-backward"><a href="#关于-backward" class="headerlink" title="关于 backward"></a>关于 backward</h3><ul>
-<li>需要一步内多次<code>backward()</code>的情况：<code>loss.backward(retain_graph=True)</code> 否则无法在之后再次 <code>loss.backward()</code>。注意此类型报错通常能以更高效的方式解决(?)</li>
-</ul>
-<hr>
-<h3 id="关于-apply-fn"><a href="#关于-apply-fn" class="headerlink" title="关于 apply(fn)"></a>关于 apply(fn)</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> module <span class="keyword">in</span> self.children():</span><br><span class="line">  module.apply(fn)</span><br><span class="line">fn(self)</span><br><span class="line"><span class="keyword">return</span> self</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="关于-tensor与numpy的转换"><a href="#关于-tensor与numpy的转换" class="headerlink" title="关于 tensor与numpy的转换"></a>关于 tensor与numpy的转换</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.ones[<span class="number">5</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">tensor([<span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a.numpy()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b[<span class="number">0</span>] = <span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">tensor([<span class="number">3.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>])</span><br></pre></td></tr></table></figure>
-<p>两者指向同一地址。</p>
-<p>对b进行改动时应使用inplace操作，否则b地址会被替换。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = numpy.zeros_like([<span class="number">5</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = c</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">tensor([<span class="number">3.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a.numpy()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b += (c - b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">tensor([<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>])</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可以注意到凸优化问题的可行集为凸</p>
+</blockquote>
 <ul>
-<li>需要注意的是，显卡上的tensor（device=GPU）需要取到cpu上才能转换为numpy <code>A.cpu().numpy()</code> 否则报错。</li>
-<li>还有一点是，注意维持其为同一个ndarray数组对象，否则仍然会替换地址(如 <code>b = 1</code> 则b不再和a共享地址)</li>
-</ul>
-<hr>
-<h3 id="关于-copy-clone-detach-的区别"><a href="#关于-copy-clone-detach-的区别" class="headerlink" title="关于 copy_(), clone(), detach(), = 的区别"></a>关于 copy_(), clone(), detach(), = 的区别</h3><ul>
-<li><p>后两者复制地址，detach不复制梯度</p>
+<li><p><strong>Any local optimal point is globally optimal</strong></p>
 </li>
-<li><p>注意转换 <code>A.cpu().detach().numpy()</code> 所detach的是cpu上的临时tensor，不会对A (此时A的device是显卡) 造成任何影响，也不会对其他Tensor有影响。<code>A.cpu()</code> 是函数返回值，本身创造的临时tensor在创造完numpy数组后会被释放(大概吧)</p>
-<p><del>所以需要重新 register_buffer</del> </p>
-<p>不需要，用 <code>A.data.copy_(torch.as_tensor(A_np))</code> 。</p>
-</li>
-<li><p>在 <code>W.required_grad==True</code> 的情况下不能使用 <code>W.cpu().numpy()</code> ，必须detach()</p>
+<li><p>Optimality criterion for differentiable $f_0$ </p>
+<p>$x$ is optimal <strong>iff</strong> it’s feasible $(x\in X)$ and $\triangledown f_0(x)^T(y-x)\geq 0$ </p>
 </li>
 </ul>
-<hr>
+<blockquote>
+<p>$-\triangledown f(x)$ 定义了一个支撑超平面切于 最优点</p>
+</blockquote>
+<ul>
+<li>Equivalent convex problem</li>
+</ul>
+<blockquote>
+<p>包括消除、引入等式约束；加入松弛变量；极小化部分变量；化为上境图问题</p>
+</blockquote>
+<h2 id="2-Quasiconvex-optimization"><a href="#2-Quasiconvex-optimization" class="headerlink" title="2. Quasiconvex optimization"></a>2. Quasiconvex optimization</h2><ul>
+<li><p>Different point: </p>
+<p>$x$ is optimal <strong>if</strong> it’s feasible and $\triangledown f_0(x)^T(y-x)&gt;0$</p>
+</li>
+</ul>
+<blockquote>
+<p>拟凸问题可以通过构造凸可行性问题来求解</p>
+</blockquote>
+<h2 id="3-Linear-program"><a href="#3-Linear-program" class="headerlink" title="3. Linear program"></a>3. Linear program</h2><ul>
+<li><p>minimize $c^Tx+d$</p>
+<p>subject to $Gx\preceq h, Ax=b$</p>
+</li>
+</ul>
+<blockquote>
+<p>线性目标函数对凸优化是普适的。</p>
+<p>与线性分式问题等价</p>
+<p>$\min |x|_1$ s.t. $Ax=b$ 是线性规划问题：<br>$\min t$ s.t. $|x|_1\leq t, Ax=b$ 1范数可以分解成各分量的线性不等式</p>
+</blockquote>
+<h2 id="4-Quadradic-program"><a href="#4-Quadradic-program" class="headerlink" title="4. Quadradic program"></a>4. Quadradic program</h2><ul>
+<li><p>minimize $(1/2)x^TPx+q^Tx+r$</p>
+<p>subject to $Gx\preceq h, Ax=b, P\in \textbf{S}^n_+$ </p>
+</li>
+<li><p>least-squares: minimize $|Ax-b|^2_2$</p>
+<p>analytical solution $x^\star = A^\dagger b$</p>
+</li>
+</ul>
+<blockquote>
+<p>$A^\dagger$ 是伪逆矩阵的意思， $A=U\Sigma V^T, A^\dagger=V\Sigma^+U^T$</p>
+</blockquote>
+<h2 id="5-Second-order-cone-programming"><a href="#5-Second-order-cone-programming" class="headerlink" title="5. Second-order cone programming"></a>5. Second-order cone programming</h2><ul>
+<li><p>minimize $f^Tx$</p>
+<p>subject to $|A_ix+b_i|_2\leq c^T_ix, i=1,\cdots,m, Fx=g$</p>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>笔记</category>
-        <category>问题记录</category>
-        <category>PyTorch</category>
+        <category>凸优化</category>
       </categories>
       <tags>
-        <tag>深度学习</tag>
         <tag>笔记</tag>
-        <tag>PyTorch</tag>
+        <tag>凸优化</tag>
       </tags>
   </entry>
   <entry>
-    <title>非root权限下安装zsh</title>
-    <url>/note-zsh-without-root.html</url>
-    <content><![CDATA[<a id="more"></a>
-<p>选修课分到的服务器虽然环境配好，但是默认shell是bash，<a href="https://www.bilibili.com/video/av911093/">我不能忍</a>。locate了一下，发现两年前服务器上也有个人不能忍，第一次上线啥都没干，就装了个zsh。偷瞄了一下bash_history，他应该看的这篇教程：</p>
-<p><a href="https://www.drewsilcock.co.uk/compiling-zsh">Compiling zsh without root</a></p>
-<p>因为第一次wget zsh后解压+configure，会发现ncurses的报错，所以先要把对应的ncurses装好（具体版本根据服务器系统而定），然后调环境变量让编译器认得路就行了。一般来说用不到icmake和yodl（参考github上一个更简单的<a href="https://gist.github.com/mgbckr/b8dc6d7d228e25325b6dfaa1c4018e78">脚本</a>）。</p>
-<p>当然，如果还不行，就老实安装icmake，按照教程做吧。</p>
+    <title>变分不等式</title>
+    <url>/note-variational-inequalities.html</url>
+    <content><![CDATA[<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>大部分学习资料来自于何炳生教授的 <a href="http://maths.nju.edu.cn/~hebma/">主页</a></li>
+<li>已弃坑，待填。</li>
+</ul>
+<a id="more"></a>
+<h2 id="1-变分不等式"><a href="#1-变分不等式" class="headerlink" title="1. 变分不等式"></a>1. 变分不等式</h2><ul>
+<li>设 $\Omega$ 为 $R^n$ 中的一个非空闭凸集，$F$ 是 $R^n$ 到 $R^n$ 的一个连续映射（向量函数），单调变分不等式问题就是寻找 $x^*$：<script type="math/tex; mode=display">x^*\in\Omega, F(x^*)^T(x-x^*)\geq 0, \forall x \in\Omega</script>单调是指 $F$ 满足 $(u-v)^T(F(u)-F(v))\geq 0$ 。</li>
+</ul>
+<h2 id="2-与可微凸优化的关系"><a href="#2-与可微凸优化的关系" class="headerlink" title="2. 与可微凸优化的关系"></a>2. 与可微凸优化的关系</h2><p>设 $f: R^n \rightarrow R$ 为可微凸函数，凸优化问题：</p>
+<script type="math/tex; mode=display">\min f(x), x\in \Omega</script><p>则最优点必须有：</p>
+<ul>
+<li>它属于 $\Omega$</li>
+<li>它的邻域内无可行下降方向</li>
+</ul>
+<p>可求 $f$ 梯度 $\triangledown f(x)$ ，记</p>
+<ul>
+<li>$Sd(x)={s\in R^n| s^T\triangledown f(x)&lt;0}$ 为点 $x$ 处的可行方向集（ $s$ 为下降向量满足逆梯度）</li>
+<li>$Sf(x)={s\in R^n| s=x’-x, x’\in\Omega}$ 为点 $x$ 处的下降方向集（ $s$ 为下降向量满足下降后向量仍在集合内）</li>
+</ul>
+<p>那么凸优化条件可表述为：</p>
+<script type="math/tex; mode=display">x\in\Omega,\ \ and\  \ Sf(x)\cap Sd(x)\neq\varnothing</script><p>其等价数学形式为：</p>
+<script type="math/tex; mode=display">x\in\Omega, (x'-x)^T\triangledown f(x)\geq 0, \forall x'\in\Omega</script><p>（暂时弃坑，等系统学习完凸优化后再来补充）</p>
 ]]></content>
       <categories>
-        <category>杂物</category>
+        <category>笔记</category>
+        <category>凸优化</category>
       </categories>
       <tags>
-        <tag>杂物</tag>
+        <tag>笔记</tag>
+        <tag>凸优化</tag>
       </tags>
   </entry>
   <entry>
@@ -2176,38 +2196,19 @@ W^{(c)}&:=W-\beta_c\partial_WL(W^{(p)})
       </tags>
   </entry>
   <entry>
-    <title>变分不等式</title>
-    <url>/note-variational-inequalities.html</url>
-    <content><![CDATA[<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
-<li>大部分学习资料来自于何炳生教授的 <a href="http://maths.nju.edu.cn/~hebma/">主页</a></li>
-<li>已弃坑，待填。</li>
-</ul>
-<a id="more"></a>
-<h2 id="1-变分不等式"><a href="#1-变分不等式" class="headerlink" title="1. 变分不等式"></a>1. 变分不等式</h2><ul>
-<li>设 $\Omega$ 为 $R^n$ 中的一个非空闭凸集，$F$ 是 $R^n$ 到 $R^n$ 的一个连续映射（向量函数），单调变分不等式问题就是寻找 $x^*$：<script type="math/tex; mode=display">x^*\in\Omega, F(x^*)^T(x-x^*)\geq 0, \forall x \in\Omega</script>单调是指 $F$ 满足 $(u-v)^T(F(u)-F(v))\geq 0$ 。</li>
-</ul>
-<h2 id="2-与可微凸优化的关系"><a href="#2-与可微凸优化的关系" class="headerlink" title="2. 与可微凸优化的关系"></a>2. 与可微凸优化的关系</h2><p>设 $f: R^n \rightarrow R$ 为可微凸函数，凸优化问题：</p>
-<script type="math/tex; mode=display">\min f(x), x\in \Omega</script><p>则最优点必须有：</p>
-<ul>
-<li>它属于 $\Omega$</li>
-<li>它的邻域内无可行下降方向</li>
-</ul>
-<p>可求 $f$ 梯度 $\triangledown f(x)$ ，记</p>
-<ul>
-<li>$Sd(x)={s\in R^n| s^T\triangledown f(x)&lt;0}$ 为点 $x$ 处的可行方向集（ $s$ 为下降向量满足逆梯度）</li>
-<li>$Sf(x)={s\in R^n| s=x’-x, x’\in\Omega}$ 为点 $x$ 处的下降方向集（ $s$ 为下降向量满足下降后向量仍在集合内）</li>
-</ul>
-<p>那么凸优化条件可表述为：</p>
-<script type="math/tex; mode=display">x\in\Omega,\ \ and\  \ Sf(x)\cap Sd(x)\neq\varnothing</script><p>其等价数学形式为：</p>
-<script type="math/tex; mode=display">x\in\Omega, (x'-x)^T\triangledown f(x)\geq 0, \forall x'\in\Omega</script><p>（暂时弃坑，等系统学习完凸优化后再来补充）</p>
+    <title>非root权限下安装zsh</title>
+    <url>/note-zsh-without-root.html</url>
+    <content><![CDATA[<a id="more"></a>
+<p>选修课分到的服务器虽然环境配好，但是默认shell是bash，<a href="https://www.bilibili.com/video/av911093/">我不能忍</a>。locate了一下，发现两年前服务器上也有个人不能忍，第一次上线啥都没干，就装了个zsh。偷瞄了一下bash_history，他应该看的这篇教程：</p>
+<p><a href="https://www.drewsilcock.co.uk/compiling-zsh">Compiling zsh without root</a></p>
+<p>因为第一次wget zsh后解压+configure，会发现ncurses的报错，所以先要把对应的ncurses装好（具体版本根据服务器系统而定），然后调环境变量让编译器认得路就行了。一般来说用不到icmake和yodl（参考github上一个更简单的<a href="https://gist.github.com/mgbckr/b8dc6d7d228e25325b6dfaa1c4018e78">脚本</a>）。</p>
+<p>当然，如果还不行，就老实安装icmake，按照教程做吧。</p>
 ]]></content>
       <categories>
-        <category>笔记</category>
-        <category>凸优化</category>
+        <category>杂物</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
-        <tag>凸优化</tag>
+        <tag>杂物</tag>
       </tags>
   </entry>
   <entry>
@@ -2421,9 +2422,9 @@ W^{(c)}&:=W-\beta_c\partial_WL(W^{(p)})
         <category>LeetCode</category>
       </categories>
       <tags>
+        <tag>习题</tag>
         <tag>OJ</tag>
         <tag>LeetCode</tag>
-        <tag>习题</tag>
       </tags>
   </entry>
   <entry>
@@ -2719,9 +2720,9 @@ W^{(c)}&:=W-\beta_c\partial_WL(W^{(p)})
         <category>LeetCode</category>
       </categories>
       <tags>
+        <tag>习题</tag>
         <tag>OJ</tag>
         <tag>LeetCode</tag>
-        <tag>习题</tag>
       </tags>
   </entry>
 </search>

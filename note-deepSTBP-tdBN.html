@@ -63,7 +63,7 @@
      
     <div class="article-meta">
       <a href="/note-deepSTBP-tdBN.html" class="article-date">
-  <time datetime="2020-12-15T14:00:43.874Z" itemprop="datePublished">2020-12-15</time>
+  <time datetime="2020-12-15T14:12:57.146Z" itemprop="datePublished">2020-12-15</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87/">论文</a> / <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87/SNN/">SNN</a>
@@ -74,7 +74,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">953</span>
+            <span class="post-count">976</span>
         </span>
     </span>
 
@@ -101,6 +101,7 @@
   <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2011.05280">Going Deeper With Directly-Trained Larger Spiking Neural Networks - 原文</a> 。</li>
 <li>个人理解：听起来和结果上都很厉害的工作。主要解决直接训练SNN算法中的各类Normalization的问题。如STBP这类算法因为是BPTT-inspired的，也会出现梯度消失和爆炸的现象。而且由于脉冲激活不可导，为了BP算法的应用通常都要引入梯度的近似，造成梯度更新有误差，带来了不稳定因素。同时由于信息在LIF模型中传输是“输入-电位-输出”的模型，信息需要在电位上周转一次。如果timestep低且发放率（firing rate）低，“电位-输出”这一环节就会被卡住，造成信息损失；如果脉冲发放率高，神经元的输出对输入就不敏感（实际上从编码的角度来看，firing rate无论是过低还是过高，其信息表达能力都很有限，从这个角度来看理想的发放率是0.5）。论文提出了适用于直接训练SNN算法的BN改进版，并且在残差网络上跑了ImageNet数据集，总的来说算是比较solid的，要是能开放源码就更solid了。</li>
+<li>后续补：给个Vth和tau也行啊，还以为能解决硬调Vth的问题呢。</li>
 </ul>
 <a id="more"></a>
 <h3 id="Iterative-LIF"><a href="#Iterative-LIF" class="headerlink" title="Iterative LIF"></a>Iterative LIF</h3><ul>
@@ -220,19 +221,10 @@ y_k&=\lambda_k\hat{x}_k+\beta_k
    
   <nav class="article-nav">
     
-      <a href="/note-STBP.html" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            Spatio-Temporal Backpropagation for Training High-Performance Spiking Neural Networks
-          
-        </div>
-      </a>
     
-    
-      <a href="/note-zsh-without-root.html" class="article-nav-link">
+      <a href="/note-snn-compression.html" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">非root权限下安装zsh</div>
+        <div class="article-nav-title">Comprehensive SNN Compression using ADMM Optimization and Activity Regularization</div>
       </a>
     
   </nav>
