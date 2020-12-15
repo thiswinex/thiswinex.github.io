@@ -1,0 +1,8 @@
+User-agent: * Allow: /
+Allow: /archives/
+Disallow: /tags/
+Disallow: /categories/
+
+
+Sitemap: http://thiswinex.github.io/sitemap.xml
+Sitemap: http://thiswinex.github.io/baidusitemap.xml

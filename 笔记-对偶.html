@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    6. 对偶与对偶问题 |  Thiswinex&#39;s Blog
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/github.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-笔记-对偶"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  6. 对偶与对偶问题
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/%E7%AC%94%E8%AE%B0-%E5%AF%B9%E5%81%B6.html" class="article-date">
+  <time datetime="2019-06-05T02:37:44.000Z" itemprop="datePublished">2019-06-05</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a> / <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/%E5%87%B8%E4%BC%98%E5%8C%96/">凸优化</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">327</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">1 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="Duality"><a href="#Duality" class="headerlink" title="Duality"></a>Duality</h2><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>主要记录了对偶问题和对偶方法。由于强对偶性下对偶问题的解与原问题相等，许多问题在原函数性质不好的情况下可以变换到对偶空间去求解。</li>
+<li>Why duality? 降低计算复杂度，数据降维等；更好的性质，更光滑、凸。。</li>
+</ul>
+<a id="more"></a>
+<h2 id="1-Lagrangian"><a href="#1-Lagrangian" class="headerlink" title="1. Lagrangian"></a>1. Lagrangian</h2><ul>
+<li><p>Standard form problem:</p>
+<p>minimize $f_0(x)$</p>
+<p>subject to $f_i(x)\leq 0, i=1,\cdots,m, h_i(x)=0,i=1,\cdots,p$ </p>
+</li>
+<li><p>Lagrangian:</p>
+<script type="math/tex; mode=display">
+L(x,\lambda,\nu)=f_0(x)+\sum^m_{i=1}\lambda_if_i(x)+\sum^p_{i=1}\nu_ih_i(x)</script></li>
+</ul>
+<blockquote>
+<p>$\lambda,\nu$ 分别是不等式约束和等式约束的拉格朗日乘子</p>
+</blockquote>
+<h2 id="2-Lagrangian-Dual"><a href="#2-Lagrangian-Dual" class="headerlink" title="2. Lagrangian Dual"></a>2. Lagrangian Dual</h2><script type="math/tex; mode=display">
+g(\lambda,\nu)=\inf_{x\in D}L(x,\lambda,\nu)</script><blockquote>
+<p>因为 $\inf$ 的存在，且 $L$ 是关于 $\lambda,\nu$ 的仿射函数，对偶函数一定凸且构成了原问题最优值 $p^\star$ 的下界 $g(\lambda,\nu)\leq p^\star$</p>
+</blockquote>
+<h2 id="3-Lagrange-dual-and-conjugate-function"><a href="#3-Lagrange-dual-and-conjugate-function" class="headerlink" title="3. Lagrange dual and conjugate function"></a>3. Lagrange dual and conjugate function</h2><ul>
+<li><p>minimize $f_0(x)$</p>
+<p>subject to $Ax\preceq b, Cx=d$</p>
+<script type="math/tex; mode=display">
+\begin{align}
+g(\lambda,\nu)&=\inf_{x\in\textbf{dom}f_0}(f_0(x)+(A^T\lambda+C^T\nu)^Tx-b^T\lambda-d^T\nu)\\
+&=-f_0^*(-A^T\lambda-C^T\nu)-b^T\lambda-d^T\nu
+\end{align}</script></li>
+</ul>
+<h2 id="4-The-dual-problem"><a href="#4-The-dual-problem" class="headerlink" title="4. The dual problem"></a>4. The dual problem</h2><ul>
+<li><p>maximize $g(\lambda,\nu)$</p>
+<p>subject to $\lambda \succeq 0$ </p>
+<p>finds best lower bound of $p^\star$_</p>
+</li>
+</ul>
+<h2 id="5-Weak-and-strong-duality"><a href="#5-Weak-and-strong-duality" class="headerlink" title="5. Weak and strong duality"></a>5. Weak and strong duality</h2><ul>
+<li><p>weak duality: $d^\star\leq p^\star$</p>
+<p>always holds for convex and nonconvex problems</p>
+</li>
+<li><p>strong duality: $d^\star=p^\star$</p>
+<p>Slater’ constraint qualification:</p>
+<script type="math/tex; mode=display">
+\exists x\in \textbf{int}D: f_i(x)<0, i=1,\cdots,m</script></li>
+</ul>
+<blockquote>
+<p>Slater条件成立即不等式约束可以取严格小于，强对偶性成立。 Slater条件确保拉格朗日函数存在鞍点(参见拉格朗日对偶的鞍点解释，即 $x^\star,\lambda^\star$ 最优且强对偶性成立，则其为 $L$ 的鞍点)</p>
+</blockquote>
+<h2 id="6-A-nonconvex-problem-with-strong-duality"><a href="#6-A-nonconvex-problem-with-strong-duality" class="headerlink" title="6. A nonconvex problem with strong duality"></a>6. A nonconvex problem with strong duality</h2><blockquote>
+<p>对非凸问题也可能存在强对偶条件</p>
+<p>无论 $x$ 的维数($x\in \mathcal{R}^n$ )，其对偶问题总是针对 $\lambda\in \mathcal{R}$ 的一维优化。这是个很好的性质，可以直接使问题降维。</p>
+</blockquote>
+<h2 id="7-Geometric-interpretation"><a href="#7-Geometric-interpretation" class="headerlink" title="7. Geometric interpretation"></a>7. Geometric interpretation</h2><script type="math/tex; mode=display">
+g(\lambda)=\inf_{(u,t)\in G}(t+\lambda u)</script><p>where $G={(f_1(x),f_2(x))\mid x\in D}$</p>
+<p><img src="/Users/pingguo/Library/Application Support/typora-user-images/image-20190425154237918.png" alt="image-20190425154237918"></p>
+<blockquote>
+<p>原问题可行集在左半侧(Slater条件)；超平面 $\lambda u+t=g(\lambda)$ 与 $t$ 的交点永远在 $p^*$ 的下边。此处 $\lambda$ 作为自变量变换超平面的”斜率”，取与G相切之后（inf保证相切）与t轴焦点即为 $g(\lambda)$ 。无论怎么交，最优点（最大的 $g(\lambda)$ ）总在 $p^\star$ 下部。 </p>
+<p>(弱对偶条件 $d^<em>&lt;p^</em>$)</p>
+</blockquote>
+<ul>
+<li>Epigraph variation:</li>
+</ul>
+<blockquote>
+<p>令 $A$ 为G的上境图，强对偶性成立当$p^\star$ 处可以作非垂直（于坐标轴u）的支撑超平面。</p>
+<p>上图G非凸；如果G凸（即对于凸问题），过 $(0,p^\star)$ 可以作支撑超平面。</p>
+<p>此时Slater’s condition: 如果存在 $(\tilde{u},\tilde{t})\in A$ 且 $\tilde{u}&lt;0$ ，$(0,p^\star)$ 点的支撑超平面必然不垂直。</p>
+</blockquote>
+<h2 id="8-Complementary-slackness"><a href="#8-Complementary-slackness" class="headerlink" title="8. Complementary slackness"></a>8. Complementary slackness</h2><ul>
+<li><p>assume strong duality holds, $x^\star$ optimal and $(\lambda^\star,\nu^\star)$ dual optimal</p>
+<p>obviously we have:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+f_0(x^\star)=g(\lambda^\star,\nu^\star)&=\inf_x\{f_0(x)+\sum\lambda_i^\star f_i(x)+\sum\nu_i^\star h_i(x)\}\\
+&\leq f_0(x^\star)+\sum\lambda_i^\star f_i(x^\star)+\sum\nu_i^\star h_i(x^\star)\\
+&\leq f_0(x^\star)
+\end{align}</script><ul>
+<li>First inequality: $x^\star$ minimize $L(x,\lambda^\star,\nu^\star)$ </li>
+<li>$\sum \lambda_i^\star f_i(x^\star)=0$</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>第二个条件即 complementary slackness 互补松弛性，即最优点处除非第i个约束起作用，否则最优拉格朗日乘子的第i项都为零。</p>
+</blockquote>
+<h2 id="9-KKT-Condition"><a href="#9-KKT-Condition" class="headerlink" title="9. KKT Condition"></a>9. KKT Condition</h2><ul>
+<li>For non-convex problem, if strong duality holds, i.e. $x^\star$ minimize $L(x,\lambda^\star,\nu^\star)$ , so its gradient at $x^\star$:<script type="math/tex; mode=display">
+\triangledown f_0(x^\star)+\sum \lambda^\star_i\triangledown f_i(x)+\sum\nu^\star_i\triangledown h_i(x)=0</script>so we have KKT condition:<script type="math/tex; mode=display">
+\begin{align}
+f_i(x^\star)&\leq 0 \text{     primal constraints}\\
+h_i(x^\star)&=0 \\
+\lambda^\star_i&\geq 0 \text{     dual constraints}\\
+\lambda^\star_if_i(x^\star)&=0\text{     complementary slackness}\\
+\triangledown f_0(x^\star)+\sum \lambda^\star_i\triangledown f_i(x)+\sum\nu^\star_i\triangledown h_i(x)&=0 \text{     gradient vanish}
+\end{align}</script></li>
+</ul>
+<blockquote>
+<p>KKT条件由强对偶性下的非凸问题导出，即在非凸问题中，原问题和对偶问题的一堆最优解必须满足KKT条件(必要条件) 。</p>
+<p>（原问题可行性、对偶问题可行性、互补松弛性、最优性）</p>
+<p>若原问题为凸，必要条件变为充要条件，满足KKT条件的点是最优解且对偶间隙为零(强对偶)。对于还未知是否满足强对偶性的凸问题，需要满足 Slater 条件。</p>
+</blockquote>
+<h2 id="10-Example"><a href="#10-Example" class="headerlink" title="10. Example"></a>10. Example</h2><blockquote>
+<p>$\underset{y}{\min} \frac{1}{2}|x-y|^2_2$， $s.t. |x|_1=1$ </p>
+</blockquote>
+<p>待补充</p>
+<h2 id="11-LP-SDP-SOCP-Duality"><a href="#11-LP-SDP-SOCP-Duality" class="headerlink" title="11. LP, SDP, SOCP Duality"></a>11. LP, SDP, SOCP Duality</h2><p>待补充</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://thiswinex.github.io/%E7%AC%94%E8%AE%B0-%E5%AF%B9%E5%81%B6.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%87%B8%E4%BC%98%E5%8C%96/" rel="tag">凸优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/%E7%AC%94%E8%AE%B0-%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95.html" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            7. 梯度方法
+          
+        </div>
+      </a>
+    
+    
+      <a href="/%E7%AC%94%E8%AE%B0-%E5%87%B8%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98-1.html" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">4. 凸优化问题(1)</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "o28iHkvdJaYlwuG7Tbx9lYWu-gzGzoHsz",
+    app_key: "vRnPCs772pxOTas4gSYdOXmx",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2019-2020
+        <i class="ri-heart-fill heart_icon"></i> thiswinex
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/github.svg" alt="Thiswinex&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝奶茶~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>

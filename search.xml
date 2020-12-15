@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>LeetCode 基础题目</title>
-    <url>/2019/08/14/OJ-LeetCode%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE/</url>
+    <url>/OJ-LeetCode%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE.html</url>
     <content><![CDATA[<p>分享一些基础题目题解和标答。</p>
 <a id="more"></a>
 <h3 id="206-Easy-反转链表-Reverse-Linked-List"><a href="#206-Easy-反转链表-Reverse-Linked-List" class="headerlink" title="#206 [Easy] 反转链表 Reverse Linked List"></a>#206 [Easy] 反转链表 <a href="https://leetcode-cn.com/problems/reverse-linked-list/">Reverse Linked List</a></h3><blockquote>
@@ -48,8 +48,455 @@
       </tags>
   </entry>
   <entry>
+    <title>凸集/凸函数习题</title>
+    <url>/%E5%87%B8%E9%9B%86%E4%B9%A0%E9%A2%98.html</url>
+    <content><![CDATA[<p>《凸优化》第二/三章部分习题。</p>
+<a id="more"></a> 
+<h3 id="2-9"><a href="#2-9" class="headerlink" title="2.9"></a>2.9</h3><p>(a) 证明：</p>
+<p>​    考虑 </p>
+<script type="math/tex; mode=display">
+V_i=\{x=\textbf{R}^n\mid \|x-x_0\|_2\leq\|x-x_i\|_2\}</script><p>作超平面 $(x_i-x_0)^Tx=(x_i-x_0)^T(x_i+x_0)/2$</p>
+<p>​    对超平面上每个点 $x<em>k$ 的分量 $j$ 都有 $2(x</em>{ij}-x<em>{0j})x</em>{kj}=(x<em>i^2-x_0^2)$ ，且 $|x_k-x_0|_2=\sqrt{\sum_j{(x</em>{kj}-x<em>{0j})^2}}$  ，$|x_k-x_i|_2=\sqrt{\sum_j{(x</em>{kj}-x_{0j})^2}}$ 。</p>
+<p>​    将第一式带入范数表达式可得对超平面上每个点 $x$ 均有 $|x-x_0|_2=|x-x_i|_2$ ，且对于超平面下方的半空间 $(x_i-x_0)^Tx\leq(x_i-x_0)^T(x_i+x_0)/2$ ，均有 $|x-x_0|_2\leq |x-x_i|_2$ ，对所有的 $i$ 均成立。即 $V$ 的边界为一系列超平面的交，$V$ 为多面体。设 $x_i-x_0=a_i$ ，$(x_i-x_0)^T(x_i+x_0)/2=b_i$ ， $V$ 可以被写作 </p>
+<script type="math/tex; mode=display">
+V=\{x\mid Ax\preceq b\}, A=\{a_1^T,a_2^T,\cdots,a_K^T\}, b=\{b_1,b_2,\cdots,b_K\}</script><p>(b)</p>
+<p>​    P总可以表达为$P={x\mid Ax\preceq b}$ 的形式，设 $A={a_1^T,a_2^T,\cdots,a_K^T}$ ，对于任意一点 $x_0\in P$ 和多面体的面 $a_i^Tx=b$，总可以找到直线 $x=x_0+ka_i, k\in\textbf{R}$ 上的一点 $x_i$ 满足对面上任意一点 $x_k$ ，有 $ |x_i-x_k|_2=|x_0-x_k|_2$ (作点 $x_0$ 关于面的对称点即可) ，这是由于 $x_0$ 在多面体内部，满足 $a^T_ix&lt;b$ ，在直线上增大 $k$ 会使 $|x_i-x_k|_2$ 减小至0后增大，使 $|x_0-x_k|_2$ 增大。根据定义，这样的一组点就$x_0, x_1,\cdots,x_K$ 满足 $P$ 是 $x_0$ 关于 $x_1,\cdots, x_K$ 的 Voronoi 区域。</p>
+<p>(c)</p>
+<p>​    并不总可以用 Voronoi 区域表示。最明显的例子是由数个无限边界多面体组成的集合，考虑 $\textbf{R}^2$ 中由三个多面体组成的集合，他们的边界超平面的法向量共面，且边界两两之间夹角小于90°，这样就有至少一个多面体真包含了一个半空间，记为A。依照之前 Voronoi 区域点的找法， $x_1,x_2,x_A$ 分属三个多面体且需要互相关于边界超平面对称，将其他两个多面体沿边界对称投影到A上，它们的交集就是 $x_A$ 的取值范围(因为 $x_A$ 需要同时与 $x_1,x_2$ 关于两条边界对称)。由于 A 真包含了一个半空间，所以两部分投影不可能有交集，即不可能找到这样的 $x_A$ 。</p>
+<blockquote>
+<p>总结：</p>
+<p>主要是超平面的定义。</p>
+</blockquote>
+<h3 id="2-26"><a href="#2-26" class="headerlink" title="2.26"></a>2.26</h3><p>证明： </p>
+<p>​    先证必要性。因为 $C=D$ ，即 $C\subseteq D, D\subseteq C$ ， ，显然它可以推得于 $S_C\leq S_D, S_D\leq S_C$， 即 $S_C=S_D$ 。</p>
+<p>  再证充分性。因为 $S_C=S_D$，设 $C\neq D$ ，不失一般性，设存在 $x_i\in C, x_i\notin D$ ，<br>根据凸集定义，取 $D$ 的支撑超平面集，一定存在某个方向 $a^T$ 上的 $D$ 的支撑超平面，满足 $a^Tx_i&gt;b$ 且 $\forall x \in D, a^Tx&lt;b$ 。<br>  将 $a$ 取为支撑函数自变量，则 </p>
+<script type="math/tex; mode=display">
+S_C(a)=\sup\{a^Tx\mid x\in C\}=a^Tx_i >b> \sup\{a^Tx\mid\ x\in D\}</script><p>  即 $S_C\neq S_D$ ，矛盾。所以 $C=D$ 。</p>
+<blockquote>
+<p>总结：</p>
+<p>这道题说明了一个性质，即凸集能被他们的支撑函数完全表征，它们是双射关系。考虑”支撑集”定义和支撑一词的含义，能够表征凸集还是比较容易理解的。</p>
+</blockquote>
+<h3 id="2-33"><a href="#2-33" class="headerlink" title="2.33"></a>2.33</h3><p>(a) 证明:</p>
+<p>​    $K<em>{m+}$ 在 $\textbf{R}^n$ 中由 n 个带等号不等式约束，所以其是闭凸集，且容易知道它满足 $\theta_1 x_1+\theta_2 x_2\in K</em>{m+}, \forall x<em>1,x_2\in K</em>{m+}$ 所以 $K<em>{m+}$ 是个闭凸锥。其内部非空性质通过列举满足条件的向量同样易得。<br>​    因为 $x\in K</em>{m+}, -x\in K<em>{m+}$ ，即 $x_1\geq x_2\geq\cdots\geq x_n\geq 0, x_1\leq x_2\leq\cdots\leq x_n\leq 0$ ，即 $x_1=x_2=\cdots=x_n=0$ ， $x=0$ 。所以 $K</em>{m+}$ 是尖的，所以它是正常锥。</p>
+<p>(b) </p>
+<script type="math/tex; mode=display">
+K^*_{m+}=\{y\mid\sum x_iy_i\geq0, \forall x\in K\}\\</script><p>注意到提示中恒等式，有</p>
+<script type="math/tex; mode=display">
+\begin{align}
+K^*_{m+}&=\{y\mid (x_1-x_2)y_1+(x_2-x_3)(y_1+y_2)+
+(x_3-x_4)(y_1+y_2+y_3)\\&+\cdots+(x_{n-1}-x_n)(y_1+\cdots+y_{n-1})+x_n(y_1+\cdots+y_n)\geq0, \forall x\in K\}\\
+K^*_{m+}&=\{y\mid\sum_{i=1}^n y_i\geq 0\}
+\end{align}</script><blockquote>
+<p>总结：</p>
+<ul>
+<li>等号不等式约束集为闭凸集。</li>
+</ul>
+</blockquote>
+<h3 id="3-9"><a href="#3-9" class="headerlink" title="3.9"></a>3.9</h3><p>(a) 证明:</p>
+<p>$\overset{-}{f}$ 为凸的二阶条件是 $\triangledown^2\overset{-}{f}$ 半正定。<br>即 $\bigtriangledown^2\overset{-}{f}(z)=F^T\bigtriangledown^2f(Fz+\hat{x})F\succeq 0$ </p>
+<p>(b) 证明：</p>
+<p>即证明 $F^T\bigtriangledown^2(Fz+\hat{x})F\succeq 0 \Leftrightarrow \bigtriangledown^2 f(Fz+\hat{x})+\lambda A^TA\succeq 0$<br>使用引理：</p>
+<blockquote>
+<p>总结：</p>
+<p>这里没有写，但最后交上去的时候这里还是写了的，实际上这里是应用 (a) 中的结论， 将 $F$ 分解后仍然成立，即$\forall v,v^T\triangledown^2f(Fz+\hat{x})v\succeq0$ 。 $v$ 也在 $A$ 的零空间中。然后直接用引理就行。 用 $B=\triangledown^2f(Fz+\hat{x})$ 代换引理的话，很容易就能得出结论。</p>
+<p>还需要注意一点是 $g(x)=f(Ax+b)$ 的二阶条件是 $\triangledown^2g$ 和 $A^T\triangledown^2fA$ 。</p>
+</blockquote>
+<h3 id="3-35"><a href="#3-35" class="headerlink" title="3.35"></a>3.35</h3><p>(a)证明：</p>
+<p>$S<em>B(y)=\sup{y^Tx\mid x\in B}$， $S</em>{\textbf{conv}B}(y)=\sup{y^Tx’\mid x’\in\textbf{conv}B}$ </p>
+<p>因为 $B\subseteq\textbf{conv}B$ ，所以在 $y$ 确定时 ， 有 $y^Tx\leq y^Tx’$ 。在 $y$ 确定的情况下，若此不等式不能取严格等号，则必定存在某个 $x’$ 对任意 $x$ 都取 </p>
+<script type="math/tex; mode=display">
+y^Tx<y^Tx'</script><p>根据凸包定义，$x’=\sum_i\theta_i x_i, \sum\theta_i=1, x_i\in B$ ，则有 </p>
+<script type="math/tex; mode=display">
+y^Tx'=y^T\sum\theta_i x'>y^T\sum\theta_i x_i=y^Tx_i</script><p>矛盾。所以不等式可以严格取等号，即 $S<em>B(y)=S</em>{\textbf{conv}B}(y)$</p>
+<p>(b)证明：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+S_{A+B}(y)&=\sup\{y^Tx\mid x\in A+B\}=\sup\{y^T(a+b)\mid a\in A, b\in B\}\\
+&=\sup\{y^Ta\mid a\in A\}+\sup\{y^Tb\mid b\in B\}\\
+&=S_A(y)+S_B(y)
+\end{align}</script><p>(c)证明：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+S_{A\cup B}(y)&=\sup\{y^Tx\mid x\in A\cup B\}\\
+&=\max\{\sup\{y^Tx\mid x\in A\}, \sup\{y^Tx\mid x\in B\}\}\\
+&=\max\{S_A(y)+S_B(y)\}
+\end{align}</script><p>(d)证明:</p>
+<p>必要性易得，此处仅证充分性：</p>
+<script type="math/tex; mode=display">
+S_{\textbf{conv}A}(y)=S_A(y)\leq S_B(y)</script><p>若 $\textbf{conv}A\nsubseteq B$，即 $\exists x\in \textbf{conv}A, x\notin B$ ，则 $S<em>{\textbf{conv}A\cup B}(y)&gt;S_B(y)$ 。又有 $S</em>{\textbf{conv}A\cup B}(y)=\max{S_{\textbf{conv}A}(y), S_B(y)}=S_B(y)$ 矛盾。所以 $A\subseteq \textbf{conv}A \subseteq B$。</p>
+<blockquote>
+<p>总结：</p>
+<p>和2.26一样，结合之前的支撑函数的例子和此题（尤其是(a)），能更好地理解支撑函数能够表征凸集的性质。这种一一对应关系由sup运算保证。</p>
+</blockquote>
+<h3 id="3-38"><a href="#3-38" class="headerlink" title="3.38"></a>3.38</h3><p>证明:</p>
+<p>即证明 $F(x)=\underset{y\in\textbf{dom}G}{\sup}(xy-G(y))$ 。</p>
+<p>Young 不等式的简单图示:</p>
+<p>可以看到 $xy$ 表征一个矩形面积，可以看到阴影面积和（即 $F(x)+G(y)$）永远不小于这个矩形面积，等号在 $f(x)=y$ 时取得。因为 $xy\leq F(x)+G(y)$ ，所以 $F(x)\geq xy-G(y)$ 。因为 $y=f(x)$ 时不等式可以取等号，所以$F(x)=\underset{y\in\textbf{dom}G}{\sup}(xy-G(y))$</p>
+<blockquote>
+<p>总结</p>
+<p>此处无图，自行想象哈。大概就是函数过零点的函数 $f(x)$ 对 $x$ 轴和 $y$ 轴分别做 $[0,x],[0,y]$ 上的积分，这样可以把两个函数的定积分画到一个图上。</p>
+</blockquote>
+<h3 id="3-49"><a href="#3-49" class="headerlink" title="3.49"></a>3.49</h3><p>(a) 证明：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\ln f(x)=\ln\frac{e^x}{1+e^x}=x-\ln (1+e^x)
+\end{align}</script><p>其中 $x$ 是凹函数而 $-\ln(1+e^x)$ 可以看做指数和的对数取负，它是凹函数函数。所以原式是对数凹的。</p>
+<p>(b) 证明：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\ln f(x)=-\ln\sum\frac{1}{x_i}
+\end{align}</script><p>因为 $1/x<em>i$ 在 $x\in\textbf{dom}f=\textbf{R}^n</em>{++}$ 上为凸函数，所以 $\sum 1/x_i$ 为其非负加权求和，也是凸函数。 $-\ln(x)$ 在定义域内为凸函数且非增。需要对复合函数求二阶导：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+h(x)&=-\ln\sum\frac{1}{x_i}\\
+h'(x)&=
+\end{align}</script><p>(c) 证明：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\ln f(x)=\ln x_i-\ln\sum x_i
+
+\\
+f[\theta x+(1-\theta)y]=\frac{\prod[\theta x_i+(1-\theta) y_i]}{\sum[\theta x_i+(1-\theta) y_i]}\\
+\frac{\prod[x_i^\theta y_i^{1-\theta}]}{(\sum x_i)^\theta(\sum y_i)^{1-\theta}}
+\end{align}</script><p>(d) 证明：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+f(\theta X+(1-\theta)Y)=\frac{\det [\theta X+(1-\theta)Y]}{\textbf{tr}[\theta X+(1-\theta)Y]}\\
+\frac{(\det X)^\theta(\det Y)^{1-\theta}}{\textbf{tr}X^\theta\textbf{tr}Y^{1-\theta}}
+\end{align}</script><blockquote>
+<p>总结：</p>
+<p>实在做不下去了。。可以说一下答案大概的思路。</p>
+<p>(b)考虑取 $\log$ 后的二阶条件，直接通过暴力（也没多暴力）算对 $x_i$ 的二次偏导和 $x_i,x_j$ 的联合偏导 ，这样可以直接写出整个 Hessian 阵的项，可以通过柯西施瓦茨不等式得出二阶条件为为负。</p>
+<p>(c)有点麻烦按下不表。主体方法还是通过代入 $x+tv$ 的方式。</p>
+<p>(d)同样考虑 $X=Z+tV$ ， $Z\succ 0$ 且对  $Z^{-1/2}VZ^{-1/2}$ 做特征值分解。主要行了一个比较难的代换：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+h(Z+tV)=\log f(Z+tV)&=\log\det(Z+tV)-\log\textbf{tr}(Z+tV)\\
+&=\log\det Z-\log\det(I+tZ^{-1/2}VZ^{-1/2})-\\
+&\ \ \ \ \log\textbf{tr}(Z(I+tZ^{-1/2}VZ^{-1/2}))
+\end{align}</script><p>并用到了(c)中的条件。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>习题</category>
+        <category>凸优化</category>
+      </categories>
+      <tags>
+        <tag>凸优化</tag>
+        <tag>习题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>对偶习题</title>
+    <url>/%E5%AF%B9%E5%81%B6%E4%B9%A0%E9%A2%98.html</url>
+    <content><![CDATA[<p>《凸优化》第五章部分习题</p>
+<a id="more"></a>
+<h3 id="5-6"><a href="#5-6" class="headerlink" title="5.6"></a>5.6</h3><p>(a)</p>
+<script type="math/tex; mode=display">
+\begin{align}
+&\because\forall z\in\textbf{R}^m, \|z\|_\infty\geq\frac{1}{\sqrt{m}}\|z\|_2\\
+&\therefore \|Ax_{ch}-b\|_2\leq\sqrt{m}\|Ax_{ch}-b\|_\infty\\
+&\because \|Ax_{ch}-b\|_2\geq\|Ax_{ls}-b\|_2\text{(optimal)}\geq\|Ax_{ls}-b\|_{\infty}\text{(hint)}\\
+&\therefore \|Ax_{ls}-b\|_\infty\leq \sqrt{m}\|Ax_{ch}-b\|_{\infty}
+\end{align}</script><p>(b)</p>
+<p>容易得到 $|\hat\nu|_1\leq1$ ，$|\tilde{\nu}|_1\leq1$ 。</p>
+<script type="math/tex; mode=display">
+\begin{align}
+A^T\hat{\nu}&=(A^TAx_{ls}-A^Tb)/\|b-Ax_{ls}\|_1\\
+&=(A^TA(A^TA)^{-1}A^Tb-A^Tb)/\|b-Ax_{ls}\|_1\\
+&=0\\
+A^T\tilde{\nu}&=-A^T\hat{\nu}=0
+\end{align}</script><p> 即两个 $\nu$ 都是问题的可行解。考虑 $b^T\nu$：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+b^T\hat\nu&=\frac{-b^Tr_{ls}}{\|r_{ls}\|_1}=\frac{x_{ls}^TA^Tr_{ls}-b^Tr_{ls}}{\|r_{ls}\|_1}=-\frac{\|r_{ls}\|^2_2}{\|r_{ls}\|_1}\\
+b^T\tilde\nu&=-b^T\hat\nu=\frac{\|r_{ls}\|^2_2}{\|r_{ls}\|_1}\\
+\end{align}</script><p>即 $\tilde{\nu}$ 给出了更好（大）的下界。和(a)相比:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\frac{\|r_{ls}\|^2_2}{\|r_{ls}\|_1}=\frac{\|Ax_{ls}-b\|^2_2}{\|b-Ax_{ls}\|_1}\geq\frac{\|Ax_{ls}-b\|^2_2}{\sqrt{m}\|b-Ax_{ls}\|_2}\geq\frac{\|Ax_{ls}-b\|_\infty}{\sqrt{m}}
+\end{align}</script><p>比 (a) 给出了一个更好的下界。</p>
+<blockquote>
+<p>总结：</p>
+<p>解是一些矩阵代换。不过这一题还给出了一个通过最小二乘问题等其他问题的对偶问题来逼近原问题最优解的方法。通常这类问题没有解析解，通过其他问题的对偶问题的分析得到的下界通常比一般不等式要好。</p>
+</blockquote>
+<h3 id="5-7"><a href="#5-7" class="headerlink" title="5.7"></a>5.7</h3><p>(a)</p>
+<script type="math/tex; mode=display">
+L(x,y,\nu)=\max_{i=1,\cdots,m} y_i+\sum_i\nu_i(a^T_ix+b_i-y_i)\\
+g(\nu)=\inf_{x,y}(\max_{i=1,\cdots,m} y_i+\sum_i\nu_i(a^T_ix+b_i-y_i))</script><p>对偶问题：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &g(\nu)\\
+\text{subject to }&\nu\succeq 0
+\end{align}</script><p>由于原函数有线性部分，考虑 $g(\nu)$：</p>
+<p>优化 $x$ 时，$ \sum\nu^T a_i=0, i.e. A^T\nu=0$ 否则拉格朗日函数无下界。</p>
+<p>优化 $y$ 时，$\max y_i-\nu^Ty=0$ 否则拉格朗日函数无下界，即 $v^T\textbf{1}=1$ 。</p>
+<p>等价对偶问题：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &\nu^Tb\\
+\text{subject to }&\nu\succeq 0\\
+&\nu^T\textbf{1}=1\\
+&A^T\nu=0
+\end{align}</script><p>(b)</p>
+<p>原问题的上境图形式为LP：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &t\\
+\text{subject to }&\max(a_i^Tx+b_i)-t\leq 0
+\end{align}</script><p>约束等价变换：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &t\\
+\text{subject to }&A_i^Tx+b_i-t\textbf{1}\preceq 0
+\end{align}</script><p>对偶问题：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &\lambda^Tb\\
+\text{subject to }&A^T\lambda=0\\
+&\lambda^T\textbf{1}=1\\
+&\lambda\succeq0
+\end{align}</script><p>和(a)中对偶问题完全等价。</p>
+<p>(c)</p>
+<p>考虑无约束几何规划对偶问题的最优解 $d^\star$ 以及其最优点 $z^\star$ ：</p>
+<script type="math/tex; mode=display">
+p^\star_{gp}\leq d^\star=b^Tz_i-\sum_iz^\star_i\log z^\star_i</script><p>将其变换成LP ，对某个 $\nu$ 有以下式子成立：</p>
+<script type="math/tex; mode=display">
+b^T\nu= p^\star_{gp} -\sum_iz^\star_i\log z^\star_i</script><p>又因为 $z^\star$ 在GP对偶问题上的可行域也是原分片线性极小化对偶问题的可行域，即 $z^\star$ 为此LP的可行解：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+p^\star_{pw1}&\geq b^T\nu=p^\star_{gp}-\sum_iz^\star_i\log z^\star_i\\
+p^\star_{gp}-p^\star_{pw1}&\leq \sum_iz^\star_i\log z^\star_i\leq \log m
+\end{align}</script><p>(d)</p>
+<p>写出对偶问题，先变换问题为</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &(1/\gamma)\log(\sum_i\exp(\gamma y_i))\\
+\text{subject to }&Ax+b=y
+\end{align}</script><p>拉格朗日函数：</p>
+<script type="math/tex; mode=display">
+L(x,\lambda)=(1/\gamma)\log\sum\exp(\gamma y_i)+\lambda^T(Ax+b-y)</script><p>$x$ 的最优化条件为 $A^T\lambda=0$ ，对 y 第一项为 Log-Sum-Exp 函数，其导数为 Softmax。即 $y$ 的最优化条件为：</p>
+<script type="math/tex; mode=display">
+\frac{e^{\gamma y_i}}{\sum e^{\gamma y_i}}=\lambda_i</script><p>对偶问题为：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &\lambda^Tb-(1/\gamma)\sum_{i=1}^m\lambda_i\log\lambda_i\\
+\text{subject to }&A^T\lambda=0\\
+&\textbf{1}^T\lambda=1
+\end{align}</script><p>按照处理(c)中GP对偶问题的步骤，第二项可以放缩为 $1/\gamma \log m$令其最优解为 $p^\star_{gp}(\gamma)-1/\gamma\log m$ 有：</p>
+<script type="math/tex; mode=display">
+p^\star_{gp}(\gamma)-1/\gamma\log m\leq p^\star_{pw1}\leq p^\star_{gp}(\gamma)</script><p>可看出 $\gamma $ 变大会让此优化问题逼近 $p^\star_{pw1}$ 。</p>
+<blockquote>
+<p>总结：</p>
+<p>问题的拉格朗日对偶问题常常会因为保证满足优化时极小值可达所需要的条件，从而消去一些项使目标函数或约束变得简单 （拉格朗日对偶问题优化拉格朗日变量，对原问题优化变量直接取inf下界，化成等价问题时常常消去inf，即把原优化变量全部去掉），等价问题还可能直接优化成LP形式。(c)的解法比较技巧化，即通过辅助的LP问题分析，能用到之前分片线性极小化问题的性质。</p>
+</blockquote>
+<h3 id="5-16"><a href="#5-16" class="headerlink" title="5.16"></a>5.16</h3><p>(a)</p>
+<p>因为 $f<em>0$ 凸， $f_i$ 凸，所以 $\max{0, f_i}$ 凸，所以 $\max</em>{i=1,\cdots,m}\max{0,f_i}$ 凸，所以 $\phi$ 凸。</p>
+<p>(b)</p>
+<script type="math/tex; mode=display">
+\begin{align}
+L(x,\lambda)&=f_0(x)+\sum_i\lambda_if_i(x)\\
+g(\lambda)&=\inf_x(f_0(x)+\sum_i\lambda_if_ix(x))\\
+L'(x,y,\lambda,\nu)&=f_0(x)+\alpha y+\sum_i\lambda_i(f_i(x)-y)-\nu y\\
+g'(\lambda,\nu)&=\inf_{x,y}(f_0(x)+\alpha y+\sum_i\lambda_i(f_i(x)-y)-\nu y)\\
+&=\inf_x(f_0(x)+\sum\lambda_if_i(x))+\inf_y((\alpha-\nu-\sum_i\lambda_i)y)
+\end{align}</script><p>优化 $g’(\lambda,\nu)$ 的等价问题：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &g(\lambda)\\
+\text{subject to }&\textbf{1}^T\lambda-\alpha\leq0\\
+&\lambda\succeq0\\
+\end{align}</script><p>(c)</p>
+<p>$\lambda^\star$ 为原对偶问题最优解： </p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &g(\lambda)\\
+\text{subject to }
+&\lambda\succeq0\\
+\end{align}</script><p>辅助问题最优解 $x_s^\star\geq \lambda^\star_s$ ，且容易知道辅助问题对偶最优解 $ \lambda^\star_s$ 在原对偶问题上可行。又有 $\alpha&gt;\textbf{1}^T\lambda^\star$ ， 即 $\lambda^\star$ 也是辅助问题对偶最优解，两者可行域以及优化函数等价，辅助问题的最优解是其对偶问题最优解，由于原问题强对偶成立，所以对偶问题最优解也是原问题最优解，即：辅助问题的最优解也是原问题的最优解。</p>
+<blockquote>
+<p>总结：</p>
+<p>比较常规的对偶分析。罚函数项和一些损失函数正则项有相似之处。</p>
+</blockquote>
+<h3 id="5-23"><a href="#5-23" class="headerlink" title="5.23"></a>5.23</h3><p>(a)</p>
+<p>设不存在这样的 $z$ ，即 $-c\notin{\sum z_ia_i\mid z_i\geq0}$ ，右侧为闭凸集，根据严格分离超平面定理，存在超平面 $u^Tx$ 严格分离点和集合。即：</p>
+<script type="math/tex; mode=display">
+-u^Tc>\sum u^Tz_ia_i=u^TA^Tz</script><p>约束为 $z\succeq 0$ ，可以看出 $u^Tc&lt;0, u^TA^T&lt;0$ 。令 $x=x^\star+tu$ ：</p>
+<script type="math/tex; mode=display">
+a^T_ix=a^T_ix^\star+a^T_itu\leq b_i+ta^T_iu<b_i</script><p>即 $x$ 可行；考虑目标函数：</p>
+<script type="math/tex; mode=display">
+c^Tx=c^Tx^\star+tc^Tu<c^Tx^\star</script><p>我们找到了比 $x^\star$ 更优的解，矛盾。所以存在满足题意的 $z$ 。</p>
+<p>(b)</p>
+<p>对偶问题可行即 $-b\notin {Ax+s\mid s\succeq0}$ ，右侧为闭凸集，根据严格分离超平面定理，存在超平面 $v^Tx$ 严格分离点和集合。即：</p>
+<script type="math/tex; mode=display">
+-v^Tb>v^TAx+v^Ts</script><p>在 $x$ 任意取值下成立需要 $v^TA=0$ ， 等价式子为：</p>
+<script type="math/tex; mode=display">
+v^TA=0, v^Tb<0,v\succeq 0</script><p>那么对偶问题可行性条件 $A^Tz+c=0=A^T(z+v)$ ，即对偶问题在 $v$ 方向上是无界的， $d^\star =\infty$。</p>
+<p>(c)</p>
+<p>原问题容易看出不可行 ($0\leq -1$)，$p^\star=\infty$ 。</p>
+<script type="math/tex; mode=display">
+L(x,\lambda_1,\lambda_2)=x+\lambda_1(x-1)+\lambda_2</script><p>可行性条件 $\lambda_1+1=0$  ，对偶线性规划：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{maximize } &\lambda_2-\lambda_1\\
+\text{subject to }&\lambda_1+1=0\\
+&\lambda_1,\lambda_2\geq0\\
+\end{align}</script><p>容易看出此问题约束  $\lambda_1=-1\geq0$ 不能满足，对偶问题不可行。$d^\star=-\infty$ 。</p>
+<h3 id="5-27"><a href="#5-27" class="headerlink" title="5.27"></a>5.27</h3><p>拉格朗日函数：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+L(x,\nu)&=\|Ax-b\|^2_2+\nu^T(Gx-h)\\
+&=x^TA^TAx-2b^TAx+b^Tb+\nu G^T x-\nu^Th\\
+&=x^TA^TAx+(G^T\nu-2A^Tb)^Tx-\nu^Th+b^Tb
+\end{align}</script><p>KKT条件:</p>
+<script type="math/tex; mode=display">
+2A^TAx^\star-2A^Tb+G^T\nu^\star=0\\
+Gx^\star-h=0</script><p>最优解 $x^\star$ 可以用 $\nu^\star$ 显式表达：</p>
+<script type="math/tex; mode=display">
+x^\star=(\frac{1}{2}(A^TA)^{-1})(-G^T\nu^\star+2A^Tb)</script><p>代入 $Gx^\star-h=0, x^\star=G^{-1}h$ 后 $\nu^\star$ 可独立写出：</p>
+<script type="math/tex; mode=display">
+\nu^\star=(G^T)^{-1}(2A^Tb-2A^TAG^{-1}h)</script>]]></content>
+      <categories>
+        <category>习题</category>
+        <category>凸优化</category>
+      </categories>
+      <tags>
+        <tag>凸优化</tag>
+        <tag>习题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ADMM 交替方向乘子法</title>
+    <url>/%E7%AC%94%E8%AE%B0-ADMM-%E4%BA%A4%E6%9B%BF%E6%96%B9%E5%90%91%E4%B9%98%E5%AD%90%E6%B3%95.html</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li><a href="http://web.stanford.edu/~boyd/papers/pdf/admm_distr_stats.pdf">ADMM by Boyd, 2010</a></li>
+<li>收敛速率和算法复杂度分析可见南大何教授的分析 <a href="http://maths.nju.edu.cn/~hebma/">主页</a></li>
+<li>对于基础知识，建议简要阅读一下 Boyd 的凸优化。(Convex Optimization, Stephen Boyd)</li>
+</ul>
+<a id="more"></a>
+<h2 id="等式约束优化问题"><a href="#等式约束优化问题" class="headerlink" title="等式约束优化问题"></a>等式约束优化问题</h2><h3 id="拉格朗日乘子法"><a href="#拉格朗日乘子法" class="headerlink" title="拉格朗日乘子法"></a>拉格朗日乘子法</h3><ul>
+<li>即求 <script type="math/tex">\min f(x) \ \ s.t.g_i(x)=0</script><br>使用拉格朗日乘子 <script type="math/tex">\ L(x,\lambda)=f(x)+\sum\lambda_i g_i(x)</script> ，使 <script type="math/tex; mode=display">\frac{\partial L}{\partial x}=\frac{\partial L}{\partial \lambda_i}=0</script>可以得到最优解。</li>
+<li>即多元微积分中求多元函数的条件极值。</li>
+</ul>
+<h3 id="罚函数"><a href="#罚函数" class="headerlink" title="罚函数"></a>罚函数</h3><ul>
+<li>即求 <script type="math/tex">\min f(x) \ \ s.t.g_i(x)=0</script> 。<br>引入惩罚因子 $\sigma$ 与增广函数 $P$ ，有 <script type="math/tex">\min F(x,\sigma)=f(x)+\sigma P(x)</script><br>其中 $\sigma$ 取很大的正数， $P=g^T g$ 。增广函数指示偏离约束的程度，并由一个很大的惩罚因子给予惩罚。由此求解的极值几乎不会脱离约束。 </li>
+</ul>
+<h3 id="增广拉格朗日乘子法-Augmented-Lagrange-Method"><a href="#增广拉格朗日乘子法-Augmented-Lagrange-Method" class="headerlink" title="增广拉格朗日乘子法 Augmented Lagrange Method"></a>增广拉格朗日乘子法 Augmented Lagrange Method</h3><ul>
+<li>在拉格朗日函数中引入罚函数，具体形式见后。</li>
+</ul>
+<h2 id="共轭问题和对偶问题"><a href="#共轭问题和对偶问题" class="headerlink" title="共轭问题和对偶问题"></a>共轭问题和对偶问题</h2><h3 id="共轭问题"><a href="#共轭问题" class="headerlink" title="共轭问题"></a>共轭问题</h3><ul>
+<li>$f(x): R^n\rightarrow R$</li>
+<li>$f^*(y): R^n\rightarrow R$</li>
+<li>$f^*(y)=\sup_{x\in D}(y^Tx-f(x))$</li>
+<li>(重要) <script type="math/tex">f^*(y)</script> 一定是凸的。这是因为逐点最大和逐点上确界操作是保凸的。在 <script type="math/tex">y\in R</script> 的情况下， <script type="math/tex">f^*</script> 相当于遍历仿射函数 <script type="math/tex">yx(kx)</script> 的斜率，并取 $kx+b$ 与 $f(x)$ 相交的时候最小的 $b$ ($b=-f(x)$)。</li>
+<li>(重要) 若 $f$ 是凸的且可微，则使 $y^Tx-f(x)$ 取最大的 <script type="math/tex">x^*</script> 满足 <script type="math/tex">y=\triangledown f(x^*)</script>（遍历的仿射函数和 $f(x)$ 相切）。即，给定任意 $y$ ，可以求解梯度方程 $y=\triangledown f(z)$ 得到 $y$ 处共轭函数 $f^*(y)$</li>
+<li>此处 $x$ 带有 $\sup$ 即要对 $x$ 做遍历，所以并不是常数。</li>
+</ul>
+<h4 id="拉格朗日对偶函数"><a href="#拉格朗日对偶函数" class="headerlink" title="拉格朗日对偶函数"></a>拉格朗日对偶函数</h4><ul>
+<li>$g(\lambda,t)=\inf_{x\in D}L(x,\lambda,\nu)$</li>
+<li>由于$\inf$的影响，$g$ 只能在一系列 $x$ 的取值中取最小的 $g(\lambda,\nu)$ 中取，是一族关于 $(\lambda,\nu)$ 的仿射函数的逐点下确界，是一定凸的。<br>所以对 $g(\lambda,\nu)=\min L(x,\lambda,\nu)\leq \min<em>x \max</em>{\lambda,\nu} L(x,\lambda,\nu)=\min f(x)$ 恒成立</li>
+<li>拉格朗日对偶函数给出了优化问题的最优值的一个下界 <script type="math/tex">(d^*\leq p^*)</script></li>
+</ul>
+<h3 id="线性约束下两者关系"><a href="#线性约束下两者关系" class="headerlink" title="线性约束下两者关系"></a>线性约束下两者关系</h3><p>$\min f(x),s.t. Ax=a, Bx\leq b.$<br>$L(x,\lambda,t)=f(x)+\lambda(Ax-a)+\nu(Bx-b)$<br>对偶函数 $g(\lambda,\nu)=\inf<em>{x\in D} L(x,\lambda,\nu)=-\lambda a-\nu b-\sup</em>{x\in D}[(-\lambda A-\nu B)x-f(x)]$<br>$=-\lambda a-\nu b-f^*(-\lambda A-\nu B)$</p>
+<h3 id="对偶问题"><a href="#对偶问题" class="headerlink" title="对偶问题"></a>对偶问题</h3><ul>
+<li>$\max g(\lambda,\nu ),\ \ s.t.\ \ \lambda,\nu \geq 0.$</li>
+<li>对偶问题的引出是因为 $g(\lambda,\nu)$ 描述一个最优值的下界，那么 $\max g(\lambda,\nu)$ 则是最优值的最好下界。</li>
+<li>$\lambda,\nu$ 可代回 $L(x,\lambda,\nu)$ 对 $x$ 求 $\min L.$</li>
+<li>此问题是无约束问题，拉格朗日方程不带约束项。这一过程消除了约束的限制(并入 $g$ 中)。且对偶问题一定是一个<strong>凸优化</strong>问题。</li>
+<li>注意强对偶条件下对偶问题的解才和原问题解相同。凸优化问题满足Slater条件，即凸优化问题存在严格可行解（约束中的仿射函数不等式约束满足严格小于），问题具有强对偶性质。Slater条件确保原函数存在鞍点（？）。</li>
+<li>凸问题下满足KKT条件的点 $\tilde{x},\tilde{\lambda},\tilde{\nu}$ ， $\tilde{x}$ 和 $(\tilde{\lambda},\tilde{\nu})$ 分别是原问题和对偶问题的最优解，且对偶间隙为0。</li>
+</ul>
+<h2 id="ADMM与相关优化算法"><a href="#ADMM与相关优化算法" class="headerlink" title="ADMM与相关优化算法"></a>ADMM与相关优化算法</h2><h3 id="对偶上升法-Dual-Ascent-Method"><a href="#对偶上升法-Dual-Ascent-Method" class="headerlink" title="对偶上升法 Dual Ascent Method"></a>对偶上升法 Dual Ascent Method</h3><ul>
+<li>使用梯度上升法更新 $\lambda$ 和 $\nu$ 。不断迭代求对偶问题的最优解（最大值，故用上升法）。每次更新 $\lambda$ 和 $\nu$ 都可以从此带入 $L$ 求出一个新的 $x$ ，此时得到一条新曲线（也可能是原曲线，但永远不会在原曲线上方），可以得到新的对偶问题继续更新 $\lambda$ 和 $\nu$ 。</li>
+<li><p>$\lambda, \nu$ 的上标表示迭代次数，在迭代中不断将解更新为满足不同约束条件的解。(剩余约束条件是多余的)(等式约束对所有可行解都是起作用的)</p>
+</li>
+<li><p>原问题：$\min f(x) \s.t. Ax=b$<br>其拉格朗日函数为：</p>
+<script type="math/tex; mode=display">L(x,\lambda)=f(x)+\lambda^T(Ax-b)</script><p>对偶函数为：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+g(\lambda)&=\inf_x L(x,\lambda)=\inf_x (f(x)+\lambda^T(Ax-b))\\&=-\sup_x (-f(x)-\lambda^TAx)-\lambda^Tb\\&=-f^※(-A^T\lambda)-b^T\lambda
+\end{align}</script><p>对偶问题：$\max g(\lambda)$<br>在强对偶条件成立的情况下，原问题最优解(minimizer) <script type="math/tex">x^*</script> 可以通过 <script type="math/tex">y^*</script> (即上述 <script type="math/tex">\lambda^*</script>) 使用下式计算：<br><script type="math/tex">x^*=\arg\min_x L(x,\lambda^*)</script> 。</p>
+</li>
+<li><p>若 $g$ 可微，对任意点 $(x,\lambda)$ ，令（有?） $x^+=\arg\min_xL(x,y)$ ,则其梯度 $\triangledown g(y)=Ax^+-b$ ，则点的迭代（即梯度上升迭代）式如下：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+x^{k+1}&:=\arg\min_x L(x,y^k)\\
+y^{k+1}&:=y^k+\alpha^k(Ax^{k+1}-b)
+\end{align}</script><p>利用梯度上升迭代更新对偶问题的答案 $y$ ，并用 $y$ 反过来更新 $x$ 。 $\alpha^k&gt;0$ 是步长，所有上标都为迭代计数器。</p>
+</li>
+<li><p>若 $f$ 为 $x$ 的任何分量的非零仿射函数，则 $x$ 无法更新，因为大多数情况下 $L$ 对 $x$ 无界（例 $y=kx+b$ 在 $k\neq0$ 时 $y$ 无下界）。</p>
+</li>
+</ul>
+<h4 id="对偶分解法-Dual-Decomposition"><a href="#对偶分解法-Dual-Decomposition" class="headerlink" title="对偶分解法 Dual Decomposition"></a>对偶分解法 Dual Decomposition</h4><ul>
+<li>对 $x$ 的更新可以并行执行。</li>
+</ul>
+<h3 id="增广拉格朗日乘子法-Augmented-Lagrange-Method-1"><a href="#增广拉格朗日乘子法-Augmented-Lagrange-Method-1" class="headerlink" title="增广拉格朗日乘子法 Augmented Lagrange Method"></a>增广拉格朗日乘子法 Augmented Lagrange Method</h3><ul>
+<li>在拉格朗日函数中引入二次罚函数因子（即二次正则项，设约束为线性约束） <script type="math/tex; mode=display">L_\rho(x,y)=f(x)+y^T(Ax-b)+(\rho/2)||Ax-b||^2_2</script></li>
+<li>迭代过程：<script type="math/tex; mode=display">
+\begin{align}
+x^{k+1}&:=\arg\min_x L_\rho(x,y^k)\\
+y^{k+1}&:=y^k+\rho(Ax^{k+1}-b)
+\end{align}</script></li>
+<li>由于二次惩罚项的存在无法并行更新 $x$</li>
+</ul>
+<h3 id="交替方向乘子法-Alternating-Direction-Method-of-Multipliers"><a href="#交替方向乘子法-Alternating-Direction-Method-of-Multipliers" class="headerlink" title="交替方向乘子法 Alternating Direction Method of Multipliers"></a>交替方向乘子法 Alternating Direction Method of Multipliers</h3><h4 id="ADMM-基本形式-Unscale-form"><a href="#ADMM-基本形式-Unscale-form" class="headerlink" title="ADMM 基本形式(Unscale form)"></a>ADMM 基本形式(Unscale form)</h4><ul>
+<li>ADMM将原来的变量 $x$ 分成 $x$ 和 $z$ 两部分。优化问题如下（一次等式约束）：<script type="math/tex; mode=display">\min f(x)+g(z)\\ s.t. Ax+Bz=c</script></li>
+<li>最优值可表示为(?)：<script type="math/tex; mode=display">p^*=\inf\{f(x)+g(z)\ |\ Ax+Bz=c\}</script></li>
+<li>其拉格朗日函数可表示为：<script type="math/tex; mode=display">L_\rho(x,z,y)=f(x)+g(z)+y^T(Ax+Bz-c)+(\rho/2)||Ax+Bz-c||^2_2</script></li>
+<li>迭代过程：<script type="math/tex; mode=display">
+\begin{align}
+x^{k+1}&:=\arg\min_x L_\rho(x,z^k,y^k)\\
+z^{k+1}&:=\arg\min_z L_\rho(x^{k+1},z,y^k)\\
+y^{k+1}&:=y^k+\rho(Ax^{k+1}+Bz^{k+1}-c)
+\end{align}</script></li>
+<li>ADMM的可以并行迭代更新x,z</li>
+</ul>
+<h4 id="Scale-form"><a href="#Scale-form" class="headerlink" title="Scale form"></a>Scale form</h4><ul>
+<li>定义残差(residual) $r=Ax+Bz-c$ 和 Scale dual variable $u=(1/\rho)y$ ，我们有<script type="math/tex; mode=display">y^Tr+(\rho/2)||r||^2_2=(\rho/2)||r+(1/\rho)y||^2_2-(1/2\rho)||y||^2_2</script>ADMM迭代式可以重写为：<script type="math/tex; mode=display">
+\begin{align}
+x^{k+1}&:=\arg\min_x (f(x)+(\rho/2)||Ax+Bz^k-c+u^k||^2_2)\\
+z^{k+1}&:=\arg\min_z (g(x)+(\rho/2)||Ax^{k+1}+Bz-c+u^k||^2_2)\\
+u^{k+1}&:=u^k+Ax^{k+1}+Bz^{k+1}-c
+\end{align}</script>即为ADMM的Scale form</li>
+</ul>
+<h4 id="停止条件"><a href="#停止条件" class="headerlink" title="停止条件"></a>停止条件</h4><ul>
+<li>原变量满足收敛条件时残差必定满足收敛于0的条件，所以可以取<script type="math/tex; mode=display">||r^k||_2\leq\epsilon^{pri}\ \ \ \ and\ \ \ \ ||s^k||_2\leq\epsilon^{dual}</script></li>
+<li>其中的 $\epsilon$ 取法需满足一定条件，可见Boyd 2011论文式(3.12)部分。</li>
+</ul>
+<h4 id="对一般约束问题"><a href="#对一般约束问题" class="headerlink" title="对一般约束问题"></a>对一般约束问题</h4><ul>
+<li>优化问题如下：<script type="math/tex; mode=display">\min f(x)\\ s.t. x\in \mathcal{C}</script>其中 $x\in R^n$ ，$f$ 和 $\mathcal{C}$ 都是凸的，转化为ADMM形式：<script type="math/tex; mode=display">\min f(x)+g(z)\\ s.t. x-z=0</script>其中 $g$ 是 $\mathcal{C}$ 的指示函数（即 $x\in \mathcal{C}$ 则 $g(x)=0$ ，否则 $g(x)=+\infty$<br>迭代式为：<script type="math/tex; mode=display">
+\begin{align}
+x^{k+1}&:=\arg\min_x (f(x)+(\rho/2)||x-z^k+u^k||^2_2)\\
+z^{k+1}&:=\Pi_C(x^{k+1}+u^k)\\
+u^{k+1}&:=u^k+x^{k+1}-z^{k+1}
+\end{align}</script>其中 $\Pi_{\mathcal{C}(x)}$ 即 $x$ 在集合 $\mathcal{C}$ 上的欧几里得投影。</li>
+</ul>
+<h4 id="对非凸问题"><a href="#对非凸问题" class="headerlink" title="对非凸问题"></a>对非凸问题</h4><ul>
+<li>优化问题如下：<script type="math/tex; mode=display">\min f(x)\\ s.t. x\in S</script>其中 $f$ 凸而 $S$ 非凸，ADMM迭代式为：<script type="math/tex; mode=display">
+\begin{align}
+x^{k+1}&:=\arg\min_x (f(x)+(\rho/2)||x-z^k+u^k||^2_2)\\
+z^{k+1}&:=\Pi_S(x^{k+1}+u^k)\\
+u^{k+1}&:=u^k+x^{k+1}-z^{k+1}
+\end{align}</script>对 $z$ 的更新由于 $S$ 的非凸性变得难以计算，但仍然有容易计算的特例存在：<ul>
+<li>基数运算：<br>如果 <script type="math/tex">S=\{x| card(x)\leq c\}</script> ，其中 $card$ 给出集合中非零元的数量，那么 $\Pi_S(v)$ 是将 $v$ 的最大 $c$ 个元素保留并将其余元素置零。</li>
+<li>秩运算：<br>如果 $S$ 是秩为 $c$ 的矩阵的集合，那么 $\Pi<em>S(v)$ 通过SVD计算并保留前 $c$ 对，即 $\Pi_S(v)=\sum^c</em>{i=1}\sigma_i u_i v_i^T$</li>
+<li>布尔约束：<br>如果 $S={x|x<em>i\in{0,1}}$ ，那么 $\Pi<em>S(v)$ 直接取 0、1 中更近的那个。__整数约束</em></em>可以被同样的方式处理。</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>凸优化</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>凸优化</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>凸问题习题</title>
-    <url>/2019/06/18/%E5%87%B8%E9%97%AE%E9%A2%98%E4%B9%A0%E9%A2%98/</url>
+    <url>/%E5%87%B8%E9%97%AE%E9%A2%98%E4%B9%A0%E9%A2%98.html</url>
     <content><![CDATA[<p>《凸优化》第四章部分习题。</p>
 <a id="more"></a>
 <h3 id="4-2"><a href="#4-2" class="headerlink" title="4.2"></a>4.2</h3><p>(a) </p>
@@ -371,455 +818,8 @@ i.e.\ &f_0[\theta x_1+(1-\theta)x_2]\preceq_K\theta f_0(x_1)+(1-\theta)f_0(x_2)\
       </tags>
   </entry>
   <entry>
-    <title>凸集/凸函数习题</title>
-    <url>/2019/06/18/%E5%87%B8%E9%9B%86%E4%B9%A0%E9%A2%98/</url>
-    <content><![CDATA[<p>《凸优化》第二/三章部分习题。</p>
-<a id="more"></a> 
-<h3 id="2-9"><a href="#2-9" class="headerlink" title="2.9"></a>2.9</h3><p>(a) 证明：</p>
-<p>​    考虑 </p>
-<script type="math/tex; mode=display">
-V_i=\{x=\textbf{R}^n\mid \|x-x_0\|_2\leq\|x-x_i\|_2\}</script><p>作超平面 $(x_i-x_0)^Tx=(x_i-x_0)^T(x_i+x_0)/2$</p>
-<p>​    对超平面上每个点 $x<em>k$ 的分量 $j$ 都有 $2(x</em>{ij}-x<em>{0j})x</em>{kj}=(x<em>i^2-x_0^2)$ ，且 $|x_k-x_0|_2=\sqrt{\sum_j{(x</em>{kj}-x<em>{0j})^2}}$  ，$|x_k-x_i|_2=\sqrt{\sum_j{(x</em>{kj}-x_{0j})^2}}$ 。</p>
-<p>​    将第一式带入范数表达式可得对超平面上每个点 $x$ 均有 $|x-x_0|_2=|x-x_i|_2$ ，且对于超平面下方的半空间 $(x_i-x_0)^Tx\leq(x_i-x_0)^T(x_i+x_0)/2$ ，均有 $|x-x_0|_2\leq |x-x_i|_2$ ，对所有的 $i$ 均成立。即 $V$ 的边界为一系列超平面的交，$V$ 为多面体。设 $x_i-x_0=a_i$ ，$(x_i-x_0)^T(x_i+x_0)/2=b_i$ ， $V$ 可以被写作 </p>
-<script type="math/tex; mode=display">
-V=\{x\mid Ax\preceq b\}, A=\{a_1^T,a_2^T,\cdots,a_K^T\}, b=\{b_1,b_2,\cdots,b_K\}</script><p>(b)</p>
-<p>​    P总可以表达为$P={x\mid Ax\preceq b}$ 的形式，设 $A={a_1^T,a_2^T,\cdots,a_K^T}$ ，对于任意一点 $x_0\in P$ 和多面体的面 $a_i^Tx=b$，总可以找到直线 $x=x_0+ka_i, k\in\textbf{R}$ 上的一点 $x_i$ 满足对面上任意一点 $x_k$ ，有 $ |x_i-x_k|_2=|x_0-x_k|_2$ (作点 $x_0$ 关于面的对称点即可) ，这是由于 $x_0$ 在多面体内部，满足 $a^T_ix&lt;b$ ，在直线上增大 $k$ 会使 $|x_i-x_k|_2$ 减小至0后增大，使 $|x_0-x_k|_2$ 增大。根据定义，这样的一组点就$x_0, x_1,\cdots,x_K$ 满足 $P$ 是 $x_0$ 关于 $x_1,\cdots, x_K$ 的 Voronoi 区域。</p>
-<p>(c)</p>
-<p>​    并不总可以用 Voronoi 区域表示。最明显的例子是由数个无限边界多面体组成的集合，考虑 $\textbf{R}^2$ 中由三个多面体组成的集合，他们的边界超平面的法向量共面，且边界两两之间夹角小于90°，这样就有至少一个多面体真包含了一个半空间，记为A。依照之前 Voronoi 区域点的找法， $x_1,x_2,x_A$ 分属三个多面体且需要互相关于边界超平面对称，将其他两个多面体沿边界对称投影到A上，它们的交集就是 $x_A$ 的取值范围(因为 $x_A$ 需要同时与 $x_1,x_2$ 关于两条边界对称)。由于 A 真包含了一个半空间，所以两部分投影不可能有交集，即不可能找到这样的 $x_A$ 。</p>
-<blockquote>
-<p>总结：</p>
-<p>主要是超平面的定义。</p>
-</blockquote>
-<h3 id="2-26"><a href="#2-26" class="headerlink" title="2.26"></a>2.26</h3><p>证明： </p>
-<p>​    先证必要性。因为 $C=D$ ，即 $C\subseteq D, D\subseteq C$ ， ，显然它可以推得于 $S_C\leq S_D, S_D\leq S_C$， 即 $S_C=S_D$ 。</p>
-<p>  再证充分性。因为 $S_C=S_D$，设 $C\neq D$ ，不失一般性，设存在 $x_i\in C, x_i\notin D$ ，<br>根据凸集定义，取 $D$ 的支撑超平面集，一定存在某个方向 $a^T$ 上的 $D$ 的支撑超平面，满足 $a^Tx_i&gt;b$ 且 $\forall x \in D, a^Tx&lt;b$ 。<br>  将 $a$ 取为支撑函数自变量，则 </p>
-<script type="math/tex; mode=display">
-S_C(a)=\sup\{a^Tx\mid x\in C\}=a^Tx_i >b> \sup\{a^Tx\mid\ x\in D\}</script><p>  即 $S_C\neq S_D$ ，矛盾。所以 $C=D$ 。</p>
-<blockquote>
-<p>总结：</p>
-<p>这道题说明了一个性质，即凸集能被他们的支撑函数完全表征，它们是双射关系。考虑”支撑集”定义和支撑一词的含义，能够表征凸集还是比较容易理解的。</p>
-</blockquote>
-<h3 id="2-33"><a href="#2-33" class="headerlink" title="2.33"></a>2.33</h3><p>(a) 证明:</p>
-<p>​    $K<em>{m+}$ 在 $\textbf{R}^n$ 中由 n 个带等号不等式约束，所以其是闭凸集，且容易知道它满足 $\theta_1 x_1+\theta_2 x_2\in K</em>{m+}, \forall x<em>1,x_2\in K</em>{m+}$ 所以 $K<em>{m+}$ 是个闭凸锥。其内部非空性质通过列举满足条件的向量同样易得。<br>​    因为 $x\in K</em>{m+}, -x\in K<em>{m+}$ ，即 $x_1\geq x_2\geq\cdots\geq x_n\geq 0, x_1\leq x_2\leq\cdots\leq x_n\leq 0$ ，即 $x_1=x_2=\cdots=x_n=0$ ， $x=0$ 。所以 $K</em>{m+}$ 是尖的，所以它是正常锥。</p>
-<p>(b) </p>
-<script type="math/tex; mode=display">
-K^*_{m+}=\{y\mid\sum x_iy_i\geq0, \forall x\in K\}\\</script><p>注意到提示中恒等式，有</p>
-<script type="math/tex; mode=display">
-\begin{align}
-K^*_{m+}&=\{y\mid (x_1-x_2)y_1+(x_2-x_3)(y_1+y_2)+
-(x_3-x_4)(y_1+y_2+y_3)\\&+\cdots+(x_{n-1}-x_n)(y_1+\cdots+y_{n-1})+x_n(y_1+\cdots+y_n)\geq0, \forall x\in K\}\\
-K^*_{m+}&=\{y\mid\sum_{i=1}^n y_i\geq 0\}
-\end{align}</script><blockquote>
-<p>总结：</p>
-<ul>
-<li>等号不等式约束集为闭凸集。</li>
-</ul>
-</blockquote>
-<h3 id="3-9"><a href="#3-9" class="headerlink" title="3.9"></a>3.9</h3><p>(a) 证明:</p>
-<p>$\overset{-}{f}$ 为凸的二阶条件是 $\triangledown^2\overset{-}{f}$ 半正定。<br>即 $\bigtriangledown^2\overset{-}{f}(z)=F^T\bigtriangledown^2f(Fz+\hat{x})F\succeq 0$ </p>
-<p>(b) 证明：</p>
-<p>即证明 $F^T\bigtriangledown^2(Fz+\hat{x})F\succeq 0 \Leftrightarrow \bigtriangledown^2 f(Fz+\hat{x})+\lambda A^TA\succeq 0$<br>使用引理：</p>
-<blockquote>
-<p>总结：</p>
-<p>这里没有写，但最后交上去的时候这里还是写了的，实际上这里是应用 (a) 中的结论， 将 $F$ 分解后仍然成立，即$\forall v,v^T\triangledown^2f(Fz+\hat{x})v\succeq0$ 。 $v$ 也在 $A$ 的零空间中。然后直接用引理就行。 用 $B=\triangledown^2f(Fz+\hat{x})$ 代换引理的话，很容易就能得出结论。</p>
-<p>还需要注意一点是 $g(x)=f(Ax+b)$ 的二阶条件是 $\triangledown^2g$ 和 $A^T\triangledown^2fA$ 。</p>
-</blockquote>
-<h3 id="3-35"><a href="#3-35" class="headerlink" title="3.35"></a>3.35</h3><p>(a)证明：</p>
-<p>$S<em>B(y)=\sup{y^Tx\mid x\in B}$， $S</em>{\textbf{conv}B}(y)=\sup{y^Tx’\mid x’\in\textbf{conv}B}$ </p>
-<p>因为 $B\subseteq\textbf{conv}B$ ，所以在 $y$ 确定时 ， 有 $y^Tx\leq y^Tx’$ 。在 $y$ 确定的情况下，若此不等式不能取严格等号，则必定存在某个 $x’$ 对任意 $x$ 都取 </p>
-<script type="math/tex; mode=display">
-y^Tx<y^Tx'</script><p>根据凸包定义，$x’=\sum_i\theta_i x_i, \sum\theta_i=1, x_i\in B$ ，则有 </p>
-<script type="math/tex; mode=display">
-y^Tx'=y^T\sum\theta_i x'>y^T\sum\theta_i x_i=y^Tx_i</script><p>矛盾。所以不等式可以严格取等号，即 $S<em>B(y)=S</em>{\textbf{conv}B}(y)$</p>
-<p>(b)证明：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-S_{A+B}(y)&=\sup\{y^Tx\mid x\in A+B\}=\sup\{y^T(a+b)\mid a\in A, b\in B\}\\
-&=\sup\{y^Ta\mid a\in A\}+\sup\{y^Tb\mid b\in B\}\\
-&=S_A(y)+S_B(y)
-\end{align}</script><p>(c)证明：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-S_{A\cup B}(y)&=\sup\{y^Tx\mid x\in A\cup B\}\\
-&=\max\{\sup\{y^Tx\mid x\in A\}, \sup\{y^Tx\mid x\in B\}\}\\
-&=\max\{S_A(y)+S_B(y)\}
-\end{align}</script><p>(d)证明:</p>
-<p>必要性易得，此处仅证充分性：</p>
-<script type="math/tex; mode=display">
-S_{\textbf{conv}A}(y)=S_A(y)\leq S_B(y)</script><p>若 $\textbf{conv}A\nsubseteq B$，即 $\exists x\in \textbf{conv}A, x\notin B$ ，则 $S<em>{\textbf{conv}A\cup B}(y)&gt;S_B(y)$ 。又有 $S</em>{\textbf{conv}A\cup B}(y)=\max{S_{\textbf{conv}A}(y), S_B(y)}=S_B(y)$ 矛盾。所以 $A\subseteq \textbf{conv}A \subseteq B$。</p>
-<blockquote>
-<p>总结：</p>
-<p>和2.26一样，结合之前的支撑函数的例子和此题（尤其是(a)），能更好地理解支撑函数能够表征凸集的性质。这种一一对应关系由sup运算保证。</p>
-</blockquote>
-<h3 id="3-38"><a href="#3-38" class="headerlink" title="3.38"></a>3.38</h3><p>证明:</p>
-<p>即证明 $F(x)=\underset{y\in\textbf{dom}G}{\sup}(xy-G(y))$ 。</p>
-<p>Young 不等式的简单图示:</p>
-<p>可以看到 $xy$ 表征一个矩形面积，可以看到阴影面积和（即 $F(x)+G(y)$）永远不小于这个矩形面积，等号在 $f(x)=y$ 时取得。因为 $xy\leq F(x)+G(y)$ ，所以 $F(x)\geq xy-G(y)$ 。因为 $y=f(x)$ 时不等式可以取等号，所以$F(x)=\underset{y\in\textbf{dom}G}{\sup}(xy-G(y))$</p>
-<blockquote>
-<p>总结</p>
-<p>此处无图，自行想象哈。大概就是函数过零点的函数 $f(x)$ 对 $x$ 轴和 $y$ 轴分别做 $[0,x],[0,y]$ 上的积分，这样可以把两个函数的定积分画到一个图上。</p>
-</blockquote>
-<h3 id="3-49"><a href="#3-49" class="headerlink" title="3.49"></a>3.49</h3><p>(a) 证明：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\ln f(x)=\ln\frac{e^x}{1+e^x}=x-\ln (1+e^x)
-\end{align}</script><p>其中 $x$ 是凹函数而 $-\ln(1+e^x)$ 可以看做指数和的对数取负，它是凹函数函数。所以原式是对数凹的。</p>
-<p>(b) 证明：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\ln f(x)=-\ln\sum\frac{1}{x_i}
-\end{align}</script><p>因为 $1/x<em>i$ 在 $x\in\textbf{dom}f=\textbf{R}^n</em>{++}$ 上为凸函数，所以 $\sum 1/x_i$ 为其非负加权求和，也是凸函数。 $-\ln(x)$ 在定义域内为凸函数且非增。需要对复合函数求二阶导：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-h(x)&=-\ln\sum\frac{1}{x_i}\\
-h'(x)&=
-\end{align}</script><p>(c) 证明：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\ln f(x)=\ln x_i-\ln\sum x_i
-
-\\
-f[\theta x+(1-\theta)y]=\frac{\prod[\theta x_i+(1-\theta) y_i]}{\sum[\theta x_i+(1-\theta) y_i]}\\
-\frac{\prod[x_i^\theta y_i^{1-\theta}]}{(\sum x_i)^\theta(\sum y_i)^{1-\theta}}
-\end{align}</script><p>(d) 证明：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-f(\theta X+(1-\theta)Y)=\frac{\det [\theta X+(1-\theta)Y]}{\textbf{tr}[\theta X+(1-\theta)Y]}\\
-\frac{(\det X)^\theta(\det Y)^{1-\theta}}{\textbf{tr}X^\theta\textbf{tr}Y^{1-\theta}}
-\end{align}</script><blockquote>
-<p>总结：</p>
-<p>实在做不下去了。。可以说一下答案大概的思路。</p>
-<p>(b)考虑取 $\log$ 后的二阶条件，直接通过暴力（也没多暴力）算对 $x_i$ 的二次偏导和 $x_i,x_j$ 的联合偏导 ，这样可以直接写出整个 Hessian 阵的项，可以通过柯西施瓦茨不等式得出二阶条件为为负。</p>
-<p>(c)有点麻烦按下不表。主体方法还是通过代入 $x+tv$ 的方式。</p>
-<p>(d)同样考虑 $X=Z+tV$ ， $Z\succ 0$ 且对  $Z^{-1/2}VZ^{-1/2}$ 做特征值分解。主要行了一个比较难的代换：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-h(Z+tV)=\log f(Z+tV)&=\log\det(Z+tV)-\log\textbf{tr}(Z+tV)\\
-&=\log\det Z-\log\det(I+tZ^{-1/2}VZ^{-1/2})-\\
-&\ \ \ \ \log\textbf{tr}(Z(I+tZ^{-1/2}VZ^{-1/2}))
-\end{align}</script><p>并用到了(c)中的条件。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>习题</category>
-        <category>凸优化</category>
-      </categories>
-      <tags>
-        <tag>凸优化</tag>
-        <tag>习题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>对偶习题</title>
-    <url>/2019/06/18/%E5%AF%B9%E5%81%B6%E4%B9%A0%E9%A2%98/</url>
-    <content><![CDATA[<p>《凸优化》第五章部分习题</p>
-<a id="more"></a>
-<h3 id="5-6"><a href="#5-6" class="headerlink" title="5.6"></a>5.6</h3><p>(a)</p>
-<script type="math/tex; mode=display">
-\begin{align}
-&\because\forall z\in\textbf{R}^m, \|z\|_\infty\geq\frac{1}{\sqrt{m}}\|z\|_2\\
-&\therefore \|Ax_{ch}-b\|_2\leq\sqrt{m}\|Ax_{ch}-b\|_\infty\\
-&\because \|Ax_{ch}-b\|_2\geq\|Ax_{ls}-b\|_2\text{(optimal)}\geq\|Ax_{ls}-b\|_{\infty}\text{(hint)}\\
-&\therefore \|Ax_{ls}-b\|_\infty\leq \sqrt{m}\|Ax_{ch}-b\|_{\infty}
-\end{align}</script><p>(b)</p>
-<p>容易得到 $|\hat\nu|_1\leq1$ ，$|\tilde{\nu}|_1\leq1$ 。</p>
-<script type="math/tex; mode=display">
-\begin{align}
-A^T\hat{\nu}&=(A^TAx_{ls}-A^Tb)/\|b-Ax_{ls}\|_1\\
-&=(A^TA(A^TA)^{-1}A^Tb-A^Tb)/\|b-Ax_{ls}\|_1\\
-&=0\\
-A^T\tilde{\nu}&=-A^T\hat{\nu}=0
-\end{align}</script><p> 即两个 $\nu$ 都是问题的可行解。考虑 $b^T\nu$：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-b^T\hat\nu&=\frac{-b^Tr_{ls}}{\|r_{ls}\|_1}=\frac{x_{ls}^TA^Tr_{ls}-b^Tr_{ls}}{\|r_{ls}\|_1}=-\frac{\|r_{ls}\|^2_2}{\|r_{ls}\|_1}\\
-b^T\tilde\nu&=-b^T\hat\nu=\frac{\|r_{ls}\|^2_2}{\|r_{ls}\|_1}\\
-\end{align}</script><p>即 $\tilde{\nu}$ 给出了更好（大）的下界。和(a)相比:</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\frac{\|r_{ls}\|^2_2}{\|r_{ls}\|_1}=\frac{\|Ax_{ls}-b\|^2_2}{\|b-Ax_{ls}\|_1}\geq\frac{\|Ax_{ls}-b\|^2_2}{\sqrt{m}\|b-Ax_{ls}\|_2}\geq\frac{\|Ax_{ls}-b\|_\infty}{\sqrt{m}}
-\end{align}</script><p>比 (a) 给出了一个更好的下界。</p>
-<blockquote>
-<p>总结：</p>
-<p>解是一些矩阵代换。不过这一题还给出了一个通过最小二乘问题等其他问题的对偶问题来逼近原问题最优解的方法。通常这类问题没有解析解，通过其他问题的对偶问题的分析得到的下界通常比一般不等式要好。</p>
-</blockquote>
-<h3 id="5-7"><a href="#5-7" class="headerlink" title="5.7"></a>5.7</h3><p>(a)</p>
-<script type="math/tex; mode=display">
-L(x,y,\nu)=\max_{i=1,\cdots,m} y_i+\sum_i\nu_i(a^T_ix+b_i-y_i)\\
-g(\nu)=\inf_{x,y}(\max_{i=1,\cdots,m} y_i+\sum_i\nu_i(a^T_ix+b_i-y_i))</script><p>对偶问题：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{maximize } &g(\nu)\\
-\text{subject to }&\nu\succeq 0
-\end{align}</script><p>由于原函数有线性部分，考虑 $g(\nu)$：</p>
-<p>优化 $x$ 时，$ \sum\nu^T a_i=0, i.e. A^T\nu=0$ 否则拉格朗日函数无下界。</p>
-<p>优化 $y$ 时，$\max y_i-\nu^Ty=0$ 否则拉格朗日函数无下界，即 $v^T\textbf{1}=1$ 。</p>
-<p>等价对偶问题：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{maximize } &\nu^Tb\\
-\text{subject to }&\nu\succeq 0\\
-&\nu^T\textbf{1}=1\\
-&A^T\nu=0
-\end{align}</script><p>(b)</p>
-<p>原问题的上境图形式为LP：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{maximize } &t\\
-\text{subject to }&\max(a_i^Tx+b_i)-t\leq 0
-\end{align}</script><p>约束等价变换：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{maximize } &t\\
-\text{subject to }&A_i^Tx+b_i-t\textbf{1}\preceq 0
-\end{align}</script><p>对偶问题：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{maximize } &\lambda^Tb\\
-\text{subject to }&A^T\lambda=0\\
-&\lambda^T\textbf{1}=1\\
-&\lambda\succeq0
-\end{align}</script><p>和(a)中对偶问题完全等价。</p>
-<p>(c)</p>
-<p>考虑无约束几何规划对偶问题的最优解 $d^\star$ 以及其最优点 $z^\star$ ：</p>
-<script type="math/tex; mode=display">
-p^\star_{gp}\leq d^\star=b^Tz_i-\sum_iz^\star_i\log z^\star_i</script><p>将其变换成LP ，对某个 $\nu$ 有以下式子成立：</p>
-<script type="math/tex; mode=display">
-b^T\nu= p^\star_{gp} -\sum_iz^\star_i\log z^\star_i</script><p>又因为 $z^\star$ 在GP对偶问题上的可行域也是原分片线性极小化对偶问题的可行域，即 $z^\star$ 为此LP的可行解：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-p^\star_{pw1}&\geq b^T\nu=p^\star_{gp}-\sum_iz^\star_i\log z^\star_i\\
-p^\star_{gp}-p^\star_{pw1}&\leq \sum_iz^\star_i\log z^\star_i\leq \log m
-\end{align}</script><p>(d)</p>
-<p>写出对偶问题，先变换问题为</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{maximize } &(1/\gamma)\log(\sum_i\exp(\gamma y_i))\\
-\text{subject to }&Ax+b=y
-\end{align}</script><p>拉格朗日函数：</p>
-<script type="math/tex; mode=display">
-L(x,\lambda)=(1/\gamma)\log\sum\exp(\gamma y_i)+\lambda^T(Ax+b-y)</script><p>$x$ 的最优化条件为 $A^T\lambda=0$ ，对 y 第一项为 Log-Sum-Exp 函数，其导数为 Softmax。即 $y$ 的最优化条件为：</p>
-<script type="math/tex; mode=display">
-\frac{e^{\gamma y_i}}{\sum e^{\gamma y_i}}=\lambda_i</script><p>对偶问题为：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{maximize } &\lambda^Tb-(1/\gamma)\sum_{i=1}^m\lambda_i\log\lambda_i\\
-\text{subject to }&A^T\lambda=0\\
-&\textbf{1}^T\lambda=1
-\end{align}</script><p>按照处理(c)中GP对偶问题的步骤，第二项可以放缩为 $1/\gamma \log m$令其最优解为 $p^\star_{gp}(\gamma)-1/\gamma\log m$ 有：</p>
-<script type="math/tex; mode=display">
-p^\star_{gp}(\gamma)-1/\gamma\log m\leq p^\star_{pw1}\leq p^\star_{gp}(\gamma)</script><p>可看出 $\gamma $ 变大会让此优化问题逼近 $p^\star_{pw1}$ 。</p>
-<blockquote>
-<p>总结：</p>
-<p>问题的拉格朗日对偶问题常常会因为保证满足优化时极小值可达所需要的条件，从而消去一些项使目标函数或约束变得简单 （拉格朗日对偶问题优化拉格朗日变量，对原问题优化变量直接取inf下界，化成等价问题时常常消去inf，即把原优化变量全部去掉），等价问题还可能直接优化成LP形式。(c)的解法比较技巧化，即通过辅助的LP问题分析，能用到之前分片线性极小化问题的性质。</p>
-</blockquote>
-<h3 id="5-16"><a href="#5-16" class="headerlink" title="5.16"></a>5.16</h3><p>(a)</p>
-<p>因为 $f<em>0$ 凸， $f_i$ 凸，所以 $\max{0, f_i}$ 凸，所以 $\max</em>{i=1,\cdots,m}\max{0,f_i}$ 凸，所以 $\phi$ 凸。</p>
-<p>(b)</p>
-<script type="math/tex; mode=display">
-\begin{align}
-L(x,\lambda)&=f_0(x)+\sum_i\lambda_if_i(x)\\
-g(\lambda)&=\inf_x(f_0(x)+\sum_i\lambda_if_ix(x))\\
-L'(x,y,\lambda,\nu)&=f_0(x)+\alpha y+\sum_i\lambda_i(f_i(x)-y)-\nu y\\
-g'(\lambda,\nu)&=\inf_{x,y}(f_0(x)+\alpha y+\sum_i\lambda_i(f_i(x)-y)-\nu y)\\
-&=\inf_x(f_0(x)+\sum\lambda_if_i(x))+\inf_y((\alpha-\nu-\sum_i\lambda_i)y)
-\end{align}</script><p>优化 $g’(\lambda,\nu)$ 的等价问题：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{maximize } &g(\lambda)\\
-\text{subject to }&\textbf{1}^T\lambda-\alpha\leq0\\
-&\lambda\succeq0\\
-\end{align}</script><p>(c)</p>
-<p>$\lambda^\star$ 为原对偶问题最优解： </p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{maximize } &g(\lambda)\\
-\text{subject to }
-&\lambda\succeq0\\
-\end{align}</script><p>辅助问题最优解 $x_s^\star\geq \lambda^\star_s$ ，且容易知道辅助问题对偶最优解 $ \lambda^\star_s$ 在原对偶问题上可行。又有 $\alpha&gt;\textbf{1}^T\lambda^\star$ ， 即 $\lambda^\star$ 也是辅助问题对偶最优解，两者可行域以及优化函数等价，辅助问题的最优解是其对偶问题最优解，由于原问题强对偶成立，所以对偶问题最优解也是原问题最优解，即：辅助问题的最优解也是原问题的最优解。</p>
-<blockquote>
-<p>总结：</p>
-<p>比较常规的对偶分析。罚函数项和一些损失函数正则项有相似之处。</p>
-</blockquote>
-<h3 id="5-23"><a href="#5-23" class="headerlink" title="5.23"></a>5.23</h3><p>(a)</p>
-<p>设不存在这样的 $z$ ，即 $-c\notin{\sum z_ia_i\mid z_i\geq0}$ ，右侧为闭凸集，根据严格分离超平面定理，存在超平面 $u^Tx$ 严格分离点和集合。即：</p>
-<script type="math/tex; mode=display">
--u^Tc>\sum u^Tz_ia_i=u^TA^Tz</script><p>约束为 $z\succeq 0$ ，可以看出 $u^Tc&lt;0, u^TA^T&lt;0$ 。令 $x=x^\star+tu$ ：</p>
-<script type="math/tex; mode=display">
-a^T_ix=a^T_ix^\star+a^T_itu\leq b_i+ta^T_iu<b_i</script><p>即 $x$ 可行；考虑目标函数：</p>
-<script type="math/tex; mode=display">
-c^Tx=c^Tx^\star+tc^Tu<c^Tx^\star</script><p>我们找到了比 $x^\star$ 更优的解，矛盾。所以存在满足题意的 $z$ 。</p>
-<p>(b)</p>
-<p>对偶问题可行即 $-b\notin {Ax+s\mid s\succeq0}$ ，右侧为闭凸集，根据严格分离超平面定理，存在超平面 $v^Tx$ 严格分离点和集合。即：</p>
-<script type="math/tex; mode=display">
--v^Tb>v^TAx+v^Ts</script><p>在 $x$ 任意取值下成立需要 $v^TA=0$ ， 等价式子为：</p>
-<script type="math/tex; mode=display">
-v^TA=0, v^Tb<0,v\succeq 0</script><p>那么对偶问题可行性条件 $A^Tz+c=0=A^T(z+v)$ ，即对偶问题在 $v$ 方向上是无界的， $d^\star =\infty$。</p>
-<p>(c)</p>
-<p>原问题容易看出不可行 ($0\leq -1$)，$p^\star=\infty$ 。</p>
-<script type="math/tex; mode=display">
-L(x,\lambda_1,\lambda_2)=x+\lambda_1(x-1)+\lambda_2</script><p>可行性条件 $\lambda_1+1=0$  ，对偶线性规划：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\text{maximize } &\lambda_2-\lambda_1\\
-\text{subject to }&\lambda_1+1=0\\
-&\lambda_1,\lambda_2\geq0\\
-\end{align}</script><p>容易看出此问题约束  $\lambda_1=-1\geq0$ 不能满足，对偶问题不可行。$d^\star=-\infty$ 。</p>
-<h3 id="5-27"><a href="#5-27" class="headerlink" title="5.27"></a>5.27</h3><p>拉格朗日函数：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-L(x,\nu)&=\|Ax-b\|^2_2+\nu^T(Gx-h)\\
-&=x^TA^TAx-2b^TAx+b^Tb+\nu G^T x-\nu^Th\\
-&=x^TA^TAx+(G^T\nu-2A^Tb)^Tx-\nu^Th+b^Tb
-\end{align}</script><p>KKT条件:</p>
-<script type="math/tex; mode=display">
-2A^TAx^\star-2A^Tb+G^T\nu^\star=0\\
-Gx^\star-h=0</script><p>最优解 $x^\star$ 可以用 $\nu^\star$ 显式表达：</p>
-<script type="math/tex; mode=display">
-x^\star=(\frac{1}{2}(A^TA)^{-1})(-G^T\nu^\star+2A^Tb)</script><p>代入 $Gx^\star-h=0, x^\star=G^{-1}h$ 后 $\nu^\star$ 可独立写出：</p>
-<script type="math/tex; mode=display">
-\nu^\star=(G^T)^{-1}(2A^Tb-2A^TAG^{-1}h)</script>]]></content>
-      <categories>
-        <category>习题</category>
-        <category>凸优化</category>
-      </categories>
-      <tags>
-        <tag>凸优化</tag>
-        <tag>习题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ADMM 交替方向乘子法</title>
-    <url>/2019/01/28/%E7%AC%94%E8%AE%B0-ADMM-%E4%BA%A4%E6%9B%BF%E6%96%B9%E5%90%91%E4%B9%98%E5%AD%90%E6%B3%95/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
-<li><a href="http://web.stanford.edu/~boyd/papers/pdf/admm_distr_stats.pdf">ADMM by Boyd, 2010</a></li>
-<li>收敛速率和算法复杂度分析可见南大何教授的分析 <a href="http://maths.nju.edu.cn/~hebma/">主页</a></li>
-<li>对于基础知识，建议简要阅读一下 Boyd 的凸优化。(Convex Optimization, Stephen Boyd)</li>
-</ul>
-<a id="more"></a>
-<h2 id="等式约束优化问题"><a href="#等式约束优化问题" class="headerlink" title="等式约束优化问题"></a>等式约束优化问题</h2><h3 id="拉格朗日乘子法"><a href="#拉格朗日乘子法" class="headerlink" title="拉格朗日乘子法"></a>拉格朗日乘子法</h3><ul>
-<li>即求 <script type="math/tex">\min f(x) \ \ s.t.g_i(x)=0</script><br>使用拉格朗日乘子 <script type="math/tex">\ L(x,\lambda)=f(x)+\sum\lambda_i g_i(x)</script> ，使 <script type="math/tex; mode=display">\frac{\partial L}{\partial x}=\frac{\partial L}{\partial \lambda_i}=0</script>可以得到最优解。</li>
-<li>即多元微积分中求多元函数的条件极值。</li>
-</ul>
-<h3 id="罚函数"><a href="#罚函数" class="headerlink" title="罚函数"></a>罚函数</h3><ul>
-<li>即求 <script type="math/tex">\min f(x) \ \ s.t.g_i(x)=0</script> 。<br>引入惩罚因子 $\sigma$ 与增广函数 $P$ ，有 <script type="math/tex">\min F(x,\sigma)=f(x)+\sigma P(x)</script><br>其中 $\sigma$ 取很大的正数， $P=g^T g$ 。增广函数指示偏离约束的程度，并由一个很大的惩罚因子给予惩罚。由此求解的极值几乎不会脱离约束。 </li>
-</ul>
-<h3 id="增广拉格朗日乘子法-Augmented-Lagrange-Method"><a href="#增广拉格朗日乘子法-Augmented-Lagrange-Method" class="headerlink" title="增广拉格朗日乘子法 Augmented Lagrange Method"></a>增广拉格朗日乘子法 Augmented Lagrange Method</h3><ul>
-<li>在拉格朗日函数中引入罚函数，具体形式见后。</li>
-</ul>
-<h2 id="共轭问题和对偶问题"><a href="#共轭问题和对偶问题" class="headerlink" title="共轭问题和对偶问题"></a>共轭问题和对偶问题</h2><h3 id="共轭问题"><a href="#共轭问题" class="headerlink" title="共轭问题"></a>共轭问题</h3><ul>
-<li>$f(x): R^n\rightarrow R$</li>
-<li>$f^*(y): R^n\rightarrow R$</li>
-<li>$f^*(y)=\sup_{x\in D}(y^Tx-f(x))$</li>
-<li>(重要) <script type="math/tex">f^*(y)</script> 一定是凸的。这是因为逐点最大和逐点上确界操作是保凸的。在 <script type="math/tex">y\in R</script> 的情况下， <script type="math/tex">f^*</script> 相当于遍历仿射函数 <script type="math/tex">yx(kx)</script> 的斜率，并取 $kx+b$ 与 $f(x)$ 相交的时候最小的 $b$ ($b=-f(x)$)。</li>
-<li>(重要) 若 $f$ 是凸的且可微，则使 $y^Tx-f(x)$ 取最大的 <script type="math/tex">x^*</script> 满足 <script type="math/tex">y=\triangledown f(x^*)</script>（遍历的仿射函数和 $f(x)$ 相切）。即，给定任意 $y$ ，可以求解梯度方程 $y=\triangledown f(z)$ 得到 $y$ 处共轭函数 $f^*(y)$</li>
-<li>此处 $x$ 带有 $\sup$ 即要对 $x$ 做遍历，所以并不是常数。</li>
-</ul>
-<h4 id="拉格朗日对偶函数"><a href="#拉格朗日对偶函数" class="headerlink" title="拉格朗日对偶函数"></a>拉格朗日对偶函数</h4><ul>
-<li>$g(\lambda,t)=\inf_{x\in D}L(x,\lambda,\nu)$</li>
-<li>由于$\inf$的影响，$g$ 只能在一系列 $x$ 的取值中取最小的 $g(\lambda,\nu)$ 中取，是一族关于 $(\lambda,\nu)$ 的仿射函数的逐点下确界，是一定凸的。<br>所以对 $g(\lambda,\nu)=\min L(x,\lambda,\nu)\leq \min<em>x \max</em>{\lambda,\nu} L(x,\lambda,\nu)=\min f(x)$ 恒成立</li>
-<li>拉格朗日对偶函数给出了优化问题的最优值的一个下界 <script type="math/tex">(d^*\leq p^*)</script></li>
-</ul>
-<h3 id="线性约束下两者关系"><a href="#线性约束下两者关系" class="headerlink" title="线性约束下两者关系"></a>线性约束下两者关系</h3><p>$\min f(x),s.t. Ax=a, Bx\leq b.$<br>$L(x,\lambda,t)=f(x)+\lambda(Ax-a)+\nu(Bx-b)$<br>对偶函数 $g(\lambda,\nu)=\inf<em>{x\in D} L(x,\lambda,\nu)=-\lambda a-\nu b-\sup</em>{x\in D}[(-\lambda A-\nu B)x-f(x)]$<br>$=-\lambda a-\nu b-f^*(-\lambda A-\nu B)$</p>
-<h3 id="对偶问题"><a href="#对偶问题" class="headerlink" title="对偶问题"></a>对偶问题</h3><ul>
-<li>$\max g(\lambda,\nu ),\ \ s.t.\ \ \lambda,\nu \geq 0.$</li>
-<li>对偶问题的引出是因为 $g(\lambda,\nu)$ 描述一个最优值的下界，那么 $\max g(\lambda,\nu)$ 则是最优值的最好下界。</li>
-<li>$\lambda,\nu$ 可代回 $L(x,\lambda,\nu)$ 对 $x$ 求 $\min L.$</li>
-<li>此问题是无约束问题，拉格朗日方程不带约束项。这一过程消除了约束的限制(并入 $g$ 中)。且对偶问题一定是一个<strong>凸优化</strong>问题。</li>
-<li>注意强对偶条件下对偶问题的解才和原问题解相同。凸优化问题满足Slater条件，即凸优化问题存在严格可行解（约束中的仿射函数不等式约束满足严格小于），问题具有强对偶性质。Slater条件确保原函数存在鞍点（？）。</li>
-<li>凸问题下满足KKT条件的点 $\tilde{x},\tilde{\lambda},\tilde{\nu}$ ， $\tilde{x}$ 和 $(\tilde{\lambda},\tilde{\nu})$ 分别是原问题和对偶问题的最优解，且对偶间隙为0。</li>
-</ul>
-<h2 id="ADMM与相关优化算法"><a href="#ADMM与相关优化算法" class="headerlink" title="ADMM与相关优化算法"></a>ADMM与相关优化算法</h2><h3 id="对偶上升法-Dual-Ascent-Method"><a href="#对偶上升法-Dual-Ascent-Method" class="headerlink" title="对偶上升法 Dual Ascent Method"></a>对偶上升法 Dual Ascent Method</h3><ul>
-<li>使用梯度上升法更新 $\lambda$ 和 $\nu$ 。不断迭代求对偶问题的最优解（最大值，故用上升法）。每次更新 $\lambda$ 和 $\nu$ 都可以从此带入 $L$ 求出一个新的 $x$ ，此时得到一条新曲线（也可能是原曲线，但永远不会在原曲线上方），可以得到新的对偶问题继续更新 $\lambda$ 和 $\nu$ 。</li>
-<li><p>$\lambda, \nu$ 的上标表示迭代次数，在迭代中不断将解更新为满足不同约束条件的解。(剩余约束条件是多余的)(等式约束对所有可行解都是起作用的)</p>
-</li>
-<li><p>原问题：$\min f(x) \s.t. Ax=b$<br>其拉格朗日函数为：</p>
-<script type="math/tex; mode=display">L(x,\lambda)=f(x)+\lambda^T(Ax-b)</script><p>对偶函数为：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-g(\lambda)&=\inf_x L(x,\lambda)=\inf_x (f(x)+\lambda^T(Ax-b))\\&=-\sup_x (-f(x)-\lambda^TAx)-\lambda^Tb\\&=-f^※(-A^T\lambda)-b^T\lambda
-\end{align}</script><p>对偶问题：$\max g(\lambda)$<br>在强对偶条件成立的情况下，原问题最优解(minimizer) <script type="math/tex">x^*</script> 可以通过 <script type="math/tex">y^*</script> (即上述 <script type="math/tex">\lambda^*</script>) 使用下式计算：<br><script type="math/tex">x^*=\arg\min_x L(x,\lambda^*)</script> 。</p>
-</li>
-<li><p>若 $g$ 可微，对任意点 $(x,\lambda)$ ，令（有?） $x^+=\arg\min_xL(x,y)$ ,则其梯度 $\triangledown g(y)=Ax^+-b$ ，则点的迭代（即梯度上升迭代）式如下：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-x^{k+1}&:=\arg\min_x L(x,y^k)\\
-y^{k+1}&:=y^k+\alpha^k(Ax^{k+1}-b)
-\end{align}</script><p>利用梯度上升迭代更新对偶问题的答案 $y$ ，并用 $y$ 反过来更新 $x$ 。 $\alpha^k&gt;0$ 是步长，所有上标都为迭代计数器。</p>
-</li>
-<li><p>若 $f$ 为 $x$ 的任何分量的非零仿射函数，则 $x$ 无法更新，因为大多数情况下 $L$ 对 $x$ 无界（例 $y=kx+b$ 在 $k\neq0$ 时 $y$ 无下界）。</p>
-</li>
-</ul>
-<h4 id="对偶分解法-Dual-Decomposition"><a href="#对偶分解法-Dual-Decomposition" class="headerlink" title="对偶分解法 Dual Decomposition"></a>对偶分解法 Dual Decomposition</h4><ul>
-<li>对 $x$ 的更新可以并行执行。</li>
-</ul>
-<h3 id="增广拉格朗日乘子法-Augmented-Lagrange-Method-1"><a href="#增广拉格朗日乘子法-Augmented-Lagrange-Method-1" class="headerlink" title="增广拉格朗日乘子法 Augmented Lagrange Method"></a>增广拉格朗日乘子法 Augmented Lagrange Method</h3><ul>
-<li>在拉格朗日函数中引入二次罚函数因子（即二次正则项，设约束为线性约束） <script type="math/tex; mode=display">L_\rho(x,y)=f(x)+y^T(Ax-b)+(\rho/2)||Ax-b||^2_2</script></li>
-<li>迭代过程：<script type="math/tex; mode=display">
-\begin{align}
-x^{k+1}&:=\arg\min_x L_\rho(x,y^k)\\
-y^{k+1}&:=y^k+\rho(Ax^{k+1}-b)
-\end{align}</script></li>
-<li>由于二次惩罚项的存在无法并行更新 $x$</li>
-</ul>
-<h3 id="交替方向乘子法-Alternating-Direction-Method-of-Multipliers"><a href="#交替方向乘子法-Alternating-Direction-Method-of-Multipliers" class="headerlink" title="交替方向乘子法 Alternating Direction Method of Multipliers"></a>交替方向乘子法 Alternating Direction Method of Multipliers</h3><h4 id="ADMM-基本形式-Unscale-form"><a href="#ADMM-基本形式-Unscale-form" class="headerlink" title="ADMM 基本形式(Unscale form)"></a>ADMM 基本形式(Unscale form)</h4><ul>
-<li>ADMM将原来的变量 $x$ 分成 $x$ 和 $z$ 两部分。优化问题如下（一次等式约束）：<script type="math/tex; mode=display">\min f(x)+g(z)\\ s.t. Ax+Bz=c</script></li>
-<li>最优值可表示为(?)：<script type="math/tex; mode=display">p^*=\inf\{f(x)+g(z)\ |\ Ax+Bz=c\}</script></li>
-<li>其拉格朗日函数可表示为：<script type="math/tex; mode=display">L_\rho(x,z,y)=f(x)+g(z)+y^T(Ax+Bz-c)+(\rho/2)||Ax+Bz-c||^2_2</script></li>
-<li>迭代过程：<script type="math/tex; mode=display">
-\begin{align}
-x^{k+1}&:=\arg\min_x L_\rho(x,z^k,y^k)\\
-z^{k+1}&:=\arg\min_z L_\rho(x^{k+1},z,y^k)\\
-y^{k+1}&:=y^k+\rho(Ax^{k+1}+Bz^{k+1}-c)
-\end{align}</script></li>
-<li>ADMM的可以并行迭代更新x,z</li>
-</ul>
-<h4 id="Scale-form"><a href="#Scale-form" class="headerlink" title="Scale form"></a>Scale form</h4><ul>
-<li>定义残差(residual) $r=Ax+Bz-c$ 和 Scale dual variable $u=(1/\rho)y$ ，我们有<script type="math/tex; mode=display">y^Tr+(\rho/2)||r||^2_2=(\rho/2)||r+(1/\rho)y||^2_2-(1/2\rho)||y||^2_2</script>ADMM迭代式可以重写为：<script type="math/tex; mode=display">
-\begin{align}
-x^{k+1}&:=\arg\min_x (f(x)+(\rho/2)||Ax+Bz^k-c+u^k||^2_2)\\
-z^{k+1}&:=\arg\min_z (g(x)+(\rho/2)||Ax^{k+1}+Bz-c+u^k||^2_2)\\
-u^{k+1}&:=u^k+Ax^{k+1}+Bz^{k+1}-c
-\end{align}</script>即为ADMM的Scale form</li>
-</ul>
-<h4 id="停止条件"><a href="#停止条件" class="headerlink" title="停止条件"></a>停止条件</h4><ul>
-<li>原变量满足收敛条件时残差必定满足收敛于0的条件，所以可以取<script type="math/tex; mode=display">||r^k||_2\leq\epsilon^{pri}\ \ \ \ and\ \ \ \ ||s^k||_2\leq\epsilon^{dual}</script></li>
-<li>其中的 $\epsilon$ 取法需满足一定条件，可见Boyd 2011论文式(3.12)部分。</li>
-</ul>
-<h4 id="对一般约束问题"><a href="#对一般约束问题" class="headerlink" title="对一般约束问题"></a>对一般约束问题</h4><ul>
-<li>优化问题如下：<script type="math/tex; mode=display">\min f(x)\\ s.t. x\in \mathcal{C}</script>其中 $x\in R^n$ ，$f$ 和 $\mathcal{C}$ 都是凸的，转化为ADMM形式：<script type="math/tex; mode=display">\min f(x)+g(z)\\ s.t. x-z=0</script>其中 $g$ 是 $\mathcal{C}$ 的指示函数（即 $x\in \mathcal{C}$ 则 $g(x)=0$ ，否则 $g(x)=+\infty$<br>迭代式为：<script type="math/tex; mode=display">
-\begin{align}
-x^{k+1}&:=\arg\min_x (f(x)+(\rho/2)||x-z^k+u^k||^2_2)\\
-z^{k+1}&:=\Pi_C(x^{k+1}+u^k)\\
-u^{k+1}&:=u^k+x^{k+1}-z^{k+1}
-\end{align}</script>其中 $\Pi_{\mathcal{C}(x)}$ 即 $x$ 在集合 $\mathcal{C}$ 上的欧几里得投影。</li>
-</ul>
-<h4 id="对非凸问题"><a href="#对非凸问题" class="headerlink" title="对非凸问题"></a>对非凸问题</h4><ul>
-<li>优化问题如下：<script type="math/tex; mode=display">\min f(x)\\ s.t. x\in S</script>其中 $f$ 凸而 $S$ 非凸，ADMM迭代式为：<script type="math/tex; mode=display">
-\begin{align}
-x^{k+1}&:=\arg\min_x (f(x)+(\rho/2)||x-z^k+u^k||^2_2)\\
-z^{k+1}&:=\Pi_S(x^{k+1}+u^k)\\
-u^{k+1}&:=u^k+x^{k+1}-z^{k+1}
-\end{align}</script>对 $z$ 的更新由于 $S$ 的非凸性变得难以计算，但仍然有容易计算的特例存在：<ul>
-<li>基数运算：<br>如果 <script type="math/tex">S=\{x| card(x)\leq c\}</script> ，其中 $card$ 给出集合中非零元的数量，那么 $\Pi_S(v)$ 是将 $v$ 的最大 $c$ 个元素保留并将其余元素置零。</li>
-<li>秩运算：<br>如果 $S$ 是秩为 $c$ 的矩阵的集合，那么 $\Pi<em>S(v)$ 通过SVD计算并保留前 $c$ 对，即 $\Pi_S(v)=\sum^c</em>{i=1}\sigma_i u_i v_i^T$</li>
-<li>布尔约束：<br>如果 $S={x|x<em>i\in{0,1}}$ ，那么 $\Pi<em>S(v)$ 直接取 0、1 中更近的那个。__整数约束</em></em>可以被同样的方式处理。</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>笔记</category>
-        <category>凸优化</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-        <tag>凸优化</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>PLS简介</title>
-    <url>/2019/11/23/%E7%AC%94%E8%AE%B0-PLS%E5%88%9D%E6%8E%A2/</url>
+    <url>/%E7%AC%94%E8%AE%B0-PLS%E5%88%9D%E6%8E%A2.html</url>
     <content><![CDATA[<p>PLS 即 Partial Least Squares  偏最小二乘法。</p>
 <a id="more"></a>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
@@ -959,7 +959,7 @@ M=X_{a-1}'Y_{a-1}Y_{a-1}'X_{a-1}</script><p>其最大特征值为 $\theta_a^2$�
   </entry>
   <entry>
     <title>PyTorch 问题汇总</title>
-    <url>/2019/11/23/%E7%AC%94%E8%AE%B0-Pytorch%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/</url>
+    <url>/%E7%AC%94%E8%AE%B0-Pytorch%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB.html</url>
     <content><![CDATA[<p>记录一些自己遇到的有关 PyTroch 的问题。</p>
 <a id="more"></a>
 <h3 id="关于Mask梯度的方法"><a href="#关于Mask梯度的方法" class="headerlink" title="关于Mask梯度的方法"></a>关于Mask梯度的方法</h3><ul>
@@ -1015,8 +1015,87 @@ M=X_{a-1}'Y_{a-1}Y_{a-1}'X_{a-1}</script><p>其最大特征值为 $\theta_a^2$�
       </tags>
   </entry>
   <entry>
+    <title>Comprehensive SNN Compression using ADMM Optimization and Activity Regularization</title>
+    <url>/%E7%AC%94%E8%AE%B0-SNNcompression.html</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li><a href="https://arxiv.org/pdf/1911.00822.pdf">Comprehensive SNN Compression using ADMM Optimization and Activity Regularization - 原文</a> 。</li>
+<li>文章把ADMM剪枝和量化用到了SNN当中，并提出了降低firing rate的activity regularization方法。</li>
+</ul>
+<a id="more"></a>
+<h3 id="Compression"><a href="#Compression" class="headerlink" title="Compression"></a>Compression</h3><ul>
+<li>整体思路基本参照：<a href="https://arxiv.org/pdf/1812.11677.pdf">ADMM-NN: An Algorithm-Hardware Co-Design Framework of DNNs Using Alternating Direction Method of Multipliers</a> ，ASPLOS 19（体系结构顶会）。</li>
+</ul>
+<h4 id="Pruning"><a href="#Pruning" class="headerlink" title="Pruning"></a>Pruning</h4><ul>
+<li><p>admm-pruning在ANN上的论文：<a href="https://arxiv.org/pdf/1804.03294.pdf">A Systematic DNN Weight Pruning Framework using Alternating Direction Method of Multipliers</a> ，ECCV 18。</p>
+</li>
+<li><p>方法和上文大同小异。由于我们可以使用STBP把SNN训练问题当做普通ANN优化问题来做，所以ADMM结合STBP的使用和在ANN上使用并无不同。</p>
+</li>
+</ul>
+<h4 id="Quantization"><a href="#Quantization" class="headerlink" title="Quantization"></a>Quantization</h4><ul>
+<li>同理，参考冷聪18年AAAI的<a href="https://thiswinex.github.io/2019/02/12/%E8%AE%BA%E6%96%87-Low-bit-quantization/">ADMM量化论文</a>。方法基本相同。</li>
+</ul>
+<h4 id="Activity-regularization"><a href="#Activity-regularization" class="headerlink" title="Activity regularization"></a>Activity regularization</h4><ul>
+<li>简单地把loss项加入正则项 $\lambda R$ ，其中R是每个神经元、每步的平均firing rate。</li>
+<li>之前有类似的正则化项方法被提出过，但是没有结合STBP，即使用的ANN2SNN方法。</li>
+</ul>
+<hr>
+<h3 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h3><ul>
+<li>实验结果我没有分析。现在的SNN效果也比不上ANN，这样看几个点的涨跌也说明不了什么。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>论文</category>
+        <category>SNN</category>
+      </categories>
+      <tags>
+        <tag>论文</tag>
+        <tag>NN压缩与加速</tag>
+        <tag>SNN</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Spiking-YOLO:Spiking Neural Network for Energy-Efficient Object Detection</title>
+    <url>/%E7%AC%94%E8%AE%B0-SNNyolo.html</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li><a href="https://arxiv.org/pdf/1903.06530.pdf">Spiking-YOLO:Spiking Neural Network for Energy-Efﬁcient Object Detection - 原文</a> ；AAAI 20。</li>
+<li>IF模型，SNN在检测领域的一次尝试</li>
+<li>新的norm方法</li>
+<li>imbalanced threshold</li>
+</ul>
+<a id="more"></a>
+<h3 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h3><ul>
+<li><p>ANN-to-SNN方法</p>
+</li>
+<li><p>IF模型（似乎没有明说，但在relate work里提到）</p>
+</li>
+</ul>
+<h3 id="Key-Point"><a href="#Key-Point" class="headerlink" title="Key Point"></a>Key Point</h3><ul>
+<li>新的channel wise的norm方法（就是把常用的layer-wise的方法改了一下）。看实验数据的话，对平衡firing rate效果不错。</li>
+</ul>
+<p><img src="https://s3.ax1x.com/2020/11/23/DJwMT0.png" alt="image-20201123142221085"></p>
+<ul>
+<li>imbalanced threshold 模拟 leaky relu<ul>
+<li>新的负阈值（与正阈值不对称，<script type="math/tex">V_{th-}=-V_{th+}/\alpha</script>，模拟leaky的α）</li>
+<li>超过负阈值发放负脉冲（模拟leaky relu的负值激活）</li>
+</ul>
+</li>
+</ul>
+<h3 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h3><p>然后论文跑了一下实验，其他部分就没啥了，图我也不放了。文章更大的亮点可能还是做了个性能还行的SNN版本yolo，而且还没有上板测试，是纯理论的模型。<del>把以上几点搅拌到一起，一篇AAAI就诞生了</del>。</p>
+<p>另一个需要注意的点是<strong>SNN要如何处理回归问题</strong>。YOLO里需要对bounding box进行回归，这对离散的SNN来说是一个非常难处理的问题。因为回归问题要求高精确度的浮点值（而非相对的分类结果），天然与SNN的离散性相悖。所以，基于bounding box回归的方法肯定不是SNN做检测的最优解，Spiking YOLO花费上千的timesteps来做一帧的检测也实属无奈之举。</p>
+]]></content>
+      <categories>
+        <category>论文</category>
+        <category>SNN</category>
+      </categories>
+      <tags>
+        <tag>论文</tag>
+        <tag>目标检测</tag>
+        <tag>SNN</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Going Deeper With Directly-Trained Larger Spiking Neural Networks</title>
-    <url>/2020/12/15/%E7%AC%94%E8%AE%B0-STBP-tdBN/</url>
+    <url>/%E7%AC%94%E8%AE%B0-STBP-tdBN.html</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
 <li><a href="https://arxiv.org/abs/2011.05280">Going Deeper With Directly-Trained Larger Spiking Neural Networks - 原文</a> 。</li>
 <li>个人理解：听起来和结果上都很厉害的工作。主要解决直接训练SNN算法中的各类Normalization的问题。如STBP这类算法因为是BPTT-inspired的，也会出现梯度消失和爆炸的现象。而且由于脉冲激活不可导，为了BP算法的应用通常都要引入梯度的近似，造成梯度更新有误差，带来了不稳定因素。同时由于信息在LIF模型中传输是“输入-电位-输出”的模型，信息需要在电位上周转一次。如果timestep低且发放率（firing rate）低，“电位-输出”这一环节就会被卡住，造成信息损失；如果脉冲发放率高，神经元的输出对输入就不敏感（实际上从编码的角度来看，firing rate无论是过低还是过高，其信息表达能力都很有限，从这个角度来看理想的发放率是0.5）。论文提出了适用于直接训练SNN算法的BN改进版，并且在残差网络上跑了ImageNet数据集，总的来说算是比较solid的，要是能开放源码就更solid了。</li>
@@ -1074,7 +1153,7 @@ y_k&=\lambda_k\hat{x}_k+\beta_k
   </entry>
   <entry>
     <title>Spatio-Temporal Backpropagation for Training High-Performance Spiking Neural Networks</title>
-    <url>/2020/12/15/%E7%AC%94%E8%AE%B0-STBP/</url>
+    <url>/%E7%AC%94%E8%AE%B0-STBP.html</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
 <li><a href="https://www.frontiersin.org/articles/10.3389/fnins.2018.00331/full">Spatio-temporal backpropagation for training high-performance spiking neural networks - 原文</a> ；本文刊登在2018年 Frontiers in Neuroscience 期刊上。</li>
 <li>BPTT-inspired的方法，文章的主要思想是以迭代式的方式近似LIF模型，使得LIF模型网络的推理过程变为线性迭代（线性地完成时域和空间域的迭代，是谓”spatio-temporal”），从而可以根据迭代式进行反向传播。对于脉冲激活函数的梯度，文章设计了数种不同的梯度近似函数，取得了不错的效果。</li>
@@ -1141,7 +1220,7 @@ h(u)=\frac{1}{a_1}sign(|u-V_{th}|<\frac{a_1}{2})\tag{9}</script></li>
   </entry>
   <entry>
     <title>1. 凸集(1)</title>
-    <url>/2019/02/26/%E7%AC%94%E8%AE%B0-%E5%87%B8%E4%BC%98%E5%8C%961/</url>
+    <url>/%E7%AC%94%E8%AE%B0-%E5%87%B8%E4%BC%98%E5%8C%961.html</url>
     <content><![CDATA[<h2 id="Convex-Set-1"><a href="#Convex-Set-1" class="headerlink" title="Convex Set(1)"></a>Convex Set(1)</h2><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
 <li>主要说明了一些学习前需要了解的重要概念和前置知识。</li>
 <li><a href="https://web.stanford.edu/~boyd/cvxbook/">boyd教授的凸优化主页</a></li>
@@ -1239,7 +1318,7 @@ S^n_{++}&=\{x\in \textrm{S}^n\mid x>0\}\\
   </entry>
   <entry>
     <title>2. 凸集(2)</title>
-    <url>/2019/03/01/%E7%AC%94%E8%AE%B0-%E5%87%B8%E4%BC%98%E5%8C%962/</url>
+    <url>/%E7%AC%94%E8%AE%B0-%E5%87%B8%E4%BC%98%E5%8C%962.html</url>
     <content><![CDATA[<h2 id="Convex-Sets-2"><a href="#Convex-Sets-2" class="headerlink" title="Convex Sets(2)"></a>Convex Sets(2)</h2><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
 <li>这一篇笔记涉及的东西比较抽象，且涉及比较多实变中的定义。对度量空间上的各类集合性质不甚熟悉的话，学起来会比较吃力（特别是一些证明）。我认为需要首先掌握好重要的概念，并且对定理有直观的认识体会（先不要求严格证明）。</li>
 </ul>
@@ -1357,7 +1436,7 @@ $$g(x)=\begin{pmatrix}A\\c^T\end{pmatrix}x+\begin{pmatrix}b\\d\end{pmatrix}, p(x
   </entry>
   <entry>
     <title>3. 凸函数(1)</title>
-    <url>/2019/03/08/%E7%AC%94%E8%AE%B0-%E5%87%B8%E4%BC%98%E5%8C%963/</url>
+    <url>/%E7%AC%94%E8%AE%B0-%E5%87%B8%E4%BC%98%E5%8C%963.html</url>
     <content><![CDATA[<h2 id="Convex-functions-1"><a href="#Convex-functions-1" class="headerlink" title="Convex functions(1)"></a>Convex functions(1)</h2><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
 <li>主要介绍了凸函数及其性质</li>
 </ul>
@@ -1409,87 +1488,8 @@ $$g(x)=\begin{pmatrix}A\\c^T\end{pmatrix}x+\begin{pmatrix}b\\d\end{pmatrix}, p(x
       </tags>
   </entry>
   <entry>
-    <title>Comprehensive SNN Compression using ADMM Optimization and Activity Regularization</title>
-    <url>/2020/12/15/%E7%AC%94%E8%AE%B0-SNNcompression/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
-<li><a href="https://arxiv.org/pdf/1911.00822.pdf">Comprehensive SNN Compression using ADMM Optimization and Activity Regularization - 原文</a> 。</li>
-<li>文章把ADMM剪枝和量化用到了SNN当中，并提出了降低firing rate的activity regularization方法。</li>
-</ul>
-<a id="more"></a>
-<h3 id="Compression"><a href="#Compression" class="headerlink" title="Compression"></a>Compression</h3><ul>
-<li>整体思路基本参照：<a href="https://arxiv.org/pdf/1812.11677.pdf">ADMM-NN: An Algorithm-Hardware Co-Design Framework of DNNs Using Alternating Direction Method of Multipliers</a> ，ASPLOS 19（体系结构顶会）。</li>
-</ul>
-<h4 id="Pruning"><a href="#Pruning" class="headerlink" title="Pruning"></a>Pruning</h4><ul>
-<li><p>admm-pruning在ANN上的论文：<a href="https://arxiv.org/pdf/1804.03294.pdf">A Systematic DNN Weight Pruning Framework using Alternating Direction Method of Multipliers</a> ，ECCV 18。</p>
-</li>
-<li><p>方法和上文大同小异。由于我们可以使用STBP把SNN训练问题当做普通ANN优化问题来做，所以ADMM结合STBP的使用和在ANN上使用并无不同。</p>
-</li>
-</ul>
-<h4 id="Quantization"><a href="#Quantization" class="headerlink" title="Quantization"></a>Quantization</h4><ul>
-<li>同理，参考冷聪18年AAAI的<a href="https://thiswinex.github.io/2019/02/12/%E8%AE%BA%E6%96%87-Low-bit-quantization/">ADMM量化论文</a>。方法基本相同。</li>
-</ul>
-<h4 id="Activity-regularization"><a href="#Activity-regularization" class="headerlink" title="Activity regularization"></a>Activity regularization</h4><ul>
-<li>简单地把loss项加入正则项 $\lambda R$ ，其中R是每个神经元、每步的平均firing rate。</li>
-<li>之前有类似的正则化项方法被提出过，但是没有结合STBP，即使用的ANN2SNN方法。</li>
-</ul>
-<hr>
-<h3 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h3><ul>
-<li>实验结果我没有分析。现在的SNN效果也比不上ANN，这样看几个点的涨跌也说明不了什么。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>论文</category>
-        <category>SNN</category>
-      </categories>
-      <tags>
-        <tag>论文</tag>
-        <tag>SNN</tag>
-        <tag>NN压缩与加速</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Spiking-YOLO:Spiking Neural Network for Energy-Efficient Object Detection</title>
-    <url>/2020/12/15/%E7%AC%94%E8%AE%B0-SNNyolo/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
-<li><a href="https://arxiv.org/pdf/1903.06530.pdf">Spiking-YOLO:Spiking Neural Network for Energy-Efﬁcient Object Detection - 原文</a> ；AAAI 20。</li>
-<li>IF模型，SNN在检测领域的一次尝试</li>
-<li>新的norm方法</li>
-<li>imbalanced threshold</li>
-</ul>
-<a id="more"></a>
-<h3 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h3><ul>
-<li><p>ANN-to-SNN方法</p>
-</li>
-<li><p>IF模型（似乎没有明说，但在relate work里提到）</p>
-</li>
-</ul>
-<h3 id="Key-Point"><a href="#Key-Point" class="headerlink" title="Key Point"></a>Key Point</h3><ul>
-<li>新的channel wise的norm方法（就是把常用的layer-wise的方法改了一下）。看实验数据的话，对平衡firing rate效果不错。</li>
-</ul>
-<p><img src="https://s3.ax1x.com/2020/11/23/DJwMT0.png" alt="image-20201123142221085"></p>
-<ul>
-<li>imbalanced threshold 模拟 leaky relu<ul>
-<li>新的负阈值（与正阈值不对称，<script type="math/tex">V_{th-}=-V_{th+}/\alpha</script>，模拟leaky的α）</li>
-<li>超过负阈值发放负脉冲（模拟leaky relu的负值激活）</li>
-</ul>
-</li>
-</ul>
-<h3 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h3><p>然后论文跑了一下实验，其他部分就没啥了，图我也不放了。文章更大的亮点可能还是做了个性能还行的SNN版本yolo，而且还没有上板测试，是纯理论的模型。<del>把以上几点搅拌到一起，一篇AAAI就诞生了</del>。</p>
-<p>另一个需要注意的点是<strong>SNN要如何处理回归问题</strong>。YOLO里需要对bounding box进行回归，这对离散的SNN来说是一个非常难处理的问题。因为回归问题要求高精确度的浮点值（而非相对的分类结果），天然与SNN的离散性相悖。所以，基于bounding box回归的方法肯定不是SNN做检测的最优解，Spiking YOLO花费上千的timesteps来做一帧的检测也实属无奈之举。</p>
-]]></content>
-      <categories>
-        <category>论文</category>
-        <category>SNN</category>
-      </categories>
-      <tags>
-        <tag>目标检测</tag>
-        <tag>论文</tag>
-        <tag>SNN</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>4. 凸优化问题(1)</title>
-    <url>/2019/04/24/%E7%AC%94%E8%AE%B0-%E5%87%B8%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98-1/</url>
+    <url>/%E7%AC%94%E8%AE%B0-%E5%87%B8%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98-1.html</url>
     <content><![CDATA[<h2 id="Convex-Optimization-Problems-1"><a href="#Convex-Optimization-Problems-1" class="headerlink" title="Convex-Optimization Problems(1)"></a>Convex-Optimization Problems(1)</h2><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
 <li>介绍了一些经典的优化问题，不止于凸优化问题</li>
 <li>仍然有很多问题（几何规划、向量规划、广义不等式约束等等）以及关于SDP和SOCP的一些拓展未在此处给出，未来用到的时候再继续写点。</li>
@@ -1567,7 +1567,7 @@ $$g(x)=\begin{pmatrix}A\\c^T\end{pmatrix}x+\begin{pmatrix}b\\d\end{pmatrix}, p(x
   </entry>
   <entry>
     <title>4. 凸函数(2)</title>
-    <url>/2019/04/24/%E7%AC%94%E8%AE%B0-%E5%87%B8%E5%87%BD%E6%95%B0-2/</url>
+    <url>/%E7%AC%94%E8%AE%B0-%E5%87%B8%E5%87%BD%E6%95%B0-2.html</url>
     <content><![CDATA[<h2 id="Convex-Function-2"><a href="#Convex-Function-2" class="headerlink" title="Convex Function(2)"></a>Convex Function(2)</h2><h2 id="1-Operation-that-preserve-convexity"><a href="#1-Operation-that-preserve-convexity" class="headerlink" title="1. Operation that preserve convexity"></a>1. Operation that preserve convexity</h2><ol>
 <li><p>Positive weighted sum</p>
 <p>if $f_1,f_2,\cdots,f_n$ are convex, $\omega_1,\omega_2,\cdots,\omega_n\geq0$, then $f=\sum\omega_if_i$ is convex</p>
@@ -1673,8 +1673,43 @@ $$g(x)=\begin{pmatrix}A\\c^T\end{pmatrix}x+\begin{pmatrix}b\\d\end{pmatrix}, p(x
       </tags>
   </entry>
   <entry>
+    <title>变分不等式</title>
+    <url>/%E7%AC%94%E8%AE%B0-%E5%8F%98%E5%88%86%E4%B8%8D%E7%AD%89%E5%BC%8F.html</url>
+    <content><![CDATA[<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>大部分学习资料来自于何炳生教授的 <a href="http://maths.nju.edu.cn/~hebma/">主页</a></li>
+<li>已弃坑，待填。</li>
+</ul>
+<a id="more"></a>
+<h2 id="1-变分不等式"><a href="#1-变分不等式" class="headerlink" title="1. 变分不等式"></a>1. 变分不等式</h2><ul>
+<li>设 $\Omega$ 为 $R^n$ 中的一个非空闭凸集，$F$ 是 $R^n$ 到 $R^n$ 的一个连续映射（向量函数），单调变分不等式问题就是寻找 $x^*$：<script type="math/tex; mode=display">x^*\in\Omega, F(x^*)^T(x-x^*)\geq 0, \forall x \in\Omega</script>单调是指 $F$ 满足 $(u-v)^T(F(u)-F(v))\geq 0$ 。</li>
+</ul>
+<h2 id="2-与可微凸优化的关系"><a href="#2-与可微凸优化的关系" class="headerlink" title="2. 与可微凸优化的关系"></a>2. 与可微凸优化的关系</h2><p>设 $f: R^n \rightarrow R$ 为可微凸函数，凸优化问题：</p>
+<script type="math/tex; mode=display">\min f(x), x\in \Omega</script><p>则最优点必须有：</p>
+<ul>
+<li>它属于 $\Omega$</li>
+<li>它的邻域内无可行下降方向</li>
+</ul>
+<p>可求 $f$ 梯度 $\triangledown f(x)$ ，记</p>
+<ul>
+<li>$Sd(x)={s\in R^n| s^T\triangledown f(x)&lt;0}$ 为点 $x$ 处的可行方向集（ $s$ 为下降向量满足逆梯度）</li>
+<li>$Sf(x)={s\in R^n| s=x’-x, x’\in\Omega}$ 为点 $x$ 处的下降方向集（ $s$ 为下降向量满足下降后向量仍在集合内）</li>
+</ul>
+<p>那么凸优化条件可表述为：</p>
+<script type="math/tex; mode=display">x\in\Omega,\ \ and\  \ Sf(x)\cap Sd(x)\neq\varnothing</script><p>其等价数学形式为：</p>
+<script type="math/tex; mode=display">x\in\Omega, (x'-x)^T\triangledown f(x)\geq 0, \forall x'\in\Omega</script><p>（暂时弃坑，等系统学习完凸优化后再来补充）</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>凸优化</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>凸优化</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>6. 对偶与对偶问题</title>
-    <url>/2019/06/05/%E7%AC%94%E8%AE%B0-%E5%AF%B9%E5%81%B6/</url>
+    <url>/%E7%AC%94%E8%AE%B0-%E5%AF%B9%E5%81%B6.html</url>
     <content><![CDATA[<h2 id="Duality"><a href="#Duality" class="headerlink" title="Duality"></a>Duality</h2><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
 <li>主要记录了对偶问题和对偶方法。由于强对偶性下对偶问题的解与原问题相等，许多问题在原函数性质不好的情况下可以变换到对偶空间去求解。</li>
 <li>Why duality? 降低计算复杂度，数据降维等；更好的性质，更光滑、凸。。</li>
@@ -1792,7 +1827,7 @@ h_i(x^\star)&=0 \\
   </entry>
   <entry>
     <title>7. 梯度方法</title>
-    <url>/2019/06/05/%E7%AC%94%E8%AE%B0-%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/</url>
+    <url>/%E7%AC%94%E8%AE%B0-%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95.html</url>
     <content><![CDATA[<h2 id="Gradient-Method"><a href="#Gradient-Method" class="headerlink" title="Gradient Method"></a>Gradient Method</h2><h3 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h3><ul>
 <li>介绍了经典的一阶方法，梯度下降。</li>
 </ul>
@@ -1882,206 +1917,8 @@ f(x_k)-f^\star\geq \frac{3L\|x-x^\star\|^2_2}{32(k+1)^2}</script><blockquote>
       </categories>
   </entry>
   <entry>
-    <title>变分不等式</title>
-    <url>/2019/02/16/%E7%AC%94%E8%AE%B0-%E5%8F%98%E5%88%86%E4%B8%8D%E7%AD%89%E5%BC%8F/</url>
-    <content><![CDATA[<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
-<li>大部分学习资料来自于何炳生教授的 <a href="http://maths.nju.edu.cn/~hebma/">主页</a></li>
-<li>已弃坑，待填。</li>
-</ul>
-<a id="more"></a>
-<h2 id="1-变分不等式"><a href="#1-变分不等式" class="headerlink" title="1. 变分不等式"></a>1. 变分不等式</h2><ul>
-<li>设 $\Omega$ 为 $R^n$ 中的一个非空闭凸集，$F$ 是 $R^n$ 到 $R^n$ 的一个连续映射（向量函数），单调变分不等式问题就是寻找 $x^*$：<script type="math/tex; mode=display">x^*\in\Omega, F(x^*)^T(x-x^*)\geq 0, \forall x \in\Omega</script>单调是指 $F$ 满足 $(u-v)^T(F(u)-F(v))\geq 0$ 。</li>
-</ul>
-<h2 id="2-与可微凸优化的关系"><a href="#2-与可微凸优化的关系" class="headerlink" title="2. 与可微凸优化的关系"></a>2. 与可微凸优化的关系</h2><p>设 $f: R^n \rightarrow R$ 为可微凸函数，凸优化问题：</p>
-<script type="math/tex; mode=display">\min f(x), x\in \Omega</script><p>则最优点必须有：</p>
-<ul>
-<li>它属于 $\Omega$</li>
-<li>它的邻域内无可行下降方向</li>
-</ul>
-<p>可求 $f$ 梯度 $\triangledown f(x)$ ，记</p>
-<ul>
-<li>$Sd(x)={s\in R^n| s^T\triangledown f(x)&lt;0}$ 为点 $x$ 处的可行方向集（ $s$ 为下降向量满足逆梯度）</li>
-<li>$Sf(x)={s\in R^n| s=x’-x, x’\in\Omega}$ 为点 $x$ 处的下降方向集（ $s$ 为下降向量满足下降后向量仍在集合内）</li>
-</ul>
-<p>那么凸优化条件可表述为：</p>
-<script type="math/tex; mode=display">x\in\Omega,\ \ and\  \ Sf(x)\cap Sd(x)\neq\varnothing</script><p>其等价数学形式为：</p>
-<script type="math/tex; mode=display">x\in\Omega, (x'-x)^T\triangledown f(x)\geq 0, \forall x'\in\Omega</script><p>（暂时弃坑，等系统学习完凸优化后再来补充）</p>
-]]></content>
-      <categories>
-        <category>笔记</category>
-        <category>凸优化</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-        <tag>凸优化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>10. 近似点算子</title>
-    <url>/2019/07/22/%E7%AC%94%E8%AE%B0-%E8%BF%91%E4%BC%BC%E7%82%B9%E7%AE%97%E5%AD%90/</url>
-    <content><![CDATA[<h2 id="The-proximal-mapping"><a href="#The-proximal-mapping" class="headerlink" title="The proximal mapping"></a>The proximal mapping</h2><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
-<li>介绍了近似点映射以及一些常见的函数的近似点映射的例子。</li>
-</ul>
-<a id="more"></a>
-<h2 id="1-Closed-function"><a href="#1-Closed-function" class="headerlink" title="1. Closed function"></a>1. Closed function</h2><h3 id="1-1-Closed-set"><a href="#1-1-Closed-set" class="headerlink" title="1.1 Closed set"></a>1.1 Closed set</h3><ul>
-<li>A set $C$ is closed if it contains its boundary:<script type="math/tex; mode=display">
-x^k\in C, x^k\rightarrow \overline{x}\Rightarrow\overline{x}\in C</script></li>
-</ul>
-<ul>
-<li>Notice:<script type="math/tex; mode=display">
-C \text{  closed}\Rightarrow A^{-1}C\text{  closed}\\
-C \text{  closed}, AC=\{Ax\mid x\in C\}\text{  might be open}</script></li>
-</ul>
-<h3 id="1-2-Closed-function"><a href="#1-2-Closed-function" class="headerlink" title="1.2 Closed function"></a>1.2 Closed function</h3><ul>
-<li>See slides</li>
-</ul>
-<h2 id="2-Conjugate-function"><a href="#2-Conjugate-function" class="headerlink" title="2. Conjugate function"></a>2. Conjugate function</h2><h3 id="2-1-Recall-and-some-example"><a href="#2-1-Recall-and-some-example" class="headerlink" title="2.1 Recall and some example."></a>2.1 Recall and some example.</h3><ul>
-<li>See slides</li>
-</ul>
-<h2 id="3-Proximal-mapping"><a href="#3-Proximal-mapping" class="headerlink" title="3. Proximal mapping"></a>3. Proximal mapping</h2><ul>
-<li><p>Definition: proximal mapping of a closed convex function $f$ is</p>
-<script type="math/tex; mode=display">
-\text{prox}_f(x)=\arg\min_u(f(u)+\frac{1}{2}\|u-x\|^2_2)</script><blockquote>
-<p>加入二次项保证强凸性，使 $\arg\min$ 的值唯一</p>
-<p>闭性质保证一定有 $\arg\min$ </p>
-<p>将 $x$ 映射到近似点 $u$ (意义？)</p>
-</blockquote>
-</li>
-<li><p>Subgradient characterization</p>
-</li>
-<li><script type="math/tex; mode=display">
-u=\text{prox}_f(x)\Leftrightarrow x-u\in\partial f(u)\tag{10-1}</script><p>Proof:</p>
-<script type="math/tex; mode=display">
-\begin{align}
-&\because0\in\partial f(u)+(u-x)\\
-&\therefore x-u\in\partial f(u)
-
-\end{align}</script></li>
-<li></li>
-</ul>
-<script type="math/tex; mode=display">
-f(x)=g(x)+a^Tx,\ \ \ \ \text{prox}_f(x)=\text{prox}_g(x-a)</script><script type="math/tex; mode=display">
-f(x)=g(x)+\frac{\mu}{2}\|x-a\|^2_2\ \ \ \ \text{prox}_{\theta g}(\theta x+(1-\theta)a)</script><ul>
-<li><strong>Moreau decomposition</strong></li>
-</ul>
-<script type="math/tex; mode=display">
-x=\text{prox}_f(x)+\text{prox}_{f^*}(x), \forall x</script><p>​            Follows form:</p>
-<script type="math/tex; mode=display">
-\begin{align}
-u=\text{prox}_f(x)&\Leftrightarrow x-u\in\partial f(u)\text{    (10-1)}\\
-&\Leftrightarrow u\in\partial f^*(x-u)\text{    (8-1)}\\
-&\Leftrightarrow x-u=\text{prox}_{f^*}(x)\text{   (10-1)}
-\end{align}</script><p>​            Decomposition:</p>
-<script type="math/tex; mode=display">
-x=P_L(x)+P_{L^\perp}(x)</script><p>​                    with $f=\delta<em>{L}, f^*=\delta</em>{L^\perp}$ .</p>
-<p>​            Extended version</p>
-<ul>
-<li>Composition with affine mapping</li>
-</ul>
-<script type="math/tex; mode=display">
-f(x)=g(Ax+b)</script><blockquote>
-<p>由 g 的近似点映射求  f 的并不容易</p>
-<p>但是如果 $AA^T=(1/\alpha)I$ ，则 f 有解析的近似点映射(slides)</p>
-</blockquote>
-<h2 id="4-Projections"><a href="#4-Projections" class="headerlink" title="4. Projections"></a>4. Projections</h2><blockquote>
-<p>近似点映射对各种集合的投影有比较好的性质。例子见slides。</p>
-</blockquote>
-<h2 id="5-Support-functions-norms-distances"><a href="#5-Support-functions-norms-distances" class="headerlink" title="5. Support functions, norms, distances"></a>5. Support functions, norms, distances</h2><blockquote>
-<p>同上，例子见slides。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>笔记</category>
-        <category>凸优化</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-        <tag>凸优化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Extremely Low Bit Neural Network: Squeeze the Last Bit Out with ADMM</title>
-    <url>/2019/02/12/%E8%AE%BA%E6%96%87-Low-bit-quantization/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
-<li><a href="https://arxiv.org/pdf/1707.09870.pdf">Extremely Low Bit Neural Network: Squeeze the Last Bit Out with ADMM - 原文</a> ；AAAI 18 Oral。</li>
-<li>从结果看比之前的一些量化工作都要好上不少，干货较多。</li>
-</ul>
-<a id="more"></a>
-<h2 id="量化-Quantization"><a href="#量化-Quantization" class="headerlink" title="量化(Quantization)"></a>量化(Quantization)</h2><h3 id="为什么要压缩网络"><a href="#为什么要压缩网络" class="headerlink" title="为什么要压缩网络"></a>为什么要压缩网络</h3><ul>
-<li>网络的表达能力过强，压缩网络可以起到一定正则的作用</li>
-<li>网络存在很多冗余参数和计算量，压缩网络可以极大减少储存空间以及运算量</li>
-</ul>
-<h3 id="什么是量化"><a href="#什么是量化" class="headerlink" title="什么是量化"></a>什么是量化</h3><ul>
-<li>对权重的参数进行取整，降低存储精度。低精度数不仅减少存储空间，而且能够规避浮点运算带来的巨大计算量。经过特别设计的芯片还能对低精度数的运算（可用速度更快的位运算）进行更进一步的优化。</li>
-<li>有几种方法降低精度，常见的方法如直接对权值作聚类分析（更进一步可以对每一个cluster进行Huffman编码，继续压缩存储空间）或是直接添加整数约束/改变激活函数等</li>
-</ul>
-<p><img src="https://camo.githubusercontent.com/16e9d6bdc804b3204c476a6082bbc72f06db9b6d/68747470733a2f2f696d672d626c6f672e6373646e2e6e65742f3230313631303236313834323333333237" alt=""></p>
-<ul>
-<li>也可以对梯度和输出量化；对于不同的方法，可能需要专门设计训练过程来计算梯度。</li>
-</ul>
-<h2 id="ADMM-Alternative-Direction-Multiplier-Method"><a href="#ADMM-Alternative-Direction-Multiplier-Method" class="headerlink" title="ADMM(Alternative Direction Multiplier Method)"></a>ADMM(Alternative Direction Multiplier Method)</h2><ul>
-<li>因大规模网络的应用，近年来颇受关注的一种优化方法。虽然ADMM在理论分析中收敛慢，但是在许多实际的大规模应用场景中表现稳定，且较为适合分布式计算。</li>
-<li>更进一步的对ADMM的讨论可见<a href="https://thiswinex.github.io/2019/01/28/%E7%AC%94%E8%AE%B0-ADMM-%E4%BA%A4%E6%9B%BF%E6%96%B9%E5%90%91%E4%B9%98%E5%AD%90%E6%B3%95/">另一篇文章</a></li>
-</ul>
-<h2 id="论文"><a href="#论文" class="headerlink" title="论文"></a>论文</h2><ul>
-<li>论文实现了将32比特权重压缩至3比特的低比特权重量化。之前的若是要将权重量化到3或更低的比特上的话，在大数据集上效果并不好。</li>
-<li>论文只介绍了思路，并没有源码</li>
-</ul>
-<h3 id="实现算法"><a href="#实现算法" class="headerlink" title="实现算法"></a>实现算法</h3><ul>
-<li>将离散权重网络训练定义成离散约束问题，以三值网络为例，约束为：<script type="math/tex; mode=display">\underset{W}{\min}\ f(W)\ \ s.t.W\in \mathcal{C}=\{1,0,-1\}^d</script></li>
-<li>引进 scale 参数扩展可行域，将约束条件扩展至 $W\in \mathcal{C}={a,0,-a}$ 。由于约束空间变大（如下图），收敛速度将大大加快。<ul>
-<li>注意这里之后再 scale 回去严格二值的话，实际上是会损失精度，这样量化出来的BWN只能算作变种（参考XNOR Net）</li>
-<li>个人有点怀疑这样部署到端上后的效果。有些端不支持高位数的scale参数的存储和计算。</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://camo.githubusercontent.com/8a5b07526e6e12e6b0c7cc8538e72f35711a58df/68747470733a2f2f696d6167652e6a6971697a686978696e2e636f6d2f75706c6f6164732f656469746f722f66643965633961632d353064642d343836372d623762622d6238306261666431366335312f353137393630332e6a7067" alt=""></p>
-<ul>
-<li><p>使用ADMM算法一般约束下的形式，将问题转换为：</p>
-<script type="math/tex; mode=display">\underset{W,G}{\min}\ f(W)+I_C(G)\ \ s.t.W=G</script><p>其中 $I_C$ 为指示函数，$G$ 符合约束则为0，否则为无穷大。</p>
-<p>其拉格朗日函数形式为：</p>
-<script type="math/tex; mode=display">L_\rho(W,G,\lambda)=f(W)+I_C(G)+\frac{\rho}{2}||W-G+\lambda||^2-\frac{\rho}{2}||\lambda||^2</script><p>迭代过程：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-W^{k+1}&:=\arg\min_W L_\rho(W, G^k, \lambda^k)\\
-G^{k+1}&:=\arg\min_G L_\rho(W^{k+1}, G, \lambda^k)\\
-\lambda^{k+1}&:=\lambda^k+W^{k+1}-G^{k+1}
-\end{align}</script></li>
-<li><p>对第一个对 $W$ 更新的过程，采用 Extra-gradient 算法进行梯度下降能够避免收敛过慢的问题：</p>
-<script type="math/tex; mode=display">
-\begin{align}
-W^{(p)}&:=W-\beta_p\partial_WL(W)\\
-W^{(c)}&:=W-\beta_c\partial_WL(W^{(p)})
-\end{align}</script><ul>
-<li>Extra-gradient method 即外梯度算法，由 Korpelevich 提出（可见原文引文[23]）。这篇论文距今已经40年了，既难找又难懂，感觉又是个新坑……涉及变分不等式的部分可以和ADMM一起又单写一篇文章了。</li>
-<li>（学习完凸优化后补充）其实也不是很复杂，如果不关心数学图景上的原理的话，可以看做用下一步的梯度来取代这一步的梯度做梯度下降。单步计算量和存储量都会更高，但是会获得相对更正确的下降方向。</li>
-</ul>
-</li>
-<li>对第二个对 $G$ 更新的过程，我们可以将其看做在非凸集上整数约束的优化问题。令 $W_i, G_i, \lambda_i, \mathcal{C}_i$ 分别为第 $i$ 层权重、辅助变量、拉格朗日乘子和约束集合。根据ADMM算法，迭代时需要计算在 $\mathcal{C}_i$ 上 $W^{k+1}_i+\lambda^k_i$的欧式投影。令 $V_i=W^{k+1}_i+\lambda^k_i$ ，其欧式投影可以表示为：<script type="math/tex; mode=display">\min_{G_i,\alpha_i} ||V_i-G_i||^2</script><script type="math/tex; mode=display">s.t. G_i\in\{0,\pm\alpha_i, \pm 2\alpha, \cdots, \pm 2^N\alpha\}^{d_i}</script>从约束中分离 scale 参数：<script type="math/tex; mode=display">\min_{Q_i,\alpha_i} ||V_i-\alpha_i\cdot Q_i||^2</script><script type="math/tex; mode=display">s.t. Q_i\in\{0,\pm, \pm 2, \cdots, \pm 2^N\}^{d_i}</script>算法交替优化 $Q_i$ 和 $\alpha_i$ 中的其中一个而固定另外一个：<ul>
-<li>在 $Q_i$ 固定时：<script type="math/tex; mode=display">\alpha_i=\frac{V^T_i Q_i}{Q^T_i Q_I}</script></li>
-<li>在 $\alpha_i$ 固定时：<script type="math/tex; mode=display">Q_i=\Pi_{\{0,\pm 1,\pm 2,\cdots,\pm 2^N\}}(\frac{V_i}{\alpha_i})</script>对 $Q_i$ 的更新，$\Pi$ 投影只是简单地取离约束集合最近的点（参见ADMM笔记4.3.5）。</li>
-</ul>
-</li>
-<li>这种迭代算法能保证很快收敛到局部极小值。</li>
-<li>最后迭代停止时，直接用 $G$ 取代 $W$ 即可。</li>
-</ul>
-<h3 id="论文结果"><a href="#论文结果" class="headerlink" title="论文结果"></a>论文结果</h3><ul>
-<li>算法在AlexNet、VGG、ResNet、GoogleNet上均做了测试，2~3bit的量化相比state-of-art 的一些二值网络与三值网络高出有1~4%的Top5正确率，只比全精度的baseline低1%多一些。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>论文</category>
-        <category>NN压缩与加速</category>
-      </categories>
-      <tags>
-        <tag>深度学习</tag>
-        <tag>论文</tag>
-        <tag>NN压缩与加速</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>8. 次梯度</title>
-    <url>/2019/06/05/%E7%AC%94%E8%AE%B0-%E6%AC%A1%E6%A2%AF%E5%BA%A6/</url>
+    <url>/%E7%AC%94%E8%AE%B0-%E6%AC%A1%E6%A2%AF%E5%BA%A6.html</url>
     <content><![CDATA[<h2 id="Sub-Gradient"><a href="#Sub-Gradient" class="headerlink" title="Sub-Gradient"></a>Sub-Gradient</h2><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
 <li>介绍了次梯度的一些性质，为之后的次梯度方法作铺垫。</li>
 </ul>
@@ -2195,8 +2032,171 @@ f'(x;y)=\lim_{\alpha\rightarrow0}\frac{f(x+\alpha y)-f(x)}{\alpha}</script>]]></
       </tags>
   </entry>
   <entry>
+    <title>10. 近似点算子</title>
+    <url>/%E7%AC%94%E8%AE%B0-%E8%BF%91%E4%BC%BC%E7%82%B9%E7%AE%97%E5%AD%90.html</url>
+    <content><![CDATA[<h2 id="The-proximal-mapping"><a href="#The-proximal-mapping" class="headerlink" title="The proximal mapping"></a>The proximal mapping</h2><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>介绍了近似点映射以及一些常见的函数的近似点映射的例子。</li>
+</ul>
+<a id="more"></a>
+<h2 id="1-Closed-function"><a href="#1-Closed-function" class="headerlink" title="1. Closed function"></a>1. Closed function</h2><h3 id="1-1-Closed-set"><a href="#1-1-Closed-set" class="headerlink" title="1.1 Closed set"></a>1.1 Closed set</h3><ul>
+<li>A set $C$ is closed if it contains its boundary:<script type="math/tex; mode=display">
+x^k\in C, x^k\rightarrow \overline{x}\Rightarrow\overline{x}\in C</script></li>
+</ul>
+<ul>
+<li>Notice:<script type="math/tex; mode=display">
+C \text{  closed}\Rightarrow A^{-1}C\text{  closed}\\
+C \text{  closed}, AC=\{Ax\mid x\in C\}\text{  might be open}</script></li>
+</ul>
+<h3 id="1-2-Closed-function"><a href="#1-2-Closed-function" class="headerlink" title="1.2 Closed function"></a>1.2 Closed function</h3><ul>
+<li>See slides</li>
+</ul>
+<h2 id="2-Conjugate-function"><a href="#2-Conjugate-function" class="headerlink" title="2. Conjugate function"></a>2. Conjugate function</h2><h3 id="2-1-Recall-and-some-example"><a href="#2-1-Recall-and-some-example" class="headerlink" title="2.1 Recall and some example."></a>2.1 Recall and some example.</h3><ul>
+<li>See slides</li>
+</ul>
+<h2 id="3-Proximal-mapping"><a href="#3-Proximal-mapping" class="headerlink" title="3. Proximal mapping"></a>3. Proximal mapping</h2><ul>
+<li><p>Definition: proximal mapping of a closed convex function $f$ is</p>
+<script type="math/tex; mode=display">
+\text{prox}_f(x)=\arg\min_u(f(u)+\frac{1}{2}\|u-x\|^2_2)</script><blockquote>
+<p>加入二次项保证强凸性，使 $\arg\min$ 的值唯一</p>
+<p>闭性质保证一定有 $\arg\min$ </p>
+<p>将 $x$ 映射到近似点 $u$ (意义？)</p>
+</blockquote>
+</li>
+<li><p>Subgradient characterization</p>
+</li>
+<li><script type="math/tex; mode=display">
+u=\text{prox}_f(x)\Leftrightarrow x-u\in\partial f(u)\tag{10-1}</script><p>Proof:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+&\because0\in\partial f(u)+(u-x)\\
+&\therefore x-u\in\partial f(u)
+
+\end{align}</script></li>
+<li></li>
+</ul>
+<script type="math/tex; mode=display">
+f(x)=g(x)+a^Tx,\ \ \ \ \text{prox}_f(x)=\text{prox}_g(x-a)</script><script type="math/tex; mode=display">
+f(x)=g(x)+\frac{\mu}{2}\|x-a\|^2_2\ \ \ \ \text{prox}_{\theta g}(\theta x+(1-\theta)a)</script><ul>
+<li><strong>Moreau decomposition</strong></li>
+</ul>
+<script type="math/tex; mode=display">
+x=\text{prox}_f(x)+\text{prox}_{f^*}(x), \forall x</script><p>​            Follows form:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+u=\text{prox}_f(x)&\Leftrightarrow x-u\in\partial f(u)\text{    (10-1)}\\
+&\Leftrightarrow u\in\partial f^*(x-u)\text{    (8-1)}\\
+&\Leftrightarrow x-u=\text{prox}_{f^*}(x)\text{   (10-1)}
+\end{align}</script><p>​            Decomposition:</p>
+<script type="math/tex; mode=display">
+x=P_L(x)+P_{L^\perp}(x)</script><p>​                    with $f=\delta<em>{L}, f^*=\delta</em>{L^\perp}$ .</p>
+<p>​            Extended version</p>
+<ul>
+<li>Composition with affine mapping</li>
+</ul>
+<script type="math/tex; mode=display">
+f(x)=g(Ax+b)</script><blockquote>
+<p>由 g 的近似点映射求  f 的并不容易</p>
+<p>但是如果 $AA^T=(1/\alpha)I$ ，则 f 有解析的近似点映射(slides)</p>
+</blockquote>
+<h2 id="4-Projections"><a href="#4-Projections" class="headerlink" title="4. Projections"></a>4. Projections</h2><blockquote>
+<p>近似点映射对各种集合的投影有比较好的性质。例子见slides。</p>
+</blockquote>
+<h2 id="5-Support-functions-norms-distances"><a href="#5-Support-functions-norms-distances" class="headerlink" title="5. Support functions, norms, distances"></a>5. Support functions, norms, distances</h2><blockquote>
+<p>同上，例子见slides。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>凸优化</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>凸优化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Extremely Low Bit Neural Network: Squeeze the Last Bit Out with ADMM</title>
+    <url>/%E8%AE%BA%E6%96%87-Low-bit-quantization.html</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li><a href="https://arxiv.org/pdf/1707.09870.pdf">Extremely Low Bit Neural Network: Squeeze the Last Bit Out with ADMM - 原文</a> ；AAAI 18 Oral。</li>
+<li>从结果看比之前的一些量化工作都要好上不少，干货较多。</li>
+</ul>
+<a id="more"></a>
+<h2 id="量化-Quantization"><a href="#量化-Quantization" class="headerlink" title="量化(Quantization)"></a>量化(Quantization)</h2><h3 id="为什么要压缩网络"><a href="#为什么要压缩网络" class="headerlink" title="为什么要压缩网络"></a>为什么要压缩网络</h3><ul>
+<li>网络的表达能力过强，压缩网络可以起到一定正则的作用</li>
+<li>网络存在很多冗余参数和计算量，压缩网络可以极大减少储存空间以及运算量</li>
+</ul>
+<h3 id="什么是量化"><a href="#什么是量化" class="headerlink" title="什么是量化"></a>什么是量化</h3><ul>
+<li>对权重的参数进行取整，降低存储精度。低精度数不仅减少存储空间，而且能够规避浮点运算带来的巨大计算量。经过特别设计的芯片还能对低精度数的运算（可用速度更快的位运算）进行更进一步的优化。</li>
+<li>有几种方法降低精度，常见的方法如直接对权值作聚类分析（更进一步可以对每一个cluster进行Huffman编码，继续压缩存储空间）或是直接添加整数约束/改变激活函数等</li>
+</ul>
+<p><img src="https://camo.githubusercontent.com/16e9d6bdc804b3204c476a6082bbc72f06db9b6d/68747470733a2f2f696d672d626c6f672e6373646e2e6e65742f3230313631303236313834323333333237" alt=""></p>
+<ul>
+<li>也可以对梯度和输出量化；对于不同的方法，可能需要专门设计训练过程来计算梯度。</li>
+</ul>
+<h2 id="ADMM-Alternative-Direction-Multiplier-Method"><a href="#ADMM-Alternative-Direction-Multiplier-Method" class="headerlink" title="ADMM(Alternative Direction Multiplier Method)"></a>ADMM(Alternative Direction Multiplier Method)</h2><ul>
+<li>因大规模网络的应用，近年来颇受关注的一种优化方法。虽然ADMM在理论分析中收敛慢，但是在许多实际的大规模应用场景中表现稳定，且较为适合分布式计算。</li>
+<li>更进一步的对ADMM的讨论可见<a href="https://thiswinex.github.io/2019/01/28/%E7%AC%94%E8%AE%B0-ADMM-%E4%BA%A4%E6%9B%BF%E6%96%B9%E5%90%91%E4%B9%98%E5%AD%90%E6%B3%95/">另一篇文章</a></li>
+</ul>
+<h2 id="论文"><a href="#论文" class="headerlink" title="论文"></a>论文</h2><ul>
+<li>论文实现了将32比特权重压缩至3比特的低比特权重量化。之前的若是要将权重量化到3或更低的比特上的话，在大数据集上效果并不好。</li>
+<li>论文只介绍了思路，并没有源码</li>
+</ul>
+<h3 id="实现算法"><a href="#实现算法" class="headerlink" title="实现算法"></a>实现算法</h3><ul>
+<li>将离散权重网络训练定义成离散约束问题，以三值网络为例，约束为：<script type="math/tex; mode=display">\underset{W}{\min}\ f(W)\ \ s.t.W\in \mathcal{C}=\{1,0,-1\}^d</script></li>
+<li>引进 scale 参数扩展可行域，将约束条件扩展至 $W\in \mathcal{C}={a,0,-a}$ 。由于约束空间变大（如下图），收敛速度将大大加快。<ul>
+<li>注意这里之后再 scale 回去严格二值的话，实际上是会损失精度，这样量化出来的BWN只能算作变种（参考XNOR Net）</li>
+<li>个人有点怀疑这样部署到端上后的效果。有些端不支持高位数的scale参数的存储和计算。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://camo.githubusercontent.com/8a5b07526e6e12e6b0c7cc8538e72f35711a58df/68747470733a2f2f696d6167652e6a6971697a686978696e2e636f6d2f75706c6f6164732f656469746f722f66643965633961632d353064642d343836372d623762622d6238306261666431366335312f353137393630332e6a7067" alt=""></p>
+<ul>
+<li><p>使用ADMM算法一般约束下的形式，将问题转换为：</p>
+<script type="math/tex; mode=display">\underset{W,G}{\min}\ f(W)+I_C(G)\ \ s.t.W=G</script><p>其中 $I_C$ 为指示函数，$G$ 符合约束则为0，否则为无穷大。</p>
+<p>其拉格朗日函数形式为：</p>
+<script type="math/tex; mode=display">L_\rho(W,G,\lambda)=f(W)+I_C(G)+\frac{\rho}{2}||W-G+\lambda||^2-\frac{\rho}{2}||\lambda||^2</script><p>迭代过程：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+W^{k+1}&:=\arg\min_W L_\rho(W, G^k, \lambda^k)\\
+G^{k+1}&:=\arg\min_G L_\rho(W^{k+1}, G, \lambda^k)\\
+\lambda^{k+1}&:=\lambda^k+W^{k+1}-G^{k+1}
+\end{align}</script></li>
+<li><p>对第一个对 $W$ 更新的过程，采用 Extra-gradient 算法进行梯度下降能够避免收敛过慢的问题：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+W^{(p)}&:=W-\beta_p\partial_WL(W)\\
+W^{(c)}&:=W-\beta_c\partial_WL(W^{(p)})
+\end{align}</script><ul>
+<li>Extra-gradient method 即外梯度算法，由 Korpelevich 提出（可见原文引文[23]）。这篇论文距今已经40年了，既难找又难懂，感觉又是个新坑……涉及变分不等式的部分可以和ADMM一起又单写一篇文章了。</li>
+<li>（学习完凸优化后补充）其实也不是很复杂，如果不关心数学图景上的原理的话，可以看做用下一步的梯度来取代这一步的梯度做梯度下降。单步计算量和存储量都会更高，但是会获得相对更正确的下降方向。</li>
+</ul>
+</li>
+<li>对第二个对 $G$ 更新的过程，我们可以将其看做在非凸集上整数约束的优化问题。令 $W_i, G_i, \lambda_i, \mathcal{C}_i$ 分别为第 $i$ 层权重、辅助变量、拉格朗日乘子和约束集合。根据ADMM算法，迭代时需要计算在 $\mathcal{C}_i$ 上 $W^{k+1}_i+\lambda^k_i$的欧式投影。令 $V_i=W^{k+1}_i+\lambda^k_i$ ，其欧式投影可以表示为：<script type="math/tex; mode=display">\min_{G_i,\alpha_i} ||V_i-G_i||^2</script><script type="math/tex; mode=display">s.t. G_i\in\{0,\pm\alpha_i, \pm 2\alpha, \cdots, \pm 2^N\alpha\}^{d_i}</script>从约束中分离 scale 参数：<script type="math/tex; mode=display">\min_{Q_i,\alpha_i} ||V_i-\alpha_i\cdot Q_i||^2</script><script type="math/tex; mode=display">s.t. Q_i\in\{0,\pm, \pm 2, \cdots, \pm 2^N\}^{d_i}</script>算法交替优化 $Q_i$ 和 $\alpha_i$ 中的其中一个而固定另外一个：<ul>
+<li>在 $Q_i$ 固定时：<script type="math/tex; mode=display">\alpha_i=\frac{V^T_i Q_i}{Q^T_i Q_I}</script></li>
+<li>在 $\alpha_i$ 固定时：<script type="math/tex; mode=display">Q_i=\Pi_{\{0,\pm 1,\pm 2,\cdots,\pm 2^N\}}(\frac{V_i}{\alpha_i})</script>对 $Q_i$ 的更新，$\Pi$ 投影只是简单地取离约束集合最近的点（参见ADMM笔记4.3.5）。</li>
+</ul>
+</li>
+<li>这种迭代算法能保证很快收敛到局部极小值。</li>
+<li>最后迭代停止时，直接用 $G$ 取代 $W$ 即可。</li>
+</ul>
+<h3 id="论文结果"><a href="#论文结果" class="headerlink" title="论文结果"></a>论文结果</h3><ul>
+<li>算法在AlexNet、VGG、ResNet、GoogleNet上均做了测试，2~3bit的量化相比state-of-art 的一些二值网络与三值网络高出有1~4%的Top5正确率，只比全精度的baseline低1%多一些。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>论文</category>
+        <category>NN压缩与加速</category>
+      </categories>
+      <tags>
+        <tag>论文</tag>
+        <tag>深度学习</tag>
+        <tag>NN压缩与加速</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>非root权限下安装zsh</title>
-    <url>/2020/03/09/%E9%9D%9Eroot%E6%9D%83%E9%99%90%E4%B8%8B%E5%AE%89%E8%A3%85zsh/</url>
+    <url>/%E9%9D%9Eroot%E6%9D%83%E9%99%90%E4%B8%8B%E5%AE%89%E8%A3%85zsh.html</url>
     <content><![CDATA[<a id="more"></a>
 <p>选修课分到的服务器虽然环境配好，但是默认shell是bash，<a href="https://www.bilibili.com/video/av911093/">我不能忍</a>。locate了一下，发现两年前服务器上也有个人不能忍，第一次上线啥都没干，就装了个zsh。偷瞄了一下bash_history，他应该看的这篇教程：</p>
 <p><a href="https://www.drewsilcock.co.uk/compiling-zsh">Compiling zsh without root</a></p>
@@ -2212,7 +2212,7 @@ f'(x;y)=\lim_{\alpha\rightarrow0}\frac{f(x+\alpha y)-f(x)}{\alpha}</script>]]></
   </entry>
   <entry>
     <title>LeetCode 题解记录(2)</title>
-    <url>/2019/08/26/OJ-LeetCode%E9%A2%98%E8%A7%A3%E8%AE%B0%E5%BD%95-2/</url>
+    <url>/OJ-LeetCode%E9%A2%98%E8%A7%A3%E8%AE%B0%E5%BD%95-2.html</url>
     <content><![CDATA[<p>分享一些自己LeetCode题目的题解。</p>
 <p>*标记的题目为待优化题目。</p>
 <a id="more"></a>
@@ -2428,7 +2428,7 @@ f'(x;y)=\lim_{\alpha\rightarrow0}\frac{f(x+\alpha y)-f(x)}{\alpha}</script>]]></
   </entry>
   <entry>
     <title>LeetCode 题解记录(1)</title>
-    <url>/2019/08/05/OJ-LeetCode%E9%A2%98%E8%A7%A3%E8%AE%B0%E5%BD%95/</url>
+    <url>/OJ-LeetCode%E9%A2%98%E8%A7%A3%E8%AE%B0%E5%BD%95.html</url>
     <content><![CDATA[<p>分享一些自己LeetCode题目的题解。</p>
 <p>*标记的题目为待优化题目。</p>
 <a id="more"></a>
