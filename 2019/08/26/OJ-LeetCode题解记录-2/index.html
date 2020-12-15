@@ -1,242 +1,109 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+
+
+<html lang="zh-CN">
+
+
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.8.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="若公式显示不正常，可尝试右键点击公式-&gt;Math Setting-&gt;Math Renderer切换渲染器。" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    LeetCode 题解记录(2) |  Thiswinex&#39;s Blog
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
 
-<link rel="stylesheet" href="/css/main.css">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
 
+  
+<link rel="stylesheet" href="/css/custom.css">
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
 
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="分享一些自己LeetCode题目的题解。 *标记的题目为待优化题目。">
-<meta name="keywords" content="OJ,LeetCode,习题">
-<meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode 题解记录(2)">
-<meta property="og:url" content="http://yoursite.com/2019/08/26/OJ-LeetCode题解记录-2/index.html">
-<meta property="og:site_name" content="Thiswinex&#39;s Blog">
-<meta property="og:description" content="分享一些自己LeetCode题目的题解。 *标记的题目为待优化题目。">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-07-27T13:09:37.186Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LeetCode 题解记录(2)">
-<meta name="twitter:description" content="分享一些自己LeetCode题目的题解。 *标记的题目为待优化题目。">
-
-<link rel="canonical" href="http://yoursite.com/2019/08/26/OJ-LeetCode题解记录-2/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-Hans'
-  };
-</script>
-
-  <title>LeetCode 题解记录(2) | Thiswinex's Blog</title>
+  
   
 
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
+  
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+</html>
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Thiswinex's Blog</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
+<body>
+  <div id="app">
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/26/OJ-LeetCode题解记录-2/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="thiswinex">
-      <meta itemprop="description" content="若公式显示不正常，可尝试右键点击公式->Math Setting->Math Renderer切换渲染器。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Thiswinex's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          LeetCode 题解记录(2)
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-08-26 20:03:12" itemprop="dateCreated datePublished" datetime="2019-08-26T20:03:12+08:00">2019-08-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-27 21:09:37" itemprop="dateModified" datetime="2020-07-27T21:09:37+08:00">2020-07-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/习题/" itemprop="url" rel="index"><span itemprop="name">习题</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/习题/OJ/" itemprop="url" rel="index"><span itemprop="name">OJ</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/习题/OJ/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/08/26/OJ-LeetCode题解记录-2/" class="post-meta-item leancloud_visitors" data-flag-title="LeetCode 题解记录(2)" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2019/08/26/OJ-LeetCode题解记录-2/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/08/26/OJ-LeetCode题解记录-2/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
       
-        <p>分享一些自己LeetCode题目的题解。</p>
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-OJ-LeetCode题解记录-2"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  LeetCode 题解记录(2)
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2019/08/26/OJ-LeetCode%E9%A2%98%E8%A7%A3%E8%AE%B0%E5%BD%95-2/" class="article-date">
+  <time datetime="2019-08-26T12:03:12.000Z" itemprop="datePublished">2019-08-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E4%B9%A0%E9%A2%98/">习题</a> / <a class="article-category-link" href="/categories/%E4%B9%A0%E9%A2%98/OJ/">OJ</a> / <a class="article-category-link" href="/categories/%E4%B9%A0%E9%A2%98/OJ/LeetCode/">LeetCode</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">5.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">22 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>分享一些自己LeetCode题目的题解。</p>
 <p>*标记的题目为待优化题目。</p>
 <a id="more"></a>
-<h3 id="565-Medium-数组嵌套-Array-Nesting"><a href="#565-Medium-数组嵌套-Array-Nesting" class="headerlink" title="#565 [Medium] 数组嵌套 Array Nesting"></a>#565 [Medium] 数组嵌套 <a href="https://leetcode-cn.com/problems/array-nesting/" target="_blank" rel="noopener">Array Nesting</a></h3><blockquote>
+<h3 id="565-Medium-数组嵌套-Array-Nesting"><a href="#565-Medium-数组嵌套-Array-Nesting" class="headerlink" title="#565 [Medium] 数组嵌套 Array Nesting"></a>#565 [Medium] 数组嵌套 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/array-nesting/">Array Nesting</a></h3><blockquote>
 <p>索引从0开始长度为N的数组A，包含0到N - 1的所有整数。找到并返回最大的集合S，S[i] = {A[i], A[A[i]], A[A[A[i]]], … }且遵守以下的规则。</p>
 <p>假设选择索引为i的元素A[i]为S的第一个元素，S的下一个元素应该是A[A[i]]，之后是A[A[A[i]]]… 以此类推，不断添加直到S出现重复的元素。</p>
 </blockquote>
@@ -254,13 +121,13 @@
 </blockquote>
 <p>这下舒服了。。</p>
 <hr>
-<h3 id="984-Medium-不含AAA或BBB的字符串-String-Without-AAA-or-BBB"><a href="#984-Medium-不含AAA或BBB的字符串-String-Without-AAA-or-BBB" class="headerlink" title="#984 [Medium] 不含AAA或BBB的字符串 String Without AAA or BBB"></a>#984 [Medium] 不含AAA或BBB的字符串 <a href="https://leetcode-cn.com/problems/string-without-aaa-or-bbb/" target="_blank" rel="noopener">String Without AAA or BBB</a></h3><blockquote>
+<h3 id="984-Medium-不含AAA或BBB的字符串-String-Without-AAA-or-BBB"><a href="#984-Medium-不含AAA或BBB的字符串-String-Without-AAA-or-BBB" class="headerlink" title="#984 [Medium] 不含AAA或BBB的字符串 String Without AAA or BBB"></a>#984 [Medium] 不含AAA或BBB的字符串 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/string-without-aaa-or-bbb/">String Without AAA or BBB</a></h3><blockquote>
 <p>给定两个整数 A 和 B，返回任意字符串 S，要求满足：</p>
 <p>S 的长度为 A + B，且正好包含 A 个 ‘a’ 字母与 B 个 ‘b’ 字母；<br>子串 ‘aaa’ 没有出现在 S 中；<br>子串 ‘bbb’ 没有出现在 S 中。</p>
 </blockquote>
 <p>直接构造即可。不妨设 $A&gt;B$ ，那么只需要特殊考虑 <code>A/B&gt;2</code>  的情况即可，剩下的字符串用 <code>A%B</code> 来构造。</p>
 <p>更直观的构造使用计数器，哪个剩余字符多写哪个字符，用一个标记来阻止程序连写三个符号。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">strWithout3a3b</span><span class="params">(<span class="keyword">int</span> A, <span class="keyword">int</span> B)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m_A, m_B;</span><br><span class="line">        <span class="built_in">string</span> ans;</span><br><span class="line">        <span class="built_in">string</span> m_a_char, m_b_char;</span><br><span class="line">        <span class="keyword">if</span>(A &gt; B) &#123; m_A = A; m_B = B; m_a_char = <span class="string">"a"</span>; m_b_char = <span class="string">"b"</span>;&#125;</span><br><span class="line">        <span class="keyword">else</span> &#123; m_A = B; m_B = A; m_a_char = <span class="string">"b"</span>; m_b_char = <span class="string">"a"</span>;&#125;</span><br><span class="line">        <span class="built_in">string</span> tri = m_a_char+m_a_char+m_b_char, duo = m_a_char+m_b_char;</span><br><span class="line">        <span class="keyword">if</span>(m_A / m_B &lt; <span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">int</span> res = m_A%m_B;</span><br><span class="line">            <span class="keyword">while</span>(res &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                ans += tri;</span><br><span class="line">                res--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(ans.length() &lt; A+B)&#123;</span><br><span class="line">                ans += duo;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">while</span>(ans.length() +<span class="number">2</span> &lt; A+B)</span><br><span class="line">                ans += tri;</span><br><span class="line">            <span class="keyword">while</span>(ans.length() &lt; A+B)</span><br><span class="line">                ans += m_a_char;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">strWithout3a3b</span><span class="params">(<span class="keyword">int</span> A, <span class="keyword">int</span> B)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m_A, m_B;</span><br><span class="line">        <span class="built_in">string</span> ans;</span><br><span class="line">        <span class="built_in">string</span> m_a_char, m_b_char;</span><br><span class="line">        <span class="keyword">if</span>(A &gt; B) &#123; m_A = A; m_B = B; m_a_char = <span class="string">&quot;a&quot;</span>; m_b_char = <span class="string">&quot;b&quot;</span>;&#125;</span><br><span class="line">        <span class="keyword">else</span> &#123; m_A = B; m_B = A; m_a_char = <span class="string">&quot;b&quot;</span>; m_b_char = <span class="string">&quot;a&quot;</span>;&#125;</span><br><span class="line">        <span class="built_in">string</span> tri = m_a_char+m_a_char+m_b_char, duo = m_a_char+m_b_char;</span><br><span class="line">        <span class="keyword">if</span>(m_A / m_B &lt; <span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">int</span> res = m_A%m_B;</span><br><span class="line">            <span class="keyword">while</span>(res &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                ans += tri;</span><br><span class="line">                res--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(ans.length() &lt; A+B)&#123;</span><br><span class="line">                ans += duo;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">while</span>(ans.length() +<span class="number">2</span> &lt; A+B)</span><br><span class="line">                ans += tri;</span><br><span class="line">            <span class="keyword">while</span>(ans.length() &lt; A+B)</span><br><span class="line">                ans += m_a_char;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>执行用时 :12 ms, 在所有 C++ 提交中击败了30.65%的用户</p>
 <p>内存消耗 :8.7 MB, 在所有 C++ 提交中击败了81.08%的用户</p>
@@ -288,7 +155,7 @@
 </blockquote>
 <p>真正的Hard应该是做不出来的。。</p>
 <p>核心问题可以看做求每个柱子的最大等高线宽度。应该是卡了 $O(n^2)$ 的暴力，需要用一些方法优化。我这里维护了一个数组<code>left_w</code>和一个栈<code>stk</code>，<code>stk</code>是一个单调增的柱子序列的index（index也单增），一旦检索到比<code>top</code>元素小的元素，则循环出栈直到新元素能入栈，并处理出栈元素对答案的更新（由于新元素小于出栈元素，出栈元素的右向宽度计数在此终止）。由于是右向检索，还需要<code>left_w</code>数组来维护新元素左向的宽度。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; heights)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(heights.size() == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; left_w(heights.size());</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stk;</span><br><span class="line">        stk.push(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;heights.size();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(heights[i] &gt;= heights[stk.top()]) stk.push(i); <span class="comment">//大于栈顶元素则入栈</span></span><br><span class="line">            <span class="keyword">while</span>(!stk.empty() &amp;&amp; heights[i] &lt;  heights[stk.top()])&#123;<span class="comment">//栈空或当前元素大于栈顶元素停止循环</span></span><br><span class="line">                ans = max(ans, (i-stk.top()+left_w[stk.top()])*heights[stk.top()]);<span class="comment">//更新ANS</span></span><br><span class="line">                left_w[i] = i-stk.top()+left_w[stk.top()];<span class="comment">//更新LEFT_W</span></span><br><span class="line">                stk.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            stk.push(i); <span class="comment">//入栈(好像重复了但是还是AC了。。)</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(!stk.empty())&#123;<span class="comment">//遍历完之后若栈非空的处理</span></span><br><span class="line">            <span class="keyword">int</span> i = heights.size();</span><br><span class="line">            ans = max(ans, (i-stk.top()+left_w[stk.top()])*heights[stk.top()]);</span><br><span class="line">            stk.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; heights)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(heights.size() == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">left_w</span><span class="params">(heights.size())</span></span>;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stk;</span><br><span class="line">        stk.push(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;heights.size();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(heights[i] &gt;= heights[stk.top()]) stk.push(i); <span class="comment">//大于栈顶元素则入栈</span></span><br><span class="line">            <span class="keyword">while</span>(!stk.empty() &amp;&amp; heights[i] &lt;  heights[stk.top()])&#123;<span class="comment">//栈空或当前元素大于栈顶元素停止循环</span></span><br><span class="line">                ans = max(ans, (i-stk.top()+left_w[stk.top()])*heights[stk.top()]);<span class="comment">//更新ANS</span></span><br><span class="line">                left_w[i] = i-stk.top()+left_w[stk.top()];<span class="comment">//更新LEFT_W</span></span><br><span class="line">                stk.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            stk.push(i); <span class="comment">//入栈(好像重复了但是还是AC了。。)</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(!stk.empty())&#123;<span class="comment">//遍历完之后若栈非空的处理</span></span><br><span class="line">            <span class="keyword">int</span> i = heights.size();</span><br><span class="line">            ans = max(ans, (i-stk.top()+left_w[stk.top()])*heights[stk.top()]);</span><br><span class="line">            stk.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>执行用时 :36 ms, 在所有 C++ 提交中击败了14.06%的用户</p>
 <p>内存消耗 :10.8 MB, 在所有 C++ 提交中击败了7.44%的用户</p>
@@ -305,18 +172,18 @@
 </li>
 </ul>
 <hr>
-<h3 id="215-Medium-数组中的第K个最大元素-Kth-Largest-Element-in-an-Array"><a href="#215-Medium-数组中的第K个最大元素-Kth-Largest-Element-in-an-Array" class="headerlink" title="#215* [Medium] 数组中的第K个最大元素 Kth Largest Element in an Array"></a>#215* [Medium] 数组中的第K个最大元素 <a href="https://leetcode-cn.com/problems/kth-largest-element-in-an-array/" target="_blank" rel="noopener">Kth Largest Element in an Array</a></h3><blockquote>
+<h3 id="215-Medium-数组中的第K个最大元素-Kth-Largest-Element-in-an-Array"><a href="#215-Medium-数组中的第K个最大元素-Kth-Largest-Element-in-an-Array" class="headerlink" title="#215* [Medium] 数组中的第K个最大元素 Kth Largest Element in an Array"></a>#215* [Medium] 数组中的第K个最大元素 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/kth-largest-element-in-an-array/">Kth Largest Element in an Array</a></h3><blockquote>
 <p>在未排序的数组中找到第 <strong>k</strong> 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。</p>
 </blockquote>
 <p>我这里是使用了堆排，排序好久没写了手生。。实际上不需要排序，只需要维护k大小的小顶堆即可，时间复杂度还能优化一下。</p>
 <p>同样用快排的话，不需要对pivot两边递归排序。因为每次都知道pivot是第几大的元素，所以可以直接选择一边而放弃另一边。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findKthLargest</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; heap(nums.size());</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.size();i++)&#123;</span><br><span class="line">            heap[i] = nums[i];</span><br><span class="line">            <span class="comment">//cout&lt;&lt;"Push: "&lt;&lt;nums[i]&lt;&lt;endl;</span></span><br><span class="line">            <span class="comment">//shiftUp(heap, i);</span></span><br><span class="line">        &#125;</span><br><span class="line">        sort(heap, k);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;heap.size();i++) <span class="built_in">cout</span>&lt;&lt;heap[i]&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">        <span class="keyword">return</span> heap[heap.size()-k];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">shiftUp</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; heap, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> parent = start;</span><br><span class="line">        <span class="keyword">int</span> son = parent*<span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(son &lt;= end)&#123;</span><br><span class="line">            <span class="keyword">if</span>(son + <span class="number">1</span> &lt;= end &amp;&amp; heap[son] &lt; heap[son+<span class="number">1</span>]) son++;</span><br><span class="line">            <span class="keyword">if</span>(heap[parent] &gt; heap[son]) <span class="keyword">return</span>;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                swap(heap[parent], heap[son]);</span><br><span class="line">                parent = son;</span><br><span class="line">                son = parent*<span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; heap, <span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = heap.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=len/<span class="number">2</span><span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">            shiftUp(heap, i, len<span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=len<span class="number">-1</span>;i&gt;=len-k;i--)&#123;</span><br><span class="line">            swap(heap[<span class="number">0</span>],heap[i]);</span><br><span class="line">            shiftUp(heap, <span class="number">0</span>, i<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> &amp;a, <span class="keyword">int</span> &amp;b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> mid = a;</span><br><span class="line">        a = b;</span><br><span class="line">        b = mid;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findKthLargest</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">heap</span><span class="params">(nums.size())</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.size();i++)&#123;</span><br><span class="line">            heap[i] = nums[i];</span><br><span class="line">            <span class="comment">//cout&lt;&lt;&quot;Push: &quot;&lt;&lt;nums[i]&lt;&lt;endl;</span></span><br><span class="line">            <span class="comment">//shiftUp(heap, i);</span></span><br><span class="line">        &#125;</span><br><span class="line">        sort(heap, k);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;heap.size();i++) <span class="built_in">cout</span>&lt;&lt;heap[i]&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> heap[heap.size()-k];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">shiftUp</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; heap, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> parent = start;</span><br><span class="line">        <span class="keyword">int</span> son = parent*<span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(son &lt;= end)&#123;</span><br><span class="line">            <span class="keyword">if</span>(son + <span class="number">1</span> &lt;= end &amp;&amp; heap[son] &lt; heap[son+<span class="number">1</span>]) son++;</span><br><span class="line">            <span class="keyword">if</span>(heap[parent] &gt; heap[son]) <span class="keyword">return</span>;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                swap(heap[parent], heap[son]);</span><br><span class="line">                parent = son;</span><br><span class="line">                son = parent*<span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; heap, <span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = heap.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=len/<span class="number">2</span><span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">            shiftUp(heap, i, len<span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=len<span class="number">-1</span>;i&gt;=len-k;i--)&#123;</span><br><span class="line">            swap(heap[<span class="number">0</span>],heap[i]);</span><br><span class="line">            shiftUp(heap, <span class="number">0</span>, i<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> &amp;a, <span class="keyword">int</span> &amp;b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> mid = a;</span><br><span class="line">        a = b;</span><br><span class="line">        b = mid;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>执行用时 :40 ms, 在所有 C++ 提交中击败了35.47%的用户</p>
 <p>内存消耗 :9.3 MB, 在所有 C++ 提交中击败了67.49%的用户</p>
 </blockquote>
 <hr>
-<h3 id="55-Medium-跳跃游戏-Jump-Game"><a href="#55-Medium-跳跃游戏-Jump-Game" class="headerlink" title="#55 [Medium] 跳跃游戏 Jump Game"></a>#55 [Medium] 跳跃游戏 <a href="https://leetcode-cn.com/problems/jump-game/" target="_blank" rel="noopener">Jump Game</a></h3><blockquote>
+<h3 id="55-Medium-跳跃游戏-Jump-Game"><a href="#55-Medium-跳跃游戏-Jump-Game" class="headerlink" title="#55 [Medium] 跳跃游戏 Jump Game"></a>#55 [Medium] 跳跃游戏 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/jump-game/">Jump Game</a></h3><blockquote>
 <p>给定一个非负整数数组，你最初位于数组的第一个位置。</p>
 <p>数组中的每个元素代表你在该位置可以跳跃的最大长度。</p>
 <p>判断你是否能够到达最后一个位置。</p>
@@ -329,7 +196,7 @@
 <p>内存消耗 :9.9 MB, 在所有 C++ 提交中击败了72.19%的用户</p>
 </blockquote>
 <hr>
-<h3 id="122-Easy-买卖股票的最佳时机II-Best-Time-to-Buy-and-Sell-Stock-II"><a href="#122-Easy-买卖股票的最佳时机II-Best-Time-to-Buy-and-Sell-Stock-II" class="headerlink" title="#122 [Easy] 买卖股票的最佳时机II Best Time to Buy and Sell Stock II"></a>#122 [Easy] 买卖股票的最佳时机II <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/" target="_blank" rel="noopener">Best Time to Buy and Sell Stock II</a></h3><blockquote>
+<h3 id="122-Easy-买卖股票的最佳时机II-Best-Time-to-Buy-and-Sell-Stock-II"><a href="#122-Easy-买卖股票的最佳时机II-Best-Time-to-Buy-and-Sell-Stock-II" class="headerlink" title="#122 [Easy] 买卖股票的最佳时机II Best Time to Buy and Sell Stock II"></a>#122 [Easy] 买卖股票的最佳时机II <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/">Best Time to Buy and Sell Stock II</a></h3><blockquote>
 <p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p>
 <p>设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。</p>
 <p>注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p>
@@ -342,7 +209,7 @@
 <p>内存消耗 :9.6 MB, 在所有 C++ 提交中击败了7.50%的用户</p>
 </blockquote>
 <hr>
-<h3 id="45-Hard-跳跃游戏II-Jump-Game-II"><a href="#45-Hard-跳跃游戏II-Jump-Game-II" class="headerlink" title="#45 [Hard] 跳跃游戏II Jump Game II"></a>#45 [Hard] 跳跃游戏II <a href="https://leetcode-cn.com/problems/jump-game-ii/" target="_blank" rel="noopener">Jump Game II</a></h3><blockquote>
+<h3 id="45-Hard-跳跃游戏II-Jump-Game-II"><a href="#45-Hard-跳跃游戏II-Jump-Game-II" class="headerlink" title="#45 [Hard] 跳跃游戏II Jump Game II"></a>#45 [Hard] 跳跃游戏II <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/jump-game-ii/">Jump Game II</a></h3><blockquote>
 <p>给定一个非负整数数组，你最初位于数组的第一个位置。</p>
 <p>数组中的每个元素代表你在该位置可以跳跃的最大长度。</p>
 <p>你的目标是使用最少的跳跃次数到达数组的最后一个位置。</p>
@@ -359,13 +226,13 @@
 <p>给出一个区间的集合，请合并所有重叠的区间。</p>
 </blockquote>
 <p>排序就完事了。区间头尾分两个数组排序，坏处是占空间多。如果排序后的头/尾数组上有关系：$start[i+1]&gt;end[i]$ ，则 $end[i]$ 为一段合并区间的尾。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; merge(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; intervals) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans;</span><br><span class="line">        <span class="keyword">if</span>(intervals.size() == <span class="number">0</span>) <span class="keyword">return</span> ans;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; start(intervals.size());</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; end(intervals.size());</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;intervals.size();i++)&#123;</span><br><span class="line">            start[i] = intervals[i][<span class="number">0</span>];</span><br><span class="line">            end[i] = intervals[i][<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        quickSort(start, <span class="number">0</span>, start.size()<span class="number">-1</span>);</span><br><span class="line">        quickSort(end, <span class="number">0</span>, end.size()<span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">int</span> l = start[<span class="number">0</span>], r = end[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;start.size()<span class="number">-1</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(end[i] &lt; start[i+<span class="number">1</span>]) &#123;</span><br><span class="line">                r = end[i];</span><br><span class="line">                <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec&#123;l, r&#125;;</span><br><span class="line">                ans.push_back(vec);</span><br><span class="line">                l = start[i+<span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec&#123;l, end[end.size()<span class="number">-1</span>]&#125;;</span><br><span class="line">        ans.push_back(vec);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;a, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(left &lt; right)&#123;</span><br><span class="line">            <span class="keyword">int</span> leftmark = left, rightmark = right, pivot = a[right];</span><br><span class="line">            <span class="keyword">while</span>(leftmark &lt; rightmark)&#123;</span><br><span class="line">                <span class="keyword">while</span>(a[leftmark] &lt;= pivot &amp;&amp; leftmark &lt; rightmark) leftmark++;</span><br><span class="line">                <span class="keyword">if</span>(leftmark &lt; rightmark) a[rightmark--] = a[leftmark];</span><br><span class="line">                <span class="keyword">while</span>(a[rightmark] &gt; pivot &amp;&amp; leftmark &lt; rightmark) rightmark--;</span><br><span class="line">                <span class="keyword">if</span>(leftmark &lt; rightmark) a[leftmark++] = a[rightmark];</span><br><span class="line">            &#125;</span><br><span class="line">            a[rightmark] = pivot;</span><br><span class="line">            quickSort(a, left, rightmark<span class="number">-1</span>);</span><br><span class="line">            quickSort(a, rightmark+<span class="number">1</span>, right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; merge(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; intervals) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans;</span><br><span class="line">        <span class="keyword">if</span>(intervals.size() == <span class="number">0</span>) <span class="keyword">return</span> ans;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">start</span><span class="params">(intervals.size())</span></span>;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">end</span><span class="params">(intervals.size())</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;intervals.size();i++)&#123;</span><br><span class="line">            start[i] = intervals[i][<span class="number">0</span>];</span><br><span class="line">            end[i] = intervals[i][<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        quickSort(start, <span class="number">0</span>, start.size()<span class="number">-1</span>);</span><br><span class="line">        quickSort(end, <span class="number">0</span>, end.size()<span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">int</span> l = start[<span class="number">0</span>], r = end[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;start.size()<span class="number">-1</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(end[i] &lt; start[i+<span class="number">1</span>]) &#123;</span><br><span class="line">                r = end[i];</span><br><span class="line">                <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec&#123;l, r&#125;;</span><br><span class="line">                ans.push_back(vec);</span><br><span class="line">                l = start[i+<span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec&#123;l, end[end.size()<span class="number">-1</span>]&#125;;</span><br><span class="line">        ans.push_back(vec);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;a, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(left &lt; right)&#123;</span><br><span class="line">            <span class="keyword">int</span> leftmark = left, rightmark = right, pivot = a[right];</span><br><span class="line">            <span class="keyword">while</span>(leftmark &lt; rightmark)&#123;</span><br><span class="line">                <span class="keyword">while</span>(a[leftmark] &lt;= pivot &amp;&amp; leftmark &lt; rightmark) leftmark++;</span><br><span class="line">                <span class="keyword">if</span>(leftmark &lt; rightmark) a[rightmark--] = a[leftmark];</span><br><span class="line">                <span class="keyword">while</span>(a[rightmark] &gt; pivot &amp;&amp; leftmark &lt; rightmark) rightmark--;</span><br><span class="line">                <span class="keyword">if</span>(leftmark &lt; rightmark) a[leftmark++] = a[rightmark];</span><br><span class="line">            &#125;</span><br><span class="line">            a[rightmark] = pivot;</span><br><span class="line">            quickSort(a, left, rightmark<span class="number">-1</span>);</span><br><span class="line">            quickSort(a, rightmark+<span class="number">1</span>, right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>执行用时 :32 ms, 在所有 C++ 提交中击败了63.52%的用户</p>
 <p>内存消耗 :12.8 MB, 在所有 C++ 提交中击败了5.08%的用户</p>
 </blockquote>
 <hr>
-<h3 id="136-Easy-只出现一次的数字-Single-Number"><a href="#136-Easy-只出现一次的数字-Single-Number" class="headerlink" title="#136 [Easy] 只出现一次的数字 Single Number"></a>#136 [Easy] 只出现一次的数字 <a href="https://leetcode-cn.com/problems/single-number/" target="_blank" rel="noopener">Single Number</a></h3><blockquote>
+<h3 id="136-Easy-只出现一次的数字-Single-Number"><a href="#136-Easy-只出现一次的数字-Single-Number" class="headerlink" title="#136 [Easy] 只出现一次的数字 Single Number"></a>#136 [Easy] 只出现一次的数字 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/single-number/">Single Number</a></h3><blockquote>
 <p>给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</p>
 <p>说明：</p>
 <p>你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？</p>
@@ -378,8 +245,8 @@
 <p>内存消耗 :9.6 MB, 在所有 C++ 提交中击败了67.52%的用户</p>
 </blockquote>
 <hr>
-<h3 id="461-Easy-汉明距离-Hamming-Distance"><a href="#461-Easy-汉明距离-Hamming-Distance" class="headerlink" title="#461 [Easy] 汉明距离 Hamming Distance"></a>#461 [Easy] 汉明距离 <a href="https://leetcode-cn.com/problems/hamming-distance/" target="_blank" rel="noopener">Hamming Distance</a></h3><blockquote>
-<p>两个整数之间的<a href="https://baike.baidu.com/item/汉明距离" target="_blank" rel="noopener">汉明距离</a>指的是这两个数字对应二进制位不同的位置的数目。</p>
+<h3 id="461-Easy-汉明距离-Hamming-Distance"><a href="#461-Easy-汉明距离-Hamming-Distance" class="headerlink" title="#461 [Easy] 汉明距离 Hamming Distance"></a>#461 [Easy] 汉明距离 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/hamming-distance/">Hamming Distance</a></h3><blockquote>
+<p>两个整数之间的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/汉明距离">汉明距离</a>指的是这两个数字对应二进制位不同的位置的数目。</p>
 <p>给出两个整数 <code>x</code> 和 <code>y</code>，计算它们之间的汉明距离。</p>
 </blockquote>
 <p>异或后用移位来计数。</p>
@@ -389,7 +256,7 @@
 <p>内存消耗 :8.2 MB, 在所有 C++ 提交中击败了81.46%的用户</p>
 </blockquote>
 <hr>
-<h3 id="169-Easy-求众数-Majority-Element"><a href="#169-Easy-求众数-Majority-Element" class="headerlink" title="#169 [Easy] 求众数 Majority Element"></a>#169 [Easy] 求众数 <a href="https://leetcode-cn.com/problems/majority-element/" target="_blank" rel="noopener">Majority Element</a></h3><blockquote>
+<h3 id="169-Easy-求众数-Majority-Element"><a href="#169-Easy-求众数-Majority-Element" class="headerlink" title="#169 [Easy] 求众数 Majority Element"></a>#169 [Easy] 求众数 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/majority-element/">Majority Element</a></h3><blockquote>
 <p>给定一个大小为 <em>n</em> 的数组，找到其中的众数。众数是指在数组中出现次数<strong>大于</strong> <code>⌊ n/2 ⌋</code> 的元素。</p>
 <p>你可以假设数组是非空的，并且给定的数组总是存在众数。</p>
 </blockquote>
@@ -401,7 +268,7 @@
 <p>内存消耗 :11 MB, 在所有 C++ 提交中击败了85.94%的用户</p>
 </blockquote>
 <hr>
-<h3 id="62-Medium-不同路径-Unique-Paths"><a href="#62-Medium-不同路径-Unique-Paths" class="headerlink" title="#62 [Medium] 不同路径 Unique Paths"></a>#62 [Medium] 不同路径 <a href="https://leetcode-cn.com/problems/unique-paths/" target="_blank" rel="noopener">Unique Paths</a></h3><blockquote>
+<h3 id="62-Medium-不同路径-Unique-Paths"><a href="#62-Medium-不同路径-Unique-Paths" class="headerlink" title="#62 [Medium] 不同路径 Unique Paths"></a>#62 [Medium] 不同路径 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/unique-paths/">Unique Paths</a></h3><blockquote>
 <p>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。</p>
 <p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。</p>
 <p>问总共有多少条不同的路径？</p>
@@ -413,16 +280,16 @@
 <p>内存消耗 :8.5 MB, 在所有 C++ 提交中击败了40.06%的用户</p>
 </blockquote>
 <hr>
-<h3 id="63-Medium-不同路径-II-Unique-Paths-II"><a href="#63-Medium-不同路径-II-Unique-Paths-II" class="headerlink" title="#63 [Medium] 不同路径 II Unique Paths II"></a>#63 [Medium] 不同路径 II <a href="https://leetcode-cn.com/problems/unique-paths-ii/" target="_blank" rel="noopener">Unique Paths II</a></h3><p>加入了障碍物的版本，这里就不细谈了。坑的是数据是卡int类型的，而答案完全没有提到这一点。</p>
+<h3 id="63-Medium-不同路径-II-Unique-Paths-II"><a href="#63-Medium-不同路径-II-Unique-Paths-II" class="headerlink" title="#63 [Medium] 不同路径 II Unique Paths II"></a>#63 [Medium] 不同路径 II <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/unique-paths-ii/">Unique Paths II</a></h3><p>加入了障碍物的版本，这里就不细谈了。坑的是数据是卡int类型的，而答案完全没有提到这一点。</p>
 <hr>
-<h3 id="64-Medium-最小路径和-Minimum-Path-Sum"><a href="#64-Medium-最小路径和-Minimum-Path-Sum" class="headerlink" title="#64 [Medium] 最小路径和 Minimum Path Sum"></a>#64 [Medium] 最小路径和 <a href="https://leetcode-cn.com/problems/minimum-path-sum/" target="_blank" rel="noopener">Minimum Path Sum</a></h3><p>最优子问题性质是显然的。不多说。</p>
+<h3 id="64-Medium-最小路径和-Minimum-Path-Sum"><a href="#64-Medium-最小路径和-Minimum-Path-Sum" class="headerlink" title="#64 [Medium] 最小路径和 Minimum Path Sum"></a>#64 [Medium] 最小路径和 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-path-sum/">Minimum Path Sum</a></h3><p>最优子问题性质是显然的。不多说。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minPathSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; grid)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;grid.size();i++)&#123;</span><br><span class="line">            grid[i][<span class="number">0</span>] += grid[i<span class="number">-1</span>][<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;grid[<span class="number">0</span>].size();i++)&#123;</span><br><span class="line">            grid[<span class="number">0</span>][i] += grid[<span class="number">0</span>][i<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;grid.size();i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;grid[<span class="number">0</span>].size();j++)&#123;</span><br><span class="line">                 grid[i][j] += min(grid[i<span class="number">-1</span>][j], grid[i][j<span class="number">-1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> grid[grid.size()<span class="number">-1</span>][grid[<span class="number">0</span>].size()<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>执行用时 :8 ms, 在所有 C++ 提交中击败了96.38%的用户</p>
 <p>内存消耗 :10.3 MB, 在所有 C++ 提交中击败了99.31%的用户</p>
 </blockquote>
 <hr>
-<h3 id="120-Medium-三角形最小路径和-Triangle"><a href="#120-Medium-三角形最小路径和-Triangle" class="headerlink" title="#120 [Medium] 三角形最小路径和 Triangle"></a>#120 [Medium] 三角形最小路径和 <a href="https://leetcode-cn.com/problems/triangle/" target="_blank" rel="noopener">Triangle</a></h3><blockquote>
+<h3 id="120-Medium-三角形最小路径和-Triangle"><a href="#120-Medium-三角形最小路径和-Triangle" class="headerlink" title="#120 [Medium] 三角形最小路径和 Triangle"></a>#120 [Medium] 三角形最小路径和 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/triangle/">Triangle</a></h3><blockquote>
 <p>给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。</p>
 <p>例如，给定三角形：</p>
 <p>[<br>     [2],<br>    [3,4],<br>   [6,5,7],<br>  [4,1,8,3]<br>]<br>自顶向下的最小路径和为 11（即，2 + 3 + 5 + 1 = 11）。</p>
@@ -434,278 +301,536 @@
 <p>内存消耗 :9.5 MB, 在所有 C++ 提交中击败了98.29%的用户</p>
 </blockquote>
 <hr>
-
-    </div>
-
-    
-    
-    
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/OJ/" rel="tag"># OJ</a>
-              <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
-              <a href="/tags/习题/" rel="tag"># 习题</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2019/08/14/OJ-LeetCode基础题目/" rel="prev" title="LeetCode 基础题目">
-      <i class="fa fa-chevron-left"></i> LeetCode 基础题目
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2019/11/23/笔记-Pytorch问题汇总/" rel="next" title="PyTorch 问题汇总">
-      PyTorch 问题汇总 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-    <div class="comments" id="valine-comments"></div>
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
         </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
           
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
         </li>
       </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#565-Medium-数组嵌套-Array-Nesting"><span class="nav-number">1.</span> <span class="nav-text">#565 [Medium] 数组嵌套 Array Nesting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#984-Medium-不含AAA或BBB的字符串-String-Without-AAA-or-BBB"><span class="nav-number">2.</span> <span class="nav-text">#984 [Medium] 不含AAA或BBB的字符串 String Without AAA or BBB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#42-Hard-接雨水"><span class="nav-number">3.</span> <span class="nav-text">#42 [Hard] 接雨水</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#84-Hard-柱状图中的最大矩形"><span class="nav-number">4.</span> <span class="nav-text">#84 [Hard] 柱状图中的最大矩形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#215-Medium-数组中的第K个最大元素-Kth-Largest-Element-in-an-Array"><span class="nav-number">5.</span> <span class="nav-text">#215* [Medium] 数组中的第K个最大元素 Kth Largest Element in an Array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#55-Medium-跳跃游戏-Jump-Game"><span class="nav-number">6.</span> <span class="nav-text">#55 [Medium] 跳跃游戏 Jump Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#122-Easy-买卖股票的最佳时机II-Best-Time-to-Buy-and-Sell-Stock-II"><span class="nav-number">7.</span> <span class="nav-text">#122 [Easy] 买卖股票的最佳时机II Best Time to Buy and Sell Stock II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#45-Hard-跳跃游戏II-Jump-Game-II"><span class="nav-number">8.</span> <span class="nav-text">#45 [Hard] 跳跃游戏II Jump Game II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#56-Medium-合并区间"><span class="nav-number">9.</span> <span class="nav-text">#56 [Medium] 合并区间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#136-Easy-只出现一次的数字-Single-Number"><span class="nav-number">10.</span> <span class="nav-text">#136 [Easy] 只出现一次的数字 Single Number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#461-Easy-汉明距离-Hamming-Distance"><span class="nav-number">11.</span> <span class="nav-text">#461 [Easy] 汉明距离 Hamming Distance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#169-Easy-求众数-Majority-Element"><span class="nav-number">12.</span> <span class="nav-text">#169 [Easy] 求众数 Majority Element</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#62-Medium-不同路径-Unique-Paths"><span class="nav-number">13.</span> <span class="nav-text">#62 [Medium] 不同路径 Unique Paths</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#63-Medium-不同路径-II-Unique-Paths-II"><span class="nav-number">14.</span> <span class="nav-text">#63 [Medium] 不同路径 II Unique Paths II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#64-Medium-最小路径和-Minimum-Path-Sum"><span class="nav-number">15.</span> <span class="nav-text">#64 [Medium] 最小路径和 Minimum Path Sum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#120-Medium-三角形最小路径和-Triangle"><span class="nav-number">16.</span> <span class="nav-text">#120 [Medium] 三角形最小路径和 Triangle</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">thiswinex</p>
-  <div class="site-description" itemprop="description">若公式显示不正常，可尝试右键点击公式->Math Setting->Math Renderer切换渲染器。</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">25</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-        <span class="site-state-item-count">19</span>
-        <span class="site-state-item-name">categories</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">15</span>
-        <span class="site-state-item-name">tags</span>
-      </div>
-  </nav>
-</div>
-
-
-
-      </div>
-
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
       </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">thiswinex</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
-  </div>
 
-        
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2019/08/26/OJ-LeetCode%E9%A2%98%E8%A7%A3%E8%AE%B0%E5%BD%95-2/" alt="微信分享二维码">
+    </div>
+</div>
 
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OJ/" rel="tag">OJ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B9%A0%E9%A2%98/" rel="tag">习题</a></li></ul>
 
-
-
-
-
-
-
-      </div>
     </footer>
   </div>
 
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
-<script src="/js/schemes/muse.js"></script>
-<script src="/js/next-boot.js"></script>
+   
+  <nav class="article-nav">
+    
+      <a href="/2019/11/23/%E7%AC%94%E8%AE%B0-Pytorch%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            PyTorch 问题汇总
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2019/08/14/OJ-LeetCode%E5%9F%BA%E7%A1%80%E9%A2%98%E7%9B%AE/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">LeetCode 基础题目</div>
+      </a>
+    
+  </nav>
 
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "o28iHkvdJaYlwuG7Tbx9lYWu-gzGzoHsz",
+    app_key: "vRnPCs772pxOTas4gSYdOXmx",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
 
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
 
-  
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
 
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
 
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
 
+ 
+     
+</article>
 
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2019-2020
+        <i class="ri-heart-fill heart_icon"></i> thiswinex
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
       
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Thiswinex&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝奶茶~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
 
 <script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
       }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
   }
 </script>
 
-    
+<!-- Katex -->
 
-  
+<!-- busuanzi  -->
 
 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
-    var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick';
-    guest = guest.split(',').filter(item => {
-      return GUEST.includes(item);
-    });
-    new Valine({
-      el         : '#valine-comments',
-      verify     : false,
-      notify     : false,
-      appId      : 'o28iHkvdJaYlwuG7Tbx9lYWu-gzGzoHsz',
-      appKey     : 'vRnPCs772pxOTas4gSYdOXmx',
-      placeholder: "随便说点什么~",
-      avatar     : 'mm',
-      meta       : guest,
-      pageSize   : '10' || 10,
-      visitor    : true,
-      lang       : 'zh-cn' || 'zh-cn',
-      path       : location.pathname,
-      recordIP   : true,
-      serverURLs : ''
-    });
-  }, window.Valine);
-});
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
 </script>
 
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
 </body>
+
 </html>
